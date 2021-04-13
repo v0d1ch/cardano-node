@@ -1345,8 +1345,6 @@ data TxBodyError era =
      | TxBodyOutputOverflow Quantity (TxOut era)
      | TxBodyMetadataError [(Word64, TxMetadataRangeError)]
      | TxBodyMintAdaError
-     | TxBodyAuxDataHashInvalidError
-     | TxBodyMintBeforeMaryError
      | TxBodyMissingProtocolParams
      deriving Show
 
@@ -1368,10 +1366,6 @@ instance Error (TxBodyError era) where
         | (k, err) <- errs ]
     displayError TxBodyMintAdaError =
       "Transaction cannot mint ada, only non-ada assets"
-    displayError TxBodyMintBeforeMaryError =
-      "Transaction can mint in Mary era or later"
-    displayError TxBodyAuxDataHashInvalidError =
-      "Auxiliary data hash is invalid"
     displayError TxBodyMissingProtocolParams =
       "Transaction uses Plutus scripts but does not provide the protocol " ++
       "parameters to hash"
@@ -1389,6 +1383,7 @@ makeTransactionBody =
 
 pattern TxBody :: TxBodyContent ViewTx era -> TxBody era
 pattern TxBody txbodycontent <- (getTxBodyContent -> txbodycontent)
+{-# COMPLETE TxBody :: TxBody #-}
 
 getTxBodyContent :: TxBody era -> TxBodyContent ViewTx era
 getTxBodyContent (ByronTxBody body) = getByronTxBodyContent body

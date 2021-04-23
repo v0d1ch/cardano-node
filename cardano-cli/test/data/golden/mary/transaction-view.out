@@ -13,14 +13,12 @@ mint:
     snow: 43
 outputs:
 - address: addr_test1qrefnr4k09pvge6dq83v6s67ruter8sftmky8qrmkqqsxy7q5psgn8tgqmupq4r79jmxlyk4eqt6z6hj5g8jd8393msqaw47f4
-  address era: Shelley
+    (Shelley)
   amount:
     lovelace: 138
   network: Testnet
-  payment credential:
-    key hash: f2998eb67942c4674d01e2cd435e1f17919e095eec43807bb0010313
-  stake reference:
-    key hash: c0a060899d6806f810547e2cb66f92d5c817a16af2a20f269e258ee0
+  payment credential key hash: f2998eb67942c4674d01e2cd435e1f17919e095eec43807bb0010313
+  stake reference credential key hash: c0a060899d6806f810547e2cb66f92d5c817a16af2a20f269e258ee0
 update proposal: null
 validity range:
   lower bound: 140

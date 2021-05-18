@@ -135,7 +135,7 @@ data SubmissionThreadStats
 data SubmissionThreadReport
   = SubmissionThreadReport
       { strStats         :: !SubmissionThreadStats
-      , strThreadIndex   :: !Natural
+--      , strThreadIndex   :: !Natural
       , strEndOfProtocol :: !UTCTime
       }
 
@@ -344,9 +344,8 @@ txSubmissionClient tr bmtr sub threadIx =
   submitReport :: SubmissionThreadStats -> m SubmissionThreadReport
   submitReport strStats = do
     strEndOfProtocol <- liftIO Clock.getCurrentTime
-    let strThreadIndex = threadIx
-        report = SubmissionThreadReport{..}
-    submitThreadReport sub threadIx (Right report)
+    let report = SubmissionThreadReport{..}
+    submitThreadReport (sReportsRefs sub) threadIx (Right report)
     pure report
 
   txToIdSize :: tx -> (gentxid, TxSizeInBytes)

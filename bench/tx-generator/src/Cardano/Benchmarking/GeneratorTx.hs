@@ -31,9 +31,11 @@ module Cardano.Benchmarking.GeneratorTx
 import           Cardano.Prelude
 import           Prelude (id, String)
 
+import qualified Control.Concurrent.STM as STM
 import           Control.Monad (fail)
 import           Control.Monad.Trans.Except.Extra (left, newExceptT, right)
 import           Control.Tracer (Tracer, traceWith)
+import qualified Data.Time.Clock as Clock
 
 import qualified Data.List.NonEmpty as NE
 import qualified Data.Map.Strict as Map
@@ -302,28 +304,27 @@ asyncBenchmark
 
   traceDebug $ "******* Tx generator, launching Tx peers:  " ++ show (NE.length remoteAddresses) ++ " of them"
   liftIO $ do
-    submission :: Submission IO era  <- mkSubmission traceSubmit $
-                    SubmissionParams
-                    { spTps           = tpsRate
-                    , spTargets       = numTargets
-                    , spQueueLen      = 32
-                    , spErrorPolicy   = errorPolicy
-                    }
-    allAsyncs <- forM (zip [0..] $ NE.toList remoteAddresses) $
-      \(i, remoteAddr) ->
+    startTime <- Clock.getCurrentTime
+    txSendQueue <- STM.newTBQueueIO 32
+
+    reportRefs <- STM.atomically $ replicateM (fromIntegral numTargets) STM.newEmptyTMVar
+
+    allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
+      \(reportRef, remoteAddr) ->
         launchTxPeer
               traceSubmit
               traceN2N
               connectClient
               remoteAddr
-              submission
-              i
-    tpsFeeder <- async $ tpsLimitedTxFeeder submission finalTransactions
+              txSendQueue
+              reportRef
+              errorPolicy
+    tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate finalTransactions
     let tpsFeederShutdown = do
           cancel tpsFeeder
-          liftIO $ tpsLimitedTxFeederShutdown submission
+          liftIO $ tpsLimitedTxFeederShutdown numTargets txSendQueue
 
-    return (tpsFeeder, allAsyncs, mkSubmissionSummary threadName submission, tpsFeederShutdown)
+    return (tpsFeeder, allAsyncs, mkSubmissionSummary threadName startTime reportRefs, tpsFeederShutdown)
 
 -- | At this moment 'sourceAddress' contains a huge amount of money (lets call it A).
 --   Now we have to split this amount to N equal parts, as a result we'll have
@@ -439,11 +440,6 @@ txGenerator
 -- Txs for submission.
 ---------------------------------------------------------------------------------------------------
 
--- | To get higher performance we need to hide latency of getting and
--- forwarding (in sufficient numbers) transactions.
---
--- TODO: transform comments into haddocks.
---
 launchTxPeer
   :: forall era
   .  IsShelleyBasedEra era
@@ -451,24 +447,22 @@ launchTxPeer
   -> Tracer IO NodeToNodeSubmissionTrace
   -> ConnectClient
   -> Network.Socket.AddrInfo
-  -- Remote address
-  -> Submission IO  era
-  -- Mutable state shared between submission threads
-  -> Natural
-  -- Thread index
+  -> TxSendQueue era
+  -> ReportRef
+  -> SubmissionErrorPolicy
   -> IO (Async ())
-launchTxPeer traceSubmit traceN2N connectClient remoteAddr sub tix =
+launchTxPeer traceSubmit traceN2N connectClient remoteAddr txSendQueue reportRef errorPolicy =
   async $
    handle
      (\(SomeException err) -> do
          let errDesc = mconcat
-               [ "Exception while talking to peer #", show tix
+               [ "Exception while talking to peer "
                , " (", show (addrAddress remoteAddr), "): "
                , show err]
-         submitThreadReport sub tix (Left errDesc)
-         case spErrorPolicy $ sParams sub of
+         submitThreadReport reportRef (Left errDesc)
+         case errorPolicy of
            FailOnError -> throwIO err
            LogErrors   -> traceWith traceSubmit $
              TraceBenchTxSubError (pack errDesc))
      $ connectClient remoteAddr
-        (txSubmissionClient traceN2N traceSubmit sub tix)
+        (txSubmissionClient traceN2N traceSubmit txSendQueue reportRef)

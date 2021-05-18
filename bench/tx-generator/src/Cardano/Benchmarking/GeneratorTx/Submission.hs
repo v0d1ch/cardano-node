@@ -175,7 +175,7 @@ simpleTxFeeder
   => Submission m era -> [Tx era] -> m ()
 simpleTxFeeder
  Submission{sTrace, sThreads, sTxSendQueue} txs = do
-  foldM_ (const feedTx) () (zip txs [0..])
+  forM_ (zip txs [0..]) feedTx
   -- Issue the termination notifications.
   replicateM_ (fromIntegral sThreads) $
     liftIO $ STM.atomically $ STM.writeTBQueue sTxSendQueue Nothing
@@ -187,9 +187,9 @@ simpleTxFeeder
 
 tpsLimitedTxFeederShutdown :: Submission m era -> IO ()
 tpsLimitedTxFeederShutdown Submission{sThreads, sTxSendQueue }
-   = do
-     replicateM_ (fromIntegral sThreads)
-        . STM.atomically $ STM.writeTBQueue sTxSendQueue Nothing
+   = STM.atomically $
+       replicateM_ (fromIntegral sThreads)
+          $ STM.writeTBQueue sTxSendQueue Nothing
 
 tpsLimitedTxFeeder
   :: forall m era . MonadIO m => Submission m era -> [Tx era] -> m ()
@@ -274,7 +274,7 @@ txSubmissionClient tr bmtr sub threadIx =
   client :: Bool -> UnAcked tx -> SubmissionThreadStats
          -- The () return type is forced by Ouroboros.Network.NodeToNode.connectTo
          -> ClientStIdle gentxid gentx m ()
-  client done unAcked (!stats) = ClientStIdle
+  client done unAcked !stats = ClientStIdle
    { recvMsgRequestTxIds = \blocking ackNum reqNum
       -> do
        let ack = Ack $ fromIntegral ackNum
@@ -300,29 +300,25 @@ txSubmissionClient tr bmtr sub threadIx =
        let newStats = stats { stsAcked =
                               stsAcked stats + ack }
 
-       case (exhausted, NE.nonEmpty annNow, blocking) of
-         (_, Nothing, TokBlocking) -> do
-           traceWith tr EndOfProtocol
-           SendMsgDone <$> (submitReport newStats
+       case blocking of
+         TokBlocking -> case NE.nonEmpty annNow of
+           Nothing -> do
+             traceWith tr EndOfProtocol
+             _wantedReturnValue <- submitReport newStats
+             pure $ SendMsgDone ()
                             -- The () return type is forced by
-                            --   Ouroboros.Network.NodeToNode.connectTo
-                            >> pure ())
-
-         (_, Just neAnnNow, TokBlocking) ->
-           pure $ SendMsgReplyTxIds
-                    (BlockingReply $ txToIdSize <$> neAnnNow)
-                    (client exhausted newUnacked newStats)
-
-         (False, Nothing, TokNonBlocking) -> do
-           pure $ SendMsgReplyTxIds
+                            --   Ouroboros.Network.NodeToNode.connectTo.
+           (Just neAnnNow) -> pure $ SendMsgReplyTxIds
+                                 (BlockingReply $ txToIdSize <$> neAnnNow)
+                                 (client exhausted newUnacked newStats)
+         TokNonBlocking -> if not exhausted && null annNow
+           then pure $ SendMsgReplyTxIds
                     (NonBlockingReply [])
                     (client exhausted newUnacked newStats)
 
-         (_, _, TokNonBlocking) ->
-           pure $ SendMsgReplyTxIds
+           else pure $ SendMsgReplyTxIds
                     (NonBlockingReply $ txToIdSize <$> annNow)
                     (client exhausted newUnacked newStats)
-
    , recvMsgRequestTxs = \txIds -> do
        let  reqTxIds :: [txid]
             reqTxIds = fmap fromGenTxId txIds

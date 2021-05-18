@@ -1,0 +1,21 @@
+* Traces involved:
+  |                     | component         | role   | trace                                                                                                                  |
+  |---------------------+-------------------+--------+------------------------------------------------------------------------------------------------------------------------|
+  | slot start          | blockchain time   | forger | any with slot#                                                                                                         |
+  | positive leadership | forge             | forger | TraceNodeIsLeader                                                                                                      |
+  | block forged        | forge             | forger | TraceForgedBlock                                                                                                       |
+  | block adopted       | chaindb           | forger | AddedToCurrentChain                                                                               |
+  | header advertisment | chainsync server  | forger | ChainSyncServerEvent.TraceChainSyncServerReadBlocked.AddBlock / ChainSyncServerEvent.TraceChainSyncServerRead.AddBlock |
+  | block send          | blockfetch server | forger | TraceBlockFetchServerSendBlock                                                                                         |
+  | header notice       | chainsync client  | peer   | ChainSyncClientEvent.TraceDownloadedHeader                                                                             |
+  | block receipt       | blockfetch client | peer   | CompletedBlockFetch                                                                                                    |
+  | adoption            | chaindb           | peer   | AddedToCurrentChain / TraceAddBlockEvent                                                                               |
+  | header advertisment | chainsync server  | peer   | TraceChainSyncServerRead                                                                                               |
+  | block send          | blockfetch server | peer   | TraceBlockFetchServerSendBlock                                                                                         |
+
+  grep TraceForgedBlock current/*/stdout | head -n2
+  grep AddedToCurrentChain current/*/stdout | head -n2
+  grep 'TraceChainSyncServerRead.*AddBlock' current/*/stdout | head -n2
+  grep TraceBlockFetchServerSendBlock current/*/stdout | head -n2
+  grep TraceDownloadedHeader current/*/stdout | head -n2
+  grep CompletedBlockFetch current/*/stdout | head -n2

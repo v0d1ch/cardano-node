@@ -209,19 +209,21 @@ consumeTxs
   . (MonadIO m)
   => TxSendQueue era -> TokBlockingStyle blk -> Req -> m (Bool, UnReqd (Tx era))
 consumeTxs txSendQueue blk req
-  = liftIO . STM.atomically $ go blk req []
+  = liftIO . STM.atomically $ case blk of
+    TokBlocking -> go req []
+    TokNonBlocking -> if req==0 then pure (False, UnReqd [])
+      else do
+        STM.tryReadTBQueue txSendQueue >>= \case
+          Nothing -> pure (False, UnReqd [])
+          Just Nothing -> pure (True, UnReqd [])
+          Just (Just tx) -> pure (False, UnReqd [tx])
  where
-  go :: TokBlockingStyle a -> Req -> [Tx era] -> STM (Bool, UnReqd (Tx era))
-  go _ 0 acc = pure (False, UnReqd acc)
-  go TokBlocking n acc = STM.readTBQueue txSendQueue >>=
+  go :: Req -> [Tx era] -> STM (Bool, UnReqd (Tx era))
+  go 0 acc = pure (False, UnReqd acc)
+  go n acc = STM.readTBQueue txSendQueue >>=
     \case
       Nothing -> pure (True, UnReqd acc)
-      Just tx -> go TokBlocking (n - 1) (tx:acc)
-  go TokNonBlocking _ _ = STM.tryReadTBQueue txSendQueue >>=
-    \case
-      Nothing -> pure (False, UnReqd [])
-      Just Nothing -> pure (True, UnReqd [])
-      Just (Just tx) -> pure (False, UnReqd [tx])
+      Just tx -> go (n - 1) (tx:acc)
 
 txSubmissionClient
   :: forall m era tx txid gentx gentxid .
@@ -243,14 +245,18 @@ txSubmissionClient tr bmtr txSendQueue reportRef =
     pure $ client False (UnAcked []) (SubmissionThreadStats 0 0 0)
  where
   -- Nothing means we've ran out of things to either announce or send.
-  decideAnnouncement :: TokBlockingStyle a
-                     -> Ack -> UnReqd tx -> UnAcked tx
-                     -> m (Either Text (ToAnnce tx, UnAcked tx, Acked tx))
+  decideAnnouncement ::
+       TokBlockingStyle a
+    -> Ack -> UnReqd tx -> UnAcked tx
+    -> m (ToAnnce tx, UnAcked tx, Acked tx)
   decideAnnouncement b (Ack ack) (UnReqd annNow) (UnAcked unAcked) =
-    if   tokIsBlocking b && ack /= length unAcked
-    then pure $ Left "decideAnnouncement: TokBlocking, but length unAcked != ack"
-    else pure $ Right (ToAnnce annNow, UnAcked newUnacked, Acked acked)
-      where
+    if tokIsBlocking b && ack /= length unAcked
+       then do
+         let err = "decideAnnouncement: TokBlocking, but length unAcked != ack"
+         traceWith bmtr (TraceBenchTxSubError err)
+         fail (T.unpack err)
+       else pure (ToAnnce annNow, UnAcked newUnacked, Acked acked)
+    where
         stillUnacked, newUnacked, acked :: [tx]
         (stillUnacked, acked) = L.splitAtEnd ack unAcked
         newUnacked = annNow <> stillUnacked
@@ -261,30 +267,36 @@ txSubmissionClient tr bmtr txSendQueue reportRef =
          -- The () return type is forced by Ouroboros.Network.NodeToNode.connectTo
          -> ClientStIdle gentxid gentx m ()
   client done unAcked !stats = ClientStIdle
-   { recvMsgRequestTxIds = \blocking ackNum reqNum
-      -> do
+    { recvMsgRequestTxIds = requestTxIds done unAcked stats
+    , recvMsgRequestTxs = requestTxs done unAcked stats
+    }
+
+  requestTxIds :: forall blocking.
+       Bool
+    -> UnAcked (Tx era)
+    -> SubmissionThreadStats
+    -> TokBlockingStyle blocking
+    -> Word16
+    -> Word16
+    -> m (ClientStTxIds blocking gentxid gentx m ())
+  requestTxIds done unAcked stats blocking ackNum reqNum = do
        let ack = Ack $ fromIntegral ackNum
            req = Req $ fromIntegral reqNum
        traceWith tr $ reqIdsTrace ack req blocking
 
        (exhausted, unReqd) <-
          if done then pure (True, UnReqd [])
-         else consumeTxs txSendQueue blocking req
+                 else consumeTxs txSendQueue blocking req
 
-       r' <- decideAnnouncement blocking ack unReqd unAcked
        (ann@(ToAnnce annNow), newUnacked@(UnAcked outs), Acked acked)
-         <- case r' of
-           Left e -> traceWith bmtr (TraceBenchTxSubError e)
-                     >> fail (T.unpack e)
-           Right x -> pure x
+         <- decideAnnouncement blocking ack unReqd unAcked
 
        traceWith tr $ idListTrace ann blocking
        traceWith bmtr $ TraceBenchTxSubServAnn  (getTxId . getTxBody <$> annNow)
        traceWith bmtr $ TraceBenchTxSubServAck  (getTxId . getTxBody <$> acked)
        traceWith bmtr $ TraceBenchTxSubServOuts (getTxId . getTxBody <$> outs)
 
-       let newStats = stats { stsAcked =
-                              stsAcked stats + ack }
+       let newStats = stats { stsAcked = stsAcked stats + ack }
 
        case blocking of
          TokBlocking -> case NE.nonEmpty annNow of
@@ -305,27 +317,33 @@ txSubmissionClient tr bmtr txSendQueue reportRef =
            else pure $ SendMsgReplyTxIds
                     (NonBlockingReply $ txToIdSize <$> annNow)
                     (client exhausted newUnacked newStats)
-   , recvMsgRequestTxs = \txIds -> do
-       let  reqTxIds :: [txid]
-            reqTxIds = fmap fromGenTxId txIds
-       traceWith tr $ ReqTxs (length reqTxIds)
-       let UnAcked ua = unAcked
-           uaIds = getTxId . getTxBody <$> ua
-           (toSend, _retained) = L.partition ((`L.elem` reqTxIds) . getTxId . getTxBody) ua
-           missIds = reqTxIds L.\\ uaIds
+                    
+  requestTxs ::
+       Bool
+    -> UnAcked (Tx era)
+    -> SubmissionThreadStats
+    -> [GenTxId CardanoBlock]
+    -> m (ClientStTxs (GenTxId CardanoBlock) (GenTx CardanoBlock) m ())
+  requestTxs done unAcked stats txIds = do
+    let  reqTxIds :: [txid]
+         reqTxIds = fmap fromGenTxId txIds
+    traceWith tr $ ReqTxs (length reqTxIds)
+    let UnAcked ua = unAcked
+        uaIds = getTxId . getTxBody <$> ua
+        (toSend, _retained) = L.partition ((`L.elem` reqTxIds) . getTxId . getTxBody) ua
+        missIds = reqTxIds L.\\ uaIds
 
-       traceWith tr $ TxList (length toSend)
-       traceWith bmtr $ TraceBenchTxSubServReq reqTxIds
-       traceWith bmtr $ TraceBenchTxSubServOuts (getTxId . getTxBody <$> ua)
-       unless (L.null missIds) $
-         traceWith bmtr $ TraceBenchTxSubServUnav missIds
-       pure $ SendMsgReplyTxs (toGenTx <$> toSend)
-         (client done unAcked $
-           stats { stsSent =
-                   stsSent stats + Sent (length toSend)
-                 , stsUnavailable =
-                   stsUnavailable stats + Unav (length missIds)})
-   }
+    traceWith tr $ TxList (length toSend)
+    traceWith bmtr $ TraceBenchTxSubServReq reqTxIds
+    traceWith bmtr $ TraceBenchTxSubServOuts (getTxId . getTxBody <$> ua)
+    unless (L.null missIds) $
+      traceWith bmtr $ TraceBenchTxSubServUnav missIds
+    pure $ SendMsgReplyTxs (toGenTx <$> toSend)
+      (client done unAcked $
+        stats { stsSent =
+                stsSent stats + Sent (length toSend)
+              , stsUnavailable =
+                stsUnavailable stats + Unav (length missIds)})
 
   submitReport :: SubmissionThreadStats -> m SubmissionThreadReport
   submitReport strStats = do

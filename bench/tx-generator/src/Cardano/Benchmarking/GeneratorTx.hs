@@ -316,10 +316,11 @@ asyncBenchmark
               traceN2N
               connectClient
               remoteAddr
-              txSendQueue
+              (legacyTxSource txSendQueue)
               reportRef
               errorPolicy
     tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate finalTransactions
+
     let tpsFeederShutdown = do
           cancel tpsFeeder
           liftIO $ tpsLimitedTxFeederShutdown numTargets txSendQueue
@@ -447,11 +448,11 @@ launchTxPeer
   -> Tracer IO NodeToNodeSubmissionTrace
   -> ConnectClient
   -> Network.Socket.AddrInfo
-  -> TxSendQueue era
+  -> TxSource era
   -> ReportRef
   -> SubmissionErrorPolicy
   -> IO (Async ())
-launchTxPeer traceSubmit traceN2N connectClient remoteAddr txSendQueue reportRef errorPolicy =
+launchTxPeer traceSubmit traceN2N connectClient remoteAddr txSource reportRef errorPolicy =
   async $
    handle
      (\(SomeException err) -> do
@@ -465,4 +466,4 @@ launchTxPeer traceSubmit traceN2N connectClient remoteAddr txSendQueue reportRef
            LogErrors   -> traceWith traceSubmit $
              TraceBenchTxSubError (pack errDesc))
      $ connectClient remoteAddr
-        (txSubmissionClient traceN2N traceSubmit txSendQueue reportRef)
+        (txSubmissionClient traceN2N traceSubmit txSource reportRef)

@@ -24,7 +24,7 @@ library
 
                        Cardano.TopHandler
 
-                       Cardano.Unlog.Analysis
+                       Cardano.Unlog.BlockProp
                        Cardano.Unlog.Commands
                        Cardano.Unlog.LogObject
                        Cardano.Unlog.Parsers
@@ -32,12 +32,14 @@ library
                        Cardano.Unlog.Run
                        Cardano.Unlog.SlotStats
                        Cardano.Unlog.Summary
+                       Cardano.Unlog.Timeline
 
   other-modules:       Paths_locli
 
   build-depends:       base
                      , aeson
                      , aeson-pretty
+                     , async
                      , attoparsec
                      , attoparsec-iso8601
                      , bytestring
@@ -51,6 +53,7 @@ library
                      , iohk-monitoring
                      , optparse-applicative
                      , optparse-generic
+                     , ouroboros-network
                      , process
                      , scientific
                      , split

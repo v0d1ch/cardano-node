@@ -34,9 +34,9 @@ TraceDownloadedHeader
 CompletedBlockFetch
 EOF
         ## 1. enumerate logs, filter by keyfile & consolidate
-        local logs=("$dir"/node-*/stdout) filtered="$adir"/logs-cluster.flt.json
+        local logdirs=("$dir"/node-*/)
 
-        msg "filtering.."
+        msg "filtering logs in: $dir/node-* "
         local jq_args=(
             --sort-keys
             --compact-output
@@ -44,25 +44,26 @@ EOF
             ' delpaths([["app"],["env"],["loc"],["msg"],["ns"],["sev"]])
             '"$(wb backend lostream-fixup-jqexpr)"
         )
-        grep -hFf "$keyfile" "${logs[@]}" |
-            jq "${jq_args[@]}" > "$filtered"
+        for d in "${logdirs[@]}"
+        do ## TODO: supervisor-specific logfile layout
+           grep -hFf "$keyfile" $(ls "$d"/stdout* | tac) | jq "${jq_args[@]}" > \
+                "$adir"/logs-$(basename "$d").flt.json &
+        done
+        wait
 
-        msg "log size of entire cluster:  (lines: $(wc -l "$filtered"))"
-
-        local sorted="$adir"/logs-cluster.sort.json
-        msg "sorting.."
-        sort -t, -k1 "$filtered" > "$sorted"
+        msg "log sizes:  (files: $(ls "$adir"/*.flt.json | wc -l), lines: $(cat "$adir"/*.flt.json | wc -l))"
 
         msg "analysing.."
         local locli_args=(
             --genesis         "$dir"/genesis/genesis.json
             --run-metafile    "$dir"/meta.json
             ## ->
-            --logobjects-json "$adir"/logs-cluster.logobjects.json
+            # --logobjects-json "$adir"/logs-cluster.logobjects.json
+            --analysis-json   "$adir"/block-event-stream.json
         )
 
         locli 'analyse' 'block-propagation' \
-            "${locli_args[@]}" "$sorted";;
+            "${locli_args[@]}" "$adir"/*.flt.json;;
 
     machine-timeline | machine | mt )
         local usage="USAGE: wb analyse $op [RUN-NAME=current] [MACH-NAME=node-1]"

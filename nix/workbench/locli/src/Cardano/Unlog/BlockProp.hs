@@ -31,6 +31,7 @@ import qualified Data.Time.Clock as Time
 import           Ouroboros.Network.Block (BlockNo(..), SlotNo(..))
 
 import           Data.Accum
+import           Data.Distribution
 import           Cardano.Profile
 import           Cardano.Unlog.LogObject
 import           Cardano.Unlog.Resources

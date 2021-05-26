@@ -61,6 +61,9 @@ let
                TraceChainSyncHeaderServer = true;
                TraceChainSyncClient       = true;
 
+               StubComputeDuration  = 0.5;
+               StubComputePrecision = 0.01;
+
                defaultScribes = [
                  [ "StdoutSK" "stdout" ]
                ];

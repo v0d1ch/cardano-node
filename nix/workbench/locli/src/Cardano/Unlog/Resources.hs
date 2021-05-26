@@ -18,7 +18,6 @@ import           Cardano.Prelude
 
 import           Data.Accum
 import           Data.Distribution
-import qualified Data.Sequence as Seq
 import           Data.Time.Clock (UTCTime)
 
 import           Cardano.BM.Stats.Resources
@@ -56,14 +55,14 @@ computeResDistrib ::
   forall a
   .  [PercSpec Float]
   -> ResDistribProjections a
-  -> Seq.Seq a
+  -> [a]
   -> Resources (Distribution Float Word64)
 computeResDistrib percentiles projs xs =
   compDist <$> projs
  where
    compDist :: (a -> Maybe Word64) -> Distribution Float Word64
    compDist proj = computeDistribution percentiles
-     (Seq.fromList . catMaybes . toList $ proj <$> xs)
+     (catMaybes . toList $ proj <$> xs)
 
 type ResContinuity a = Resources (a -> Maybe a)
 

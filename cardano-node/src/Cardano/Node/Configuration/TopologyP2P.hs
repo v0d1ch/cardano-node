@@ -31,12 +31,25 @@ import qualified Data.ByteString.Lazy.Char8 as LBS
 import qualified Data.Text as Text
 
 import           Cardano.Node.Configuration.POM (NodeConfiguration (..))
+import           Cardano.Slotting.Slot (SlotNo (..))
 
 import           Cardano.Node.Types
-import           Cardano.Node.Configuration.Topology (TopologyError (..), UseLedger (..))
+import           Cardano.Node.Configuration.Topology (TopologyError (..))
 
 import           Ouroboros.Network.NodeToNode (PeerAdvertise (..))
 import           Ouroboros.Network.PeerSelection.LedgerPeers (UseLedgerAfter (..), RelayAddress (..))
+
+newtype UseLedger = UseLedger UseLedgerAfter deriving (Eq, Show)
+
+instance FromJSON UseLedger where
+  parseJSON (Data.Aeson.Number n) =
+    if n >= 0 then return $ UseLedger $ UseLedgerAfter $ SlotNo $ floor n
+              else return $ UseLedger   DontUseLedger
+  parseJSON _ = mzero
+
+instance ToJSON UseLedger where
+  toJSON (UseLedger (UseLedgerAfter (SlotNo n))) = Number $ fromIntegral n
+  toJSON (UseLedger DontUseLedger)               = Number (-1)
 
 data NodeSetup = NodeSetup
   { nodeId :: !Word64

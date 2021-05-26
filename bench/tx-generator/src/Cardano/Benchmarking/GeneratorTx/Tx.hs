@@ -81,10 +81,12 @@ mkGenesisTransaction key _payloadSize ttl fee txins txouts
     ShelleyBasedEraShelley -> TxFeeExplicit TxFeesExplicitInShelleyEra fee
     ShelleyBasedEraAllegra -> TxFeeExplicit TxFeesExplicitInAllegraEra fee
     ShelleyBasedEraMary    -> TxFeeExplicit TxFeesExplicitInMaryEra fee
+    ShelleyBasedEraAlonzo  -> TxFeeExplicit TxFeesExplicitInAlonzoEra fee
   validityUpperBound = case shelleyBasedEra @ era of
     ShelleyBasedEraShelley -> TxValidityUpperBound ValidityUpperBoundInShelleyEra ttl
     ShelleyBasedEraAllegra -> TxValidityUpperBound ValidityUpperBoundInAllegraEra ttl
     ShelleyBasedEraMary    -> TxValidityUpperBound ValidityUpperBoundInMaryEra ttl
+    ShelleyBasedEraAlonzo  -> TxValidityUpperBound ValidityUpperBoundInAlonzoEra ttl
 
 mkTransaction :: forall era .
      IsShelleyBasedEra era
@@ -121,6 +123,7 @@ mkFee f = case shelleyBasedEra @ era of
   ShelleyBasedEraShelley -> TxFeeExplicit TxFeesExplicitInShelleyEra f
   ShelleyBasedEraAllegra -> TxFeeExplicit TxFeesExplicitInAllegraEra f
   ShelleyBasedEraMary    -> TxFeeExplicit TxFeesExplicitInMaryEra f
+  ShelleyBasedEraAlonzo  -> TxFeeExplicit TxFeesExplicitInAlonzoEra f
 
 mkValidityUpperBound :: forall era .
      IsShelleyBasedEra era
@@ -130,6 +133,7 @@ mkValidityUpperBound ttl = case shelleyBasedEra @ era of
   ShelleyBasedEraShelley -> TxValidityUpperBound ValidityUpperBoundInShelleyEra ttl
   ShelleyBasedEraAllegra -> TxValidityUpperBound ValidityUpperBoundInAllegraEra ttl
   ShelleyBasedEraMary    -> TxValidityUpperBound ValidityUpperBoundInMaryEra ttl
+  ShelleyBasedEraAlonzo  -> TxValidityUpperBound ValidityUpperBoundInAlonzoEra ttl
 
 mkTransactionGen :: forall era .
      IsShelleyBasedEra era
@@ -164,7 +168,7 @@ mkTransactionGen signingKey inputs address payments metadata fee =
 
   (txOutputs, mChange) = case compare changeValue 0 of
     GT ->
-      let changeTxOut   = TxOut address $ mkTxOutValueAdaOnly changeValue
+      let changeTxOut   = TxOut address (mkTxOutValueAdaOnly changeValue) TxOutDatumHashNone
           changeIndex   = TxIx $ fromIntegral $ length payTxOuts -- 0-based index
       in
           (appendr payTxOuts (changeTxOut :| []), Just (changeIndex, changeValue))
@@ -181,7 +185,7 @@ mkTransactionGen signingKey inputs address payments metadata fee =
   txOutSum :: [ TxOut era ] -> Lovelace
   txOutSum l = sum $ map toVal l
 
-  toVal (TxOut _ val) = txOutValueToLovelace val
+  toVal (TxOut _ val _) = txOutValueToLovelace val
 
   -- | Append a non-empty list to a list.
   -- > appendr [1,2,3] (4 :| [5]) == 1 :| [2,3,4,5]
@@ -193,6 +197,7 @@ mkTxOutValueAdaOnly l = case shelleyBasedEra @ era of
   ShelleyBasedEraShelley -> TxOutAdaOnly AdaOnlyInShelleyEra l
   ShelleyBasedEraAllegra -> TxOutAdaOnly AdaOnlyInAllegraEra l
   ShelleyBasedEraMary    -> TxOutValue MultiAssetInMaryEra $ lovelaceToValue l
+  ShelleyBasedEraAlonzo  -> TxOutValue MultiAssetInAlonzoEra $ lovelaceToValue l
 
 txOutValueToLovelace :: TxOutValue era -> Lovelace
 txOutValueToLovelace = \case
@@ -208,3 +213,4 @@ txInModeCardano tx = case shelleyBasedEra @ era of
   ShelleyBasedEraShelley -> TxInMode tx ShelleyEraInCardanoMode
   ShelleyBasedEraAllegra -> TxInMode tx AllegraEraInCardanoMode
   ShelleyBasedEraMary    -> TxInMode tx MaryEraInCardanoMode
+  ShelleyBasedEraAlonzo  -> TxInMode tx AlonzoEraInCardanoMode

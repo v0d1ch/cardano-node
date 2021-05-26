@@ -103,3 +103,4 @@ liftAnyEra f x = case x of
   InAnyCardanoEra ShelleyEra a ->   InAnyCardanoEra ShelleyEra $ f a
   InAnyCardanoEra AllegraEra a ->   InAnyCardanoEra AllegraEra $ f a
   InAnyCardanoEra MaryEra a    ->   InAnyCardanoEra MaryEra $ f a
+  InAnyCardanoEra AlonzoEra a  ->   InAnyCardanoEra AlonzoEra $ f a

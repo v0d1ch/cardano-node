@@ -25,18 +25,22 @@ assume_cbor_properties
   =    prop_mapCostsShelley
     && prop_mapCostsAllegra
     && prop_mapCostsMary
+    && prop_mapCostsAlonzo
     && prop_bsCostsShelley
     && prop_bsCostsAllegra
     && prop_bsCostsMary
+    && prop_bsCostsAlonzo
 
 -- The cost of map entries in metadata follows a step function.
 -- This assums the map indecies are [0..n].
 prop_mapCostsShelley :: Bool
 prop_mapCostsAllegra :: Bool
 prop_mapCostsMary    :: Bool
+prop_mapCostsAlonzo  :: Bool
 prop_mapCostsShelley = measureMapCosts AsShelleyEra == assumeMapCosts AsShelleyEra
 prop_mapCostsAllegra = measureMapCosts AsAllegraEra == assumeMapCosts AsAllegraEra
 prop_mapCostsMary    = measureMapCosts AsMaryEra    == assumeMapCosts AsMaryEra
+prop_mapCostsAlonzo  = measureMapCosts AsAlonzoEra  == assumeMapCosts AsAlonzoEra
 
 assumeMapCosts :: forall era . IsShelleyBasedEra era => AsType era -> [Int]
 assumeMapCosts _proxy = stepFunction [
@@ -51,15 +55,20 @@ assumeMapCosts _proxy = stepFunction [
       ShelleyBasedEraShelley -> 37
       ShelleyBasedEraAllegra -> 39
       ShelleyBasedEraMary    -> 39
+ -- Unconfirmed ! update when alonzo is runnable.
+      ShelleyBasedEraAlonzo  -> error "39"
 
 -- Bytestring costs are not LINEAR !!
 -- Costs are piecewise linear for payload sizes [0..23] and [24..64].
 prop_bsCostsShelley  :: Bool
 prop_bsCostsAllegra :: Bool
 prop_bsCostsMary    :: Bool
+prop_bsCostsAlonzo  :: Bool
 prop_bsCostsShelley  = measureBSCosts AsShelleyEra == [37..60] ++ [62..102]
 prop_bsCostsAllegra = measureBSCosts AsAllegraEra == [39..62] ++ [64..104]
 prop_bsCostsMary    = measureBSCosts AsMaryEra    == [39..62] ++ [64..104]
+ -- Unconfirmed ! update when alonzo is runnable.
+prop_bsCostsAlonzo  = measureBSCosts AsAlonzoEra  == error "[39..62] ++ [64..104]"
 
 stepFunction :: [(Int, Int)] -> [Int]
 stepFunction f = scanl1 (+) steps
@@ -113,6 +122,7 @@ metadataInEra (Just m) = case shelleyBasedEra @ era of
   ShelleyBasedEraShelley -> TxMetadataInEra TxMetadataInShelleyEra m
   ShelleyBasedEraAllegra -> TxMetadataInEra TxMetadataInAllegraEra m
   ShelleyBasedEraMary    -> TxMetadataInEra TxMetadataInMaryEra m
+  ShelleyBasedEraAlonzo  -> TxMetadataInEra TxMetadataInAlonzoEra m
 
 mkMetadata :: forall era . IsShelleyBasedEra era => Int -> Either String (TxMetadataInEra era)
 mkMetadata 0 = Right $ metadataInEra Nothing
@@ -125,6 +135,7 @@ mkMetadata size
     ShelleyBasedEraShelley -> 37
     ShelleyBasedEraAllegra -> 39
     ShelleyBasedEraMary    -> 39
+    ShelleyBasedEraAlonzo  -> error "39"
   nettoSize = size - minSize
 
   -- At 24 the CBOR representation changes.

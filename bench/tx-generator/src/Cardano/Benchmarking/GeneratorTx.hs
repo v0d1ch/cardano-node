@@ -189,7 +189,7 @@ splitFunds
             -- same TxOut for all
             outs = zip [identityIndex ..
                         identityIndex + fromIntegral numOutsPerInitTx - 1]
-                       (repeat (TxOut globalOutAddr txOut))
+                       (repeat (TxOut globalOutAddr txOut TxOutDatumHashNone))
             (mFunds, _fees, outIndices, splitTx) =
               mkTransactionGen sKey (initialFund :| []) globalOutAddr outs TxMetadataNone fee
             !splitTxId = getTxId $ getTxBody splitTx
@@ -381,7 +381,7 @@ txGenerator
   initRecipientIndex = 0 :: Int
   -- The same output for all transactions.
   valueForRecipient = quantityToLovelace $ Quantity 1000000 -- 10 ADA
-  !txOut = TxOut recipientAddress (mkTxOutValueAdaOnly valueForRecipient)
+  !txOut = TxOut recipientAddress (mkTxOutValueAdaOnly valueForRecipient) TxOutDatumHashNone
   totalValue = valueForRecipient + txFee
   -- Send possible change to the same 'recipientAddress'.
   addressForChange = recipientAddress

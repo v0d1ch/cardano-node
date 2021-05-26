@@ -26,6 +26,7 @@ getDSL _         ByronEra = error "ByronEra not supported"
 getDSL (x, _, _) ShelleyEra = x
 getDSL (_, x, _) AllegraEra = x
 getDSL (_, _, x) MaryEra    = x
+getDSL _         AlonzoEra = error "AlonzoEra not supported" -- use json mode
 
 type Fee = Lovelace
 type TTL = SlotNo

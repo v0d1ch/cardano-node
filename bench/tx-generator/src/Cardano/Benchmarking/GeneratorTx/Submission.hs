@@ -63,7 +63,7 @@ import           Ouroboros.Consensus.Shelley.Ledger.Mempool (mkShelleyTx)
 import qualified Ouroboros.Consensus.Shelley.Ledger.Mempool as Mempool (TxId(ShelleyTxId))
 import           Ouroboros.Consensus.Shelley.Protocol (StandardCrypto)
 
-import           Ouroboros.Consensus.Cardano.Block (GenTx (GenTxShelley, GenTxMary, GenTxAllegra))
+import           Ouroboros.Consensus.Cardano.Block (GenTx (GenTxAllegra, GenTxAlonzo, GenTxShelley, GenTxMary))
 import qualified Ouroboros.Consensus.Cardano.Block as Block (TxId(GenTxIdShelley, GenTxIdAllegra, GenTxIdMary))
 
 import           Ouroboros.Network.Protocol.TxSubmission.Client (ClientStIdle (..),
@@ -361,6 +361,7 @@ txSubmissionClient tr bmtr sub threadIx =
     (ShelleyBasedEraShelley, ShelleyTx _ tx') -> GenTxShelley (mkShelleyTx tx')
     (ShelleyBasedEraAllegra, ShelleyTx _ tx') -> GenTxAllegra (mkShelleyTx tx')
     (ShelleyBasedEraMary, ShelleyTx _ tx') -> GenTxMary (mkShelleyTx tx')
+    (ShelleyBasedEraAlonzo, ShelleyTx _ tx') -> GenTxAlonzo (mkShelleyTx tx')
 
   fromGenTxId :: gentxid -> txid
   fromGenTxId (Block.GenTxIdShelley (Mempool.ShelleyTxId i)) = fromShelleyTxId i

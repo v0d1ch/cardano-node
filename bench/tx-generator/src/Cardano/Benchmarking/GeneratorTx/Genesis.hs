@@ -58,7 +58,7 @@ genesisExpenditure networkId key addr coin fee ttl = (tx, fund)
   tx = mkGenesisTransaction (castKey key) 0 ttl fee [ pseudoTxIn ] [ txout ]
 
   value = mkTxOutValueAdaOnly $ coin - fee
-  txout = TxOut addr value
+  txout = TxOut addr value TxOutDatumHashNone
 
   pseudoTxIn = genesisUTxOPseudoTxIn networkId
                  (verificationKeyHash $ getVerificationKey $ castKey key)

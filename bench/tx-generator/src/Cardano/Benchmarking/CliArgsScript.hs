@@ -62,6 +62,7 @@ plainOldCliScript _ _ (FundsUtxo _ _ _) _ = error "plainOldCliScript FundsUtxo n
 plainOldCliScript _ _ (FundsSplitUtxo _ _) _ = error "plainOldCliScript FundsSplitUtxo not supported"
 plainOldCliScript cliPartialBenchmark benchmarkEra (FundsGenesis keyFile) (tracers, dslSet) = do
   case benchmarkEra of
+      AnyCardanoEra AlonzoEra  -> error "AlonzoEra not supported"
       AnyCardanoEra ByronEra   -> error "ByronEra not supported"
       AnyCardanoEra ShelleyEra -> do
         myTracer "POScript :: ShelleyEra"

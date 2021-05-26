@@ -116,13 +116,14 @@ genTx key networkId inFunds outValues
       , txMintValue = TxMintNone
       }
 
-  mkTxOut v = TxOut (Tx.keyAddress @ era networkId key) (mkTxOutValueAdaOnly v)
+  mkTxOut v = TxOut (Tx.keyAddress @ era networkId key) (mkTxOutValueAdaOnly v) TxOutDatumHashNone
 
   upperBound :: TxValidityUpperBound era
   upperBound = case shelleyBasedEra @ era of
     ShelleyBasedEraShelley -> TxValidityUpperBound ValidityUpperBoundInShelleyEra $ SlotNo maxBound
     ShelleyBasedEraAllegra -> TxValidityNoUpperBound ValidityNoUpperBoundInAllegraEra
     ShelleyBasedEraMary    -> TxValidityNoUpperBound ValidityNoUpperBoundInMaryEra
+    ShelleyBasedEraAlonzo  -> TxValidityNoUpperBound ValidityNoUpperBoundInAlonzoEra
 
 benchmarkTransaction :: forall era. IsShelleyBasedEra era
   => Wallet

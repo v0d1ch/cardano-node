@@ -61,6 +61,7 @@ withEra :: (forall era. IsShelleyBasedEra era => AsType era -> ActionM x) -> Act
 withEra action = do
   era <- get $ User TEra
   case era of
+    AnyCardanoEra AlonzoEra  -> action AsAlonzoEra
     AnyCardanoEra MaryEra    -> action AsMaryEra
     AnyCardanoEra AllegraEra -> action AsAllegraEra
     AnyCardanoEra ShelleyEra -> action AsShelleyEra
@@ -223,6 +224,7 @@ asyncBenchmarkCore (ThreadName threadName) transactions tps = do
     coreCall :: forall era. IsShelleyBasedEra era => [Tx era] -> ExceptT TxGenError IO AsyncBenchmarkControl
     coreCall l = Core.asyncBenchmark (btTxSubmit_ tracers) (btN2N_ tracers) connectClient threadName targets tps LogErrors l
   ret <- liftIO $ runExceptT $ case txs of
+    InAnyCardanoEra AlonzoEra  (TxList l) -> coreCall l
     InAnyCardanoEra MaryEra    (TxList l) -> coreCall l
     InAnyCardanoEra AllegraEra (TxList l) -> coreCall l
     InAnyCardanoEra ShelleyEra (TxList l) -> coreCall l

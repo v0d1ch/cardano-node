@@ -148,6 +148,7 @@ pTxOut =
       TxOut <$> parseAddressInEra
             <*  Atto.char '+'
             <*> (TxOutAdaOnly AdaOnlyInShelleyEra <$> parseLovelace)
+            <*> pure TxOutDatumHashNone
 
 parseAddressInEra :: IsCardanoEra era => Atto.Parser (AddressInEra era)
 parseAddressInEra = do

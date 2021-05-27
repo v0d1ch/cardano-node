@@ -124,9 +124,9 @@ startProtocol logConfigFile = do
   case ncProtocolConfig nc of
     NodeProtocolConfigurationByron _    -> error "NodeProtocolConfigurationByron not supported"
     NodeProtocolConfigurationShelley _  -> error "NodeProtocolConfigurationShelley not supported"
-    NodeProtocolConfigurationCardano byC shC hfC -> do
+    NodeProtocolConfigurationCardano byronConfig shelleyConfig alonzoConfig hardforkConfig -> do
         ptcl :: SomeConsensusProtocol <- firstExceptT (ProtocolInstantiationError . pack . show) $
-                  mkSomeConsensusProtocolCardano byC shC hfC Nothing
+                  mkSomeConsensusProtocolCardano byronConfig shelleyConfig alonzoConfig hardforkConfig Nothing
         
         loggingLayer <- mkLoggingLayer nc ptcl
         return (loggingLayer, ptcl)

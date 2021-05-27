@@ -55,6 +55,7 @@ import           Cardano.Benchmarking.GeneratorTx.Error
 import           Cardano.Benchmarking.GeneratorTx.Genesis
 import           Cardano.Benchmarking.GeneratorTx.NodeToNode
 import           Cardano.Benchmarking.GeneratorTx.Submission
+import           Cardano.Benchmarking.GeneratorTx.SubmissionClient
 import           Cardano.Benchmarking.GeneratorTx.Tx
 import           Cardano.Benchmarking.GeneratorTx.SizedMetadata (mkMetadata)
 import           Cardano.Benchmarking.Tracer
@@ -275,63 +276,64 @@ asyncBenchmark
   targets
   tpsRate
   errorPolicy
-  finalTransactions
-  = do
-  let
-    traceDebug :: String -> ExceptT TxGenError IO ()
-    traceDebug =   liftIO . traceWith traceSubmit . TraceBenchTxSubDebug
-
+  transactions
+  = liftIO $ do
   traceDebug "******* Tx generator, phase 2: pay to recipients *******"
 
-  remoteAddresses <- forM targets $ \targetNodeAddress -> do
-    let targetNodeHost =
-          show . unNodeHostIPv4Address $ naHostAddress targetNodeAddress
-
-    let targetNodePort = show $ naPort targetNodeAddress
-
-    let hints :: AddrInfo
-        hints = defaultHints
-          { addrFlags      = [AI_PASSIVE]
-          , addrFamily     = AF_INET
-          , addrSocketType = Stream
-          , addrCanonName  = Nothing
-          }
-
-    (remoteAddr:_) <- liftIO $ getAddrInfo (Just hints) (Just targetNodeHost) (Just targetNodePort)
-    return remoteAddr
-
+  remoteAddresses <- forM targets lookupNodeAddress
   let numTargets :: Natural = fromIntegral $ NE.length targets
 
   traceDebug $ "******* Tx generator, launching Tx peers:  " ++ show (NE.length remoteAddresses) ++ " of them"
-  liftIO $ do
-    startTime <- Clock.getCurrentTime
-    txSendQueue <- STM.newTBQueueIO 32
 
-    reportRefs <- STM.atomically $ replicateM (fromIntegral numTargets) STM.newEmptyTMVar
+  startTime <- Clock.getCurrentTime
+  txSendQueue <- STM.newTBQueueIO 32
 
-    allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
-      \(reportRef, remoteAddr) ->
-        launchTxPeer
-              traceSubmit
-              traceN2N
-              connectClient
-              remoteAddr
-              (legacyTxSource txSendQueue)
-              reportRef
-              errorPolicy
-    tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate finalTransactions
+  reportRefs <- STM.atomically $ replicateM (fromIntegral numTargets) STM.newEmptyTMVar
 
-    let tpsFeederShutdown = do
-          cancel tpsFeeder
-          liftIO $ tpsLimitedTxFeederShutdown numTargets txSendQueue
+  allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
+    \(reportRef, remoteAddr) -> do
+      let errorHandler = handleTxSubmissionClientError traceSubmit remoteAddr reportRef errorPolicy
+          client = txSubmissionClient
+                     traceN2N
+                     traceSubmit
+                     (legacyTxSource txSendQueue)
+                     (submitSubmissionThreadStats reportRef)
+      async $ handle errorHandler (connectClient remoteAddr client)
 
-    return (tpsFeeder, allAsyncs, mkSubmissionSummary threadName startTime reportRefs, tpsFeederShutdown)
+  tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate transactions
+
+  let tpsFeederShutdown = do
+        cancel tpsFeeder
+        liftIO $ tpsLimitedTxFeederShutdown numTargets txSendQueue
+
+  return (tpsFeeder, allAsyncs, mkSubmissionSummary threadName startTime reportRefs, tpsFeederShutdown)
+ where
+  traceDebug :: String -> IO ()
+  traceDebug =   traceWith traceSubmit . TraceBenchTxSubDebug
 
 -- | At this moment 'sourceAddress' contains a huge amount of money (lets call it A).
 --   Now we have to split this amount to N equal parts, as a result we'll have
 --   N UTxO entries, and alltogether these entries will contain the same amount A.
 --   E.g. (1 entry * 1000 ADA) -> (10 entries * 100 ADA).
 --   Technically all splitting transactions will send money back to 'sourceAddress'.
+
+lookupNodeAddress ::
+  NodeAddress' NodeHostIPv4Address -> IO AddrInfo
+lookupNodeAddress node = do
+  (remoteAddr:_) <- getAddrInfo (Just hints) (Just targetNodeHost) (Just targetNodePort)
+  return remoteAddr
+ where
+  targetNodeHost = show . unNodeHostIPv4Address $ naHostAddress node
+  targetNodePort = show $ naPort node
+  hints :: AddrInfo
+  hints = defaultHints
+    { addrFlags      = [AI_PASSIVE]
+    , addrFamily     = AF_INET
+    , addrSocketType = Stream
+    , addrCanonName  = Nothing
+    }
+
+
 
 -----------------------------------------------------------------------------------------
 -- | Work with tx generator thread (for Phase 2).
@@ -441,29 +443,26 @@ txGenerator
 -- Txs for submission.
 ---------------------------------------------------------------------------------------------------
 
-launchTxPeer
-  :: forall era
-  .  IsShelleyBasedEra era
-  => Tracer IO (TraceBenchTxSubmit TxId)
-  -> Tracer IO NodeToNodeSubmissionTrace
-  -> ConnectClient
+handleTxSubmissionClientError ::
+     Tracer IO (TraceBenchTxSubmit TxId)
   -> Network.Socket.AddrInfo
-  -> TxSource era
   -> ReportRef
   -> SubmissionErrorPolicy
-  -> IO (Async ())
-launchTxPeer traceSubmit traceN2N connectClient remoteAddr txSource reportRef errorPolicy =
-  async $
-   handle
-     (\(SomeException err) -> do
-         let errDesc = mconcat
-               [ "Exception while talking to peer "
-               , " (", show (addrAddress remoteAddr), "): "
-               , show err]
-         submitThreadReport reportRef (Left errDesc)
-         case errorPolicy of
-           FailOnError -> throwIO err
-           LogErrors   -> traceWith traceSubmit $
-             TraceBenchTxSubError (pack errDesc))
-     $ connectClient remoteAddr
-        (txSubmissionClient traceN2N traceSubmit txSource reportRef)
+  -> SomeException
+  -> IO ()
+handleTxSubmissionClientError
+  traceSubmit
+  remoteAddr
+  reportRef
+  errorPolicy
+  (SomeException err) = do
+    submitThreadReport reportRef (Left errDesc)
+    case errorPolicy of
+      FailOnError -> throwIO err
+      LogErrors   -> traceWith traceSubmit $
+        TraceBenchTxSubError (pack errDesc)
+   where
+    errDesc = mconcat
+      [ "Exception while talking to peer "
+      , " (", show (addrAddress remoteAddr), "): "
+      , show err]

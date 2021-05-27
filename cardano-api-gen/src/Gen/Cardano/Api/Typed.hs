@@ -1,5 +1,6 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TupleSections #-}
@@ -35,6 +36,7 @@ module Gen.Cardano.Api.Typed
   , genStakeAddress
   , genTx
   , genTxBody
+  , genTxBodyContent
   , genValue
   , genValueDefault
   , genVerificationKey
@@ -61,6 +63,8 @@ import           Data.Coerce
 import           Data.String
 import qualified Data.ByteString as BS
 import qualified Data.ByteString.Short as SBS
+import qualified Data.Map.Strict as Map
+import           Data.String
 
 import qualified Cardano.Binary as CBOR
 import qualified Cardano.Crypto.Hash as Crypto
@@ -363,14 +367,24 @@ genShelleyHash = return . Crypto.castHash $ Crypto.hashWith CBOR.serialize' ()
 genSlotNo :: Gen SlotNo
 genSlotNo = SlotNo <$> Gen.word64 Range.constantBounded
 
-genTxIn :: Gen TxIn
-genTxIn = TxIn <$> genTxId <*> genTxIndex
+-- TODO: Should probably have a naive generator that generates no inputs, no outputs etc
+genTxBodyByron :: Gen (TxBody ByronEra)
+genTxBodyByron = do
+  res <- makeTransactionBody <$> genTxBodyContent ByronEra
+  case res of
+    Left err -> fail (show err)
+    Right txBody -> pure txBody
+
+genTxIn :: CardanoEra era -> Gen TxIn
+genTxIn era = TxIn <$> genTxId <*> genTxIndex era
 
 genTxId :: Gen TxId
 genTxId = TxId <$> genShelleyHash
 
-genTxIndex :: Gen TxIx
-genTxIndex = TxIx <$> Gen.word Range.constantBounded
+genTxIndex :: CardanoEra era -> Gen TxIx
+genTxIndex = \case
+  ByronEra -> TxIx . fromIntegral <$> Gen.word32 Range.constantBounded
+  _        -> TxIx                <$> Gen.word   Range.constantBounded
 
 genTxOutValue :: CardanoEra era -> Gen (TxOutValue era)
 genTxOutValue era =

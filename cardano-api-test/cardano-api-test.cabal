@@ -2,7 +2,7 @@ cabal-version: 3.0
 
 name:                   cardano-api-test
 version:                1.27.0
-description:            The cardano api tests
+description:            The Cardano API tests
 author:                 IOHK
 maintainer:             operations@iohk.io
 license:                Apache-2.0
@@ -10,7 +10,8 @@ license-files:          LICENSE
                         NOTICE
 build-type:             Simple
 
-common base                         { build-depends: base                             >= 4.14       && < 4.15     }
+common base
+  build-depends:        base >= 4.14 && < 4.15
 
 common project-config
   default-language:     Haskell2010
@@ -24,8 +25,6 @@ common project-config
                         -Wpartial-fields
                         -Wredundant-constraints
                         -Wunused-packages
-
-library
 
 test-suite cardano-api-test
   import:               base, project-config
@@ -54,7 +53,9 @@ test-suite cardano-api-test
                       , shelley-spec-ledger
                       , shelley-spec-ledger-test
                       , tasty
+                      , tasty-hedgehog
                       , tasty-quickcheck
+                      , tasty-th
                       , time
 
   other-modules:        Test.Cardano.Api.Crypto
@@ -63,6 +64,7 @@ test-suite cardano-api-test
                         Test.Cardano.Api.KeysByron
                         Test.Cardano.Api.Ledger
                         Test.Cardano.Api.Metadata
+                        Test.Cardano.Api.TxBody
                         Test.Cardano.Api.Typed.Bech32
                         Test.Cardano.Api.Typed.CBOR
                         Test.Cardano.Api.Typed.Envelope

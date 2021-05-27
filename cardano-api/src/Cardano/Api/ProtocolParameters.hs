@@ -1413,4 +1413,3 @@ fromAlonzoPParams
     , protocolParamCollateralPercent   = Just _collateralPercentage
     , protocolParamMaxCollateralInputs = Just _maxCollateralInputs
     }
-

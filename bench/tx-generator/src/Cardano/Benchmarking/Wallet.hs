@@ -104,17 +104,19 @@ genTx key networkId inFunds outValues
                        )
  where
   txBodyContent = TxBodyContent {
-        txIns = map (\f -> (getFundTxIn f, BuildTxWith $ KeyWitness KeyWitnessForSpending)) inFunds
-      , txOuts = map mkTxOut outValues
-      , txFee = mkFee 0
-      , txValidityRange = (TxValidityNoLowerBound, upperBound)
-      , txMetadata = TxMetadataNone
-      , txAuxScripts = TxAuxScriptsNone
-      , txWithdrawals = TxWithdrawalsNone
-      , txCertificates = TxCertificatesNone
-      , txUpdateProposal = TxUpdateProposalNone
-      , txMintValue = TxMintNone
-      }
+      txIns = map (\f -> (getFundTxIn f, BuildTxWith $ KeyWitness KeyWitnessForSpending)) inFunds
+    , txOuts = map mkTxOut outValues
+    , txFee = mkFee 0
+    , txValidityRange = (TxValidityNoLowerBound, upperBound)
+    , txMetadata = TxMetadataNone
+    , txAuxScripts = TxAuxScriptsNone
+    , txExtraKeyWits = TxExtraKeyWitnessesNone
+    , txProtocolParams = BuildTxWith Nothing
+    , txWithdrawals = TxWithdrawalsNone
+    , txCertificates = TxCertificatesNone
+    , txUpdateProposal = TxUpdateProposalNone
+    , txMintValue = TxMintNone
+    }
 
   mkTxOut v = TxOut (Tx.keyAddress @ era networkId key) (mkTxOutValueAdaOnly v) TxOutDatumHashNone
 

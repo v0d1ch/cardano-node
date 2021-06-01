@@ -31,6 +31,7 @@ case "$op" in
         local dir=$(run get "$name")
         local adir=$dir/analysis
 
+        msg "analysing run $(jq .meta.tag "$dir"/meta.json --raw-output)"
         mkdir -p "$adir"
 
         ## 0. subset what we care about into the keyfile
@@ -49,7 +50,7 @@ EOF
         ## 1. enumerate logs, filter by keyfile & consolidate
         local logdirs=("$dir"/node-*/)
 
-        if test -z "$skip_preparation" -a -n "$(ls "$adir"/logs-node-*.flt.json)"
+        if test -z "$skip_preparation" -o -z "$(ls "$adir"/logs-node-*.flt.json 2>/dev/null)"
         then
             msg "filtering logs in: $dir/node-* "
             local jq_args=(
@@ -67,7 +68,7 @@ EOF
             wait
         fi
 
-        msg "log sizes:  (files: $(ls "$adir"/*.flt.json | wc -l), lines: $(cat "$adir"/*.flt.json | wc -l))"
+        msg "log sizes:  (files: $(ls "$adir"/*.flt.json 2>/dev/null | wc -l), lines: $(cat "$adir"/*.flt.json | wc -l))"
 
         msg "analysing.."
         local locli_args=(
@@ -75,7 +76,8 @@ EOF
             --run-metafile    "$dir"/meta.json
             ## ->
             # --logobjects-json "$adir"/logs-cluster.logobjects.json
-            --analysis-json   "$adir"/block-event-stream.json
+            --timeline-pretty "$adir"/block-propagation.txt
+            --analysis-json   "$adir"/block-propagation.json
         )
 
         ${time} locli 'analyse' 'block-propagation' \
@@ -88,6 +90,7 @@ EOF
         local dir=$(run get "$name")
         local adir=$dir/analysis
 
+        msg "analysing run $(jq .meta.tag "$dir"/meta.json --raw-output)"
         mkdir -p "$adir"
 
         ## 0. subset what we care about into the keyfile
@@ -96,7 +99,7 @@ EOF
 
         ## 1. enumerate logs, filter by keyfile & consolidate
         local logs=("$dir"/$mach/stdout) consolidated="$adir"/logs-$mach.json
-        if test -z "$skip_preparation" -a -n "$(ls "$adir"/logs-$mach.json)"
+        if test -z "$skip_preparation" -o -z "$(ls "$adir"/logs-$mach.json 2>/dev/null)"
         then
             grep -hFf "$keyfile" "${logs[@]}"  > "$consolidated"
         fi

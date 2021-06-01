@@ -67,11 +67,13 @@ mkGenesisTransaction key _payloadSize ttl fee txins txouts
  where
   txBodyContent = TxBodyContent {
       txIns = zip txins $ repeat $ BuildTxWith $ KeyWitness KeyWitnessForSpending
+    , txInsCollateral = TxInsCollateralNone
     , txOuts = txouts
     , txFee = fees
     , txValidityRange = (TxValidityNoLowerBound, validityUpperBound)
     , txMetadata = TxMetadataNone
     , txAuxScripts = TxAuxScriptsNone
+    , txAuxScriptData = TxAuxScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone
@@ -106,11 +108,13 @@ mkTransaction key metadata ttl fee txins txouts
  where
   txBodyContent = TxBodyContent {
       txIns = zip txins $ repeat $ BuildTxWith $ KeyWitness KeyWitnessForSpending
+    , txInsCollateral = TxInsCollateralNone
     , txOuts = txouts
     , txFee = mkFee fee
     , txValidityRange = (TxValidityNoLowerBound, mkValidityUpperBound ttl)
     , txMetadata = metadata
     , txAuxScripts = TxAuxScriptsNone
+    , txAuxScriptData = TxAuxScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone

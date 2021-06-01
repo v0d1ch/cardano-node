@@ -105,11 +105,13 @@ genTx key networkId inFunds outValues
  where
   txBodyContent = TxBodyContent {
       txIns = map (\f -> (getFundTxIn f, BuildTxWith $ KeyWitness KeyWitnessForSpending)) inFunds
+    , txInsCollateral = TxInsCollateralNone
     , txOuts = map mkTxOut outValues
     , txFee = mkFee 0
     , txValidityRange = (TxValidityNoLowerBound, upperBound)
     , txMetadata = TxMetadataNone
     , txAuxScripts = TxAuxScriptsNone
+    , txAuxScriptData = TxAuxScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone

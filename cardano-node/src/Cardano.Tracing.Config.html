@@ -26,7 +26,7 @@
 </span><span id="line-26"></span><span class="hs-keyword">data</span><span> </span><span id="TraceOptions"><span class="annot"><a href="Cardano.Tracing.Config.html#TraceOptions"><span class="hs-identifier hs-var">TraceOptions</span></a></span></span><span>
 </span><span id="line-27"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="TracingOff"><span class="annot"><a href="Cardano.Tracing.Config.html#TracingOff"><span class="hs-identifier hs-var">TracingOff</span></a></span></span><span>
 </span><span id="line-28"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TracingOn"><span class="annot"><a href="Cardano.Tracing.Config.html#TracingOn"><span class="hs-identifier hs-var">TracingOn</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceSelection"><span class="hs-identifier hs-type">TraceSelection</span></a></span><span>
-</span><span id="line-29"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679403736"><span id="local-6989586621679403738"><span class="annot"><span class="annottext">TraceOptions -&gt; TraceOptions -&gt; Bool
+</span><span id="line-29"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679402765"><span id="local-6989586621679402767"><span class="annot"><span class="annottext">TraceOptions -&gt; TraceOptions -&gt; Bool
 (TraceOptions -&gt; TraceOptions -&gt; Bool)
 -&gt; (TraceOptions -&gt; TraceOptions -&gt; Bool) -&gt; Eq TraceOptions
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -34,7 +34,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: TraceOptions -&gt; TraceOptions -&gt; Bool
 == :: TraceOptions -&gt; TraceOptions -&gt; Bool
 $c== :: TraceOptions -&gt; TraceOptions -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679403729"><span id="local-6989586621679403731"><span id="local-6989586621679403733"><span class="annot"><span class="annottext">Int -&gt; TraceOptions -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679402758"><span id="local-6989586621679402760"><span id="local-6989586621679402762"><span class="annot"><span class="annottext">Int -&gt; TraceOptions -&gt; ShowS
 [TraceOptions] -&gt; ShowS
 TraceOptions -&gt; String
 (Int -&gt; TraceOptions -&gt; ShowS)
@@ -86,8 +86,8 @@ $cshowsPrec :: Int -&gt; TraceOptions -&gt; ShowS
 </span><span id="line-63"></span><span class="hs-keyword">type</span><span> </span><span id="TraceTxSubmissionProtocol"><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmissionProtocol"><span class="hs-identifier hs-var">TraceTxSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-string">&quot;TraceTxSubmissionProtocol&quot;</span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Symbol</span></span><span class="hs-special">)</span><span>
 </span><span id="line-64"></span><span class="hs-keyword">type</span><span> </span><span id="TraceTxSubmission2Protocol"><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmission2Protocol"><span class="hs-identifier hs-var">TraceTxSubmission2Protocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-string">&quot;TraceTxSubmission2Protocol&quot;</span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Symbol</span></span><span class="hs-special">)</span><span>
 </span><span id="line-65"></span><span>
-</span><span id="line-66"></span><span class="hs-keyword">newtype</span><span> </span><span id="OnOff"><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679403800"><span class="annot"><a href="#local-6989586621679403800"><span class="hs-identifier hs-type">name</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Symbol</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span id="OnOff"><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="isOn"><span class="annot"><span class="annottext">OnOff name -&gt; Bool
-</span><a href="Cardano.Tracing.Config.html#isOn"><span class="hs-identifier hs-var hs-var">isOn</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span> </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679403722"><span id="local-6989586621679403724"><span class="annot"><span class="annottext">OnOff name -&gt; OnOff name -&gt; Bool
+</span><span id="line-66"></span><span class="hs-keyword">newtype</span><span> </span><span id="OnOff"><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679402829"><span class="annot"><a href="#local-6989586621679402829"><span class="hs-identifier hs-type">name</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Symbol</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span id="OnOff"><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="isOn"><span class="annot"><span class="annottext">OnOff name -&gt; Bool
+</span><a href="Cardano.Tracing.Config.html#isOn"><span class="hs-identifier hs-var hs-var">isOn</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span> </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679402751"><span id="local-6989586621679402753"><span class="annot"><span class="annottext">OnOff name -&gt; OnOff name -&gt; Bool
 (OnOff name -&gt; OnOff name -&gt; Bool)
 -&gt; (OnOff name -&gt; OnOff name -&gt; Bool) -&gt; Eq (OnOff name)
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -96,7 +96,7 @@ forall (name :: Symbol). OnOff name -&gt; OnOff name -&gt; Bool
 $c/= :: forall (name :: Symbol). OnOff name -&gt; OnOff name -&gt; Bool
 == :: OnOff name -&gt; OnOff name -&gt; Bool
 $c== :: forall (name :: Symbol). OnOff name -&gt; OnOff name -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679403716"><span id="local-6989586621679403718"><span id="local-6989586621679403720"><span class="annot"><span class="annottext">Int -&gt; OnOff name -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679402745"><span id="local-6989586621679402747"><span id="local-6989586621679402749"><span class="annot"><span class="annottext">Int -&gt; OnOff name -&gt; ShowS
 [OnOff name] -&gt; ShowS
 OnOff name -&gt; String
 (Int -&gt; OnOff name -&gt; ShowS)
@@ -116,23 +116,23 @@ showsPrec :: Int -&gt; OnOff name -&gt; ShowS
 $cshowsPrec :: forall (name :: Symbol). Int -&gt; OnOff name -&gt; ShowS
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-67"></span><span>
-</span><span id="line-68"></span><span id="local-6989586621679403715"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679403712"><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679403715"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-69"></span><span>    </span><span id="local-6989586621679403710"><span class="annot"><span class="annottext">parseJSON :: Value -&gt; Parser (OnOff a)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">parseJSON</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Data.Aeson.Bool</span></span><span> </span><span id="local-6989586621679403707"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679403707"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">OnOff a -&gt; Parser (OnOff a)
+</span><span id="line-68"></span><span id="local-6989586621679402744"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679402741"><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679402744"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-69"></span><span>    </span><span id="local-6989586621679402739"><span class="annot"><span class="annottext">parseJSON :: Value -&gt; Parser (OnOff a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">parseJSON</span></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Data.Aeson.Bool</span></span><span> </span><span id="local-6989586621679402736"><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679402736"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">OnOff a -&gt; Parser (OnOff a)
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">(OnOff a -&gt; Parser (OnOff a)) -&gt; OnOff a -&gt; Parser (OnOff a)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff a
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679403707"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><a href="#local-6989586621679402736"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-70"></span><span>    </span><span class="annot"><span class="hs-identifier hs-var">parseJSON</span></span><span> </span><span class="annot"><span class="annottext">Value
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Parser (OnOff a)
 forall (m :: * -&gt; *) a. MonadPlus m =&gt; m a
 </span><span class="hs-identifier hs-var">mzero</span></span></span><span>
 </span><span id="line-71"></span><span>
-</span><span id="line-72"></span><span class="annot"><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-type">getName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679403744"><span class="annot"><a href="#local-6989586621679403744"><span class="hs-identifier hs-type">name</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">KnownSymbol</span></span><span> </span><span class="annot"><a href="#local-6989586621679403744"><span class="hs-identifier hs-type">name</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679403744"><span class="hs-identifier hs-type">name</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
+</span><span id="line-72"></span><span class="annot"><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-type">getName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679402773"><span class="annot"><a href="#local-6989586621679402773"><span class="hs-identifier hs-type">name</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="annot"><span class="hs-identifier hs-type">KnownSymbol</span></span><span> </span><span class="annot"><a href="#local-6989586621679402773"><span class="hs-identifier hs-type">name</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679402773"><span class="hs-identifier hs-type">name</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-73"></span><span id="getName"><span class="annot"><span class="annottext">getName :: OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var hs-var">getName</span></a></span></span><span> </span><span class="annot"><span class="annottext">OnOff name
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
@@ -142,7 +142,7 @@ KnownSymbol n =&gt;
 proxy n -&gt; String
 </span><span class="hs-identifier hs-var">symbolVal</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Proxy name
 forall k (t :: k). Proxy t
-</span><span class="hs-identifier hs-var">Proxy</span></span><span> </span><span class="hs-glyph">@</span><span class="annot"><a href="#local-6989586621679403744"><span class="hs-identifier hs-type">name</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span class="hs-identifier hs-var">Proxy</span></span><span> </span><span class="hs-glyph">@</span><span class="annot"><a href="#local-6989586621679402773"><span class="hs-identifier hs-type">name</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-74"></span><span>
 </span><span id="line-75"></span><span class="hs-keyword">data</span><span> </span><span id="TraceSelection"><span class="annot"><a href="Cardano.Tracing.Config.html#TraceSelection"><span class="hs-identifier hs-var">TraceSelection</span></a></span></span><span>
 </span><span id="line-76"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="TraceSelection"><span class="annot"><a href="Cardano.Tracing.Config.html#TraceSelection"><span class="hs-identifier hs-var">TraceSelection</span></a></span></span><span>
@@ -218,7 +218,7 @@ forall k (t :: k). Proxy t
 </span><a href="Cardano.Tracing.Config.html#traceTxSubmissionProtocol"><span class="hs-identifier hs-var hs-var">traceTxSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmissionProtocol"><span class="hs-identifier hs-type">TraceTxSubmissionProtocol</span></a></span><span>
 </span><span id="line-113"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="traceTxSubmission2Protocol"><span class="annot"><span class="annottext">TraceSelection -&gt; OnOff TraceTxSubmission2Protocol
 </span><a href="Cardano.Tracing.Config.html#traceTxSubmission2Protocol"><span class="hs-identifier hs-var hs-var">traceTxSubmission2Protocol</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmission2Protocol"><span class="hs-identifier hs-type">TraceTxSubmission2Protocol</span></a></span><span>
-</span><span id="line-114"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679403663"><span id="local-6989586621679403665"><span class="annot"><span class="annottext">TraceSelection -&gt; TraceSelection -&gt; Bool
+</span><span id="line-114"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679402692"><span id="local-6989586621679402694"><span class="annot"><span class="annottext">TraceSelection -&gt; TraceSelection -&gt; Bool
 (TraceSelection -&gt; TraceSelection -&gt; Bool)
 -&gt; (TraceSelection -&gt; TraceSelection -&gt; Bool) -&gt; Eq TraceSelection
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -226,7 +226,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: TraceSelection -&gt; TraceSelection -&gt; Bool
 == :: TraceSelection -&gt; TraceSelection -&gt; Bool
 $c== :: TraceSelection -&gt; TraceSelection -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679403657"><span id="local-6989586621679403659"><span id="local-6989586621679403661"><span class="annot"><span class="annottext">Int -&gt; TraceSelection -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679402686"><span id="local-6989586621679402688"><span id="local-6989586621679402690"><span class="annot"><span class="annottext">Int -&gt; TraceSelection -&gt; ShowS
 [TraceSelection] -&gt; ShowS
 TraceSelection -&gt; String
 (Int -&gt; TraceSelection -&gt; ShowS)
@@ -246,209 +246,209 @@ $cshowsPrec :: Int -&gt; TraceSelection -&gt; ShowS
 </span><span id="line-116"></span><span>
 </span><span id="line-117"></span><span class="annot"><a href="Cardano.Tracing.Config.html#traceConfigParser"><span class="hs-identifier hs-type">traceConfigParser</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Object</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceOptions"><span class="hs-identifier hs-type">TraceOptions</span></a></span><span>
 </span><span id="line-118"></span><span id="traceConfigParser"><span class="annot"><span class="annottext">traceConfigParser :: Object -&gt; Parser TraceOptions
-</span><a href="Cardano.Tracing.Config.html#traceConfigParser"><span class="hs-identifier hs-var hs-var">traceConfigParser</span></a></span></span><span> </span><span id="local-6989586621679403656"><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-119"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679403655"><span class="hs-identifier hs-type">acceptPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceAcceptPolicy"><span class="hs-identifier hs-type">TraceAcceptPolicy</span></a></span><span>
-</span><span id="line-120"></span><span>      </span><span id="local-6989586621679403655"><span class="annot"><span class="annottext">acceptPolicy :: OnOff TraceAcceptPolicy
-</span><a href="#local-6989586621679403655"><span class="hs-identifier hs-var hs-var">acceptPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceAcceptPolicy
+</span><a href="Cardano.Tracing.Config.html#traceConfigParser"><span class="hs-identifier hs-var hs-var">traceConfigParser</span></a></span></span><span> </span><span id="local-6989586621679402685"><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-119"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679402684"><span class="hs-identifier hs-type">acceptPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceAcceptPolicy"><span class="hs-identifier hs-type">TraceAcceptPolicy</span></a></span><span>
+</span><span id="line-120"></span><span>      </span><span id="local-6989586621679402684"><span class="annot"><span class="annottext">acceptPolicy :: OnOff TraceAcceptPolicy
+</span><a href="#local-6989586621679402684"><span class="hs-identifier hs-var hs-var">acceptPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceAcceptPolicy
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-121"></span><span>      </span><span class="annot"><a href="#local-6989586621679403654"><span class="hs-identifier hs-type">blockFetchClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchClient"><span class="hs-identifier hs-type">TraceBlockFetchClient</span></a></span><span>
-</span><span id="line-122"></span><span>      </span><span id="local-6989586621679403654"><span class="annot"><span class="annottext">blockFetchClient :: OnOff TraceBlockFetchClient
-</span><a href="#local-6989586621679403654"><span class="hs-identifier hs-var hs-var">blockFetchClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchClient
+</span><span id="line-121"></span><span>      </span><span class="annot"><a href="#local-6989586621679402683"><span class="hs-identifier hs-type">blockFetchClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchClient"><span class="hs-identifier hs-type">TraceBlockFetchClient</span></a></span><span>
+</span><span id="line-122"></span><span>      </span><span id="local-6989586621679402683"><span class="annot"><span class="annottext">blockFetchClient :: OnOff TraceBlockFetchClient
+</span><a href="#local-6989586621679402683"><span class="hs-identifier hs-var hs-var">blockFetchClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchClient
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-123"></span><span>      </span><span class="annot"><a href="#local-6989586621679403653"><span class="hs-identifier hs-type">blockFetchDecisions</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchDecisions"><span class="hs-identifier hs-type">TraceBlockFetchDecisions</span></a></span><span>
-</span><span id="line-124"></span><span>      </span><span id="local-6989586621679403653"><span class="annot"><span class="annottext">blockFetchDecisions :: OnOff TraceBlockFetchDecisions
-</span><a href="#local-6989586621679403653"><span class="hs-identifier hs-var hs-var">blockFetchDecisions</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchDecisions
+</span><span id="line-123"></span><span>      </span><span class="annot"><a href="#local-6989586621679402682"><span class="hs-identifier hs-type">blockFetchDecisions</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchDecisions"><span class="hs-identifier hs-type">TraceBlockFetchDecisions</span></a></span><span>
+</span><span id="line-124"></span><span>      </span><span id="local-6989586621679402682"><span class="annot"><span class="annottext">blockFetchDecisions :: OnOff TraceBlockFetchDecisions
+</span><a href="#local-6989586621679402682"><span class="hs-identifier hs-var hs-var">blockFetchDecisions</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchDecisions
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-125"></span><span>      </span><span class="annot"><a href="#local-6989586621679403652"><span class="hs-identifier hs-type">blockFetchProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchProtocol"><span class="hs-identifier hs-type">TraceBlockFetchProtocol</span></a></span><span>
-</span><span id="line-126"></span><span>      </span><span id="local-6989586621679403652"><span class="annot"><span class="annottext">blockFetchProtocol :: OnOff TraceBlockFetchProtocol
-</span><a href="#local-6989586621679403652"><span class="hs-identifier hs-var hs-var">blockFetchProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchProtocol
+</span><span id="line-125"></span><span>      </span><span class="annot"><a href="#local-6989586621679402681"><span class="hs-identifier hs-type">blockFetchProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchProtocol"><span class="hs-identifier hs-type">TraceBlockFetchProtocol</span></a></span><span>
+</span><span id="line-126"></span><span>      </span><span id="local-6989586621679402681"><span class="annot"><span class="annottext">blockFetchProtocol :: OnOff TraceBlockFetchProtocol
+</span><a href="#local-6989586621679402681"><span class="hs-identifier hs-var hs-var">blockFetchProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-127"></span><span>      </span><span class="annot"><a href="#local-6989586621679403651"><span class="hs-identifier hs-type">blockFetchProtocolSerialised</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchProtocolSerialised"><span class="hs-identifier hs-type">TraceBlockFetchProtocolSerialised</span></a></span><span>
-</span><span id="line-128"></span><span>      </span><span id="local-6989586621679403651"><span class="annot"><span class="annottext">blockFetchProtocolSerialised :: OnOff TraceBlockFetchProtocolSerialised
-</span><a href="#local-6989586621679403651"><span class="hs-identifier hs-var hs-var">blockFetchProtocolSerialised</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchProtocolSerialised
+</span><span id="line-127"></span><span>      </span><span class="annot"><a href="#local-6989586621679402680"><span class="hs-identifier hs-type">blockFetchProtocolSerialised</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchProtocolSerialised"><span class="hs-identifier hs-type">TraceBlockFetchProtocolSerialised</span></a></span><span>
+</span><span id="line-128"></span><span>      </span><span id="local-6989586621679402680"><span class="annot"><span class="annottext">blockFetchProtocolSerialised :: OnOff TraceBlockFetchProtocolSerialised
+</span><a href="#local-6989586621679402680"><span class="hs-identifier hs-var hs-var">blockFetchProtocolSerialised</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchProtocolSerialised
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-129"></span><span>      </span><span class="annot"><a href="#local-6989586621679403650"><span class="hs-identifier hs-type">blockFetchServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchServer"><span class="hs-identifier hs-type">TraceBlockFetchServer</span></a></span><span>
-</span><span id="line-130"></span><span>      </span><span id="local-6989586621679403650"><span class="annot"><span class="annottext">blockFetchServer :: OnOff TraceBlockFetchServer
-</span><a href="#local-6989586621679403650"><span class="hs-identifier hs-var hs-var">blockFetchServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchServer
+</span><span id="line-129"></span><span>      </span><span class="annot"><a href="#local-6989586621679402679"><span class="hs-identifier hs-type">blockFetchServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockFetchServer"><span class="hs-identifier hs-type">TraceBlockFetchServer</span></a></span><span>
+</span><span id="line-130"></span><span>      </span><span id="local-6989586621679402679"><span class="annot"><span class="annottext">blockFetchServer :: OnOff TraceBlockFetchServer
+</span><a href="#local-6989586621679402679"><span class="hs-identifier hs-var hs-var">blockFetchServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockFetchServer
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-131"></span><span>      </span><span class="annot"><a href="#local-6989586621679403649"><span class="hs-identifier hs-type">blockchainTime</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockchainTime"><span class="hs-identifier hs-type">TraceBlockchainTime</span></a></span><span>
-</span><span id="line-132"></span><span>      </span><span id="local-6989586621679403649"><span class="annot"><span class="annottext">blockchainTime :: OnOff TraceBlockchainTime
-</span><a href="#local-6989586621679403649"><span class="hs-identifier hs-var hs-var">blockchainTime</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockchainTime
+</span><span id="line-131"></span><span>      </span><span class="annot"><a href="#local-6989586621679402678"><span class="hs-identifier hs-type">blockchainTime</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceBlockchainTime"><span class="hs-identifier hs-type">TraceBlockchainTime</span></a></span><span>
+</span><span id="line-132"></span><span>      </span><span id="local-6989586621679402678"><span class="annot"><span class="annottext">blockchainTime :: OnOff TraceBlockchainTime
+</span><a href="#local-6989586621679402678"><span class="hs-identifier hs-var hs-var">blockchainTime</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceBlockchainTime
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-133"></span><span>      </span><span class="annot"><a href="#local-6989586621679403648"><span class="hs-identifier hs-type">chainDB</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainDB"><span class="hs-identifier hs-type">TraceChainDB</span></a></span><span>
-</span><span id="line-134"></span><span>      </span><span id="local-6989586621679403648"><span class="annot"><span class="annottext">chainDB :: OnOff TraceChainDB
-</span><a href="#local-6989586621679403648"><span class="hs-identifier hs-var hs-var">chainDB</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainDB
+</span><span id="line-133"></span><span>      </span><span class="annot"><a href="#local-6989586621679402677"><span class="hs-identifier hs-type">chainDB</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainDB"><span class="hs-identifier hs-type">TraceChainDB</span></a></span><span>
+</span><span id="line-134"></span><span>      </span><span id="local-6989586621679402677"><span class="annot"><span class="annottext">chainDB :: OnOff TraceChainDB
+</span><a href="#local-6989586621679402677"><span class="hs-identifier hs-var hs-var">chainDB</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainDB
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-135"></span><span>      </span><span class="annot"><a href="#local-6989586621679403647"><span class="hs-identifier hs-type">chainSyncBlockServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncBlockServer"><span class="hs-identifier hs-type">TraceChainSyncBlockServer</span></a></span><span>
-</span><span id="line-136"></span><span>      </span><span id="local-6989586621679403647"><span class="annot"><span class="annottext">chainSyncBlockServer :: OnOff TraceChainSyncBlockServer
-</span><a href="#local-6989586621679403647"><span class="hs-identifier hs-var hs-var">chainSyncBlockServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncBlockServer
+</span><span id="line-135"></span><span>      </span><span class="annot"><a href="#local-6989586621679402676"><span class="hs-identifier hs-type">chainSyncBlockServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncBlockServer"><span class="hs-identifier hs-type">TraceChainSyncBlockServer</span></a></span><span>
+</span><span id="line-136"></span><span>      </span><span id="local-6989586621679402676"><span class="annot"><span class="annottext">chainSyncBlockServer :: OnOff TraceChainSyncBlockServer
+</span><a href="#local-6989586621679402676"><span class="hs-identifier hs-var hs-var">chainSyncBlockServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncBlockServer
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-137"></span><span>      </span><span class="annot"><a href="#local-6989586621679403646"><span class="hs-identifier hs-type">chainSyncClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncClient"><span class="hs-identifier hs-type">TraceChainSyncClient</span></a></span><span>
-</span><span id="line-138"></span><span>      </span><span id="local-6989586621679403646"><span class="annot"><span class="annottext">chainSyncClient :: OnOff TraceChainSyncClient
-</span><a href="#local-6989586621679403646"><span class="hs-identifier hs-var hs-var">chainSyncClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncClient
+</span><span id="line-137"></span><span>      </span><span class="annot"><a href="#local-6989586621679402675"><span class="hs-identifier hs-type">chainSyncClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncClient"><span class="hs-identifier hs-type">TraceChainSyncClient</span></a></span><span>
+</span><span id="line-138"></span><span>      </span><span id="local-6989586621679402675"><span class="annot"><span class="annottext">chainSyncClient :: OnOff TraceChainSyncClient
+</span><a href="#local-6989586621679402675"><span class="hs-identifier hs-var hs-var">chainSyncClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncClient
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-139"></span><span>      </span><span class="annot"><a href="#local-6989586621679403645"><span class="hs-identifier hs-type">chainSyncHeaderServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncHeaderServer"><span class="hs-identifier hs-type">TraceChainSyncHeaderServer</span></a></span><span>
-</span><span id="line-140"></span><span>      </span><span id="local-6989586621679403645"><span class="annot"><span class="annottext">chainSyncHeaderServer :: OnOff TraceChainSyncHeaderServer
-</span><a href="#local-6989586621679403645"><span class="hs-identifier hs-var hs-var">chainSyncHeaderServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncHeaderServer
+</span><span id="line-139"></span><span>      </span><span class="annot"><a href="#local-6989586621679402674"><span class="hs-identifier hs-type">chainSyncHeaderServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncHeaderServer"><span class="hs-identifier hs-type">TraceChainSyncHeaderServer</span></a></span><span>
+</span><span id="line-140"></span><span>      </span><span id="local-6989586621679402674"><span class="annot"><span class="annottext">chainSyncHeaderServer :: OnOff TraceChainSyncHeaderServer
+</span><a href="#local-6989586621679402674"><span class="hs-identifier hs-var hs-var">chainSyncHeaderServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncHeaderServer
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-141"></span><span>      </span><span class="annot"><a href="#local-6989586621679403644"><span class="hs-identifier hs-type">chainSyncProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncProtocol"><span class="hs-identifier hs-type">TraceChainSyncProtocol</span></a></span><span>
-</span><span id="line-142"></span><span>      </span><span id="local-6989586621679403644"><span class="annot"><span class="annottext">chainSyncProtocol :: OnOff TraceChainSyncProtocol
-</span><a href="#local-6989586621679403644"><span class="hs-identifier hs-var hs-var">chainSyncProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncProtocol
+</span><span id="line-141"></span><span>      </span><span class="annot"><a href="#local-6989586621679402673"><span class="hs-identifier hs-type">chainSyncProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceChainSyncProtocol"><span class="hs-identifier hs-type">TraceChainSyncProtocol</span></a></span><span>
+</span><span id="line-142"></span><span>      </span><span id="local-6989586621679402673"><span class="annot"><span class="annottext">chainSyncProtocol :: OnOff TraceChainSyncProtocol
+</span><a href="#local-6989586621679402673"><span class="hs-identifier hs-var hs-var">chainSyncProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceChainSyncProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-143"></span><span>      </span><span class="annot"><a href="#local-6989586621679403643"><span class="hs-identifier hs-type">diffusionInitialization</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDiffusionInitialization"><span class="hs-identifier hs-type">TraceDiffusionInitialization</span></a></span><span>
-</span><span id="line-144"></span><span>      </span><span id="local-6989586621679403643"><span class="annot"><span class="annottext">diffusionInitialization :: OnOff TraceDiffusionInitialization
-</span><a href="#local-6989586621679403643"><span class="hs-identifier hs-var hs-var">diffusionInitialization</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDiffusionInitialization
+</span><span id="line-143"></span><span>      </span><span class="annot"><a href="#local-6989586621679402672"><span class="hs-identifier hs-type">diffusionInitialization</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDiffusionInitialization"><span class="hs-identifier hs-type">TraceDiffusionInitialization</span></a></span><span>
+</span><span id="line-144"></span><span>      </span><span id="local-6989586621679402672"><span class="annot"><span class="annottext">diffusionInitialization :: OnOff TraceDiffusionInitialization
+</span><a href="#local-6989586621679402672"><span class="hs-identifier hs-var hs-var">diffusionInitialization</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDiffusionInitialization
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-145"></span><span>      </span><span class="annot"><a href="#local-6989586621679403642"><span class="hs-identifier hs-type">dnsResolver</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDnsResolver"><span class="hs-identifier hs-type">TraceDnsResolver</span></a></span><span>
-</span><span id="line-146"></span><span>      </span><span id="local-6989586621679403642"><span class="annot"><span class="annottext">dnsResolver :: OnOff TraceDnsResolver
-</span><a href="#local-6989586621679403642"><span class="hs-identifier hs-var hs-var">dnsResolver</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDnsResolver
+</span><span id="line-145"></span><span>      </span><span class="annot"><a href="#local-6989586621679402671"><span class="hs-identifier hs-type">dnsResolver</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDnsResolver"><span class="hs-identifier hs-type">TraceDnsResolver</span></a></span><span>
+</span><span id="line-146"></span><span>      </span><span id="local-6989586621679402671"><span class="annot"><span class="annottext">dnsResolver :: OnOff TraceDnsResolver
+</span><a href="#local-6989586621679402671"><span class="hs-identifier hs-var hs-var">dnsResolver</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDnsResolver
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-147"></span><span>      </span><span class="annot"><a href="#local-6989586621679403641"><span class="hs-identifier hs-type">dnsSubscription</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDnsSubscription"><span class="hs-identifier hs-type">TraceDnsSubscription</span></a></span><span>
-</span><span id="line-148"></span><span>      </span><span id="local-6989586621679403641"><span class="annot"><span class="annottext">dnsSubscription :: OnOff TraceDnsSubscription
-</span><a href="#local-6989586621679403641"><span class="hs-identifier hs-var hs-var">dnsSubscription</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDnsSubscription
+</span><span id="line-147"></span><span>      </span><span class="annot"><a href="#local-6989586621679402670"><span class="hs-identifier hs-type">dnsSubscription</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceDnsSubscription"><span class="hs-identifier hs-type">TraceDnsSubscription</span></a></span><span>
+</span><span id="line-148"></span><span>      </span><span id="local-6989586621679402670"><span class="annot"><span class="annottext">dnsSubscription :: OnOff TraceDnsSubscription
+</span><a href="#local-6989586621679402670"><span class="hs-identifier hs-var hs-var">dnsSubscription</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceDnsSubscription
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-149"></span><span>      </span><span class="annot"><a href="#local-6989586621679403640"><span class="hs-identifier hs-type">errorPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceErrorPolicy"><span class="hs-identifier hs-type">TraceErrorPolicy</span></a></span><span>
-</span><span id="line-150"></span><span>      </span><span id="local-6989586621679403640"><span class="annot"><span class="annottext">errorPolicy :: OnOff TraceErrorPolicy
-</span><a href="#local-6989586621679403640"><span class="hs-identifier hs-var hs-var">errorPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceErrorPolicy
+</span><span id="line-149"></span><span>      </span><span class="annot"><a href="#local-6989586621679402669"><span class="hs-identifier hs-type">errorPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceErrorPolicy"><span class="hs-identifier hs-type">TraceErrorPolicy</span></a></span><span>
+</span><span id="line-150"></span><span>      </span><span id="local-6989586621679402669"><span class="annot"><span class="annottext">errorPolicy :: OnOff TraceErrorPolicy
+</span><a href="#local-6989586621679402669"><span class="hs-identifier hs-var hs-var">errorPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceErrorPolicy
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-151"></span><span>      </span><span class="annot"><a href="#local-6989586621679403639"><span class="hs-identifier hs-type">forge</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceForge"><span class="hs-identifier hs-type">TraceForge</span></a></span><span>
-</span><span id="line-152"></span><span>      </span><span id="local-6989586621679403639"><span class="annot"><span class="annottext">forge :: OnOff TraceForge
-</span><a href="#local-6989586621679403639"><span class="hs-identifier hs-var hs-var">forge</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceForge
+</span><span id="line-151"></span><span>      </span><span class="annot"><a href="#local-6989586621679402668"><span class="hs-identifier hs-type">forge</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceForge"><span class="hs-identifier hs-type">TraceForge</span></a></span><span>
+</span><span id="line-152"></span><span>      </span><span id="local-6989586621679402668"><span class="annot"><span class="annottext">forge :: OnOff TraceForge
+</span><a href="#local-6989586621679402668"><span class="hs-identifier hs-var hs-var">forge</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceForge
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-153"></span><span>      </span><span class="annot"><a href="#local-6989586621679403638"><span class="hs-identifier hs-type">forgeStateInfo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceForgeStateInfo"><span class="hs-identifier hs-type">TraceForgeStateInfo</span></a></span><span>
-</span><span id="line-154"></span><span>      </span><span id="local-6989586621679403638"><span class="annot"><span class="annottext">forgeStateInfo :: OnOff TraceForgeStateInfo
-</span><a href="#local-6989586621679403638"><span class="hs-identifier hs-var hs-var">forgeStateInfo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceForgeStateInfo
+</span><span id="line-153"></span><span>      </span><span class="annot"><a href="#local-6989586621679402667"><span class="hs-identifier hs-type">forgeStateInfo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceForgeStateInfo"><span class="hs-identifier hs-type">TraceForgeStateInfo</span></a></span><span>
+</span><span id="line-154"></span><span>      </span><span id="local-6989586621679402667"><span class="annot"><span class="annottext">forgeStateInfo :: OnOff TraceForgeStateInfo
+</span><a href="#local-6989586621679402667"><span class="hs-identifier hs-var hs-var">forgeStateInfo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceForgeStateInfo
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-155"></span><span>      </span><span class="annot"><a href="#local-6989586621679403637"><span class="hs-identifier hs-type">handshake</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceHandshake"><span class="hs-identifier hs-type">TraceHandshake</span></a></span><span>
-</span><span id="line-156"></span><span>      </span><span id="local-6989586621679403637"><span class="annot"><span class="annottext">handshake :: OnOff TraceHandshake
-</span><a href="#local-6989586621679403637"><span class="hs-identifier hs-var hs-var">handshake</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceHandshake
+</span><span id="line-155"></span><span>      </span><span class="annot"><a href="#local-6989586621679402666"><span class="hs-identifier hs-type">handshake</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceHandshake"><span class="hs-identifier hs-type">TraceHandshake</span></a></span><span>
+</span><span id="line-156"></span><span>      </span><span id="local-6989586621679402666"><span class="annot"><span class="annottext">handshake :: OnOff TraceHandshake
+</span><a href="#local-6989586621679402666"><span class="hs-identifier hs-var hs-var">handshake</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceHandshake
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-157"></span><span>      </span><span class="annot"><a href="#local-6989586621679403636"><span class="hs-identifier hs-type">ipSubscription</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceIpSubscription"><span class="hs-identifier hs-type">TraceIpSubscription</span></a></span><span>
-</span><span id="line-158"></span><span>      </span><span id="local-6989586621679403636"><span class="annot"><span class="annottext">ipSubscription :: OnOff TraceIpSubscription
-</span><a href="#local-6989586621679403636"><span class="hs-identifier hs-var hs-var">ipSubscription</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceIpSubscription
+</span><span id="line-157"></span><span>      </span><span class="annot"><a href="#local-6989586621679402665"><span class="hs-identifier hs-type">ipSubscription</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceIpSubscription"><span class="hs-identifier hs-type">TraceIpSubscription</span></a></span><span>
+</span><span id="line-158"></span><span>      </span><span id="local-6989586621679402665"><span class="annot"><span class="annottext">ipSubscription :: OnOff TraceIpSubscription
+</span><a href="#local-6989586621679402665"><span class="hs-identifier hs-var hs-var">ipSubscription</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceIpSubscription
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-159"></span><span>      </span><span class="annot"><a href="#local-6989586621679403635"><span class="hs-identifier hs-type">keepAliveClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceKeepAliveClient"><span class="hs-identifier hs-type">TraceKeepAliveClient</span></a></span><span>
-</span><span id="line-160"></span><span>      </span><span id="local-6989586621679403635"><span class="annot"><span class="annottext">keepAliveClient :: OnOff TraceKeepAliveClient
-</span><a href="#local-6989586621679403635"><span class="hs-identifier hs-var hs-var">keepAliveClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceKeepAliveClient
+</span><span id="line-159"></span><span>      </span><span class="annot"><a href="#local-6989586621679402664"><span class="hs-identifier hs-type">keepAliveClient</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceKeepAliveClient"><span class="hs-identifier hs-type">TraceKeepAliveClient</span></a></span><span>
+</span><span id="line-160"></span><span>      </span><span id="local-6989586621679402664"><span class="annot"><span class="annottext">keepAliveClient :: OnOff TraceKeepAliveClient
+</span><a href="#local-6989586621679402664"><span class="hs-identifier hs-var hs-var">keepAliveClient</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceKeepAliveClient
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-161"></span><span>      </span><span class="annot"><a href="#local-6989586621679403634"><span class="hs-identifier hs-type">localChainSyncProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalChainSyncProtocol"><span class="hs-identifier hs-type">TraceLocalChainSyncProtocol</span></a></span><span>
-</span><span id="line-162"></span><span>      </span><span id="local-6989586621679403634"><span class="annot"><span class="annottext">localChainSyncProtocol :: OnOff TraceLocalChainSyncProtocol
-</span><a href="#local-6989586621679403634"><span class="hs-identifier hs-var hs-var">localChainSyncProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalChainSyncProtocol
+</span><span id="line-161"></span><span>      </span><span class="annot"><a href="#local-6989586621679402663"><span class="hs-identifier hs-type">localChainSyncProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalChainSyncProtocol"><span class="hs-identifier hs-type">TraceLocalChainSyncProtocol</span></a></span><span>
+</span><span id="line-162"></span><span>      </span><span id="local-6989586621679402663"><span class="annot"><span class="annottext">localChainSyncProtocol :: OnOff TraceLocalChainSyncProtocol
+</span><a href="#local-6989586621679402663"><span class="hs-identifier hs-var hs-var">localChainSyncProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalChainSyncProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-163"></span><span>      </span><span class="annot"><a href="#local-6989586621679403633"><span class="hs-identifier hs-type">localErrorPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalErrorPolicy"><span class="hs-identifier hs-type">TraceLocalErrorPolicy</span></a></span><span>
-</span><span id="line-164"></span><span>      </span><span id="local-6989586621679403633"><span class="annot"><span class="annottext">localErrorPolicy :: OnOff TraceLocalErrorPolicy
-</span><a href="#local-6989586621679403633"><span class="hs-identifier hs-var hs-var">localErrorPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalErrorPolicy
+</span><span id="line-163"></span><span>      </span><span class="annot"><a href="#local-6989586621679402662"><span class="hs-identifier hs-type">localErrorPolicy</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalErrorPolicy"><span class="hs-identifier hs-type">TraceLocalErrorPolicy</span></a></span><span>
+</span><span id="line-164"></span><span>      </span><span id="local-6989586621679402662"><span class="annot"><span class="annottext">localErrorPolicy :: OnOff TraceLocalErrorPolicy
+</span><a href="#local-6989586621679402662"><span class="hs-identifier hs-var hs-var">localErrorPolicy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalErrorPolicy
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-165"></span><span>      </span><span class="annot"><a href="#local-6989586621679403632"><span class="hs-identifier hs-type">localHandshake</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalHandshake"><span class="hs-identifier hs-type">TraceLocalHandshake</span></a></span><span>
-</span><span id="line-166"></span><span>      </span><span id="local-6989586621679403632"><span class="annot"><span class="annottext">localHandshake :: OnOff TraceLocalHandshake
-</span><a href="#local-6989586621679403632"><span class="hs-identifier hs-var hs-var">localHandshake</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalHandshake
+</span><span id="line-165"></span><span>      </span><span class="annot"><a href="#local-6989586621679402661"><span class="hs-identifier hs-type">localHandshake</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalHandshake"><span class="hs-identifier hs-type">TraceLocalHandshake</span></a></span><span>
+</span><span id="line-166"></span><span>      </span><span id="local-6989586621679402661"><span class="annot"><span class="annottext">localHandshake :: OnOff TraceLocalHandshake
+</span><a href="#local-6989586621679402661"><span class="hs-identifier hs-var hs-var">localHandshake</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalHandshake
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-167"></span><span>      </span><span class="annot"><a href="#local-6989586621679403631"><span class="hs-identifier hs-type">localStateQueryProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalStateQueryProtocol"><span class="hs-identifier hs-type">TraceLocalStateQueryProtocol</span></a></span><span>
-</span><span id="line-168"></span><span>      </span><span id="local-6989586621679403631"><span class="annot"><span class="annottext">localStateQueryProtocol :: OnOff TraceLocalStateQueryProtocol
-</span><a href="#local-6989586621679403631"><span class="hs-identifier hs-var hs-var">localStateQueryProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalStateQueryProtocol
+</span><span id="line-167"></span><span>      </span><span class="annot"><a href="#local-6989586621679402660"><span class="hs-identifier hs-type">localStateQueryProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalStateQueryProtocol"><span class="hs-identifier hs-type">TraceLocalStateQueryProtocol</span></a></span><span>
+</span><span id="line-168"></span><span>      </span><span id="local-6989586621679402660"><span class="annot"><span class="annottext">localStateQueryProtocol :: OnOff TraceLocalStateQueryProtocol
+</span><a href="#local-6989586621679402660"><span class="hs-identifier hs-var hs-var">localStateQueryProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalStateQueryProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-169"></span><span>      </span><span class="annot"><a href="#local-6989586621679403630"><span class="hs-identifier hs-type">localTxSubmissionProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalTxSubmissionProtocol"><span class="hs-identifier hs-type">TraceLocalTxSubmissionProtocol</span></a></span><span>
-</span><span id="line-170"></span><span>      </span><span id="local-6989586621679403630"><span class="annot"><span class="annottext">localTxSubmissionProtocol :: OnOff TraceLocalTxSubmissionProtocol
-</span><a href="#local-6989586621679403630"><span class="hs-identifier hs-var hs-var">localTxSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalTxSubmissionProtocol
+</span><span id="line-169"></span><span>      </span><span class="annot"><a href="#local-6989586621679402659"><span class="hs-identifier hs-type">localTxSubmissionProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalTxSubmissionProtocol"><span class="hs-identifier hs-type">TraceLocalTxSubmissionProtocol</span></a></span><span>
+</span><span id="line-170"></span><span>      </span><span id="local-6989586621679402659"><span class="annot"><span class="annottext">localTxSubmissionProtocol :: OnOff TraceLocalTxSubmissionProtocol
+</span><a href="#local-6989586621679402659"><span class="hs-identifier hs-var hs-var">localTxSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalTxSubmissionProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-171"></span><span>      </span><span class="annot"><a href="#local-6989586621679403629"><span class="hs-identifier hs-type">localTxSubmissionServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalTxSubmissionServer"><span class="hs-identifier hs-type">TraceLocalTxSubmissionServer</span></a></span><span>
-</span><span id="line-172"></span><span>      </span><span id="local-6989586621679403629"><span class="annot"><span class="annottext">localTxSubmissionServer :: OnOff TraceLocalTxSubmissionServer
-</span><a href="#local-6989586621679403629"><span class="hs-identifier hs-var hs-var">localTxSubmissionServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalTxSubmissionServer
+</span><span id="line-171"></span><span>      </span><span class="annot"><a href="#local-6989586621679402658"><span class="hs-identifier hs-type">localTxSubmissionServer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalTxSubmissionServer"><span class="hs-identifier hs-type">TraceLocalTxSubmissionServer</span></a></span><span>
+</span><span id="line-172"></span><span>      </span><span id="local-6989586621679402658"><span class="annot"><span class="annottext">localTxSubmissionServer :: OnOff TraceLocalTxSubmissionServer
+</span><a href="#local-6989586621679402658"><span class="hs-identifier hs-var hs-var">localTxSubmissionServer</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalTxSubmissionServer
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-173"></span><span>      </span><span class="annot"><a href="#local-6989586621679403628"><span class="hs-identifier hs-type">mempool</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceMempool"><span class="hs-identifier hs-type">TraceMempool</span></a></span><span>
-</span><span id="line-174"></span><span>      </span><span id="local-6989586621679403628"><span class="annot"><span class="annottext">mempool :: OnOff TraceMempool
-</span><a href="#local-6989586621679403628"><span class="hs-identifier hs-var hs-var">mempool</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceMempool
+</span><span id="line-173"></span><span>      </span><span class="annot"><a href="#local-6989586621679402657"><span class="hs-identifier hs-type">mempool</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceMempool"><span class="hs-identifier hs-type">TraceMempool</span></a></span><span>
+</span><span id="line-174"></span><span>      </span><span id="local-6989586621679402657"><span class="annot"><span class="annottext">mempool :: OnOff TraceMempool
+</span><a href="#local-6989586621679402657"><span class="hs-identifier hs-var hs-var">mempool</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceMempool
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-175"></span><span>      </span><span class="annot"><a href="#local-6989586621679403627"><span class="hs-identifier hs-type">mux</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceMux"><span class="hs-identifier hs-type">TraceMux</span></a></span><span>
-</span><span id="line-176"></span><span>      </span><span id="local-6989586621679403627"><span class="annot"><span class="annottext">mux :: OnOff TraceMux
-</span><a href="#local-6989586621679403627"><span class="hs-identifier hs-var hs-var">mux</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceMux
+</span><span id="line-175"></span><span>      </span><span class="annot"><a href="#local-6989586621679402656"><span class="hs-identifier hs-type">mux</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceMux"><span class="hs-identifier hs-type">TraceMux</span></a></span><span>
+</span><span id="line-176"></span><span>      </span><span id="local-6989586621679402656"><span class="annot"><span class="annottext">mux :: OnOff TraceMux
+</span><a href="#local-6989586621679402656"><span class="hs-identifier hs-var hs-var">mux</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceMux
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-177"></span><span>      </span><span class="annot"><a href="#local-6989586621679403626"><span class="hs-identifier hs-type">localMux</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalMux"><span class="hs-identifier hs-type">TraceLocalMux</span></a></span><span>
-</span><span id="line-178"></span><span>      </span><span id="local-6989586621679403626"><span class="annot"><span class="annottext">localMux :: OnOff TraceLocalMux
-</span><a href="#local-6989586621679403626"><span class="hs-identifier hs-var hs-var">localMux</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalMux
+</span><span id="line-177"></span><span>      </span><span class="annot"><a href="#local-6989586621679402655"><span class="hs-identifier hs-type">localMux</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceLocalMux"><span class="hs-identifier hs-type">TraceLocalMux</span></a></span><span>
+</span><span id="line-178"></span><span>      </span><span id="local-6989586621679402655"><span class="annot"><span class="annottext">localMux :: OnOff TraceLocalMux
+</span><a href="#local-6989586621679402655"><span class="hs-identifier hs-var hs-var">localMux</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceLocalMux
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-179"></span><span>      </span><span class="annot"><a href="#local-6989586621679403625"><span class="hs-identifier hs-type">txInbound</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxInbound"><span class="hs-identifier hs-type">TraceTxInbound</span></a></span><span>
-</span><span id="line-180"></span><span>      </span><span id="local-6989586621679403625"><span class="annot"><span class="annottext">txInbound :: OnOff TraceTxInbound
-</span><a href="#local-6989586621679403625"><span class="hs-identifier hs-var hs-var">txInbound</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxInbound
+</span><span id="line-179"></span><span>      </span><span class="annot"><a href="#local-6989586621679402654"><span class="hs-identifier hs-type">txInbound</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxInbound"><span class="hs-identifier hs-type">TraceTxInbound</span></a></span><span>
+</span><span id="line-180"></span><span>      </span><span id="local-6989586621679402654"><span class="annot"><span class="annottext">txInbound :: OnOff TraceTxInbound
+</span><a href="#local-6989586621679402654"><span class="hs-identifier hs-var hs-var">txInbound</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxInbound
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-181"></span><span>      </span><span class="annot"><a href="#local-6989586621679403624"><span class="hs-identifier hs-type">txOutbound</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxOutbound"><span class="hs-identifier hs-type">TraceTxOutbound</span></a></span><span>
-</span><span id="line-182"></span><span>      </span><span id="local-6989586621679403624"><span class="annot"><span class="annottext">txOutbound :: OnOff TraceTxOutbound
-</span><a href="#local-6989586621679403624"><span class="hs-identifier hs-var hs-var">txOutbound</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxOutbound
+</span><span id="line-181"></span><span>      </span><span class="annot"><a href="#local-6989586621679402653"><span class="hs-identifier hs-type">txOutbound</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxOutbound"><span class="hs-identifier hs-type">TraceTxOutbound</span></a></span><span>
+</span><span id="line-182"></span><span>      </span><span id="local-6989586621679402653"><span class="annot"><span class="annottext">txOutbound :: OnOff TraceTxOutbound
+</span><a href="#local-6989586621679402653"><span class="hs-identifier hs-var hs-var">txOutbound</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxOutbound
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-183"></span><span>      </span><span class="annot"><a href="#local-6989586621679403623"><span class="hs-identifier hs-type">txSubmissionProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmissionProtocol"><span class="hs-identifier hs-type">TraceTxSubmissionProtocol</span></a></span><span>
-</span><span id="line-184"></span><span>      </span><span id="local-6989586621679403623"><span class="annot"><span class="annottext">txSubmissionProtocol :: OnOff TraceTxSubmissionProtocol
-</span><a href="#local-6989586621679403623"><span class="hs-identifier hs-var hs-var">txSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxSubmissionProtocol
+</span><span id="line-183"></span><span>      </span><span class="annot"><a href="#local-6989586621679402652"><span class="hs-identifier hs-type">txSubmissionProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmissionProtocol"><span class="hs-identifier hs-type">TraceTxSubmissionProtocol</span></a></span><span>
+</span><span id="line-184"></span><span>      </span><span id="local-6989586621679402652"><span class="annot"><span class="annottext">txSubmissionProtocol :: OnOff TraceTxSubmissionProtocol
+</span><a href="#local-6989586621679402652"><span class="hs-identifier hs-var hs-var">txSubmissionProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxSubmissionProtocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-185"></span><span>      </span><span class="annot"><a href="#local-6989586621679403622"><span class="hs-identifier hs-type">txSubmission2Protocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmission2Protocol"><span class="hs-identifier hs-type">TraceTxSubmission2Protocol</span></a></span><span>
-</span><span id="line-186"></span><span>      </span><span id="local-6989586621679403622"><span class="annot"><span class="annottext">txSubmission2Protocol :: OnOff TraceTxSubmission2Protocol
-</span><a href="#local-6989586621679403622"><span class="hs-identifier hs-var hs-var">txSubmission2Protocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxSubmission2Protocol
+</span><span id="line-185"></span><span>      </span><span class="annot"><a href="#local-6989586621679402651"><span class="hs-identifier hs-type">txSubmission2Protocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-type">OnOff</span></a></span><span> </span><span class="annot"><a href="Cardano.Tracing.Config.html#TraceTxSubmission2Protocol"><span class="hs-identifier hs-type">TraceTxSubmission2Protocol</span></a></span><span>
+</span><span id="line-186"></span><span>      </span><span id="local-6989586621679402651"><span class="annot"><span class="annottext">txSubmission2Protocol :: OnOff TraceTxSubmission2Protocol
+</span><a href="#local-6989586621679402651"><span class="hs-identifier hs-var hs-var">txSubmission2Protocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; OnOff TraceTxSubmission2Protocol
 forall (name :: Symbol). Bool -&gt; OnOff name
 </span><a href="Cardano.Tracing.Config.html#OnOff"><span class="hs-identifier hs-var">OnOff</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span> </span><span class="hs-keyword">in</span><span>
@@ -569,7 +569,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe TracingVerbosity)
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe TracingVerbosity)
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;TracingVerbosity&quot;</span></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe TracingVerbosity)
@@ -652,16 +652,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceAcceptPolicy))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceAcceptPolicy))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceAcceptPolicy -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceAcceptPolicy
-</span><a href="#local-6989586621679403655"><span class="hs-identifier hs-var">acceptPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceAcceptPolicy))
+</span><a href="#local-6989586621679402684"><span class="hs-identifier hs-var">acceptPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceAcceptPolicy))
 -&gt; OnOff TraceAcceptPolicy -&gt; Parser (OnOff TraceAcceptPolicy)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceAcceptPolicy
-</span><a href="#local-6989586621679403655"><span class="hs-identifier hs-var">acceptPolicy</span></a></span><span>
+</span><a href="#local-6989586621679402684"><span class="hs-identifier hs-var">acceptPolicy</span></a></span><span>
 </span><span id="line-192"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockFetchClient
    -&gt; OnOff TraceBlockFetchDecisions
@@ -734,17 +734,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchClient))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchClient))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchClient -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchClient
-</span><a href="#local-6989586621679403654"><span class="hs-identifier hs-var">blockFetchClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchClient))
+</span><a href="#local-6989586621679402683"><span class="hs-identifier hs-var">blockFetchClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchClient))
 -&gt; OnOff TraceBlockFetchClient
 -&gt; Parser (OnOff TraceBlockFetchClient)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span>  </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchClient
-</span><a href="#local-6989586621679403654"><span class="hs-identifier hs-var">blockFetchClient</span></a></span><span>
+</span><a href="#local-6989586621679402683"><span class="hs-identifier hs-var">blockFetchClient</span></a></span><span>
 </span><span id="line-193"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockFetchDecisions
    -&gt; OnOff TraceBlockFetchProtocol
@@ -815,17 +815,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchDecisions))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchDecisions))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchDecisions -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchDecisions
-</span><a href="#local-6989586621679403653"><span class="hs-identifier hs-var">blockFetchDecisions</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchDecisions))
+</span><a href="#local-6989586621679402682"><span class="hs-identifier hs-var">blockFetchDecisions</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchDecisions))
 -&gt; OnOff TraceBlockFetchDecisions
 -&gt; Parser (OnOff TraceBlockFetchDecisions)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchDecisions
-</span><a href="#local-6989586621679403653"><span class="hs-identifier hs-var">blockFetchDecisions</span></a></span><span>
+</span><a href="#local-6989586621679402682"><span class="hs-identifier hs-var">blockFetchDecisions</span></a></span><span>
 </span><span id="line-194"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockFetchProtocol
    -&gt; OnOff TraceBlockFetchProtocolSerialised
@@ -894,17 +894,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchProtocol))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocol
-</span><a href="#local-6989586621679403652"><span class="hs-identifier hs-var">blockFetchProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchProtocol))
+</span><a href="#local-6989586621679402681"><span class="hs-identifier hs-var">blockFetchProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchProtocol))
 -&gt; OnOff TraceBlockFetchProtocol
 -&gt; Parser (OnOff TraceBlockFetchProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocol
-</span><a href="#local-6989586621679403652"><span class="hs-identifier hs-var">blockFetchProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402681"><span class="hs-identifier hs-var">blockFetchProtocol</span></a></span><span>
 </span><span id="line-195"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockFetchProtocolSerialised
    -&gt; OnOff TraceBlockFetchServer
@@ -971,18 +971,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchProtocolSerialised))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocolSerialised -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocolSerialised
-</span><a href="#local-6989586621679403651"><span class="hs-identifier hs-var">blockFetchProtocolSerialised</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchProtocolSerialised))
+</span><a href="#local-6989586621679402680"><span class="hs-identifier hs-var">blockFetchProtocolSerialised</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchProtocolSerialised))
 -&gt; OnOff TraceBlockFetchProtocolSerialised
 -&gt; Parser (OnOff TraceBlockFetchProtocolSerialised)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchProtocolSerialised
-</span><a href="#local-6989586621679403651"><span class="hs-identifier hs-var">blockFetchProtocolSerialised</span></a></span><span>
+</span><a href="#local-6989586621679402680"><span class="hs-identifier hs-var">blockFetchProtocolSerialised</span></a></span><span>
 </span><span id="line-196"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockFetchServer
    -&gt; OnOff TraceBlockchainTime
@@ -1047,17 +1047,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchServer))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockFetchServer))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchServer -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchServer
-</span><a href="#local-6989586621679403650"><span class="hs-identifier hs-var">blockFetchServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchServer))
+</span><a href="#local-6989586621679402679"><span class="hs-identifier hs-var">blockFetchServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockFetchServer))
 -&gt; OnOff TraceBlockFetchServer
 -&gt; Parser (OnOff TraceBlockFetchServer)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockFetchServer
-</span><a href="#local-6989586621679403650"><span class="hs-identifier hs-var">blockFetchServer</span></a></span><span>
+</span><a href="#local-6989586621679402679"><span class="hs-identifier hs-var">blockFetchServer</span></a></span><span>
 </span><span id="line-197"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceBlockchainTime
    -&gt; OnOff TraceChainDB
@@ -1120,16 +1120,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockchainTime))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceBlockchainTime))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockchainTime -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockchainTime
-</span><a href="#local-6989586621679403649"><span class="hs-identifier hs-var">blockchainTime</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockchainTime))
+</span><a href="#local-6989586621679402678"><span class="hs-identifier hs-var">blockchainTime</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceBlockchainTime))
 -&gt; OnOff TraceBlockchainTime -&gt; Parser (OnOff TraceBlockchainTime)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceBlockchainTime
-</span><a href="#local-6989586621679403649"><span class="hs-identifier hs-var">blockchainTime</span></a></span><span>
+</span><a href="#local-6989586621679402678"><span class="hs-identifier hs-var">blockchainTime</span></a></span><span>
 </span><span id="line-198"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceChainDB
    -&gt; OnOff TraceChainSyncBlockServer
@@ -1190,16 +1190,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainDB))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainDB))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainDB -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainDB
-</span><a href="#local-6989586621679403648"><span class="hs-identifier hs-var">chainDB</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainDB))
+</span><a href="#local-6989586621679402677"><span class="hs-identifier hs-var">chainDB</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainDB))
 -&gt; OnOff TraceChainDB -&gt; Parser (OnOff TraceChainDB)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span>  </span><span class="annot"><span class="annottext">OnOff TraceChainDB
-</span><a href="#local-6989586621679403648"><span class="hs-identifier hs-var">chainDB</span></a></span><span>
+</span><a href="#local-6989586621679402677"><span class="hs-identifier hs-var">chainDB</span></a></span><span>
 </span><span id="line-199"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceChainSyncBlockServer
    -&gt; OnOff TraceChainSyncClient
@@ -1258,17 +1258,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncBlockServer))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncBlockServer))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncBlockServer -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncBlockServer
-</span><a href="#local-6989586621679403647"><span class="hs-identifier hs-var">chainSyncBlockServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncBlockServer))
+</span><a href="#local-6989586621679402676"><span class="hs-identifier hs-var">chainSyncBlockServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncBlockServer))
 -&gt; OnOff TraceChainSyncBlockServer
 -&gt; Parser (OnOff TraceChainSyncBlockServer)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncBlockServer
-</span><a href="#local-6989586621679403647"><span class="hs-identifier hs-var">chainSyncBlockServer</span></a></span><span>
+</span><a href="#local-6989586621679402676"><span class="hs-identifier hs-var">chainSyncBlockServer</span></a></span><span>
 </span><span id="line-200"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceChainSyncClient
    -&gt; OnOff TraceChainSyncHeaderServer
@@ -1325,17 +1325,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncClient))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncClient))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncClient -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncClient
-</span><a href="#local-6989586621679403646"><span class="hs-identifier hs-var">chainSyncClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncClient))
+</span><a href="#local-6989586621679402675"><span class="hs-identifier hs-var">chainSyncClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncClient))
 -&gt; OnOff TraceChainSyncClient
 -&gt; Parser (OnOff TraceChainSyncClient)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncClient
-</span><a href="#local-6989586621679403646"><span class="hs-identifier hs-var">chainSyncClient</span></a></span><span>
+</span><a href="#local-6989586621679402675"><span class="hs-identifier hs-var">chainSyncClient</span></a></span><span>
 </span><span id="line-201"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceChainSyncHeaderServer
    -&gt; OnOff TraceChainSyncProtocol
@@ -1390,17 +1390,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncHeaderServer))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncHeaderServer))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncHeaderServer -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncHeaderServer
-</span><a href="#local-6989586621679403645"><span class="hs-identifier hs-var">chainSyncHeaderServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncHeaderServer))
+</span><a href="#local-6989586621679402674"><span class="hs-identifier hs-var">chainSyncHeaderServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncHeaderServer))
 -&gt; OnOff TraceChainSyncHeaderServer
 -&gt; Parser (OnOff TraceChainSyncHeaderServer)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncHeaderServer
-</span><a href="#local-6989586621679403645"><span class="hs-identifier hs-var">chainSyncHeaderServer</span></a></span><span>
+</span><a href="#local-6989586621679402674"><span class="hs-identifier hs-var">chainSyncHeaderServer</span></a></span><span>
 </span><span id="line-202"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceChainSyncProtocol
    -&gt; OnOff TraceDiffusionInitialization
@@ -1453,17 +1453,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncProtocol))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceChainSyncProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncProtocol
-</span><a href="#local-6989586621679403644"><span class="hs-identifier hs-var">chainSyncProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncProtocol))
+</span><a href="#local-6989586621679402673"><span class="hs-identifier hs-var">chainSyncProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceChainSyncProtocol))
 -&gt; OnOff TraceChainSyncProtocol
 -&gt; Parser (OnOff TraceChainSyncProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceChainSyncProtocol
-</span><a href="#local-6989586621679403644"><span class="hs-identifier hs-var">chainSyncProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402673"><span class="hs-identifier hs-var">chainSyncProtocol</span></a></span><span>
 </span><span id="line-203"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceDiffusionInitialization
    -&gt; OnOff TraceDnsResolver
@@ -1514,18 +1514,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceDiffusionInitialization))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDiffusionInitialization -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDiffusionInitialization
-</span><a href="#local-6989586621679403643"><span class="hs-identifier hs-var">diffusionInitialization</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDiffusionInitialization))
+</span><a href="#local-6989586621679402672"><span class="hs-identifier hs-var">diffusionInitialization</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDiffusionInitialization))
 -&gt; OnOff TraceDiffusionInitialization
 -&gt; Parser (OnOff TraceDiffusionInitialization)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDiffusionInitialization
-</span><a href="#local-6989586621679403643"><span class="hs-identifier hs-var">diffusionInitialization</span></a></span><span>
+</span><a href="#local-6989586621679402672"><span class="hs-identifier hs-var">diffusionInitialization</span></a></span><span>
 </span><span id="line-204"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceDnsResolver
    -&gt; OnOff TraceDnsSubscription
@@ -1574,16 +1574,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceDnsResolver))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceDnsResolver))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsResolver -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsResolver
-</span><a href="#local-6989586621679403642"><span class="hs-identifier hs-var">dnsResolver</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDnsResolver))
+</span><a href="#local-6989586621679402671"><span class="hs-identifier hs-var">dnsResolver</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDnsResolver))
 -&gt; OnOff TraceDnsResolver -&gt; Parser (OnOff TraceDnsResolver)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsResolver
-</span><a href="#local-6989586621679403642"><span class="hs-identifier hs-var">dnsResolver</span></a></span><span>
+</span><a href="#local-6989586621679402671"><span class="hs-identifier hs-var">dnsResolver</span></a></span><span>
 </span><span id="line-205"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceDnsSubscription
    -&gt; OnOff TraceErrorPolicy
@@ -1630,17 +1630,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceDnsSubscription))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceDnsSubscription))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsSubscription -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsSubscription
-</span><a href="#local-6989586621679403641"><span class="hs-identifier hs-var">dnsSubscription</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDnsSubscription))
+</span><a href="#local-6989586621679402670"><span class="hs-identifier hs-var">dnsSubscription</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceDnsSubscription))
 -&gt; OnOff TraceDnsSubscription
 -&gt; Parser (OnOff TraceDnsSubscription)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceDnsSubscription
-</span><a href="#local-6989586621679403641"><span class="hs-identifier hs-var">dnsSubscription</span></a></span><span>
+</span><a href="#local-6989586621679402670"><span class="hs-identifier hs-var">dnsSubscription</span></a></span><span>
 </span><span id="line-206"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceErrorPolicy
    -&gt; OnOff TraceForge
@@ -1685,16 +1685,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceErrorPolicy))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceErrorPolicy))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceErrorPolicy -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceErrorPolicy
-</span><a href="#local-6989586621679403640"><span class="hs-identifier hs-var">errorPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceErrorPolicy))
+</span><a href="#local-6989586621679402669"><span class="hs-identifier hs-var">errorPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceErrorPolicy))
 -&gt; OnOff TraceErrorPolicy -&gt; Parser (OnOff TraceErrorPolicy)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span>  </span><span class="annot"><span class="annottext">OnOff TraceErrorPolicy
-</span><a href="#local-6989586621679403640"><span class="hs-identifier hs-var">errorPolicy</span></a></span><span>
+</span><a href="#local-6989586621679402669"><span class="hs-identifier hs-var">errorPolicy</span></a></span><span>
 </span><span id="line-207"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceForge
    -&gt; OnOff TraceForgeStateInfo
@@ -1737,16 +1737,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceForge))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceForge))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForge -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForge
-</span><a href="#local-6989586621679403639"><span class="hs-identifier hs-var">forge</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceForge))
+</span><a href="#local-6989586621679402668"><span class="hs-identifier hs-var">forge</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceForge))
 -&gt; OnOff TraceForge -&gt; Parser (OnOff TraceForge)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForge
-</span><a href="#local-6989586621679403639"><span class="hs-identifier hs-var">forge</span></a></span><span>
+</span><a href="#local-6989586621679402668"><span class="hs-identifier hs-var">forge</span></a></span><span>
 </span><span id="line-208"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceForgeStateInfo
    -&gt; OnOff TraceHandshake
@@ -1787,16 +1787,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceForgeStateInfo))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceForgeStateInfo))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForgeStateInfo -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForgeStateInfo
-</span><a href="#local-6989586621679403638"><span class="hs-identifier hs-var">forgeStateInfo</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceForgeStateInfo))
+</span><a href="#local-6989586621679402667"><span class="hs-identifier hs-var">forgeStateInfo</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceForgeStateInfo))
 -&gt; OnOff TraceForgeStateInfo -&gt; Parser (OnOff TraceForgeStateInfo)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceForgeStateInfo
-</span><a href="#local-6989586621679403638"><span class="hs-identifier hs-var">forgeStateInfo</span></a></span><span>
+</span><a href="#local-6989586621679402667"><span class="hs-identifier hs-var">forgeStateInfo</span></a></span><span>
 </span><span id="line-209"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceHandshake
    -&gt; OnOff TraceIpSubscription
@@ -1835,16 +1835,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceHandshake))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceHandshake))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceHandshake -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceHandshake
-</span><a href="#local-6989586621679403637"><span class="hs-identifier hs-var">handshake</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceHandshake))
+</span><a href="#local-6989586621679402666"><span class="hs-identifier hs-var">handshake</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceHandshake))
 -&gt; OnOff TraceHandshake -&gt; Parser (OnOff TraceHandshake)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceHandshake
-</span><a href="#local-6989586621679403637"><span class="hs-identifier hs-var">handshake</span></a></span><span>
+</span><a href="#local-6989586621679402666"><span class="hs-identifier hs-var">handshake</span></a></span><span>
 </span><span id="line-210"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceIpSubscription
    -&gt; OnOff TraceKeepAliveClient
@@ -1881,16 +1881,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceIpSubscription))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceIpSubscription))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceIpSubscription -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceIpSubscription
-</span><a href="#local-6989586621679403636"><span class="hs-identifier hs-var">ipSubscription</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceIpSubscription))
+</span><a href="#local-6989586621679402665"><span class="hs-identifier hs-var">ipSubscription</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceIpSubscription))
 -&gt; OnOff TraceIpSubscription -&gt; Parser (OnOff TraceIpSubscription)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceIpSubscription
-</span><a href="#local-6989586621679403636"><span class="hs-identifier hs-var">ipSubscription</span></a></span><span>
+</span><a href="#local-6989586621679402665"><span class="hs-identifier hs-var">ipSubscription</span></a></span><span>
 </span><span id="line-211"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceKeepAliveClient
    -&gt; OnOff TraceLocalChainSyncProtocol
@@ -1925,17 +1925,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceKeepAliveClient))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceKeepAliveClient))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceKeepAliveClient -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceKeepAliveClient
-</span><a href="#local-6989586621679403635"><span class="hs-identifier hs-var">keepAliveClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceKeepAliveClient))
+</span><a href="#local-6989586621679402664"><span class="hs-identifier hs-var">keepAliveClient</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceKeepAliveClient))
 -&gt; OnOff TraceKeepAliveClient
 -&gt; Parser (OnOff TraceKeepAliveClient)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceKeepAliveClient
-</span><a href="#local-6989586621679403635"><span class="hs-identifier hs-var">keepAliveClient</span></a></span><span>
+</span><a href="#local-6989586621679402664"><span class="hs-identifier hs-var">keepAliveClient</span></a></span><span>
 </span><span id="line-212"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalChainSyncProtocol
    -&gt; OnOff TraceLocalErrorPolicy
@@ -1968,18 +1968,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalChainSyncProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalChainSyncProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalChainSyncProtocol
-</span><a href="#local-6989586621679403634"><span class="hs-identifier hs-var">localChainSyncProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalChainSyncProtocol))
+</span><a href="#local-6989586621679402663"><span class="hs-identifier hs-var">localChainSyncProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalChainSyncProtocol))
 -&gt; OnOff TraceLocalChainSyncProtocol
 -&gt; Parser (OnOff TraceLocalChainSyncProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalChainSyncProtocol
-</span><a href="#local-6989586621679403634"><span class="hs-identifier hs-var">localChainSyncProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402663"><span class="hs-identifier hs-var">localChainSyncProtocol</span></a></span><span>
 </span><span id="line-213"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalErrorPolicy
    -&gt; OnOff TraceLocalHandshake
@@ -2010,17 +2010,17 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalErrorPolicy))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalErrorPolicy))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalErrorPolicy -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalErrorPolicy
-</span><a href="#local-6989586621679403633"><span class="hs-identifier hs-var">localErrorPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalErrorPolicy))
+</span><a href="#local-6989586621679402662"><span class="hs-identifier hs-var">localErrorPolicy</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalErrorPolicy))
 -&gt; OnOff TraceLocalErrorPolicy
 -&gt; Parser (OnOff TraceLocalErrorPolicy)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalErrorPolicy
-</span><a href="#local-6989586621679403633"><span class="hs-identifier hs-var">localErrorPolicy</span></a></span><span>
+</span><a href="#local-6989586621679402662"><span class="hs-identifier hs-var">localErrorPolicy</span></a></span><span>
 </span><span id="line-214"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalHandshake
    -&gt; OnOff TraceLocalStateQueryProtocol
@@ -2049,16 +2049,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalHandshake))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalHandshake))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalHandshake -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalHandshake
-</span><a href="#local-6989586621679403632"><span class="hs-identifier hs-var">localHandshake</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalHandshake))
+</span><a href="#local-6989586621679402661"><span class="hs-identifier hs-var">localHandshake</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalHandshake))
 -&gt; OnOff TraceLocalHandshake -&gt; Parser (OnOff TraceLocalHandshake)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalHandshake
-</span><a href="#local-6989586621679403632"><span class="hs-identifier hs-var">localHandshake</span></a></span><span>
+</span><a href="#local-6989586621679402661"><span class="hs-identifier hs-var">localHandshake</span></a></span><span>
 </span><span id="line-215"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalStateQueryProtocol
    -&gt; OnOff TraceLocalTxSubmissionProtocol
@@ -2085,18 +2085,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalStateQueryProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalStateQueryProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalStateQueryProtocol
-</span><a href="#local-6989586621679403631"><span class="hs-identifier hs-var">localStateQueryProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalStateQueryProtocol))
+</span><a href="#local-6989586621679402660"><span class="hs-identifier hs-var">localStateQueryProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalStateQueryProtocol))
 -&gt; OnOff TraceLocalStateQueryProtocol
 -&gt; Parser (OnOff TraceLocalStateQueryProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalStateQueryProtocol
-</span><a href="#local-6989586621679403631"><span class="hs-identifier hs-var">localStateQueryProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402660"><span class="hs-identifier hs-var">localStateQueryProtocol</span></a></span><span>
 </span><span id="line-216"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalTxSubmissionProtocol
    -&gt; OnOff TraceLocalTxSubmissionServer
@@ -2121,18 +2121,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalTxSubmissionProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionProtocol
-</span><a href="#local-6989586621679403630"><span class="hs-identifier hs-var">localTxSubmissionProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalTxSubmissionProtocol))
+</span><a href="#local-6989586621679402659"><span class="hs-identifier hs-var">localTxSubmissionProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalTxSubmissionProtocol))
 -&gt; OnOff TraceLocalTxSubmissionProtocol
 -&gt; Parser (OnOff TraceLocalTxSubmissionProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionProtocol
-</span><a href="#local-6989586621679403630"><span class="hs-identifier hs-var">localTxSubmissionProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402659"><span class="hs-identifier hs-var">localTxSubmissionProtocol</span></a></span><span>
 </span><span id="line-217"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalTxSubmissionServer
    -&gt; OnOff TraceMempool
@@ -2155,18 +2155,18 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object
 -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalTxSubmissionServer))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionServer -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionServer
-</span><a href="#local-6989586621679403629"><span class="hs-identifier hs-var">localTxSubmissionServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalTxSubmissionServer))
+</span><a href="#local-6989586621679402658"><span class="hs-identifier hs-var">localTxSubmissionServer</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalTxSubmissionServer))
 -&gt; OnOff TraceLocalTxSubmissionServer
 -&gt; Parser (OnOff TraceLocalTxSubmissionServer)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalTxSubmissionServer
-</span><a href="#local-6989586621679403629"><span class="hs-identifier hs-var">localTxSubmissionServer</span></a></span><span>
+</span><a href="#local-6989586621679402658"><span class="hs-identifier hs-var">localTxSubmissionServer</span></a></span><span>
 </span><span id="line-218"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceMempool
    -&gt; OnOff TraceMux
@@ -2187,16 +2187,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceMempool))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceMempool))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMempool -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMempool
-</span><a href="#local-6989586621679403628"><span class="hs-identifier hs-var">mempool</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceMempool))
+</span><a href="#local-6989586621679402657"><span class="hs-identifier hs-var">mempool</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceMempool))
 -&gt; OnOff TraceMempool -&gt; Parser (OnOff TraceMempool)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMempool
-</span><a href="#local-6989586621679403628"><span class="hs-identifier hs-var">mempool</span></a></span><span>
+</span><a href="#local-6989586621679402657"><span class="hs-identifier hs-var">mempool</span></a></span><span>
 </span><span id="line-219"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceMux
    -&gt; OnOff TraceLocalMux
@@ -2215,16 +2215,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceMux))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceMux))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMux -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMux
-</span><a href="#local-6989586621679403627"><span class="hs-identifier hs-var">mux</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceMux))
+</span><a href="#local-6989586621679402656"><span class="hs-identifier hs-var">mux</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceMux))
 -&gt; OnOff TraceMux -&gt; Parser (OnOff TraceMux)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceMux
-</span><a href="#local-6989586621679403627"><span class="hs-identifier hs-var">mux</span></a></span><span>
+</span><a href="#local-6989586621679402656"><span class="hs-identifier hs-var">mux</span></a></span><span>
 </span><span id="line-220"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceLocalMux
    -&gt; OnOff TraceTxInbound
@@ -2241,16 +2241,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalMux))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceLocalMux))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalMux -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalMux
-</span><a href="#local-6989586621679403626"><span class="hs-identifier hs-var">localMux</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalMux))
+</span><a href="#local-6989586621679402655"><span class="hs-identifier hs-var">localMux</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceLocalMux))
 -&gt; OnOff TraceLocalMux -&gt; Parser (OnOff TraceLocalMux)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceLocalMux
-</span><a href="#local-6989586621679403626"><span class="hs-identifier hs-var">localMux</span></a></span><span>
+</span><a href="#local-6989586621679402655"><span class="hs-identifier hs-var">localMux</span></a></span><span>
 </span><span id="line-221"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceTxInbound
    -&gt; OnOff TraceTxOutbound
@@ -2265,16 +2265,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxInbound))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxInbound))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxInbound -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxInbound
-</span><a href="#local-6989586621679403625"><span class="hs-identifier hs-var">txInbound</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxInbound))
+</span><a href="#local-6989586621679402654"><span class="hs-identifier hs-var">txInbound</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxInbound))
 -&gt; OnOff TraceTxInbound -&gt; Parser (OnOff TraceTxInbound)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxInbound
-</span><a href="#local-6989586621679403625"><span class="hs-identifier hs-var">txInbound</span></a></span><span>
+</span><a href="#local-6989586621679402654"><span class="hs-identifier hs-var">txInbound</span></a></span><span>
 </span><span id="line-222"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceTxOutbound
    -&gt; OnOff TraceTxSubmissionProtocol
@@ -2286,16 +2286,16 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
       -&gt; OnOff TraceTxSubmission2Protocol -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxOutbound))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxOutbound))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxOutbound -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxOutbound
-</span><a href="#local-6989586621679403624"><span class="hs-identifier hs-var">txOutbound</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxOutbound))
+</span><a href="#local-6989586621679402653"><span class="hs-identifier hs-var">txOutbound</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxOutbound))
 -&gt; OnOff TraceTxOutbound -&gt; Parser (OnOff TraceTxOutbound)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxOutbound
-</span><a href="#local-6989586621679403624"><span class="hs-identifier hs-var">txOutbound</span></a></span><span>
+</span><a href="#local-6989586621679402653"><span class="hs-identifier hs-var">txOutbound</span></a></span><span>
 </span><span id="line-223"></span><span>    </span><span class="annot"><span class="annottext">Parser
   (OnOff TraceTxSubmissionProtocol
    -&gt; OnOff TraceTxSubmission2Protocol -&gt; TraceSelection)
@@ -2303,31 +2303,31 @@ forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 -&gt; Parser (OnOff TraceTxSubmission2Protocol -&gt; TraceSelection)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxSubmissionProtocol))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxSubmissionProtocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmissionProtocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmissionProtocol
-</span><a href="#local-6989586621679403623"><span class="hs-identifier hs-var">txSubmissionProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxSubmissionProtocol))
+</span><a href="#local-6989586621679402652"><span class="hs-identifier hs-var">txSubmissionProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxSubmissionProtocol))
 -&gt; OnOff TraceTxSubmissionProtocol
 -&gt; Parser (OnOff TraceTxSubmissionProtocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmissionProtocol
-</span><a href="#local-6989586621679403623"><span class="hs-identifier hs-var">txSubmissionProtocol</span></a></span><span>
+</span><a href="#local-6989586621679402652"><span class="hs-identifier hs-var">txSubmissionProtocol</span></a></span><span>
 </span><span id="line-224"></span><span>    </span><span class="annot"><span class="annottext">Parser (OnOff TraceTxSubmission2Protocol -&gt; TraceSelection)
 -&gt; Parser (OnOff TraceTxSubmission2Protocol)
 -&gt; Parser TraceSelection
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Object
-</span><a href="#local-6989586621679403656"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxSubmission2Protocol))
+</span><a href="#local-6989586621679402685"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; Text -&gt; Parser (Maybe (OnOff TraceTxSubmission2Protocol))
 forall a. FromJSON a =&gt; Object -&gt; Text -&gt; Parser (Maybe a)
 </span><span class="hs-operator hs-var">.:?</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmission2Protocol -&gt; Text
 forall (name :: Symbol). KnownSymbol name =&gt; OnOff name -&gt; Text
 </span><a href="Cardano.Tracing.Config.html#getName"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmission2Protocol
-</span><a href="#local-6989586621679403622"><span class="hs-identifier hs-var">txSubmission2Protocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxSubmission2Protocol))
+</span><a href="#local-6989586621679402651"><span class="hs-identifier hs-var">txSubmission2Protocol</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (Maybe (OnOff TraceTxSubmission2Protocol))
 -&gt; OnOff TraceTxSubmission2Protocol
 -&gt; Parser (OnOff TraceTxSubmission2Protocol)
 forall a. Parser (Maybe a) -&gt; a -&gt; Parser a
 </span><span class="hs-operator hs-var">.!=</span></span><span> </span><span class="annot"><span class="annottext">OnOff TraceTxSubmission2Protocol
-</span><a href="#local-6989586621679403622"><span class="hs-identifier hs-var">txSubmission2Protocol</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679402651"><span class="hs-identifier hs-var">txSubmission2Protocol</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-225"></span></pre></body></html>

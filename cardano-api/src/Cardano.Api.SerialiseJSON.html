@@ -28,7 +28,7 @@
 </span><span id="line-28"></span><span>
 </span><span id="line-29"></span><span>
 </span><span id="line-30"></span><span class="hs-keyword">newtype</span><span> </span><span id="JsonDecodeError"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-var">JsonDecodeError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="JsonDecodeError"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-var">JsonDecodeError</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-31"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679414329"><span id="local-6989586621679414331"><span class="annot"><span class="annottext">JsonDecodeError -&gt; JsonDecodeError -&gt; Bool
+</span><span id="line-31"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679414387"><span id="local-6989586621679414389"><span class="annot"><span class="annottext">JsonDecodeError -&gt; JsonDecodeError -&gt; Bool
 (JsonDecodeError -&gt; JsonDecodeError -&gt; Bool)
 -&gt; (JsonDecodeError -&gt; JsonDecodeError -&gt; Bool)
 -&gt; Eq JsonDecodeError
@@ -37,7 +37,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: JsonDecodeError -&gt; JsonDecodeError -&gt; Bool
 == :: JsonDecodeError -&gt; JsonDecodeError -&gt; Bool
 $c== :: JsonDecodeError -&gt; JsonDecodeError -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679414322"><span id="local-6989586621679414324"><span id="local-6989586621679414326"><span class="annot"><span class="annottext">Int -&gt; JsonDecodeError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679414380"><span id="local-6989586621679414382"><span id="local-6989586621679414384"><span class="annot"><span class="annottext">Int -&gt; JsonDecodeError -&gt; ShowS
 [JsonDecodeError] -&gt; ShowS
 JsonDecodeError -&gt; String
 (Int -&gt; JsonDecodeError -&gt; ShowS)
@@ -55,13 +55,13 @@ $cshowsPrec :: Int -&gt; JsonDecodeError -&gt; ShowS
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-34"></span><span>  </span><span id="local-6989586621679414317"><span class="annot"><span class="annottext">displayError :: JsonDecodeError -&gt; String
-</span><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span> </span><span id="local-6989586621679414315"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414315"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414315"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679414375"><span class="annot"><span class="annottext">displayError :: JsonDecodeError -&gt; String
+</span><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span> </span><span id="local-6989586621679414373"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679414373"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679414373"><span class="hs-identifier hs-var">err</span></a></span><span>
 </span><span id="line-35"></span><span>
 </span><span id="line-36"></span><span>
-</span><span id="line-37"></span><span id="local-6989586621679414344"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#serialiseToJSON"><span class="hs-identifier hs-type">serialiseToJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414344"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414344"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span></span><span>
+</span><span id="line-37"></span><span id="local-6989586621679414402"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#serialiseToJSON"><span class="hs-identifier hs-type">serialiseToJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414402"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414402"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span></span><span>
 </span><span id="line-38"></span><span id="serialiseToJSON"><span class="annot"><span class="annottext">serialiseToJSON :: a -&gt; ByteString
 </span><a href="Cardano.Api.SerialiseJSON.html#serialiseToJSON"><span class="hs-identifier hs-var hs-var">serialiseToJSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
 </span><span class="hs-identifier hs-var">LBS.toStrict</span></span><span> </span><span class="annot"><span class="annottext">(ByteString -&gt; ByteString) -&gt; (a -&gt; ByteString) -&gt; a -&gt; ByteString
@@ -70,7 +70,7 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. ToJSON a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">Aeson.encode</span></span><span>
 </span><span id="line-39"></span><span>
-</span><span id="line-40"></span><span id="local-6989586621679414311"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#prettyPrintJSON"><span class="hs-identifier hs-type">prettyPrintJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414311"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414311"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span></span><span>
+</span><span id="line-40"></span><span id="local-6989586621679414369"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#prettyPrintJSON"><span class="hs-identifier hs-type">prettyPrintJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414369"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414369"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span></span><span>
 </span><span id="line-41"></span><span id="prettyPrintJSON"><span class="annot"><span class="annottext">prettyPrintJSON :: a -&gt; ByteString
 </span><a href="Cardano.Api.SerialiseJSON.html#prettyPrintJSON"><span class="hs-identifier hs-var hs-var">prettyPrintJSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
 </span><span class="hs-identifier hs-var">LBS.toStrict</span></span><span> </span><span class="annot"><span class="annottext">(ByteString -&gt; ByteString) -&gt; (a -&gt; ByteString) -&gt; a -&gt; ByteString
@@ -79,13 +79,13 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. ToJSON a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">encodePretty</span></span><span>
 </span><span id="line-42"></span><span>
-</span><span id="line-43"></span><span id="local-6989586621679414346"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#deserialiseFromJSON"><span class="hs-identifier hs-type">deserialiseFromJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414346"><span class="hs-identifier hs-type">a</span></a></span><span>
-</span><span id="line-44"></span><span>                    </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414346"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-43"></span><span id="local-6989586621679414404"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#deserialiseFromJSON"><span class="hs-identifier hs-type">deserialiseFromJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414404"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-44"></span><span>                    </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414404"><span class="hs-identifier hs-type">a</span></a></span><span>
 </span><span id="line-45"></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-46"></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414346"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-46"></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414404"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-47"></span><span id="deserialiseFromJSON"><span class="annot"><span class="annottext">deserialiseFromJSON :: AsType a -&gt; ByteString -&gt; Either JsonDecodeError a
-</span><a href="Cardano.Api.SerialiseJSON.html#deserialiseFromJSON"><span class="hs-identifier hs-var hs-var">deserialiseFromJSON</span></a></span></span><span> </span><span id="local-6989586621679414310"><span class="annot"><span class="annottext">AsType a
-</span><a href="#local-6989586621679414310"><span class="hs-identifier hs-var">_proxy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(String -&gt; Either JsonDecodeError a)
+</span><a href="Cardano.Api.SerialiseJSON.html#deserialiseFromJSON"><span class="hs-identifier hs-var hs-var">deserialiseFromJSON</span></a></span></span><span> </span><span id="local-6989586621679414368"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679414368"><span class="hs-identifier hs-var">_proxy</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(String -&gt; Either JsonDecodeError a)
 -&gt; (a -&gt; Either JsonDecodeError a)
 -&gt; Either String a
 -&gt; Either JsonDecodeError a
@@ -111,14 +111,14 @@ forall a. FromJSON a =&gt; ByteString -&gt; Either String a
 </span><span class="hs-identifier hs-var">Aeson.eitherDecodeStrict'</span></span><span>
 </span><span id="line-49"></span><span>
 </span><span id="line-50"></span><span>
-</span><span id="line-51"></span><span id="local-6989586621679414307"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#readFileJSON"><span class="hs-identifier hs-type">readFileJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414307"><span class="hs-identifier hs-type">a</span></a></span><span>
-</span><span id="line-52"></span><span>             </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414307"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-51"></span><span id="local-6989586621679414365"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#readFileJSON"><span class="hs-identifier hs-type">readFileJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FromJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414365"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-52"></span><span>             </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679414365"><span class="hs-identifier hs-type">a</span></a></span><span>
 </span><span id="line-53"></span><span>             </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span>
-</span><span id="line-54"></span><span>             </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><a href="#local-6989586621679414307"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span>
+</span><span id="line-54"></span><span>             </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#JsonDecodeError"><span class="hs-identifier hs-type">JsonDecodeError</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><a href="#local-6989586621679414365"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span><span>
 </span><span id="line-55"></span><span id="readFileJSON"><span class="annot"><span class="annottext">readFileJSON :: AsType a -&gt; String -&gt; IO (Either (FileError JsonDecodeError) a)
-</span><a href="Cardano.Api.SerialiseJSON.html#readFileJSON"><span class="hs-identifier hs-var hs-var">readFileJSON</span></a></span></span><span> </span><span id="local-6989586621679414305"><span class="annot"><span class="annottext">AsType a
-</span><a href="#local-6989586621679414305"><span class="hs-identifier hs-var">ttoken</span></a></span></span><span> </span><span id="local-6989586621679414304"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414304"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.SerialiseJSON.html#readFileJSON"><span class="hs-identifier hs-var hs-var">readFileJSON</span></a></span></span><span> </span><span id="local-6989586621679414363"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679414363"><span class="hs-identifier hs-var">ttoken</span></a></span></span><span> </span><span id="local-6989586621679414362"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679414362"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-56"></span><span>    </span><span class="annot"><span class="annottext">ExceptT (FileError JsonDecodeError) IO a
 -&gt; IO (Either (FileError JsonDecodeError) a)
 forall e (m :: * -&gt; *) a. ExceptT e m a -&gt; m (Either e a)
@@ -128,8 +128,8 @@ forall e (m :: * -&gt; *) a. ExceptT e m a -&gt; m (Either e a)
 -&gt; IO (Either (FileError JsonDecodeError) a)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-57"></span><span>      </span><span id="local-6989586621679414303"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679414303"><span class="hs-identifier hs-var">content</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(IOException -&gt; FileError JsonDecodeError)
+</span><span id="line-57"></span><span>      </span><span id="local-6989586621679414361"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679414361"><span class="hs-identifier hs-var">content</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(IOException -&gt; FileError JsonDecodeError)
 -&gt; IO ByteString
 -&gt; ExceptT (FileError JsonDecodeError) IO ByteString
 forall (m :: * -&gt; *) x a.
@@ -138,14 +138,14 @@ MonadIO m =&gt;
 </span><span class="hs-identifier hs-var">handleIOExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; IOException -&gt; FileError JsonDecodeError
 forall e. String -&gt; IOException -&gt; FileError e
 </span><a href="Cardano.Api.Error.html#FileIOError"><span class="hs-identifier hs-var">FileIOError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414304"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO ByteString
+</span><a href="#local-6989586621679414362"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO ByteString
  -&gt; ExceptT (FileError JsonDecodeError) IO ByteString)
 -&gt; IO ByteString
 -&gt; ExceptT (FileError JsonDecodeError) IO ByteString
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ByteString
 </span><span class="hs-identifier hs-var">BS.readFile</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414304"><span class="hs-identifier hs-var">path</span></a></span><span>
+</span><a href="#local-6989586621679414362"><span class="hs-identifier hs-var">path</span></a></span><span>
 </span><span id="line-58"></span><span>      </span><span class="annot"><span class="annottext">(JsonDecodeError -&gt; FileError JsonDecodeError)
 -&gt; ExceptT JsonDecodeError IO a
 -&gt; ExceptT (FileError JsonDecodeError) IO a
@@ -155,7 +155,7 @@ Functor m =&gt;
 </span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; JsonDecodeError -&gt; FileError JsonDecodeError
 forall e. String -&gt; e -&gt; FileError e
 </span><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-var">FileError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414304"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ExceptT JsonDecodeError IO a
+</span><a href="#local-6989586621679414362"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ExceptT JsonDecodeError IO a
  -&gt; ExceptT (FileError JsonDecodeError) IO a)
 -&gt; ExceptT JsonDecodeError IO a
 -&gt; ExceptT (FileError JsonDecodeError) IO a
@@ -171,17 +171,17 @@ forall a.
 FromJSON a =&gt;
 AsType a -&gt; ByteString -&gt; Either JsonDecodeError a
 </span><a href="Cardano.Api.SerialiseJSON.html#deserialiseFromJSON"><span class="hs-identifier hs-var">deserialiseFromJSON</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
-</span><a href="#local-6989586621679414305"><span class="hs-identifier hs-var">ttoken</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679414303"><span class="hs-identifier hs-var">content</span></a></span><span>
+</span><a href="#local-6989586621679414363"><span class="hs-identifier hs-var">ttoken</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679414361"><span class="hs-identifier hs-var">content</span></a></span><span>
 </span><span id="line-60"></span><span>
-</span><span id="line-61"></span><span id="local-6989586621679414299"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#writeFileJSON"><span class="hs-identifier hs-type">writeFileJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414299"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-61"></span><span id="local-6989586621679414357"><span class="annot"><a href="Cardano.Api.SerialiseJSON.html#writeFileJSON"><span class="hs-identifier hs-type">writeFileJSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="#local-6989586621679414357"><span class="hs-identifier hs-type">a</span></a></span><span>
 </span><span id="line-62"></span><span>              </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span>
-</span><span id="line-63"></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414299"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-63"></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679414357"><span class="hs-identifier hs-type">a</span></a></span><span>
 </span><span id="line-64"></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span></span><span>
 </span><span id="line-65"></span><span id="writeFileJSON"><span class="annot"><span class="annottext">writeFileJSON :: String -&gt; a -&gt; IO (Either (FileError ()) ())
-</span><a href="Cardano.Api.SerialiseJSON.html#writeFileJSON"><span class="hs-identifier hs-var hs-var">writeFileJSON</span></a></span></span><span> </span><span id="local-6989586621679414298"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414298"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span id="local-6989586621679414297"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679414297"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.SerialiseJSON.html#writeFileJSON"><span class="hs-identifier hs-var hs-var">writeFileJSON</span></a></span></span><span> </span><span id="local-6989586621679414356"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679414356"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span id="local-6989586621679414355"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679414355"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-66"></span><span>    </span><span class="annot"><span class="annottext">ExceptT (FileError ()) IO () -&gt; IO (Either (FileError ()) ())
 forall e (m :: * -&gt; *) a. ExceptT e m a -&gt; m (Either e a)
 </span><span class="hs-identifier hs-var">runExceptT</span></span><span> </span><span class="annot"><span class="annottext">(ExceptT (FileError ()) IO () -&gt; IO (Either (FileError ()) ()))
@@ -196,15 +196,15 @@ MonadIO m =&gt;
 </span><span class="hs-identifier hs-var">handleIOExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; IOException -&gt; FileError ()
 forall e. String -&gt; IOException -&gt; FileError e
 </span><a href="Cardano.Api.Error.html#FileIOError"><span class="hs-identifier hs-var">FileIOError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414298"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT (FileError ()) IO ())
+</span><a href="#local-6989586621679414356"><span class="hs-identifier hs-var">path</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT (FileError ()) IO ())
 -&gt; IO () -&gt; ExceptT (FileError ()) IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
 </span><span id="line-68"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; ByteString -&gt; IO ()
 </span><span class="hs-identifier hs-var">BS.writeFile</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679414298"><span class="hs-identifier hs-var">path</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; ByteString
+</span><a href="#local-6989586621679414356"><span class="hs-identifier hs-var">path</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; ByteString
 forall a. ToJSON a =&gt; a -&gt; ByteString
 </span><a href="Cardano.Api.SerialiseJSON.html#serialiseToJSON"><span class="hs-identifier hs-var">serialiseToJSON</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679414297"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679414355"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-69"></span><span>
 </span><span id="line-70"></span></pre></body></html>

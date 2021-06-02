@@ -93,7 +93,7 @@
 </span><span id="line-93"></span><span>                                     </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Hash.html#Hash"><span class="hs-identifier hs-type">Hash</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.KeysPraos.html#VrfKey"><span class="hs-identifier hs-type">VrfKey</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-94"></span><span>   </span><span class="hs-glyph">|</span><span> </span><span id="MIRCertificate"><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-var">MIRCertificate</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">MIRPot</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRTarget"><span class="hs-identifier hs-type">MIRTarget</span></a></span><span>
 </span><span id="line-95"></span><span>
-</span><span id="line-96"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422941"><span id="local-6989586621679422943"><span class="annot"><span class="annottext">Certificate -&gt; Certificate -&gt; Bool
+</span><span id="line-96"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422999"><span id="local-6989586621679423001"><span class="annot"><span class="annottext">Certificate -&gt; Certificate -&gt; Bool
 (Certificate -&gt; Certificate -&gt; Bool)
 -&gt; (Certificate -&gt; Certificate -&gt; Bool) -&gt; Eq Certificate
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -101,7 +101,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: Certificate -&gt; Certificate -&gt; Bool
 == :: Certificate -&gt; Certificate -&gt; Bool
 $c== :: Certificate -&gt; Certificate -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422934"><span id="local-6989586621679422936"><span id="local-6989586621679422938"><span class="annot"><span class="annottext">Int -&gt; Certificate -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422992"><span id="local-6989586621679422994"><span id="local-6989586621679422996"><span class="annot"><span class="annottext">Int -&gt; Certificate -&gt; ShowS
 [Certificate] -&gt; ShowS
 Certificate -&gt; String
 (Int -&gt; Certificate -&gt; ShowS)
@@ -117,7 +117,7 @@ $cshow :: Certificate -&gt; String
 showsPrec :: Int -&gt; Certificate -&gt; ShowS
 $cshowsPrec :: Int -&gt; Certificate -&gt; ShowS
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-97"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span id="local-6989586621679422928"><span id="local-6989586621679422930"><span class="annot"><span class="annottext">HasTypeProxy Certificate
+</span><span id="line-97"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">anyclass</span></span><span> </span><span id="local-6989586621679422986"><span id="local-6989586621679422988"><span class="annot"><span class="annottext">HasTypeProxy Certificate
 HasTypeProxy Certificate
 -&gt; (Certificate -&gt; ByteString)
 -&gt; (AsType Certificate
@@ -139,13 +139,13 @@ $cp1SerialiseAsCBOR :: HasTypeProxy Certificate
 </span><span id="line-98"></span><span>
 </span><span id="line-99"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#HasTypeProxy"><span class="hs-identifier hs-type">HasTypeProxy</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-100"></span><span>    </span><span class="hs-keyword">data</span><span> </span><span id="AsType"><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-var">AsType</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AsCertificate"><span class="annot"><a href="Cardano.Api.Certificate.html#AsCertificate"><span class="hs-identifier hs-var">AsCertificate</span></a></span></span><span>
-</span><span id="line-101"></span><span>    </span><span id="local-6989586621679422923"><span class="annot"><span class="annottext">proxyToAsType :: Proxy Certificate -&gt; AsType Certificate
+</span><span id="line-101"></span><span>    </span><span id="local-6989586621679422981"><span class="annot"><span class="annottext">proxyToAsType :: Proxy Certificate -&gt; AsType Certificate
 </span><a href="Cardano.Api.HasTypeProxy.html#proxyToAsType"><span class="hs-identifier hs-var hs-var hs-var hs-var">proxyToAsType</span></a></span></span><span> </span><span class="annot"><span class="annottext">Proxy Certificate
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AsType Certificate
 </span><a href="Cardano.Api.Certificate.html#AsCertificate"><span class="hs-identifier hs-var">AsCertificate</span></a></span><span>
 </span><span id="line-102"></span><span>
-</span><span id="line-103"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679422916"><span id="local-6989586621679422918"><span class="annot"><span class="hs-identifier hs-type">ToCBOR</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-104"></span><span>    </span><span id="local-6989586621679422914"><span class="annot"><span class="annottext">toCBOR :: Certificate -&gt; Encoding
+</span><span id="line-103"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679422974"><span id="local-6989586621679422976"><span class="annot"><span class="hs-identifier hs-type">ToCBOR</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-104"></span><span>    </span><span id="local-6989586621679422972"><span class="annot"><span class="annottext">toCBOR :: Certificate -&gt; Encoding
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">toCBOR</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DCert StandardCrypto -&gt; Encoding
 forall a. ToCBOR a =&gt; a -&gt; Encoding
 </span><span class="hs-identifier hs-var">toCBOR</span></span><span> </span><span class="annot"><span class="annottext">(DCert StandardCrypto -&gt; Encoding)
@@ -154,8 +154,8 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Certificate -&gt; DCert StandardCrypto
 </span><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span>
 </span><span id="line-105"></span><span>
-</span><span id="line-106"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679422908"><span class="annot"><span class="hs-identifier hs-type">FromCBOR</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-107"></span><span>    </span><span id="local-6989586621679422906"><span class="annot"><span class="annottext">fromCBOR :: Decoder s Certificate
+</span><span id="line-106"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679422966"><span class="annot"><span class="hs-identifier hs-type">FromCBOR</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-107"></span><span>    </span><span id="local-6989586621679422964"><span class="annot"><span class="annottext">fromCBOR :: Decoder s Certificate
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">fromCBOR</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DCert StandardCrypto -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">(DCert StandardCrypto -&gt; Certificate)
 -&gt; Decoder s (DCert StandardCrypto) -&gt; Decoder s Certificate
@@ -165,14 +165,14 @@ forall a s. FromCBOR a =&gt; Decoder s a
 </span><span class="hs-identifier hs-var">fromCBOR</span></span><span>
 </span><span id="line-108"></span><span>
 </span><span id="line-109"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseTextEnvelope.html#HasTextEnvelope"><span class="hs-identifier hs-type">HasTextEnvelope</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-110"></span><span>    </span><span id="local-6989586621679422899"><span class="annot"><span class="annottext">textEnvelopeType :: AsType Certificate -&gt; TextEnvelopeType
+</span><span id="line-110"></span><span>    </span><span id="local-6989586621679422957"><span class="annot"><span class="annottext">textEnvelopeType :: AsType Certificate -&gt; TextEnvelopeType
 </span><a href="Cardano.Api.SerialiseTextEnvelope.html#textEnvelopeType"><span class="hs-identifier hs-var hs-var hs-var hs-var">textEnvelopeType</span></a></span></span><span> </span><span class="annot"><span class="annottext">AsType Certificate
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeType
 </span><span class="hs-string">&quot;CertificateShelley&quot;</span></span><span>
-</span><span id="line-111"></span><span>    </span><span id="local-6989586621679422897"><span class="annot"><span class="annottext">textEnvelopeDefaultDescr :: Certificate -&gt; TextEnvelopeDescr
-</span><a href="Cardano.Api.SerialiseTextEnvelope.html#textEnvelopeDefaultDescr"><span class="hs-identifier hs-var hs-var hs-var hs-var">textEnvelopeDefaultDescr</span></a></span></span><span> </span><span id="local-6989586621679422895"><span class="annot"><span class="annottext">Certificate
-</span><a href="#local-6989586621679422895"><span class="hs-identifier hs-var">cert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Certificate
-</span><a href="#local-6989586621679422895"><span class="hs-identifier hs-var">cert</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-111"></span><span>    </span><span id="local-6989586621679422955"><span class="annot"><span class="annottext">textEnvelopeDefaultDescr :: Certificate -&gt; TextEnvelopeDescr
+</span><a href="Cardano.Api.SerialiseTextEnvelope.html#textEnvelopeDefaultDescr"><span class="hs-identifier hs-var hs-var hs-var hs-var">textEnvelopeDefaultDescr</span></a></span></span><span> </span><span id="local-6989586621679422953"><span class="annot"><span class="annottext">Certificate
+</span><a href="#local-6989586621679422953"><span class="hs-identifier hs-var">cert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Certificate
+</span><a href="#local-6989586621679422953"><span class="hs-identifier hs-var">cert</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-112"></span><span>      </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressRegistrationCertificate"><span class="hs-identifier hs-type">StakeAddressRegistrationCertificate</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
 </span><span class="hs-string">&quot;Stake address registration&quot;</span></span><span>
 </span><span id="line-113"></span><span>      </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressDeregistrationCertificate"><span class="hs-identifier hs-type">StakeAddressDeregistrationCertificate</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
@@ -204,7 +204,7 @@ forall a s. FromCBOR a =&gt; Decoder s a
 </span><span id="line-133"></span><span>     </span><span class="hs-comment">-- | Use 'SendToTreasuryMIR' to make the target of a 'MIRCertificate'</span><span>
 </span><span id="line-134"></span><span>     </span><span class="hs-comment">-- the treasury pot.</span><span>
 </span><span id="line-135"></span><span>   </span><span class="hs-glyph">|</span><span> </span><span id="SendToTreasuryMIR"><span class="annot"><a href="Cardano.Api.Certificate.html#SendToTreasuryMIR"><span class="hs-identifier hs-var">SendToTreasuryMIR</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-type">Lovelace</span></a></span><span>
-</span><span id="line-136"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422888"><span id="local-6989586621679422890"><span class="annot"><span class="annottext">MIRTarget -&gt; MIRTarget -&gt; Bool
+</span><span id="line-136"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="annot"><span class="hs-keyword">stock</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422946"><span id="local-6989586621679422948"><span class="annot"><span class="annottext">MIRTarget -&gt; MIRTarget -&gt; Bool
 (MIRTarget -&gt; MIRTarget -&gt; Bool)
 -&gt; (MIRTarget -&gt; MIRTarget -&gt; Bool) -&gt; Eq MIRTarget
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -212,7 +212,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: MIRTarget -&gt; MIRTarget -&gt; Bool
 == :: MIRTarget -&gt; MIRTarget -&gt; Bool
 $c== :: MIRTarget -&gt; MIRTarget -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422882"><span id="local-6989586621679422884"><span id="local-6989586621679422886"><span class="annot"><span class="annottext">Int -&gt; MIRTarget -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422940"><span id="local-6989586621679422942"><span id="local-6989586621679422944"><span class="annot"><span class="annottext">Int -&gt; MIRTarget -&gt; ShowS
 [MIRTarget] -&gt; ShowS
 MIRTarget -&gt; String
 (Int -&gt; MIRTarget -&gt; ShowS)
@@ -256,7 +256,7 @@ $cshowsPrec :: Int -&gt; MIRTarget -&gt; ShowS
 </span><span id="line-154"></span><span>       </span><span id="stakePoolMetadata"><span class="annot"><span class="annottext">StakePoolParameters -&gt; Maybe StakePoolMetadataReference
 </span><a href="Cardano.Api.Certificate.html#stakePoolMetadata"><span class="hs-identifier hs-var hs-var">stakePoolMetadata</span></a></span></span><span>      </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span>
 </span><span id="line-155"></span><span>     </span><span class="hs-special">}</span><span>
-</span><span id="line-156"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422867"><span id="local-6989586621679422869"><span class="annot"><span class="annottext">StakePoolParameters -&gt; StakePoolParameters -&gt; Bool
+</span><span id="line-156"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422925"><span id="local-6989586621679422927"><span class="annot"><span class="annottext">StakePoolParameters -&gt; StakePoolParameters -&gt; Bool
 (StakePoolParameters -&gt; StakePoolParameters -&gt; Bool)
 -&gt; (StakePoolParameters -&gt; StakePoolParameters -&gt; Bool)
 -&gt; Eq StakePoolParameters
@@ -265,7 +265,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: StakePoolParameters -&gt; StakePoolParameters -&gt; Bool
 == :: StakePoolParameters -&gt; StakePoolParameters -&gt; Bool
 $c== :: StakePoolParameters -&gt; StakePoolParameters -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422861"><span id="local-6989586621679422863"><span id="local-6989586621679422865"><span class="annot"><span class="annottext">Int -&gt; StakePoolParameters -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422919"><span id="local-6989586621679422921"><span id="local-6989586621679422923"><span class="annot"><span class="annottext">Int -&gt; StakePoolParameters -&gt; ShowS
 [StakePoolParameters] -&gt; ShowS
 StakePoolParameters -&gt; String
 (Int -&gt; StakePoolParameters -&gt; ShowS)
@@ -296,7 +296,7 @@ $cshowsPrec :: Int -&gt; StakePoolParameters -&gt; ShowS
 </span><span id="line-169"></span><span>     </span><span class="hs-glyph">|</span><span> </span><span id="StakePoolRelayDnsSrvRecord"><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsSrvRecord"><span class="hs-identifier hs-var">StakePoolRelayDnsSrvRecord</span></a></span></span><span>
 </span><span id="line-170"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
 </span><span id="line-171"></span><span>
-</span><span id="line-172"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422854"><span id="local-6989586621679422856"><span class="annot"><span class="annottext">StakePoolRelay -&gt; StakePoolRelay -&gt; Bool
+</span><span id="line-172"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422912"><span id="local-6989586621679422914"><span class="annot"><span class="annottext">StakePoolRelay -&gt; StakePoolRelay -&gt; Bool
 (StakePoolRelay -&gt; StakePoolRelay -&gt; Bool)
 -&gt; (StakePoolRelay -&gt; StakePoolRelay -&gt; Bool) -&gt; Eq StakePoolRelay
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -304,7 +304,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: StakePoolRelay -&gt; StakePoolRelay -&gt; Bool
 == :: StakePoolRelay -&gt; StakePoolRelay -&gt; Bool
 $c== :: StakePoolRelay -&gt; StakePoolRelay -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422848"><span id="local-6989586621679422850"><span id="local-6989586621679422852"><span class="annot"><span class="annottext">Int -&gt; StakePoolRelay -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422906"><span id="local-6989586621679422908"><span id="local-6989586621679422910"><span class="annot"><span class="annottext">Int -&gt; StakePoolRelay -&gt; ShowS
 [StakePoolRelay] -&gt; ShowS
 StakePoolRelay -&gt; String
 (Int -&gt; StakePoolRelay -&gt; ShowS)
@@ -328,7 +328,7 @@ $cshowsPrec :: Int -&gt; StakePoolRelay -&gt; ShowS
 </span><span id="line-177"></span><span>       </span><span id="stakePoolMetadataHash"><span class="annot"><span class="annottext">StakePoolMetadataReference -&gt; Hash StakePoolMetadata
 </span><a href="Cardano.Api.Certificate.html#stakePoolMetadataHash"><span class="hs-identifier hs-var hs-var">stakePoolMetadataHash</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Hash.html#Hash"><span class="hs-identifier hs-type">Hash</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.StakePoolMetadata.html#StakePoolMetadata"><span class="hs-identifier hs-type">StakePoolMetadata</span></a></span><span>
 </span><span id="line-178"></span><span>     </span><span class="hs-special">}</span><span>
-</span><span id="line-179"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422841"><span id="local-6989586621679422843"><span class="annot"><span class="annottext">StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool
+</span><span id="line-179"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422899"><span id="local-6989586621679422901"><span class="annot"><span class="annottext">StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool
 (StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool)
 -&gt; (StakePoolMetadataReference
     -&gt; StakePoolMetadataReference -&gt; Bool)
@@ -338,7 +338,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool
 == :: StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool
 $c== :: StakePoolMetadataReference -&gt; StakePoolMetadataReference -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422835"><span id="local-6989586621679422837"><span id="local-6989586621679422839"><span class="annot"><span class="annottext">Int -&gt; StakePoolMetadataReference -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422893"><span id="local-6989586621679422895"><span id="local-6989586621679422897"><span class="annot"><span class="annottext">Int -&gt; StakePoolMetadataReference -&gt; ShowS
 [StakePoolMetadataReference] -&gt; ShowS
 StakePoolMetadataReference -&gt; String
 (Int -&gt; StakePoolMetadataReference -&gt; ShowS)
@@ -407,8 +407,8 @@ $cshowsPrec :: Int -&gt; StakePoolMetadataReference -&gt; ShowS
 </span><span id="line-214"></span><span>
 </span><span id="line-215"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-type">toShelleyCertificate</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCert</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">StandardCrypto</span></span><span>
 </span><span id="line-216"></span><span id="toShelleyCertificate"><span class="annot"><span class="annottext">toShelleyCertificate :: Certificate -&gt; DCert StandardCrypto
-</span><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var hs-var">toShelleyCertificate</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressRegistrationCertificate"><span class="hs-identifier hs-type">StakeAddressRegistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422834"><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422834"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var hs-var">toShelleyCertificate</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressRegistrationCertificate"><span class="hs-identifier hs-type">StakeAddressRegistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422892"><span class="annot"><span class="annottext">StakeCredential
+</span><a href="#local-6989586621679422892"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-217"></span><span>    </span><span class="annot"><span class="annottext">DelegCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. DelegCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertDeleg</span></span><span> </span><span class="annot"><span class="annottext">(DelegCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -420,10 +420,10 @@ forall crypto. StakeCredential crypto -&gt; DelegCert crypto
 </span><span class="hs-identifier hs-var">Shelley.RegKey</span></span><span>
 </span><span id="line-219"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential -&gt; StakeCredential StandardCrypto
 </span><a href="Cardano.Api.Address.html#toShelleyStakeCredential"><span class="hs-identifier hs-var">toShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422834"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422892"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-220"></span><span>
-</span><span id="line-221"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressDeregistrationCertificate"><span class="hs-identifier hs-type">StakeAddressDeregistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422830"><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422830"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-221"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressDeregistrationCertificate"><span class="hs-identifier hs-type">StakeAddressDeregistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422888"><span class="annot"><span class="annottext">StakeCredential
+</span><a href="#local-6989586621679422888"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-222"></span><span>    </span><span class="annot"><span class="annottext">DelegCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. DelegCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertDeleg</span></span><span> </span><span class="annot"><span class="annottext">(DelegCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -435,11 +435,11 @@ forall crypto. StakeCredential crypto -&gt; DelegCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DeRegKey</span></span><span>
 </span><span id="line-224"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential -&gt; StakeCredential StandardCrypto
 </span><a href="Cardano.Api.Address.html#toShelleyStakeCredential"><span class="hs-identifier hs-var">toShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422830"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422888"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-225"></span><span>
 </span><span id="line-226"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressDelegationCertificate"><span class="hs-identifier hs-type">StakeAddressDelegationCertificate</span></a></span><span>
-</span><span id="line-227"></span><span>                        </span><span id="local-6989586621679422828"><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422828"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422826"><span class="annot"><a href="#local-6989586621679422826"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-227"></span><span>                        </span><span id="local-6989586621679422886"><span class="annot"><span class="annottext">StakeCredential
+</span><a href="#local-6989586621679422886"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422884"><span class="annot"><a href="#local-6989586621679422884"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-228"></span><span>    </span><span class="annot"><span class="annottext">DelegCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. DelegCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertDeleg</span></span><span> </span><span class="annot"><span class="annottext">(DelegCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -460,12 +460,12 @@ StakeCredential crypto
 </span><span class="hs-identifier hs-var">Shelley.Delegation</span></span><span>
 </span><span id="line-231"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential -&gt; StakeCredential StandardCrypto
 </span><a href="Cardano.Api.Address.html#toShelleyStakeCredential"><span class="hs-identifier hs-var">toShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422828"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422886"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-232"></span><span>        </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422826"><span class="hs-identifier hs-var">poolid</span></a></span><span>
+</span><a href="#local-6989586621679422884"><span class="hs-identifier hs-var">poolid</span></a></span><span>
 </span><span id="line-233"></span><span>
-</span><span id="line-234"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRegistrationCertificate"><span class="hs-identifier hs-type">StakePoolRegistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422823"><span class="annot"><span class="annottext">StakePoolParameters
-</span><a href="#local-6989586621679422823"><span class="hs-identifier hs-var">poolparams</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-234"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRegistrationCertificate"><span class="hs-identifier hs-type">StakePoolRegistrationCertificate</span></a></span><span> </span><span id="local-6989586621679422881"><span class="annot"><span class="annottext">StakePoolParameters
+</span><a href="#local-6989586621679422881"><span class="hs-identifier hs-var">poolparams</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-235"></span><span>    </span><span class="annot"><span class="annottext">PoolCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. PoolCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertPool</span></span><span> </span><span class="annot"><span class="annottext">(PoolCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -477,11 +477,11 @@ forall crypto. PoolParams crypto -&gt; PoolCert crypto
 </span><span class="hs-identifier hs-var">Shelley.RegPool</span></span><span>
 </span><span id="line-237"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakePoolParameters -&gt; PoolParams StandardCrypto
 </span><a href="Cardano.Api.Certificate.html#toShelleyPoolParams"><span class="hs-identifier hs-var">toShelleyPoolParams</span></a></span><span> </span><span class="annot"><span class="annottext">StakePoolParameters
-</span><a href="#local-6989586621679422823"><span class="hs-identifier hs-var">poolparams</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422881"><span class="hs-identifier hs-var">poolparams</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-238"></span><span>
 </span><span id="line-239"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRetirementCertificate"><span class="hs-identifier hs-type">StakePoolRetirementCertificate</span></a></span><span>
-</span><span id="line-240"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422820"><span class="annot"><a href="#local-6989586621679422820"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679422819"><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679422819"><span class="hs-identifier hs-var">epochno</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-240"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422878"><span class="annot"><a href="#local-6989586621679422878"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679422877"><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679422877"><span class="hs-identifier hs-var">epochno</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-241"></span><span>    </span><span class="annot"><span class="annottext">PoolCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. PoolCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertPool</span></span><span> </span><span class="annot"><span class="annottext">(PoolCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -494,14 +494,14 @@ forall crypto.
 KeyHash 'StakePool crypto -&gt; EpochNo -&gt; PoolCert crypto
 </span><span class="hs-identifier hs-var">Shelley.RetirePool</span></span><span>
 </span><span id="line-243"></span><span>        </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422820"><span class="hs-identifier hs-var">poolid</span></a></span><span>
+</span><a href="#local-6989586621679422878"><span class="hs-identifier hs-var">poolid</span></a></span><span>
 </span><span id="line-244"></span><span>        </span><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679422819"><span class="hs-identifier hs-var">epochno</span></a></span><span>
+</span><a href="#local-6989586621679422877"><span class="hs-identifier hs-var">epochno</span></a></span><span>
 </span><span id="line-245"></span><span>
 </span><span id="line-246"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#GenesisKeyDelegationCertificate"><span class="hs-identifier hs-type">GenesisKeyDelegationCertificate</span></a></span><span>
-</span><span id="line-247"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#GenesisKeyHash"><span class="hs-identifier hs-type">GenesisKeyHash</span></a></span><span>         </span><span id="local-6989586621679422816"><span class="annot"><a href="#local-6989586621679422816"><span class="hs-identifier hs-var">genesiskh</span></a></span></span><span class="hs-special">)</span><span>
-</span><span id="line-248"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#GenesisDelegateKeyHash"><span class="hs-identifier hs-type">GenesisDelegateKeyHash</span></a></span><span> </span><span id="local-6989586621679422814"><span class="annot"><a href="#local-6989586621679422814"><span class="hs-identifier hs-var">delegatekh</span></a></span></span><span class="hs-special">)</span><span>
-</span><span id="line-249"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-type">VrfKeyHash</span></a></span><span>             </span><span id="local-6989586621679422812"><span class="annot"><a href="#local-6989586621679422812"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-247"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#GenesisKeyHash"><span class="hs-identifier hs-type">GenesisKeyHash</span></a></span><span>         </span><span id="local-6989586621679422874"><span class="annot"><a href="#local-6989586621679422874"><span class="hs-identifier hs-var">genesiskh</span></a></span></span><span class="hs-special">)</span><span>
+</span><span id="line-248"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysShelley.html#GenesisDelegateKeyHash"><span class="hs-identifier hs-type">GenesisDelegateKeyHash</span></a></span><span> </span><span id="local-6989586621679422872"><span class="annot"><a href="#local-6989586621679422872"><span class="hs-identifier hs-var">delegatekh</span></a></span></span><span class="hs-special">)</span><span>
+</span><span id="line-249"></span><span>                       </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-type">VrfKeyHash</span></a></span><span>             </span><span id="local-6989586621679422870"><span class="annot"><a href="#local-6989586621679422870"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-250"></span><span>    </span><span class="annot"><span class="annottext">GenesisDelegCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. GenesisDelegCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertGenesis</span></span><span> </span><span class="annot"><span class="annottext">(GenesisDelegCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -519,15 +519,15 @@ KeyHash 'Genesis crypto
 -&gt; GenesisDelegCert crypto
 </span><span class="hs-identifier hs-var">Shelley.GenesisDelegCert</span></span><span>
 </span><span id="line-252"></span><span>        </span><span class="annot"><span class="annottext">KeyHash 'Genesis StandardCrypto
-</span><a href="#local-6989586621679422816"><span class="hs-identifier hs-var">genesiskh</span></a></span><span>
+</span><a href="#local-6989586621679422874"><span class="hs-identifier hs-var">genesiskh</span></a></span><span>
 </span><span id="line-253"></span><span>        </span><span class="annot"><span class="annottext">KeyHash 'GenesisDelegate StandardCrypto
-</span><a href="#local-6989586621679422814"><span class="hs-identifier hs-var">delegatekh</span></a></span><span>
+</span><a href="#local-6989586621679422872"><span class="hs-identifier hs-var">delegatekh</span></a></span><span>
 </span><span id="line-254"></span><span>        </span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
-</span><a href="#local-6989586621679422812"><span class="hs-identifier hs-var">vrfkh</span></a></span><span>
+</span><a href="#local-6989586621679422870"><span class="hs-identifier hs-var">vrfkh</span></a></span><span>
 </span><span id="line-255"></span><span>
-</span><span id="line-256"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422809"><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422809"><span class="hs-identifier hs-var">mirpot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressesMIR"><span class="hs-identifier hs-type">StakeAddressesMIR</span></a></span><span> </span><span id="local-6989586621679422808"><span class="annot"><span class="annottext">[(StakeCredential, Lovelace)]
-</span><a href="#local-6989586621679422808"><span class="hs-identifier hs-var">amounts</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-256"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422867"><span class="annot"><span class="annottext">MIRPot
+</span><a href="#local-6989586621679422867"><span class="hs-identifier hs-var">mirpot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakeAddressesMIR"><span class="hs-identifier hs-type">StakeAddressesMIR</span></a></span><span> </span><span id="local-6989586621679422866"><span class="annot"><span class="annottext">[(StakeCredential, Lovelace)]
+</span><a href="#local-6989586621679422866"><span class="hs-identifier hs-var">amounts</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-257"></span><span>    </span><span class="annot"><span class="annottext">MIRCert StandardCrypto -&gt; DCert StandardCrypto
 forall crypto. MIRCert crypto -&gt; DCert crypto
 </span><span class="hs-identifier hs-var">Shelley.DCertMir</span></span><span> </span><span class="annot"><span class="annottext">(MIRCert StandardCrypto -&gt; DCert StandardCrypto)
@@ -538,7 +538,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall crypto. MIRPot -&gt; MIRTarget crypto -&gt; MIRCert crypto
 </span><span class="hs-identifier hs-var">Shelley.MIRCert</span></span><span>
 </span><span id="line-259"></span><span>        </span><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422809"><span class="hs-identifier hs-var">mirpot</span></a></span><span>
+</span><a href="#local-6989586621679422867"><span class="hs-identifier hs-var">mirpot</span></a></span><span>
 </span><span id="line-260"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
 -&gt; MIRTarget StandardCrypto
 forall crypto.
@@ -557,24 +557,24 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span>
 </span><span id="line-261"></span><span>           </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential -&gt; StakeCredential StandardCrypto
 </span><a href="Cardano.Api.Address.html#toShelleyStakeCredential"><span class="hs-identifier hs-var">toShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422803"><span class="hs-identifier hs-var">sc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Coin -&gt; DeltaCoin
+</span><a href="#local-6989586621679422861"><span class="hs-identifier hs-var">sc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Coin -&gt; DeltaCoin
 </span><span class="hs-identifier hs-var">Shelley.toDeltaCoin</span></span><span> </span><span class="annot"><span class="annottext">(Coin -&gt; DeltaCoin) -&gt; (Lovelace -&gt; Coin) -&gt; Lovelace -&gt; DeltaCoin
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Lovelace -&gt; Coin
 </span><a href="Cardano.Api.Value.html#toShelleyLovelace"><span class="hs-identifier hs-var">toShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">(Lovelace -&gt; DeltaCoin) -&gt; Lovelace -&gt; DeltaCoin
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422801"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-262"></span><span>           </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422803"><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679422803"><span class="hs-identifier hs-var">sc</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422801"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422801"><span class="hs-identifier hs-var">v</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[(StakeCredential, Lovelace)]
-</span><a href="#local-6989586621679422808"><span class="hs-identifier hs-var">amounts</span></a></span><span> </span><span class="hs-special">]</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422859"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-262"></span><span>           </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422861"><span class="annot"><span class="annottext">StakeCredential
+</span><a href="#local-6989586621679422861"><span class="hs-identifier hs-var">sc</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422859"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679422859"><span class="hs-identifier hs-var">v</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[(StakeCredential, Lovelace)]
+</span><a href="#local-6989586621679422866"><span class="hs-identifier hs-var">amounts</span></a></span><span> </span><span class="hs-special">]</span><span class="hs-special">)</span><span>
 </span><span id="line-263"></span><span>
-</span><span id="line-264"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422800"><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422800"><span class="hs-identifier hs-var">mirPot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#SendToReservesMIR"><span class="hs-identifier hs-type">SendToReservesMIR</span></a></span><span> </span><span id="local-6989586621679422799"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422799"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-264"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422858"><span class="annot"><span class="annottext">MIRPot
+</span><a href="#local-6989586621679422858"><span class="hs-identifier hs-var">mirPot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#SendToReservesMIR"><span class="hs-identifier hs-type">SendToReservesMIR</span></a></span><span> </span><span id="local-6989586621679422857"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679422857"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-265"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422800"><span class="hs-identifier hs-var">mirPot</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679422858"><span class="hs-identifier hs-var">mirPot</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-266"></span><span>      </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">TreasuryMIR</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-267"></span><span>        </span><span class="annot"><span class="annottext">MIRCert StandardCrypto -&gt; DCert StandardCrypto
@@ -595,7 +595,7 @@ forall crypto. Coin -&gt; MIRTarget crypto
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Lovelace -&gt; Coin
 </span><a href="Cardano.Api.Value.html#toShelleyLovelace"><span class="hs-identifier hs-var">toShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422799"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422857"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-271"></span><span>      </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">ReservesMIR</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-272"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; DCert StandardCrypto
@@ -603,11 +603,11 @@ forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;toShelleyCertificate: Incorrect MIRPot specified. Expected TreasuryMIR but got ReservesMIR&quot;</span></span><span>
 </span><span id="line-273"></span><span>
-</span><span id="line-274"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422794"><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422794"><span class="hs-identifier hs-var">mirPot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#SendToTreasuryMIR"><span class="hs-identifier hs-type">SendToTreasuryMIR</span></a></span><span> </span><span id="local-6989586621679422793"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422793"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-274"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyCertificate"><span class="hs-identifier hs-var">toShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-type">MIRCertificate</span></a></span><span> </span><span id="local-6989586621679422852"><span class="annot"><span class="annottext">MIRPot
+</span><a href="#local-6989586621679422852"><span class="hs-identifier hs-var">mirPot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#SendToTreasuryMIR"><span class="hs-identifier hs-type">SendToTreasuryMIR</span></a></span><span> </span><span id="local-6989586621679422851"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679422851"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-275"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422794"><span class="hs-identifier hs-var">mirPot</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679422852"><span class="hs-identifier hs-var">mirPot</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-276"></span><span>      </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">ReservesMIR</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-277"></span><span>        </span><span class="annot"><span class="annottext">MIRCert StandardCrypto -&gt; DCert StandardCrypto
@@ -628,7 +628,7 @@ forall crypto. Coin -&gt; MIRTarget crypto
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Lovelace -&gt; Coin
 </span><a href="Cardano.Api.Value.html#toShelleyLovelace"><span class="hs-identifier hs-var">toShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422793"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422851"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-281"></span><span>      </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">TreasuryMIR</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-282"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; DCert StandardCrypto
@@ -639,99 +639,99 @@ forall a. HasCallStack =&gt; String -&gt; a
 </span><span id="line-284"></span><span>
 </span><span id="line-285"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-type">fromShelleyCertificate</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCert</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">StandardCrypto</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#Certificate"><span class="hs-identifier hs-type">Certificate</span></a></span><span>
 </span><span id="line-286"></span><span id="fromShelleyCertificate"><span class="annot"><span class="annottext">fromShelleyCertificate :: DCert StandardCrypto -&gt; Certificate
-</span><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var hs-var">fromShelleyCertificate</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertDeleg</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RegKey</span></span><span> </span><span id="local-6989586621679422792"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422792"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var hs-var">fromShelleyCertificate</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertDeleg</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RegKey</span></span><span> </span><span id="local-6989586621679422850"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
+</span><a href="#local-6989586621679422850"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-287"></span><span>    </span><span class="annot"><span class="annottext">StakeCredential -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#StakeAddressRegistrationCertificate"><span class="hs-identifier hs-var">StakeAddressRegistrationCertificate</span></a></span><span>
 </span><span id="line-288"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential StandardCrypto -&gt; StakeCredential
 </span><a href="Cardano.Api.Address.html#fromShelleyStakeCredential"><span class="hs-identifier hs-var">fromShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422792"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422850"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-289"></span><span>
-</span><span id="line-290"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertDeleg</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DeRegKey</span></span><span> </span><span id="local-6989586621679422790"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422790"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-290"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertDeleg</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DeRegKey</span></span><span> </span><span id="local-6989586621679422848"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
+</span><a href="#local-6989586621679422848"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-291"></span><span>    </span><span class="annot"><span class="annottext">StakeCredential -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#StakeAddressDeregistrationCertificate"><span class="hs-identifier hs-var">StakeAddressDeregistrationCertificate</span></a></span><span>
 </span><span id="line-292"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential StandardCrypto -&gt; StakeCredential
 </span><a href="Cardano.Api.Address.html#fromShelleyStakeCredential"><span class="hs-identifier hs-var">fromShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422790"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422848"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-293"></span><span>
 </span><span id="line-294"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertDeleg</span></span><span>
-</span><span id="line-295"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.Delegate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.Delegation</span></span><span> </span><span id="local-6989586621679422789"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422789"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span> </span><span id="local-6989586621679422788"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422788"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-295"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.Delegate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.Delegation</span></span><span> </span><span id="local-6989586621679422847"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
+</span><a href="#local-6989586621679422847"><span class="hs-identifier hs-var">stakecred</span></a></span></span><span> </span><span id="local-6989586621679422846"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
+</span><a href="#local-6989586621679422846"><span class="hs-identifier hs-var">poolid</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-296"></span><span>    </span><span class="annot"><span class="annottext">StakeCredential -&gt; PoolId -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#StakeAddressDelegationCertificate"><span class="hs-identifier hs-var">StakeAddressDelegationCertificate</span></a></span><span>
 </span><span id="line-297"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential StandardCrypto -&gt; StakeCredential
 </span><a href="Cardano.Api.Address.html#fromShelleyStakeCredential"><span class="hs-identifier hs-var">fromShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422789"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422847"><span class="hs-identifier hs-var">stakecred</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-298"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto -&gt; PoolId
 </span><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-var">StakePoolKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422788"><span class="hs-identifier hs-var">poolid</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422846"><span class="hs-identifier hs-var">poolid</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-299"></span><span>
-</span><span id="line-300"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertPool</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RegPool</span></span><span> </span><span id="local-6989586621679422787"><span class="annot"><span class="annottext">PoolParams StandardCrypto
-</span><a href="#local-6989586621679422787"><span class="hs-identifier hs-var">poolparams</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-300"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertPool</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RegPool</span></span><span> </span><span id="local-6989586621679422845"><span class="annot"><span class="annottext">PoolParams StandardCrypto
+</span><a href="#local-6989586621679422845"><span class="hs-identifier hs-var">poolparams</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-301"></span><span>    </span><span class="annot"><span class="annottext">StakePoolParameters -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#StakePoolRegistrationCertificate"><span class="hs-identifier hs-var">StakePoolRegistrationCertificate</span></a></span><span>
 </span><span id="line-302"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PoolParams StandardCrypto -&gt; StakePoolParameters
 </span><a href="Cardano.Api.Certificate.html#fromShelleyPoolParams"><span class="hs-identifier hs-var">fromShelleyPoolParams</span></a></span><span> </span><span class="annot"><span class="annottext">PoolParams StandardCrypto
-</span><a href="#local-6989586621679422787"><span class="hs-identifier hs-var">poolparams</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422845"><span class="hs-identifier hs-var">poolparams</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-303"></span><span>
-</span><span id="line-304"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertPool</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RetirePool</span></span><span> </span><span id="local-6989586621679422785"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422785"><span class="hs-identifier hs-var">poolid</span></a></span></span><span> </span><span id="local-6989586621679422784"><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679422784"><span class="hs-identifier hs-var">epochno</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-304"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertPool</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.RetirePool</span></span><span> </span><span id="local-6989586621679422843"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
+</span><a href="#local-6989586621679422843"><span class="hs-identifier hs-var">poolid</span></a></span></span><span> </span><span id="local-6989586621679422842"><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679422842"><span class="hs-identifier hs-var">epochno</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-305"></span><span>    </span><span class="annot"><span class="annottext">PoolId -&gt; EpochNo -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#StakePoolRetirementCertificate"><span class="hs-identifier hs-var">StakePoolRetirementCertificate</span></a></span><span>
 </span><span id="line-306"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto -&gt; PoolId
 </span><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-var">StakePoolKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422785"><span class="hs-identifier hs-var">poolid</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422843"><span class="hs-identifier hs-var">poolid</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-307"></span><span>      </span><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679422784"><span class="hs-identifier hs-var">epochno</span></a></span><span>
+</span><a href="#local-6989586621679422842"><span class="hs-identifier hs-var">epochno</span></a></span><span>
 </span><span id="line-308"></span><span>
 </span><span id="line-309"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertGenesis</span></span><span>
-</span><span id="line-310"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.GenesisDelegCert</span></span><span> </span><span id="local-6989586621679422783"><span class="annot"><span class="annottext">KeyHash 'Genesis StandardCrypto
-</span><a href="#local-6989586621679422783"><span class="hs-identifier hs-var">genesiskh</span></a></span></span><span> </span><span id="local-6989586621679422782"><span class="annot"><span class="annottext">KeyHash 'GenesisDelegate StandardCrypto
-</span><a href="#local-6989586621679422782"><span class="hs-identifier hs-var">delegatekh</span></a></span></span><span> </span><span id="local-6989586621679422781"><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
-</span><a href="#local-6989586621679422781"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-310"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.GenesisDelegCert</span></span><span> </span><span id="local-6989586621679422841"><span class="annot"><span class="annottext">KeyHash 'Genesis StandardCrypto
+</span><a href="#local-6989586621679422841"><span class="hs-identifier hs-var">genesiskh</span></a></span></span><span> </span><span id="local-6989586621679422840"><span class="annot"><span class="annottext">KeyHash 'GenesisDelegate StandardCrypto
+</span><a href="#local-6989586621679422840"><span class="hs-identifier hs-var">delegatekh</span></a></span></span><span> </span><span id="local-6989586621679422839"><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
+</span><a href="#local-6989586621679422839"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-311"></span><span>    </span><span class="annot"><span class="annottext">Hash GenesisKey
 -&gt; Hash GenesisDelegateKey -&gt; Hash VrfKey -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#GenesisKeyDelegationCertificate"><span class="hs-identifier hs-var">GenesisKeyDelegationCertificate</span></a></span><span>
 </span><span id="line-312"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">KeyHash 'Genesis StandardCrypto -&gt; Hash GenesisKey
 </span><a href="Cardano.Api.KeysShelley.html#GenesisKeyHash"><span class="hs-identifier hs-var">GenesisKeyHash</span></a></span><span>         </span><span class="annot"><span class="annottext">KeyHash 'Genesis StandardCrypto
-</span><a href="#local-6989586621679422783"><span class="hs-identifier hs-var">genesiskh</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422841"><span class="hs-identifier hs-var">genesiskh</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-313"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">KeyHash 'GenesisDelegate StandardCrypto -&gt; Hash GenesisDelegateKey
 </span><a href="Cardano.Api.KeysShelley.html#GenesisDelegateKeyHash"><span class="hs-identifier hs-var">GenesisDelegateKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">KeyHash 'GenesisDelegate StandardCrypto
-</span><a href="#local-6989586621679422782"><span class="hs-identifier hs-var">delegatekh</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422840"><span class="hs-identifier hs-var">delegatekh</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-314"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto) -&gt; Hash VrfKey
 </span><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-var">VrfKeyHash</span></a></span><span>             </span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
-</span><a href="#local-6989586621679422781"><span class="hs-identifier hs-var">vrfkh</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422839"><span class="hs-identifier hs-var">vrfkh</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-315"></span><span>
 </span><span id="line-316"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertMir</span></span><span>
-</span><span id="line-317"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MIRCert</span></span><span> </span><span id="local-6989586621679422780"><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422780"><span class="hs-identifier hs-var">mirpot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakeAddressesMIR</span></span><span> </span><span id="local-6989586621679422779"><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
-</span><a href="#local-6989586621679422779"><span class="hs-identifier hs-var">amounts</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-317"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MIRCert</span></span><span> </span><span id="local-6989586621679422838"><span class="annot"><span class="annottext">MIRPot
+</span><a href="#local-6989586621679422838"><span class="hs-identifier hs-var">mirpot</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakeAddressesMIR</span></span><span> </span><span id="local-6989586621679422837"><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
+</span><a href="#local-6989586621679422837"><span class="hs-identifier hs-var">amounts</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-318"></span><span>    </span><span class="annot"><span class="annottext">MIRPot -&gt; MIRTarget -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-var">MIRCertificate</span></a></span><span>
 </span><span id="line-319"></span><span>      </span><span class="annot"><span class="annottext">MIRPot
-</span><a href="#local-6989586621679422780"><span class="hs-identifier hs-var">mirpot</span></a></span><span>
+</span><a href="#local-6989586621679422838"><span class="hs-identifier hs-var">mirpot</span></a></span><span>
 </span><span id="line-320"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[(StakeCredential, Lovelace)] -&gt; MIRTarget
 </span><a href="Cardano.Api.Certificate.html#StakeAddressesMIR"><span class="hs-identifier hs-var">StakeAddressesMIR</span></a></span><span>
 </span><span id="line-321"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakeCredential StandardCrypto -&gt; StakeCredential
 </span><a href="Cardano.Api.Address.html#fromShelleyStakeCredential"><span class="hs-identifier hs-var">fromShelleyStakeCredential</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422778"><span class="hs-identifier hs-var">sc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DeltaCoin -&gt; Lovelace
+</span><a href="#local-6989586621679422836"><span class="hs-identifier hs-var">sc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DeltaCoin -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#fromShelleyDeltaLovelace"><span class="hs-identifier hs-var">fromShelleyDeltaLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">DeltaCoin
-</span><a href="#local-6989586621679422776"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-322"></span><span>        </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422778"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
-</span><a href="#local-6989586621679422778"><span class="hs-identifier hs-var">sc</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422776"><span class="annot"><span class="annottext">DeltaCoin
-</span><a href="#local-6989586621679422776"><span class="hs-identifier hs-var">v</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
+</span><a href="#local-6989586621679422834"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-322"></span><span>        </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679422836"><span class="annot"><span class="annottext">StakeCredential StandardCrypto
+</span><a href="#local-6989586621679422836"><span class="hs-identifier hs-var">sc</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422834"><span class="annot"><span class="annottext">DeltaCoin
+</span><a href="#local-6989586621679422834"><span class="hs-identifier hs-var">v</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
 -&gt; [(StakeCredential StandardCrypto, DeltaCoin)]
 forall k a. Map k a -&gt; [(k, a)]
 </span><span class="hs-identifier hs-var">Map.toList</span></span><span> </span><span class="annot"><span class="annottext">Map (StakeCredential StandardCrypto) DeltaCoin
-</span><a href="#local-6989586621679422779"><span class="hs-identifier hs-var">amounts</span></a></span><span> </span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679422837"><span class="hs-identifier hs-var">amounts</span></a></span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-323"></span><span>      </span><span class="hs-special">)</span><span>
 </span><span id="line-324"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertMir</span></span><span>
 </span><span id="line-325"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MIRCert</span></span><span> </span><span class="annot"><span class="annottext">MIRPot
-</span><span class="hs-identifier hs-var">ReservesMIR</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SendToOppositePotMIR</span></span><span> </span><span id="local-6989586621679422774"><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422774"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span class="hs-identifier hs-var">ReservesMIR</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SendToOppositePotMIR</span></span><span> </span><span id="local-6989586621679422832"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679422832"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-326"></span><span>    </span><span class="annot"><span class="annottext">MIRPot -&gt; MIRTarget -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-var">MIRCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">ReservesMIR</span></span><span>
@@ -740,12 +740,12 @@ forall k a. Map k a -&gt; [(k, a)]
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Coin -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#fromShelleyLovelace"><span class="hs-identifier hs-var">fromShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422774"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422832"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-328"></span><span>
 </span><span id="line-329"></span><span class="annot"><a href="Cardano.Api.Certificate.html#fromShelleyCertificate"><span class="hs-identifier hs-var">fromShelleyCertificate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.DCertMir</span></span><span>
 </span><span id="line-330"></span><span>                         </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MIRCert</span></span><span> </span><span class="annot"><span class="annottext">MIRPot
-</span><span class="hs-identifier hs-var">TreasuryMIR</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SendToOppositePotMIR</span></span><span> </span><span id="local-6989586621679422772"><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422772"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span class="hs-identifier hs-var">TreasuryMIR</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SendToOppositePotMIR</span></span><span> </span><span id="local-6989586621679422830"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679422830"><span class="hs-identifier hs-var">amount</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-331"></span><span>    </span><span class="annot"><span class="annottext">MIRPot -&gt; MIRTarget -&gt; Certificate
 </span><a href="Cardano.Api.Certificate.html#MIRCertificate"><span class="hs-identifier hs-var">MIRCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">MIRPot
 </span><span class="hs-identifier hs-var">TreasuryMIR</span></span><span>
@@ -754,43 +754,43 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Coin -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#fromShelleyLovelace"><span class="hs-identifier hs-var">fromShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422772"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422830"><span class="hs-identifier hs-var">amount</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-333"></span><span>
 </span><span id="line-334"></span><span class="annot"><a href="Cardano.Api.Certificate.html#toShelleyPoolParams"><span class="hs-identifier hs-type">toShelleyPoolParams</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolParameters"><span class="hs-identifier hs-type">StakePoolParameters</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolParams</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">StandardCrypto</span></span><span>
 </span><span id="line-335"></span><span id="toShelleyPoolParams"><span class="annot"><span class="annottext">toShelleyPoolParams :: StakePoolParameters -&gt; PoolParams StandardCrypto
 </span><a href="Cardano.Api.Certificate.html#toShelleyPoolParams"><span class="hs-identifier hs-var hs-var">toShelleyPoolParams</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolParameters"><span class="hs-identifier hs-type">StakePoolParameters</span></a></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-336"></span><span>                      </span><span class="annot"><span class="annottext">stakePoolId :: StakePoolParameters -&gt; PoolId
-</span><a href="Cardano.Api.Certificate.html#stakePoolId"><span class="hs-identifier hs-var">stakePoolId</span></a></span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422771"><span class="annot"><a href="#local-6989586621679422771"><span class="hs-identifier hs-var">poolkh</span></a></span></span><span>
+</span><a href="Cardano.Api.Certificate.html#stakePoolId"><span class="hs-identifier hs-var">stakePoolId</span></a></span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-type">StakePoolKeyHash</span></a></span><span> </span><span id="local-6989586621679422829"><span class="annot"><a href="#local-6989586621679422829"><span class="hs-identifier hs-var">poolkh</span></a></span></span><span>
 </span><span id="line-337"></span><span>                    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolVRF :: StakePoolParameters -&gt; Hash VrfKey
-</span><a href="Cardano.Api.Certificate.html#stakePoolVRF"><span class="hs-identifier hs-var">stakePoolVRF</span></a></span><span>           </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-type">VrfKeyHash</span></a></span><span> </span><span id="local-6989586621679422770"><span class="annot"><a href="#local-6989586621679422770"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span>
-</span><span id="line-338"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422769"><span class="annot"><span class="annottext">Lovelace
+</span><a href="Cardano.Api.Certificate.html#stakePoolVRF"><span class="hs-identifier hs-var">stakePoolVRF</span></a></span><span>           </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-type">VrfKeyHash</span></a></span><span> </span><span id="local-6989586621679422828"><span class="annot"><a href="#local-6989586621679422828"><span class="hs-identifier hs-var">vrfkh</span></a></span></span><span>
+</span><span id="line-338"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422827"><span class="annot"><span class="annottext">Lovelace
 stakePoolCost :: Lovelace
 stakePoolCost :: StakePoolParameters -&gt; Lovelace
-</span><a href="#local-6989586621679422769"><span class="hs-identifier hs-var hs-var">stakePoolCost</span></a></span></span><span>
-</span><span id="line-339"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422768"><span class="annot"><span class="annottext">Rational
+</span><a href="#local-6989586621679422827"><span class="hs-identifier hs-var hs-var">stakePoolCost</span></a></span></span><span>
+</span><span id="line-339"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422826"><span class="annot"><span class="annottext">Rational
 stakePoolMargin :: Rational
 stakePoolMargin :: StakePoolParameters -&gt; Rational
-</span><a href="#local-6989586621679422768"><span class="hs-identifier hs-var hs-var">stakePoolMargin</span></a></span></span><span>
-</span><span id="line-340"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422767"><span class="annot"><span class="annottext">StakeAddress
+</span><a href="#local-6989586621679422826"><span class="hs-identifier hs-var hs-var">stakePoolMargin</span></a></span></span><span>
+</span><span id="line-340"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422825"><span class="annot"><span class="annottext">StakeAddress
 stakePoolRewardAccount :: StakeAddress
 stakePoolRewardAccount :: StakePoolParameters -&gt; StakeAddress
-</span><a href="#local-6989586621679422767"><span class="hs-identifier hs-var hs-var">stakePoolRewardAccount</span></a></span></span><span>
-</span><span id="line-341"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422766"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679422825"><span class="hs-identifier hs-var hs-var">stakePoolRewardAccount</span></a></span></span><span>
+</span><span id="line-341"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422824"><span class="annot"><span class="annottext">Lovelace
 stakePoolPledge :: Lovelace
 stakePoolPledge :: StakePoolParameters -&gt; Lovelace
-</span><a href="#local-6989586621679422766"><span class="hs-identifier hs-var hs-var">stakePoolPledge</span></a></span></span><span>
-</span><span id="line-342"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422765"><span class="annot"><span class="annottext">[Hash StakeKey]
+</span><a href="#local-6989586621679422824"><span class="hs-identifier hs-var hs-var">stakePoolPledge</span></a></span></span><span>
+</span><span id="line-342"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422823"><span class="annot"><span class="annottext">[Hash StakeKey]
 stakePoolOwners :: [Hash StakeKey]
 stakePoolOwners :: StakePoolParameters -&gt; [Hash StakeKey]
-</span><a href="#local-6989586621679422765"><span class="hs-identifier hs-var hs-var">stakePoolOwners</span></a></span></span><span>
-</span><span id="line-343"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422764"><span class="annot"><span class="annottext">[StakePoolRelay]
+</span><a href="#local-6989586621679422823"><span class="hs-identifier hs-var hs-var">stakePoolOwners</span></a></span></span><span>
+</span><span id="line-343"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422822"><span class="annot"><span class="annottext">[StakePoolRelay]
 stakePoolRelays :: [StakePoolRelay]
 stakePoolRelays :: StakePoolParameters -&gt; [StakePoolRelay]
-</span><a href="#local-6989586621679422764"><span class="hs-identifier hs-var hs-var">stakePoolRelays</span></a></span></span><span>
-</span><span id="line-344"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422763"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
+</span><a href="#local-6989586621679422822"><span class="hs-identifier hs-var hs-var">stakePoolRelays</span></a></span></span><span>
+</span><span id="line-344"></span><span>                    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422821"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
 stakePoolMetadata :: Maybe StakePoolMetadataReference
 stakePoolMetadata :: StakePoolParameters -&gt; Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679422763"><span class="hs-identifier hs-var hs-var">stakePoolMetadata</span></a></span></span><span>
+</span><a href="#local-6989586621679422821"><span class="hs-identifier hs-var hs-var">stakePoolMetadata</span></a></span></span><span>
 </span><span id="line-345"></span><span>                    </span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-346"></span><span>    </span><span class="hs-comment">--TODO: validate pool parameters</span><span>
 </span><span id="line-347"></span><span>    </span><span class="annot"><span class="annottext">PoolParams :: forall crypto.
@@ -807,34 +807,34 @@ KeyHash 'StakePool crypto
 </span><span class="hs-identifier hs-type">Shelley.PoolParams</span></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-348"></span><span>      </span><span class="annot"><span class="annottext">_poolId :: KeyHash 'StakePool StandardCrypto
 </span><span class="hs-identifier hs-var">Shelley._poolId</span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422771"><span class="hs-identifier hs-var">poolkh</span></a></span><span>
+</span><a href="#local-6989586621679422829"><span class="hs-identifier hs-var">poolkh</span></a></span><span>
 </span><span id="line-349"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolVrf :: Hash StandardCrypto (VerKeyVRF StandardCrypto)
 </span><span class="hs-identifier hs-var">Shelley._poolVrf</span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
-</span><a href="#local-6989586621679422770"><span class="hs-identifier hs-var">vrfkh</span></a></span><span>
+</span><a href="#local-6989586621679422828"><span class="hs-identifier hs-var">vrfkh</span></a></span><span>
 </span><span id="line-350"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolPledge :: Coin
 </span><span class="hs-identifier hs-var">Shelley._poolPledge</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Lovelace -&gt; Coin
 </span><a href="Cardano.Api.Value.html#toShelleyLovelace"><span class="hs-identifier hs-var">toShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422766"><span class="hs-identifier hs-var">stakePoolPledge</span></a></span><span>
+</span><a href="#local-6989586621679422824"><span class="hs-identifier hs-var">stakePoolPledge</span></a></span><span>
 </span><span id="line-351"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolCost :: Coin
 </span><span class="hs-identifier hs-var">Shelley._poolCost</span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Lovelace -&gt; Coin
 </span><a href="Cardano.Api.Value.html#toShelleyLovelace"><span class="hs-identifier hs-var">toShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679422769"><span class="hs-identifier hs-var">stakePoolCost</span></a></span><span>
+</span><a href="#local-6989586621679422827"><span class="hs-identifier hs-var">stakePoolCost</span></a></span><span>
 </span><span id="line-352"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolMargin :: UnitInterval
 </span><span class="hs-identifier hs-var">Shelley._poolMargin</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Rational -&gt; UnitInterval
 </span><span class="hs-identifier hs-var">Shelley.unitIntervalFromRational</span></span><span> </span><span class="annot"><span class="annottext">Rational
-</span><a href="#local-6989586621679422768"><span class="hs-identifier hs-var">stakePoolMargin</span></a></span><span>
+</span><a href="#local-6989586621679422826"><span class="hs-identifier hs-var">stakePoolMargin</span></a></span><span>
 </span><span id="line-353"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolRAcnt :: RewardAcnt StandardCrypto
 </span><span class="hs-identifier hs-var">Shelley._poolRAcnt</span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StakeAddress -&gt; RewardAcnt StandardCrypto
 </span><a href="Cardano.Api.Address.html#toShelleyStakeAddr"><span class="hs-identifier hs-var">toShelleyStakeAddr</span></a></span><span> </span><span class="annot"><span class="annottext">StakeAddress
-</span><a href="#local-6989586621679422767"><span class="hs-identifier hs-var">stakePoolRewardAccount</span></a></span><span>
+</span><a href="#local-6989586621679422825"><span class="hs-identifier hs-var">stakePoolRewardAccount</span></a></span><span>
 </span><span id="line-354"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolOwners :: Set (KeyHash 'Staking StandardCrypto)
 </span><span class="hs-identifier hs-var">Shelley._poolOwners</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[KeyHash 'Staking StandardCrypto]
 -&gt; Set (KeyHash 'Staking StandardCrypto)
 forall a. Ord a =&gt; [a] -&gt; Set a
 </span><span class="hs-identifier hs-var">Set.fromList</span></span><span>
 </span><span id="line-355"></span><span>                              </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">KeyHash 'Staking StandardCrypto
-</span><a href="#local-6989586621679422751"><span class="hs-identifier hs-var">kh</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakeKeyHash"><span class="hs-identifier hs-type">StakeKeyHash</span></a></span><span> </span><span id="local-6989586621679422751"><span class="annot"><a href="#local-6989586621679422751"><span class="hs-identifier hs-var">kh</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Hash StakeKey]
-</span><a href="#local-6989586621679422765"><span class="hs-identifier hs-var">stakePoolOwners</span></a></span><span> </span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679422809"><span class="hs-identifier hs-var">kh</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><a href="Cardano.Api.KeysShelley.html#StakeKeyHash"><span class="hs-identifier hs-type">StakeKeyHash</span></a></span><span> </span><span id="local-6989586621679422809"><span class="annot"><a href="#local-6989586621679422809"><span class="hs-identifier hs-var">kh</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Hash StakeKey]
+</span><a href="#local-6989586621679422823"><span class="hs-identifier hs-var">stakePoolOwners</span></a></span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-356"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolRelays :: StrictSeq StakePoolRelay
 </span><span class="hs-identifier hs-var">Shelley._poolRelays</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay] -&gt; StrictSeq StakePoolRelay
 forall a. [a] -&gt; StrictSeq a
@@ -843,11 +843,11 @@ forall a. [a] -&gt; StrictSeq a
 -&gt; [StakePoolRelay] -&gt; [StakePoolRelay]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">StakePoolRelay -&gt; StakePoolRelay
-</span><a href="#local-6989586621679422747"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay]
-</span><a href="#local-6989586621679422764"><span class="hs-identifier hs-var">stakePoolRelays</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422805"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay]
+</span><a href="#local-6989586621679422822"><span class="hs-identifier hs-var">stakePoolRelays</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-358"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolMD :: StrictMaybe PoolMetadata
 </span><span class="hs-identifier hs-var">Shelley._poolMD</span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StakePoolMetadataReference -&gt; PoolMetadata
-</span><a href="#local-6989586621679422745"><span class="hs-identifier hs-var">toShelleyPoolMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">(StakePoolMetadataReference -&gt; PoolMetadata)
+</span><a href="#local-6989586621679422803"><span class="hs-identifier hs-var">toShelleyPoolMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">(StakePoolMetadataReference -&gt; PoolMetadata)
 -&gt; StrictMaybe StakePoolMetadataReference
 -&gt; StrictMaybe PoolMetadata
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -856,15 +856,15 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 -&gt; StrictMaybe StakePoolMetadataReference
 forall a. Maybe a -&gt; StrictMaybe a
 </span><span class="hs-identifier hs-var">maybeToStrictMaybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679422763"><span class="hs-identifier hs-var">stakePoolMetadata</span></a></span><span>
+</span><a href="#local-6989586621679422821"><span class="hs-identifier hs-var">stakePoolMetadata</span></a></span><span>
 </span><span id="line-360"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-361"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-362"></span><span>    </span><span class="annot"><a href="#local-6989586621679422747"><span class="hs-identifier hs-type">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelay"><span class="hs-identifier hs-type">StakePoolRelay</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakePoolRelay</span></span><span>
-</span><span id="line-363"></span><span>    </span><span id="local-6989586621679422747"><span class="annot"><span class="annottext">toShelleyStakePoolRelay :: StakePoolRelay -&gt; StakePoolRelay
-</span><a href="#local-6989586621679422747"><span class="hs-identifier hs-var hs-var">toShelleyStakePoolRelay</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayIp"><span class="hs-identifier hs-type">StakePoolRelayIp</span></a></span><span> </span><span id="local-6989586621679422744"><span class="annot"><span class="annottext">Maybe IPv4
-</span><a href="#local-6989586621679422744"><span class="hs-identifier hs-var">mipv4</span></a></span></span><span> </span><span id="local-6989586621679422743"><span class="annot"><span class="annottext">Maybe IPv6
-</span><a href="#local-6989586621679422743"><span class="hs-identifier hs-var">mipv6</span></a></span></span><span> </span><span id="local-6989586621679422742"><span class="annot"><span class="annottext">Maybe PortNumber
-</span><a href="#local-6989586621679422742"><span class="hs-identifier hs-var">mport</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-362"></span><span>    </span><span class="annot"><a href="#local-6989586621679422805"><span class="hs-identifier hs-type">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelay"><span class="hs-identifier hs-type">StakePoolRelay</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakePoolRelay</span></span><span>
+</span><span id="line-363"></span><span>    </span><span id="local-6989586621679422805"><span class="annot"><span class="annottext">toShelleyStakePoolRelay :: StakePoolRelay -&gt; StakePoolRelay
+</span><a href="#local-6989586621679422805"><span class="hs-identifier hs-var hs-var">toShelleyStakePoolRelay</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayIp"><span class="hs-identifier hs-type">StakePoolRelayIp</span></a></span><span> </span><span id="local-6989586621679422802"><span class="annot"><span class="annottext">Maybe IPv4
+</span><a href="#local-6989586621679422802"><span class="hs-identifier hs-var">mipv4</span></a></span></span><span> </span><span id="local-6989586621679422801"><span class="annot"><span class="annottext">Maybe IPv6
+</span><a href="#local-6989586621679422801"><span class="hs-identifier hs-var">mipv6</span></a></span></span><span> </span><span id="local-6989586621679422800"><span class="annot"><span class="annottext">Maybe PortNumber
+</span><a href="#local-6989586621679422800"><span class="hs-identifier hs-var">mport</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-364"></span><span>      </span><span class="annot"><span class="annottext">StrictMaybe Port
 -&gt; StrictMaybe IPv4 -&gt; StrictMaybe IPv6 -&gt; StakePoolRelay
 </span><span class="hs-identifier hs-var">Shelley.SingleHostAddr</span></span><span>
@@ -875,19 +875,19 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Maybe PortNumber -&gt; StrictMaybe PortNumber
 forall a. Maybe a -&gt; StrictMaybe a
 </span><span class="hs-identifier hs-var">maybeToStrictMaybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe PortNumber
-</span><a href="#local-6989586621679422742"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422800"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-366"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe IPv4 -&gt; StrictMaybe IPv4
 forall a. Maybe a -&gt; StrictMaybe a
 </span><span class="hs-identifier hs-var">maybeToStrictMaybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe IPv4
-</span><a href="#local-6989586621679422744"><span class="hs-identifier hs-var">mipv4</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422802"><span class="hs-identifier hs-var">mipv4</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-367"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe IPv6 -&gt; StrictMaybe IPv6
 forall a. Maybe a -&gt; StrictMaybe a
 </span><span class="hs-identifier hs-var">maybeToStrictMaybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe IPv6
-</span><a href="#local-6989586621679422743"><span class="hs-identifier hs-var">mipv6</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422801"><span class="hs-identifier hs-var">mipv6</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-368"></span><span>
-</span><span id="line-369"></span><span>    </span><span class="annot"><a href="#local-6989586621679422747"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsARecord"><span class="hs-identifier hs-type">StakePoolRelayDnsARecord</span></a></span><span> </span><span id="local-6989586621679422740"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679422740"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span> </span><span id="local-6989586621679422739"><span class="annot"><span class="annottext">Maybe PortNumber
-</span><a href="#local-6989586621679422739"><span class="hs-identifier hs-var">mport</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-369"></span><span>    </span><span class="annot"><a href="#local-6989586621679422805"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsARecord"><span class="hs-identifier hs-type">StakePoolRelayDnsARecord</span></a></span><span> </span><span id="local-6989586621679422798"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679422798"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span> </span><span id="local-6989586621679422797"><span class="annot"><span class="annottext">Maybe PortNumber
+</span><a href="#local-6989586621679422797"><span class="hs-identifier hs-var">mport</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-370"></span><span>      </span><span class="annot"><span class="annottext">StrictMaybe Port -&gt; DnsName -&gt; StakePoolRelay
 </span><span class="hs-identifier hs-var">Shelley.SingleHostName</span></span><span>
 </span><span id="line-371"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PortNumber -&gt; Port
@@ -897,46 +897,46 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Maybe PortNumber -&gt; StrictMaybe PortNumber
 forall a. Maybe a -&gt; StrictMaybe a
 </span><span class="hs-identifier hs-var">maybeToStrictMaybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe PortNumber
-</span><a href="#local-6989586621679422739"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422797"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-372"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ByteString -&gt; DnsName
-</span><a href="#local-6989586621679422737"><span class="hs-identifier hs-var">toShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679422740"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422795"><span class="hs-identifier hs-var">toShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679422798"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-373"></span><span>
-</span><span id="line-374"></span><span>    </span><span class="annot"><a href="#local-6989586621679422747"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsSrvRecord"><span class="hs-identifier hs-type">StakePoolRelayDnsSrvRecord</span></a></span><span> </span><span id="local-6989586621679422736"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679422736"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-374"></span><span>    </span><span class="annot"><a href="#local-6989586621679422805"><span class="hs-identifier hs-var">toShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsSrvRecord"><span class="hs-identifier hs-type">StakePoolRelayDnsSrvRecord</span></a></span><span> </span><span id="local-6989586621679422794"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679422794"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-375"></span><span>      </span><span class="annot"><span class="annottext">DnsName -&gt; StakePoolRelay
 </span><span class="hs-identifier hs-var">Shelley.MultiHostName</span></span><span>
 </span><span id="line-376"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ByteString -&gt; DnsName
-</span><a href="#local-6989586621679422737"><span class="hs-identifier hs-var">toShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679422736"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422795"><span class="hs-identifier hs-var">toShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679422794"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-377"></span><span>
-</span><span id="line-378"></span><span>    </span><span class="annot"><a href="#local-6989586621679422745"><span class="hs-identifier hs-type">toShelleyPoolMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span>
-</span><span id="line-379"></span><span>    </span><span id="local-6989586621679422745"><span class="annot"><span class="annottext">toShelleyPoolMetadata :: StakePoolMetadataReference -&gt; PoolMetadata
-</span><a href="#local-6989586621679422745"><span class="hs-identifier hs-var hs-var">toShelleyPoolMetadata</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span> </span><span class="hs-special">{</span><span>
-</span><span id="line-380"></span><span>                            </span><span id="local-6989586621679422734"><span class="annot"><span class="annottext">Text
+</span><span id="line-378"></span><span>    </span><span class="annot"><a href="#local-6989586621679422803"><span class="hs-identifier hs-type">toShelleyPoolMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span>
+</span><span id="line-379"></span><span>    </span><span id="local-6989586621679422803"><span class="annot"><span class="annottext">toShelleyPoolMetadata :: StakePoolMetadataReference -&gt; PoolMetadata
+</span><a href="#local-6989586621679422803"><span class="hs-identifier hs-var hs-var">toShelleyPoolMetadata</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span> </span><span class="hs-special">{</span><span>
+</span><span id="line-380"></span><span>                            </span><span id="local-6989586621679422792"><span class="annot"><span class="annottext">Text
 stakePoolMetadataURL :: Text
 stakePoolMetadataURL :: StakePoolMetadataReference -&gt; Text
-</span><a href="#local-6989586621679422734"><span class="hs-identifier hs-var hs-var">stakePoolMetadataURL</span></a></span></span><span>
+</span><a href="#local-6989586621679422792"><span class="hs-identifier hs-var hs-var">stakePoolMetadataURL</span></a></span></span><span>
 </span><span id="line-381"></span><span>                          </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMetadataHash :: StakePoolMetadataReference -&gt; Hash StakePoolMetadata
-</span><a href="Cardano.Api.Certificate.html#stakePoolMetadataHash"><span class="hs-identifier hs-var">stakePoolMetadataHash</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.StakePoolMetadata.html#StakePoolMetadataHash"><span class="hs-identifier hs-type">StakePoolMetadataHash</span></a></span><span> </span><span id="local-6989586621679422732"><span class="annot"><a href="#local-6989586621679422732"><span class="hs-identifier hs-var">mdh</span></a></span></span><span>
+</span><a href="Cardano.Api.Certificate.html#stakePoolMetadataHash"><span class="hs-identifier hs-var">stakePoolMetadataHash</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Cardano.Api.StakePoolMetadata.html#StakePoolMetadataHash"><span class="hs-identifier hs-type">StakePoolMetadataHash</span></a></span><span> </span><span id="local-6989586621679422790"><span class="annot"><a href="#local-6989586621679422790"><span class="hs-identifier hs-var">mdh</span></a></span></span><span>
 </span><span id="line-382"></span><span>                          </span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-383"></span><span>      </span><span class="annot"><span class="annottext">PoolMetadata :: Url -&gt; ByteString -&gt; PoolMetadata
 </span><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-384"></span><span>        </span><span class="annot"><span class="annottext">_poolMDUrl :: Url
 </span><span class="hs-identifier hs-var">Shelley._poolMDUrl</span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Url
-</span><a href="#local-6989586621679422729"><span class="hs-identifier hs-var">toShelleyUrl</span></a></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679422734"><span class="hs-identifier hs-var">stakePoolMetadataURL</span></a></span><span>
+</span><a href="#local-6989586621679422787"><span class="hs-identifier hs-var">toShelleyUrl</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679422792"><span class="hs-identifier hs-var">stakePoolMetadataURL</span></a></span><span>
 </span><span id="line-385"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">_poolMDHash :: ByteString
 </span><span class="hs-identifier hs-var">Shelley._poolMDHash</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash Blake2b_256 ByteString -&gt; ByteString
 forall h a. Hash h a -&gt; ByteString
 </span><span class="hs-identifier hs-var">Crypto.hashToBytes</span></span><span> </span><span class="annot"><span class="annottext">Hash StandardCrypto ByteString
 Hash Blake2b_256 ByteString
-</span><a href="#local-6989586621679422732"><span class="hs-identifier hs-var">mdh</span></a></span><span>
+</span><a href="#local-6989586621679422790"><span class="hs-identifier hs-var">mdh</span></a></span><span>
 </span><span id="line-386"></span><span>      </span><span class="hs-special">}</span><span>
 </span><span id="line-387"></span><span>
-</span><span id="line-388"></span><span>    </span><span class="annot"><a href="#local-6989586621679422737"><span class="hs-identifier hs-type">toShelleyDnsName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DnsName</span></span><span>
-</span><span id="line-389"></span><span>    </span><span id="local-6989586621679422737"><span class="annot"><span class="annottext">toShelleyDnsName :: ByteString -&gt; DnsName
-</span><a href="#local-6989586621679422737"><span class="hs-identifier hs-var hs-var">toShelleyDnsName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DnsName -&gt; Maybe DnsName -&gt; DnsName
+</span><span id="line-388"></span><span>    </span><span class="annot"><a href="#local-6989586621679422795"><span class="hs-identifier hs-type">toShelleyDnsName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DnsName</span></span><span>
+</span><span id="line-389"></span><span>    </span><span id="local-6989586621679422795"><span class="annot"><span class="annottext">toShelleyDnsName :: ByteString -&gt; DnsName
+</span><a href="#local-6989586621679422795"><span class="hs-identifier hs-var hs-var">toShelleyDnsName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DnsName -&gt; Maybe DnsName -&gt; DnsName
 forall a. a -&gt; Maybe a -&gt; a
 </span><span class="hs-identifier hs-var">fromMaybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; DnsName
 forall a. HasCallStack =&gt; String -&gt; a
@@ -953,9 +953,9 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Text
 </span><span class="hs-identifier hs-var">Text.decodeLatin1</span></span><span>
 </span><span id="line-392"></span><span>
-</span><span id="line-393"></span><span>    </span><span class="annot"><a href="#local-6989586621679422729"><span class="hs-identifier hs-type">toShelleyUrl</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.Url</span></span><span>
-</span><span id="line-394"></span><span>    </span><span id="local-6989586621679422729"><span class="annot"><span class="annottext">toShelleyUrl :: Text -&gt; Url
-</span><a href="#local-6989586621679422729"><span class="hs-identifier hs-var hs-var">toShelleyUrl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Url -&gt; Maybe Url -&gt; Url
+</span><span id="line-393"></span><span>    </span><span class="annot"><a href="#local-6989586621679422787"><span class="hs-identifier hs-type">toShelleyUrl</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.Url</span></span><span>
+</span><span id="line-394"></span><span>    </span><span id="local-6989586621679422787"><span class="annot"><span class="annottext">toShelleyUrl :: Text -&gt; Url
+</span><a href="#local-6989586621679422787"><span class="hs-identifier hs-var hs-var">toShelleyUrl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Url -&gt; Maybe Url -&gt; Url
 forall a. a -&gt; Maybe a -&gt; a
 </span><span class="hs-identifier hs-var">fromMaybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Url
 forall a. HasCallStack =&gt; String -&gt; a
@@ -972,42 +972,42 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span id="line-400"></span><span id="fromShelleyPoolParams"><span class="annot"><span class="annottext">fromShelleyPoolParams :: PoolParams StandardCrypto -&gt; StakePoolParameters
 </span><a href="Cardano.Api.Certificate.html#fromShelleyPoolParams"><span class="hs-identifier hs-var hs-var">fromShelleyPoolParams</span></a></span></span><span>
 </span><span id="line-401"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolParams</span></span><span> </span><span class="hs-special">{</span><span>
-</span><span id="line-402"></span><span>      </span><span id="local-6989586621679422722"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
+</span><span id="line-402"></span><span>      </span><span id="local-6989586621679422780"><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
 _poolId :: KeyHash 'StakePool StandardCrypto
 _poolId :: forall crypto. PoolParams crypto -&gt; KeyHash 'StakePool crypto
-</span><a href="#local-6989586621679422722"><span class="hs-identifier hs-var hs-var">Shelley._poolId</span></a></span></span><span>
-</span><span id="line-403"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422721"><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
+</span><a href="#local-6989586621679422780"><span class="hs-identifier hs-var hs-var">Shelley._poolId</span></a></span></span><span>
+</span><span id="line-403"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422779"><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
 _poolVrf :: Hash StandardCrypto (VerKeyVRF StandardCrypto)
 _poolVrf :: forall crypto. PoolParams crypto -&gt; Hash crypto (VerKeyVRF crypto)
-</span><a href="#local-6989586621679422721"><span class="hs-identifier hs-var hs-var">Shelley._poolVrf</span></a></span></span><span>
-</span><span id="line-404"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422720"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679422779"><span class="hs-identifier hs-var hs-var">Shelley._poolVrf</span></a></span></span><span>
+</span><span id="line-404"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422778"><span class="annot"><span class="annottext">Coin
 _poolPledge :: Coin
 _poolPledge :: forall crypto. PoolParams crypto -&gt; Coin
-</span><a href="#local-6989586621679422720"><span class="hs-identifier hs-var hs-var">Shelley._poolPledge</span></a></span></span><span>
-</span><span id="line-405"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422719"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679422778"><span class="hs-identifier hs-var hs-var">Shelley._poolPledge</span></a></span></span><span>
+</span><span id="line-405"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422777"><span class="annot"><span class="annottext">Coin
 _poolCost :: Coin
 _poolCost :: forall crypto. PoolParams crypto -&gt; Coin
-</span><a href="#local-6989586621679422719"><span class="hs-identifier hs-var hs-var">Shelley._poolCost</span></a></span></span><span>
-</span><span id="line-406"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422718"><span class="annot"><span class="annottext">UnitInterval
+</span><a href="#local-6989586621679422777"><span class="hs-identifier hs-var hs-var">Shelley._poolCost</span></a></span></span><span>
+</span><span id="line-406"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422776"><span class="annot"><span class="annottext">UnitInterval
 _poolMargin :: UnitInterval
 _poolMargin :: forall crypto. PoolParams crypto -&gt; UnitInterval
-</span><a href="#local-6989586621679422718"><span class="hs-identifier hs-var hs-var">Shelley._poolMargin</span></a></span></span><span>
-</span><span id="line-407"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422717"><span class="annot"><span class="annottext">RewardAcnt StandardCrypto
+</span><a href="#local-6989586621679422776"><span class="hs-identifier hs-var hs-var">Shelley._poolMargin</span></a></span></span><span>
+</span><span id="line-407"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422775"><span class="annot"><span class="annottext">RewardAcnt StandardCrypto
 _poolRAcnt :: RewardAcnt StandardCrypto
 _poolRAcnt :: forall crypto. PoolParams crypto -&gt; RewardAcnt crypto
-</span><a href="#local-6989586621679422717"><span class="hs-identifier hs-var hs-var">Shelley._poolRAcnt</span></a></span></span><span>
-</span><span id="line-408"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422716"><span class="annot"><span class="annottext">Set (KeyHash 'Staking StandardCrypto)
+</span><a href="#local-6989586621679422775"><span class="hs-identifier hs-var hs-var">Shelley._poolRAcnt</span></a></span></span><span>
+</span><span id="line-408"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422774"><span class="annot"><span class="annottext">Set (KeyHash 'Staking StandardCrypto)
 _poolOwners :: Set (KeyHash 'Staking StandardCrypto)
 _poolOwners :: forall crypto. PoolParams crypto -&gt; Set (KeyHash 'Staking crypto)
-</span><a href="#local-6989586621679422716"><span class="hs-identifier hs-var hs-var">Shelley._poolOwners</span></a></span></span><span>
-</span><span id="line-409"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422715"><span class="annot"><span class="annottext">StrictSeq StakePoolRelay
+</span><a href="#local-6989586621679422774"><span class="hs-identifier hs-var hs-var">Shelley._poolOwners</span></a></span></span><span>
+</span><span id="line-409"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422773"><span class="annot"><span class="annottext">StrictSeq StakePoolRelay
 _poolRelays :: StrictSeq StakePoolRelay
 _poolRelays :: forall crypto. PoolParams crypto -&gt; StrictSeq StakePoolRelay
-</span><a href="#local-6989586621679422715"><span class="hs-identifier hs-var hs-var">Shelley._poolRelays</span></a></span></span><span>
-</span><span id="line-410"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422714"><span class="annot"><span class="annottext">StrictMaybe PoolMetadata
+</span><a href="#local-6989586621679422773"><span class="hs-identifier hs-var hs-var">Shelley._poolRelays</span></a></span></span><span>
+</span><span id="line-410"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422772"><span class="annot"><span class="annottext">StrictMaybe PoolMetadata
 _poolMD :: StrictMaybe PoolMetadata
 _poolMD :: forall crypto. PoolParams crypto -&gt; StrictMaybe PoolMetadata
-</span><a href="#local-6989586621679422714"><span class="hs-identifier hs-var hs-var">Shelley._poolMD</span></a></span></span><span>
+</span><a href="#local-6989586621679422772"><span class="hs-identifier hs-var hs-var">Shelley._poolMD</span></a></span></span><span>
 </span><span id="line-411"></span><span>    </span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-412"></span><span>    </span><span class="annot"><span class="annottext">StakePoolParameters :: PoolId
 -&gt; Hash VrfKey
@@ -1023,27 +1023,27 @@ _poolMD :: forall crypto. PoolParams crypto -&gt; StrictMaybe PoolMetadata
 </span><span id="line-413"></span><span>      </span><span class="annot"><span class="annottext">stakePoolId :: PoolId
 </span><a href="Cardano.Api.Certificate.html#stakePoolId"><span class="hs-identifier hs-var">stakePoolId</span></a></span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto -&gt; PoolId
 </span><a href="Cardano.Api.KeysShelley.html#StakePoolKeyHash"><span class="hs-identifier hs-var">StakePoolKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">KeyHash 'StakePool StandardCrypto
-</span><a href="#local-6989586621679422722"><span class="hs-identifier hs-var">_poolId</span></a></span><span>
+</span><a href="#local-6989586621679422780"><span class="hs-identifier hs-var">_poolId</span></a></span><span>
 </span><span id="line-414"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolVRF :: Hash VrfKey
 </span><a href="Cardano.Api.Certificate.html#stakePoolVRF"><span class="hs-identifier hs-var">stakePoolVRF</span></a></span><span>           </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto) -&gt; Hash VrfKey
 </span><a href="Cardano.Api.KeysPraos.html#VrfKeyHash"><span class="hs-identifier hs-var">VrfKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">Hash StandardCrypto (VerKeyVRF StandardCrypto)
-</span><a href="#local-6989586621679422721"><span class="hs-identifier hs-var">_poolVrf</span></a></span><span>
+</span><a href="#local-6989586621679422779"><span class="hs-identifier hs-var">_poolVrf</span></a></span><span>
 </span><span id="line-415"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolCost :: Lovelace
 </span><a href="Cardano.Api.Certificate.html#stakePoolCost"><span class="hs-identifier hs-var">stakePoolCost</span></a></span><span>          </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Coin -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#fromShelleyLovelace"><span class="hs-identifier hs-var">fromShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422719"><span class="hs-identifier hs-var">_poolCost</span></a></span><span>
+</span><a href="#local-6989586621679422777"><span class="hs-identifier hs-var">_poolCost</span></a></span><span>
 </span><span id="line-416"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMargin :: Rational
 </span><a href="Cardano.Api.Certificate.html#stakePoolMargin"><span class="hs-identifier hs-var">stakePoolMargin</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">UnitInterval -&gt; Rational
 </span><span class="hs-identifier hs-var">Shelley.unitIntervalToRational</span></span><span> </span><span class="annot"><span class="annottext">UnitInterval
-</span><a href="#local-6989586621679422718"><span class="hs-identifier hs-var">_poolMargin</span></a></span><span>
+</span><a href="#local-6989586621679422776"><span class="hs-identifier hs-var">_poolMargin</span></a></span><span>
 </span><span id="line-417"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolRewardAccount :: StakeAddress
 </span><a href="Cardano.Api.Certificate.html#stakePoolRewardAccount"><span class="hs-identifier hs-var">stakePoolRewardAccount</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">RewardAcnt StandardCrypto -&gt; StakeAddress
 </span><a href="Cardano.Api.Address.html#fromShelleyStakeAddr"><span class="hs-identifier hs-var">fromShelleyStakeAddr</span></a></span><span> </span><span class="annot"><span class="annottext">RewardAcnt StandardCrypto
-</span><a href="#local-6989586621679422717"><span class="hs-identifier hs-var">_poolRAcnt</span></a></span><span>
+</span><a href="#local-6989586621679422775"><span class="hs-identifier hs-var">_poolRAcnt</span></a></span><span>
 </span><span id="line-418"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolPledge :: Lovelace
 </span><a href="Cardano.Api.Certificate.html#stakePoolPledge"><span class="hs-identifier hs-var">stakePoolPledge</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Coin -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#fromShelleyLovelace"><span class="hs-identifier hs-var">fromShelleyLovelace</span></a></span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679422720"><span class="hs-identifier hs-var">_poolPledge</span></a></span><span>
+</span><a href="#local-6989586621679422778"><span class="hs-identifier hs-var">_poolPledge</span></a></span><span>
 </span><span id="line-419"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolOwners :: [Hash StakeKey]
 </span><a href="Cardano.Api.Certificate.html#stakePoolOwners"><span class="hs-identifier hs-var">stakePoolOwners</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(KeyHash 'Staking StandardCrypto -&gt; Hash StakeKey)
 -&gt; [KeyHash 'Staking StandardCrypto] -&gt; [Hash StakeKey]
@@ -1053,45 +1053,45 @@ forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 -&gt; [KeyHash 'Staking StandardCrypto]
 forall a. Set a -&gt; [a]
 </span><span class="hs-identifier hs-var">Set.toList</span></span><span> </span><span class="annot"><span class="annottext">Set (KeyHash 'Staking StandardCrypto)
-</span><a href="#local-6989586621679422716"><span class="hs-identifier hs-var">_poolOwners</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422774"><span class="hs-identifier hs-var">_poolOwners</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-420"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolRelays :: [StakePoolRelay]
 </span><a href="Cardano.Api.Certificate.html#stakePoolRelays"><span class="hs-identifier hs-var">stakePoolRelays</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(StakePoolRelay -&gt; StakePoolRelay)
 -&gt; [StakePoolRelay] -&gt; [StakePoolRelay]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">StakePoolRelay -&gt; StakePoolRelay
-</span><a href="#local-6989586621679422710"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span>
+</span><a href="#local-6989586621679422768"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span>
 </span><span id="line-421"></span><span>                                   </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StrictSeq StakePoolRelay -&gt; [StakePoolRelay]
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; [a]
 </span><span class="hs-identifier hs-var">Foldable.toList</span></span><span> </span><span class="annot"><span class="annottext">StrictSeq StakePoolRelay
-</span><a href="#local-6989586621679422715"><span class="hs-identifier hs-var">_poolRelays</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422773"><span class="hs-identifier hs-var">_poolRelays</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-422"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMetadata :: Maybe StakePoolMetadataReference
 </span><a href="Cardano.Api.Certificate.html#stakePoolMetadata"><span class="hs-identifier hs-var">stakePoolMetadata</span></a></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PoolMetadata -&gt; StakePoolMetadataReference
-</span><a href="#local-6989586621679422708"><span class="hs-identifier hs-var">fromShelleyPoolMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">(PoolMetadata -&gt; StakePoolMetadataReference)
+</span><a href="#local-6989586621679422766"><span class="hs-identifier hs-var">fromShelleyPoolMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">(PoolMetadata -&gt; StakePoolMetadataReference)
 -&gt; Maybe PoolMetadata -&gt; Maybe StakePoolMetadataReference
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span>
 </span><span id="line-423"></span><span>                                 </span><span class="annot"><span class="annottext">StrictMaybe PoolMetadata -&gt; Maybe PoolMetadata
 forall a. StrictMaybe a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">strictMaybeToMaybe</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe PoolMetadata
-</span><a href="#local-6989586621679422714"><span class="hs-identifier hs-var">_poolMD</span></a></span><span>
+</span><a href="#local-6989586621679422772"><span class="hs-identifier hs-var">_poolMD</span></a></span><span>
 </span><span id="line-424"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-425"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-426"></span><span>    </span><span class="annot"><a href="#local-6989586621679422710"><span class="hs-identifier hs-type">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakePoolRelay</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelay"><span class="hs-identifier hs-type">StakePoolRelay</span></a></span><span>
-</span><span id="line-427"></span><span>    </span><span id="local-6989586621679422710"><span class="annot"><span class="annottext">fromShelleyStakePoolRelay :: StakePoolRelay -&gt; StakePoolRelay
-</span><a href="#local-6989586621679422710"><span class="hs-identifier hs-var hs-var">fromShelleyStakePoolRelay</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SingleHostAddr</span></span><span> </span><span id="local-6989586621679422707"><span class="annot"><span class="annottext">StrictMaybe Port
-</span><a href="#local-6989586621679422707"><span class="hs-identifier hs-var">mport</span></a></span></span><span> </span><span id="local-6989586621679422706"><span class="annot"><span class="annottext">StrictMaybe IPv4
-</span><a href="#local-6989586621679422706"><span class="hs-identifier hs-var">mipv4</span></a></span></span><span> </span><span id="local-6989586621679422705"><span class="annot"><span class="annottext">StrictMaybe IPv6
-</span><a href="#local-6989586621679422705"><span class="hs-identifier hs-var">mipv6</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-426"></span><span>    </span><span class="annot"><a href="#local-6989586621679422768"><span class="hs-identifier hs-type">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.StakePoolRelay</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolRelay"><span class="hs-identifier hs-type">StakePoolRelay</span></a></span><span>
+</span><span id="line-427"></span><span>    </span><span id="local-6989586621679422768"><span class="annot"><span class="annottext">fromShelleyStakePoolRelay :: StakePoolRelay -&gt; StakePoolRelay
+</span><a href="#local-6989586621679422768"><span class="hs-identifier hs-var hs-var">fromShelleyStakePoolRelay</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SingleHostAddr</span></span><span> </span><span id="local-6989586621679422765"><span class="annot"><span class="annottext">StrictMaybe Port
+</span><a href="#local-6989586621679422765"><span class="hs-identifier hs-var">mport</span></a></span></span><span> </span><span id="local-6989586621679422764"><span class="annot"><span class="annottext">StrictMaybe IPv4
+</span><a href="#local-6989586621679422764"><span class="hs-identifier hs-var">mipv4</span></a></span></span><span> </span><span id="local-6989586621679422763"><span class="annot"><span class="annottext">StrictMaybe IPv6
+</span><a href="#local-6989586621679422763"><span class="hs-identifier hs-var">mipv6</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-428"></span><span>      </span><span class="annot"><span class="annottext">Maybe IPv4 -&gt; Maybe IPv6 -&gt; Maybe PortNumber -&gt; StakePoolRelay
 </span><a href="Cardano.Api.Certificate.html#StakePoolRelayIp"><span class="hs-identifier hs-var">StakePoolRelayIp</span></a></span><span>
 </span><span id="line-429"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StrictMaybe IPv4 -&gt; Maybe IPv4
 forall a. StrictMaybe a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">strictMaybeToMaybe</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe IPv4
-</span><a href="#local-6989586621679422706"><span class="hs-identifier hs-var">mipv4</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422764"><span class="hs-identifier hs-var">mipv4</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-430"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StrictMaybe IPv6 -&gt; Maybe IPv6
 forall a. StrictMaybe a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">strictMaybeToMaybe</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe IPv6
-</span><a href="#local-6989586621679422705"><span class="hs-identifier hs-var">mipv6</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422763"><span class="hs-identifier hs-var">mipv6</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-431"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word16 -&gt; PortNumber
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(Word16 -&gt; PortNumber) -&gt; (Port -&gt; Word16) -&gt; Port -&gt; PortNumber
@@ -1102,16 +1102,16 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe Port -&gt; Maybe Port
 forall a. StrictMaybe a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">strictMaybeToMaybe</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe Port
-</span><a href="#local-6989586621679422707"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422765"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-432"></span><span>
-</span><span id="line-433"></span><span>    </span><span class="annot"><a href="#local-6989586621679422710"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SingleHostName</span></span><span> </span><span id="local-6989586621679422703"><span class="annot"><span class="annottext">StrictMaybe Port
-</span><a href="#local-6989586621679422703"><span class="hs-identifier hs-var">mport</span></a></span></span><span> </span><span id="local-6989586621679422702"><span class="annot"><span class="annottext">DnsName
-</span><a href="#local-6989586621679422702"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-433"></span><span>    </span><span class="annot"><a href="#local-6989586621679422768"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.SingleHostName</span></span><span> </span><span id="local-6989586621679422761"><span class="annot"><span class="annottext">StrictMaybe Port
+</span><a href="#local-6989586621679422761"><span class="hs-identifier hs-var">mport</span></a></span></span><span> </span><span id="local-6989586621679422760"><span class="annot"><span class="annottext">DnsName
+</span><a href="#local-6989586621679422760"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-434"></span><span>      </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe PortNumber -&gt; StakePoolRelay
 </span><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsARecord"><span class="hs-identifier hs-var">StakePoolRelayDnsARecord</span></a></span><span>
 </span><span id="line-435"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DnsName -&gt; ByteString
-</span><a href="#local-6989586621679422701"><span class="hs-identifier hs-var">fromShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">DnsName
-</span><a href="#local-6989586621679422702"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422759"><span class="hs-identifier hs-var">fromShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">DnsName
+</span><a href="#local-6989586621679422760"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-436"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word16 -&gt; PortNumber
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(Word16 -&gt; PortNumber) -&gt; (Port -&gt; Word16) -&gt; Port -&gt; PortNumber
@@ -1122,34 +1122,34 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe Port -&gt; Maybe Port
 forall a. StrictMaybe a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">strictMaybeToMaybe</span></span><span> </span><span class="annot"><span class="annottext">StrictMaybe Port
-</span><a href="#local-6989586621679422703"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422761"><span class="hs-identifier hs-var">mport</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-437"></span><span>
-</span><span id="line-438"></span><span>    </span><span class="annot"><a href="#local-6989586621679422710"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MultiHostName</span></span><span> </span><span id="local-6989586621679422700"><span class="annot"><span class="annottext">DnsName
-</span><a href="#local-6989586621679422700"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-438"></span><span>    </span><span class="annot"><a href="#local-6989586621679422768"><span class="hs-identifier hs-var">fromShelleyStakePoolRelay</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Shelley.MultiHostName</span></span><span> </span><span id="local-6989586621679422758"><span class="annot"><span class="annottext">DnsName
+</span><a href="#local-6989586621679422758"><span class="hs-identifier hs-var">dnsname</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-439"></span><span>      </span><span class="annot"><span class="annottext">ByteString -&gt; StakePoolRelay
 </span><a href="Cardano.Api.Certificate.html#StakePoolRelayDnsSrvRecord"><span class="hs-identifier hs-var">StakePoolRelayDnsSrvRecord</span></a></span><span>
 </span><span id="line-440"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DnsName -&gt; ByteString
-</span><a href="#local-6989586621679422701"><span class="hs-identifier hs-var">fromShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">DnsName
-</span><a href="#local-6989586621679422700"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679422759"><span class="hs-identifier hs-var">fromShelleyDnsName</span></a></span><span> </span><span class="annot"><span class="annottext">DnsName
+</span><a href="#local-6989586621679422758"><span class="hs-identifier hs-var">dnsname</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-441"></span><span>
-</span><span id="line-442"></span><span>    </span><span class="annot"><a href="#local-6989586621679422708"><span class="hs-identifier hs-type">fromShelleyPoolMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span>
-</span><span id="line-443"></span><span>    </span><span id="local-6989586621679422708"><span class="annot"><span class="annottext">fromShelleyPoolMetadata :: PoolMetadata -&gt; StakePoolMetadataReference
-</span><a href="#local-6989586621679422708"><span class="hs-identifier hs-var hs-var">fromShelleyPoolMetadata</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span> </span><span class="hs-special">{</span><span>
-</span><span id="line-444"></span><span>                              </span><span id="local-6989586621679422699"><span class="annot"><span class="annottext">Url
+</span><span id="line-442"></span><span>    </span><span class="annot"><a href="#local-6989586621679422766"><span class="hs-identifier hs-type">fromShelleyPoolMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span>
+</span><span id="line-443"></span><span>    </span><span id="local-6989586621679422766"><span class="annot"><span class="annottext">fromShelleyPoolMetadata :: PoolMetadata -&gt; StakePoolMetadataReference
+</span><a href="#local-6989586621679422766"><span class="hs-identifier hs-var hs-var">fromShelleyPoolMetadata</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.PoolMetadata</span></span><span> </span><span class="hs-special">{</span><span>
+</span><span id="line-444"></span><span>                              </span><span id="local-6989586621679422757"><span class="annot"><span class="annottext">Url
 _poolMDUrl :: Url
 _poolMDUrl :: PoolMetadata -&gt; Url
-</span><a href="#local-6989586621679422699"><span class="hs-identifier hs-var hs-var">Shelley._poolMDUrl</span></a></span></span><span>
-</span><span id="line-445"></span><span>                            </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422698"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679422757"><span class="hs-identifier hs-var hs-var">Shelley._poolMDUrl</span></a></span></span><span>
+</span><span id="line-445"></span><span>                            </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679422756"><span class="annot"><span class="annottext">ByteString
 _poolMDHash :: ByteString
 _poolMDHash :: PoolMetadata -&gt; ByteString
-</span><a href="#local-6989586621679422698"><span class="hs-identifier hs-var hs-var">Shelley._poolMDHash</span></a></span></span><span>
+</span><a href="#local-6989586621679422756"><span class="hs-identifier hs-var hs-var">Shelley._poolMDHash</span></a></span></span><span>
 </span><span id="line-446"></span><span>                            </span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-447"></span><span>      </span><span class="annot"><span class="annottext">StakePoolMetadataReference :: Text -&gt; Hash StakePoolMetadata -&gt; StakePoolMetadataReference
 </span><a href="Cardano.Api.Certificate.html#StakePoolMetadataReference"><span class="hs-identifier hs-type">StakePoolMetadataReference</span></a></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-448"></span><span>        </span><span class="annot"><span class="annottext">stakePoolMetadataURL :: Text
 </span><a href="Cardano.Api.Certificate.html#stakePoolMetadataURL"><span class="hs-identifier hs-var">stakePoolMetadataURL</span></a></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Url -&gt; Text
 </span><span class="hs-identifier hs-var hs-var">Shelley.urlToText</span></span><span> </span><span class="annot"><span class="annottext">Url
-</span><a href="#local-6989586621679422699"><span class="hs-identifier hs-var">_poolMDUrl</span></a></span><span>
+</span><a href="#local-6989586621679422757"><span class="hs-identifier hs-var">_poolMDUrl</span></a></span><span>
 </span><span id="line-449"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMetadataHash :: Hash StakePoolMetadata
 </span><a href="Cardano.Api.Certificate.html#stakePoolMetadataHash"><span class="hs-identifier hs-var">stakePoolMetadataHash</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StandardCrypto ByteString -&gt; Hash StakePoolMetadata
 Hash Blake2b_256 ByteString -&gt; Hash StakePoolMetadata
@@ -1180,13 +1180,13 @@ forall h a. HashAlgorithm h =&gt; ByteString -&gt; Maybe (Hash h a)
 -&gt; ByteString -&gt; Hash StakePoolMetadata
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679422698"><span class="hs-identifier hs-var">_poolMDHash</span></a></span><span>
+</span><a href="#local-6989586621679422756"><span class="hs-identifier hs-var">_poolMDHash</span></a></span><span>
 </span><span id="line-453"></span><span>      </span><span class="hs-special">}</span><span>
 </span><span id="line-454"></span><span>
 </span><span id="line-455"></span><span>    </span><span class="hs-comment">--TODO: change the ledger rep of the DNS name to use ShortByteString</span><span>
-</span><span id="line-456"></span><span>    </span><span class="annot"><a href="#local-6989586621679422701"><span class="hs-identifier hs-type">fromShelleyDnsName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DnsName</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-457"></span><span>    </span><span id="local-6989586621679422701"><span class="annot"><span class="annottext">fromShelleyDnsName :: DnsName -&gt; ByteString
-</span><a href="#local-6989586621679422701"><span class="hs-identifier hs-var hs-var">fromShelleyDnsName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; ByteString
+</span><span id="line-456"></span><span>    </span><span class="annot"><a href="#local-6989586621679422759"><span class="hs-identifier hs-type">fromShelleyDnsName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Shelley.DnsName</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
+</span><span id="line-457"></span><span>    </span><span id="local-6989586621679422759"><span class="annot"><span class="annottext">fromShelleyDnsName :: DnsName -&gt; ByteString
+</span><a href="#local-6989586621679422759"><span class="hs-identifier hs-var hs-var">fromShelleyDnsName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; ByteString
 </span><span class="hs-identifier hs-var">Text.encodeUtf8</span></span><span>
 </span><span id="line-458"></span><span>                       </span><span class="annot"><span class="annottext">(Text -&gt; ByteString) -&gt; (DnsName -&gt; Text) -&gt; DnsName -&gt; ByteString
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c

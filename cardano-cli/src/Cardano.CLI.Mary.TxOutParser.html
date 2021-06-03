@@ -21,8 +21,8 @@
 </span><span id="line-21"></span><span class="annot"><a href="Cardano.CLI.Mary.TxOutParser.html#parseTxOutAnyEra"><span class="hs-identifier hs-type">parseTxOutAnyEra</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Types.html#TxOutAnyEra"><span class="hs-identifier hs-type">TxOutAnyEra</span></a></span><span>
 </span><span id="line-22"></span><span id="parseTxOutAnyEra"><span class="annot"><span class="annottext">parseTxOutAnyEra :: Parser TxOutAnyEra
 </span><a href="Cardano.CLI.Mary.TxOutParser.html#parseTxOutAnyEra"><span class="hs-identifier hs-var hs-var">parseTxOutAnyEra</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-23"></span><span>    </span><span id="local-6989586621679309557"><span class="annot"><span class="annottext">AddressAny
-</span><a href="#local-6989586621679309557"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Parser AddressAny
+</span><span id="line-23"></span><span>    </span><span id="local-6989586621679309795"><span class="annot"><span class="annottext">AddressAny
+</span><a href="#local-6989586621679309795"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Parser AddressAny
 </span><a href="Cardano.CLI.Mary.TxOutParser.html#parseAddressAny"><span class="hs-identifier hs-var">parseAddressAny</span></a></span><span>
 </span><span id="line-24"></span><span>    </span><span class="annot"><span class="annottext">ParsecT String () Identity ()
 forall s (m :: * -&gt; *) u. Stream s m Char =&gt; ParsecT s u m ()
@@ -47,7 +47,7 @@ forall s (m :: * -&gt; *) u. Stream s m Char =&gt; ParsecT s u m ()
 </span><span class="hs-identifier hs-var">spaces</span></span><span class="hs-special">)</span><span>
 </span><span id="line-28"></span><span>    </span><span class="annot"><span class="annottext">AddressAny -&gt; Value -&gt; TxOutAnyEra
 </span><a href="Cardano.CLI.Types.html#TxOutAnyEra"><span class="hs-identifier hs-var">TxOutAnyEra</span></a></span><span> </span><span class="annot"><span class="annottext">AddressAny
-</span><a href="#local-6989586621679309557"><span class="hs-identifier hs-var">addr</span></a></span><span> </span><span class="annot"><span class="annottext">(Value -&gt; TxOutAnyEra)
+</span><a href="#local-6989586621679309795"><span class="hs-identifier hs-var">addr</span></a></span><span> </span><span class="annot"><span class="annottext">(Value -&gt; TxOutAnyEra)
 -&gt; ParsecT String () Identity Value -&gt; Parser TxOutAnyEra
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ParsecT String () Identity Value
@@ -56,8 +56,8 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span id="line-30"></span><span class="annot"><a href="Cardano.CLI.Mary.TxOutParser.html#parseAddressAny"><span class="hs-identifier hs-type">parseAddressAny</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">AddressAny</span></a></span><span>
 </span><span id="line-31"></span><span id="parseAddressAny"><span class="annot"><span class="annottext">parseAddressAny :: Parser AddressAny
 </span><a href="Cardano.CLI.Mary.TxOutParser.html#parseAddressAny"><span class="hs-identifier hs-var hs-var">parseAddressAny</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-32"></span><span>  </span><span id="local-6989586621679309553"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679309553"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Parser Text
+</span><span id="line-32"></span><span>  </span><span id="local-6989586621679309791"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679309791"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Parser Text
 </span><a href="Cardano.CLI.Mary.TxOutParser.html#plausibleAddressString"><span class="hs-identifier hs-var">plausibleAddressString</span></a></span><span> </span><span class="annot"><span class="annottext">Parser Text -&gt; String -&gt; Parser Text
 forall s u (m :: * -&gt; *) a.
 ParsecT s u m a -&gt; String -&gt; ParsecT s u m a
@@ -69,17 +69,17 @@ SerialiseAddress addr =&gt;
 AsType addr -&gt; Text -&gt; Maybe addr
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">deserialiseAddress</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AddressAny
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAddressAny</span></a></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679309553"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679309791"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-34"></span><span>    </span><span class="annot"><span class="annottext">Maybe AddressAny
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Parser AddressAny
 forall (m :: * -&gt; *) a. MonadFail m =&gt; String -&gt; m a
 </span><span class="hs-identifier hs-var">fail</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;expecting valid address&quot;</span></span><span>
-</span><span id="line-35"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679309550"><span class="annot"><span class="annottext">AddressAny
-</span><a href="#local-6989586621679309550"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AddressAny -&gt; Parser AddressAny
+</span><span id="line-35"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679309788"><span class="annot"><span class="annottext">AddressAny
+</span><a href="#local-6989586621679309788"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AddressAny -&gt; Parser AddressAny
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">AddressAny
-</span><a href="#local-6989586621679309550"><span class="hs-identifier hs-var">addr</span></a></span><span>
+</span><a href="#local-6989586621679309788"><span class="hs-identifier hs-var">addr</span></a></span><span>
 </span><span id="line-36"></span><span>
 </span><span id="line-37"></span><span class="annot"><a href="Cardano.CLI.Mary.TxOutParser.html#plausibleAddressString"><span class="hs-identifier hs-type">plausibleAddressString</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-38"></span><span id="plausibleAddressString"><span class="annot"><span class="annottext">plausibleAddressString :: Parser Text
@@ -96,26 +96,26 @@ forall s (m :: * -&gt; *) u.
 Stream s m Char =&gt;
 (Char -&gt; Bool) -&gt; ParsecT s u m Char
 </span><span class="hs-identifier hs-var">satisfy</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; Bool
-</span><a href="#local-6989586621679309548"><span class="hs-identifier hs-var">isPlausibleAddressChar</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679309786"><span class="hs-identifier hs-var">isPlausibleAddressChar</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-40"></span><span>  </span><span class="hs-keyword">where</span><span>
 </span><span id="line-41"></span><span>    </span><span class="hs-comment">-- Covers both base58 and bech32 (with constrained prefixes)</span><span>
-</span><span id="line-42"></span><span>    </span><span id="local-6989586621679309548"><span class="annot"><span class="annottext">isPlausibleAddressChar :: Char -&gt; Bool
-</span><a href="#local-6989586621679309548"><span class="hs-identifier hs-var hs-var">isPlausibleAddressChar</span></a></span></span><span> </span><span id="local-6989586621679309547"><span class="annot"><span class="annottext">Char
-</span><a href="#local-6989586621679309547"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-42"></span><span>    </span><span id="local-6989586621679309786"><span class="annot"><span class="annottext">isPlausibleAddressChar :: Char -&gt; Bool
+</span><a href="#local-6989586621679309786"><span class="hs-identifier hs-var hs-var">isPlausibleAddressChar</span></a></span></span><span> </span><span id="local-6989586621679309785"><span class="annot"><span class="annottext">Char
+</span><a href="#local-6989586621679309785"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-43"></span><span>      </span><span class="annot"><span class="annottext">Char -&gt; Bool
 </span><span class="hs-identifier hs-var">isAsciiLower</span></span><span> </span><span class="annot"><span class="annottext">Char
-</span><a href="#local-6989586621679309547"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679309785"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-44"></span><span>        </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">||</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; Bool
 </span><span class="hs-identifier hs-var">isAsciiUpper</span></span><span> </span><span class="annot"><span class="annottext">Char
-</span><a href="#local-6989586621679309547"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679309785"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-45"></span><span>        </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">||</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; Bool
 </span><span class="hs-identifier hs-var">isDigit</span></span><span> </span><span class="annot"><span class="annottext">Char
-</span><a href="#local-6989586621679309547"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679309785"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-46"></span><span>        </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">||</span></span><span> </span><span class="annot"><span class="annottext">Char
-</span><a href="#local-6989586621679309547"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">Char -&gt; Char -&gt; Bool
+</span><a href="#local-6989586621679309785"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">Char -&gt; Char -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">'_'</span></span><span>

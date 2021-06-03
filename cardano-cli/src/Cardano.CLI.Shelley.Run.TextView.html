@@ -20,7 +20,7 @@
 </span><span id="line-20"></span><span class="hs-keyword">data</span><span> </span><span id="ShelleyTextViewFileError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#ShelleyTextViewFileError"><span class="hs-identifier hs-var">ShelleyTextViewFileError</span></a></span></span><span>
 </span><span id="line-21"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="TextViewReadFileError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewReadFileError"><span class="hs-identifier hs-var">TextViewReadFileError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">TextEnvelopeError</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-22"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TextViewCBORPrettyPrintError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewCBORPrettyPrintError"><span class="hs-identifier hs-var">TextViewCBORPrettyPrintError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Helpers.html#HelpersError"><span class="hs-identifier hs-type">HelpersError</span></a></span><span>
-</span><span id="line-23"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679311472"><span id="local-6989586621679311474"><span id="local-6989586621679311476"><span class="annot"><span class="annottext">Int -&gt; ShelleyTextViewFileError -&gt; ShowS
+</span><span id="line-23"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679311710"><span id="local-6989586621679311712"><span id="local-6989586621679311714"><span class="annot"><span class="annottext">Int -&gt; ShelleyTextViewFileError -&gt; ShowS
 [ShelleyTextViewFileError] -&gt; ShowS
 ShelleyTextViewFileError -&gt; String
 (Int -&gt; ShelleyTextViewFileError -&gt; ShowS)
@@ -39,48 +39,48 @@ $cshowsPrec :: Int -&gt; ShelleyTextViewFileError -&gt; ShowS
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#renderShelleyTextViewFileError"><span class="hs-identifier hs-type">renderShelleyTextViewFileError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#ShelleyTextViewFileError"><span class="hs-identifier hs-type">ShelleyTextViewFileError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-26"></span><span id="renderShelleyTextViewFileError"><span class="annot"><span class="annottext">renderShelleyTextViewFileError :: ShelleyTextViewFileError -&gt; Text
-</span><a href="Cardano.CLI.Shelley.Run.TextView.html#renderShelleyTextViewFileError"><span class="hs-identifier hs-var hs-var">renderShelleyTextViewFileError</span></a></span></span><span> </span><span id="local-6989586621679311470"><span class="annot"><span class="annottext">ShelleyTextViewFileError
-</span><a href="#local-6989586621679311470"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Shelley.Run.TextView.html#renderShelleyTextViewFileError"><span class="hs-identifier hs-var hs-var">renderShelleyTextViewFileError</span></a></span></span><span> </span><span id="local-6989586621679311708"><span class="annot"><span class="annottext">ShelleyTextViewFileError
+</span><a href="#local-6989586621679311708"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-27"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ShelleyTextViewFileError
-</span><a href="#local-6989586621679311470"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-28"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewReadFileError"><span class="hs-identifier hs-type">TextViewReadFileError</span></a></span><span> </span><span id="local-6989586621679311469"><span class="annot"><span class="annottext">FileError TextEnvelopeError
-</span><a href="#local-6989586621679311469"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
+</span><a href="#local-6989586621679311708"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-28"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewReadFileError"><span class="hs-identifier hs-type">TextViewReadFileError</span></a></span><span> </span><span id="local-6989586621679311707"><span class="annot"><span class="annottext">FileError TextEnvelopeError
+</span><a href="#local-6989586621679311707"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FileError TextEnvelopeError -&gt; String
 forall e. Error e =&gt; e -&gt; String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">FileError TextEnvelopeError
-</span><a href="#local-6989586621679311469"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-29"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewCBORPrettyPrintError"><span class="hs-identifier hs-type">TextViewCBORPrettyPrintError</span></a></span><span> </span><span id="local-6989586621679311466"><span class="annot"><span class="annottext">HelpersError
-</span><a href="#local-6989586621679311466"><span class="hs-identifier hs-var">hlprsErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679311707"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-29"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#TextViewCBORPrettyPrintError"><span class="hs-identifier hs-type">TextViewCBORPrettyPrintError</span></a></span><span> </span><span id="local-6989586621679311704"><span class="annot"><span class="annottext">HelpersError
+</span><a href="#local-6989586621679311704"><span class="hs-identifier hs-var">hlprsErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-30"></span><span>      </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Error pretty printing CBOR: &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">HelpersError -&gt; Text
 </span><a href="Cardano.CLI.Helpers.html#renderHelpersError"><span class="hs-identifier hs-var">renderHelpersError</span></a></span><span> </span><span class="annot"><span class="annottext">HelpersError
-</span><a href="#local-6989586621679311466"><span class="hs-identifier hs-var">hlprsErr</span></a></span><span>
+</span><a href="#local-6989586621679311704"><span class="hs-identifier hs-var">hlprsErr</span></a></span><span>
 </span><span id="line-31"></span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewCmd"><span class="hs-identifier hs-type">runTextViewCmd</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#TextViewCmd"><span class="hs-identifier hs-type">TextViewCmd</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#ShelleyTextViewFileError"><span class="hs-identifier hs-type">ShelleyTextViewFileError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-34"></span><span id="runTextViewCmd"><span class="annot"><span class="annottext">runTextViewCmd :: TextViewCmd -&gt; ExceptT ShelleyTextViewFileError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewCmd"><span class="hs-identifier hs-var hs-var">runTextViewCmd</span></a></span></span><span> </span><span id="local-6989586621679311465"><span class="annot"><span class="annottext">TextViewCmd
-</span><a href="#local-6989586621679311465"><span class="hs-identifier hs-var">cmd</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewCmd"><span class="hs-identifier hs-var hs-var">runTextViewCmd</span></a></span></span><span> </span><span id="local-6989586621679311703"><span class="annot"><span class="annottext">TextViewCmd
+</span><a href="#local-6989586621679311703"><span class="hs-identifier hs-var">cmd</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-35"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">TextViewCmd
-</span><a href="#local-6989586621679311465"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-36"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#TextViewInfo"><span class="hs-identifier hs-type">TextViewInfo</span></a></span><span> </span><span id="local-6989586621679311463"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311463"><span class="hs-identifier hs-var">fpath</span></a></span></span><span> </span><span id="local-6989586621679311462"><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679311462"><span class="hs-identifier hs-var">mOutfile</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311703"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-36"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#TextViewInfo"><span class="hs-identifier hs-type">TextViewInfo</span></a></span><span> </span><span id="local-6989586621679311701"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311701"><span class="hs-identifier hs-var">fpath</span></a></span></span><span> </span><span id="local-6989586621679311700"><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311700"><span class="hs-identifier hs-var">mOutfile</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 -&gt; Maybe OutputFile -&gt; ExceptT ShelleyTextViewFileError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewInfo"><span class="hs-identifier hs-var">runTextViewInfo</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311463"><span class="hs-identifier hs-var">fpath</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679311462"><span class="hs-identifier hs-var">mOutfile</span></a></span><span>
+</span><a href="#local-6989586621679311701"><span class="hs-identifier hs-var">fpath</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311700"><span class="hs-identifier hs-var">mOutfile</span></a></span><span>
 </span><span id="line-37"></span><span>
 </span><span id="line-38"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewInfo"><span class="hs-identifier hs-type">runTextViewInfo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#ShelleyTextViewFileError"><span class="hs-identifier hs-type">ShelleyTextViewFileError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-39"></span><span id="runTextViewInfo"><span class="annot"><span class="annottext">runTextViewInfo :: String
 -&gt; Maybe OutputFile -&gt; ExceptT ShelleyTextViewFileError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewInfo"><span class="hs-identifier hs-var hs-var">runTextViewInfo</span></a></span></span><span> </span><span id="local-6989586621679311459"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311459"><span class="hs-identifier hs-var">fpath</span></a></span></span><span> </span><span id="local-6989586621679311458"><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679311458"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-40"></span><span>  </span><span id="local-6989586621679311457"><span class="annot"><span class="annottext">TextEnvelope
-</span><a href="#local-6989586621679311457"><span class="hs-identifier hs-var">tv</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError TextEnvelopeError -&gt; ShelleyTextViewFileError)
+</span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewInfo"><span class="hs-identifier hs-var hs-var">runTextViewInfo</span></a></span></span><span> </span><span id="local-6989586621679311697"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311697"><span class="hs-identifier hs-var">fpath</span></a></span></span><span> </span><span id="local-6989586621679311696"><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311696"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-40"></span><span>  </span><span id="local-6989586621679311695"><span class="annot"><span class="annottext">TextEnvelope
+</span><a href="#local-6989586621679311695"><span class="hs-identifier hs-var">tv</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError TextEnvelopeError -&gt; ShelleyTextViewFileError)
 -&gt; ExceptT (FileError TextEnvelopeError) IO TextEnvelope
 -&gt; ExceptT ShelleyTextViewFileError IO TextEnvelope
 forall (m :: * -&gt; *) x y a.
@@ -97,24 +97,24 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall (m :: * -&gt; *) x a. m (Either x a) -&gt; ExceptT x m a
 </span><span class="hs-identifier hs-var">newExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; IO (Either (FileError TextEnvelopeError) TextEnvelope)
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">readTextEnvelopeFromFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311459"><span class="hs-identifier hs-var">fpath</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-41"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311455"><span class="annot"><span class="annottext">lbCBOR :: ByteString
-</span><a href="#local-6989586621679311455"><span class="hs-identifier hs-var hs-var">lbCBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
+</span><a href="#local-6989586621679311697"><span class="hs-identifier hs-var">fpath</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311693"><span class="annot"><span class="annottext">lbCBOR :: ByteString
+</span><a href="#local-6989586621679311693"><span class="hs-identifier hs-var hs-var">lbCBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
 </span><span class="hs-identifier hs-var">LBS.fromStrict</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TextEnvelope -&gt; ByteString
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">textEnvelopeRawCBOR</span></a></span><span> </span><span class="annot"><span class="annottext">TextEnvelope
-</span><a href="#local-6989586621679311457"><span class="hs-identifier hs-var">tv</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311695"><span class="hs-identifier hs-var">tv</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-42"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679311458"><span class="hs-identifier hs-var">mOutFile</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-43"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679311451"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311451"><span class="hs-identifier hs-var">oFpath</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT ShelleyTextViewFileError IO ()
+</span><a href="#local-6989586621679311696"><span class="hs-identifier hs-var">mOutFile</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-43"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679311689"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311689"><span class="hs-identifier hs-var">oFpath</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT ShelleyTextViewFileError IO ()
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT ShelleyTextViewFileError IO ())
 -&gt; IO () -&gt; ExceptT ShelleyTextViewFileError IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ByteString -&gt; IO ()
 </span><span class="hs-identifier hs-var">LBS.writeFile</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679311451"><span class="hs-identifier hs-var">oFpath</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679311455"><span class="hs-identifier hs-var">lbCBOR</span></a></span><span>
+</span><a href="#local-6989586621679311689"><span class="hs-identifier hs-var">oFpath</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679311693"><span class="hs-identifier hs-var">lbCBOR</span></a></span><span>
 </span><span id="line-44"></span><span>    </span><span class="annot"><span class="annottext">Maybe OutputFile
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(HelpersError -&gt; ShelleyTextViewFileError)
 -&gt; ExceptT HelpersError IO ()
@@ -130,5 +130,5 @@ Functor m =&gt;
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ExceptT HelpersError IO ()
 </span><a href="Cardano.CLI.Helpers.html#pPrintCBOR"><span class="hs-identifier hs-var">pPrintCBOR</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679311455"><span class="hs-identifier hs-var">lbCBOR</span></a></span><span>
+</span><a href="#local-6989586621679311693"><span class="hs-identifier hs-var">lbCBOR</span></a></span><span>
 </span><span id="line-45"></span></pre></body></html>

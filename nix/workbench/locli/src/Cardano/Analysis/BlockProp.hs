@@ -16,13 +16,13 @@ module Cardano.Analysis.BlockProp (module Cardano.Analysis.BlockProp) where
 import           Prelude (String, (!!), error, head, id, show, tail)
 import           Cardano.Prelude hiding (head, show)
 
-import           Control.Arrow ((&&&), (***))
+import           Control.Arrow ((***))
 import           Control.Concurrent.Async (mapConcurrently)
-import           Data.Aeson (toJSON)
+import           Data.Aeson (ToJSON(..), FromJSON(..))
 import qualified Data.Aeson as AE
+import           Data.Bifunctor
 import           Data.Function (on)
-import           Data.Either (partitionEithers, isLeft, isRight)
-import           Data.List (dropWhileEnd)
+import           Data.List (dropWhileEnd, intercalate)
 import           Data.Maybe (catMaybes, mapMaybe)
 import           Data.Tuple (swap)
 import           Data.Vector (Vector)
@@ -66,8 +66,8 @@ instance RenderDistributions BlockPropagation where
     --  Width LeftPad
     [ Field 6 0 "forged"        (f!!0) "Forge"   $ DDeltaT bpForgerForges
     , Field 6 0 "fAdopted"      (f!!1) "Adopt"   $ DDeltaT bpForgerAdoptions
-    , Field 6 0 "fAnnounced"    (f!!2) "Ann-ce"  $ DDeltaT bpForgerAnnouncements
-    , Field 6 0 "fSendStart"    (f!!3) "Sending" $ DDeltaT bpForgerSends
+    , Field 6 0 "fAnnounced"    (f!!2) "Announ"  $ DDeltaT bpForgerAnnouncements
+    , Field 6 0 "fSendStart"    (f!!3) "Sendin"  $ DDeltaT bpForgerSends
     , Field 4 1 "noticedVal"    (p!!0) " Noti"   $ DDeltaT (fst . bpPeerNotices)
     , Field 4 0 "noticedCoV"    (p!!1) "ced  "   $ DDeltaT (snd . bpPeerNotices)
     , Field 4 1 "fetchedVal"    (p!!2) " Fetc"   $ DDeltaT (fst . bpPeerFetches)
@@ -100,6 +100,15 @@ instance AE.ToJSON BlockPropagation where
     , extendObject "kind" "peerSendsMean"         $ toJSON (fst bpPeerSends)
     , extendObject "kind" "peerSendsCoV"          $ toJSON (snd bpPeerSends)
     ]
+
+data BPError
+  = BPError
+  { eLO    :: !LogObject
+  , eBlock :: !Hash
+  , eFile  :: !(Maybe FilePath)
+  , eDesc  :: !String
+  }
+  deriving (FromJSON, Generic, Show, ToJSON)
 
 -- | Block's events, as seen by its forger.
 data BlockForgerEvents
@@ -141,44 +150,101 @@ data BlockObserverEvents
   deriving (Generic, AE.FromJSON, AE.ToJSON, Show)
 
 -- | Sum of observer and forger events alike.
-type MachBlockEvents = Either BlockObserverEvents BlockForgerEvents
+data MachBlockEvents
+  = MBFE BlockForgerEvents
+  | MBOE BlockObserverEvents
+  | MBE  BPError
+
+mbeForgP, mbeObsvP, mbeErrP :: MachBlockEvents -> Bool
+mbeForgP = \case
+  MBFE{} -> True
+  _ -> False
+mbeObsvP = \case
+  MBOE{} -> True
+  _ -> False
+mbeErrP = \case
+  MBE{} -> True
+  _ -> False
+
+mapMbe ::
+     (BlockForgerEvents -> a) -> (BlockObserverEvents -> a) -> (BPError -> a)
+  -> MachBlockEvents -> a
+mapMbe f o e = \case
+  MBFE x -> f x
+  MBOE x -> o x
+  MBE  x -> e x
+
+partitionMbes :: [MachBlockEvents] -> ([BlockForgerEvents], [BlockObserverEvents], [BPError])
+partitionMbes = go [] [] []
+  where
+    go :: [BlockForgerEvents] -> [BlockObserverEvents] -> [BPError] -> [MachBlockEvents] -> ([BlockForgerEvents], [BlockObserverEvents], [BPError])
+    go as bs cs [] = (reverse as, reverse bs, reverse cs)
+    go as bs cs (MBFE a:xs) = go (a:as) bs cs xs
+    go as bs cs (MBOE b:xs) = go as (b:bs) cs xs
+    go as bs cs (MBE  c:xs) = go as bs (c:cs) xs
+
+errorMbes :: [MachBlockEvents] -> [BPError]
+errorMbes = go []
+  where
+    go :: [BPError] -> [MachBlockEvents] -> [BPError]
+    go cs [] = reverse cs
+    go cs (MBE c:xs) = go (c:cs) xs
+    go cs (_:xs)      = go    cs  xs
+
+trimapMbe ::
+     (BlockForgerEvents -> BlockForgerEvents)
+  -> (BlockObserverEvents -> BlockObserverEvents)
+  -> (BPError -> BPError)
+  -> MachBlockEvents -> MachBlockEvents
+trimapMbe f o e = mapMbe (MBFE . f) (MBOE . o) (MBE . e)
+
+bimapMbe ::
+     (BlockForgerEvents -> BlockForgerEvents)
+  -> (BlockObserverEvents -> BlockObserverEvents)
+  -> MachBlockEvents -> MachBlockEvents
+bimapMbe f o = trimapMbe f o id
+
+bimapMbe' ::
+     (BlockForgerEvents -> Either BPError BlockForgerEvents)
+  -> (BlockObserverEvents -> Either BPError BlockObserverEvents)
+  -> MachBlockEvents -> MachBlockEvents
+bimapMbe' f o = \case
+  MBFE x -> either MBE MBFE (f x)
+  MBOE x -> either MBE MBOE (o x)
+  x@MBE{} -> x
 
 ordBlockEv :: MachBlockEvents -> MachBlockEvents -> Ordering
 ordBlockEv l r =
-  if      (on (>) $ either boeBlockNo bfeBlockNo) l r then GT
-  else if (on (>) $ either boeBlockNo bfeBlockNo) r l then LT
-  else if isRight l then GT
-  else if isRight r then LT
+  if      (on (>) $ mapMbe bfeBlockNo boeBlockNo (const 0)) l r then GT
+  else if (on (>) $ mapMbe bfeBlockNo boeBlockNo (const 0)) r l then LT
+  else if mbeForgP l then GT
+  else if mbeForgP r then LT
+  else if mbeObsvP l then GT
+  else if mbeObsvP r then LT
   else EQ
 
-mbeSlotStart :: MachBlockEvents -> UTCTime
-mbeSlotStart = either boeSlotStart bfeSlotStart
-
 mbeNoticed, mbeAcquired, mbeAdopted, mbeAnnounced, mbeSending :: MachBlockEvents -> Maybe NominalDiffTime
-mbeNoticed   = either boeNoticed   (const $ Just 0)
-mbeAcquired  = either boeFetched   bfeForged
-mbeAdopted   = either boeAdopted   bfeAdopted
-mbeAnnounced = either boeAnnounced bfeAnnounced
-mbeSending   = either boeSending   bfeSending
+mbeNoticed   = mapMbe (const $ Just 0) boeNoticed   (const Nothing)
+mbeAcquired  = mapMbe bfeForged        boeFetched   (const Nothing)
+mbeAdopted   = mapMbe bfeAdopted       boeAdopted   (const Nothing)
+mbeAnnounced = mapMbe bfeAnnounced     boeAnnounced (const Nothing)
+mbeSending   = mapMbe bfeSending       boeSending   (const Nothing)
 
-mbeBlockHash :: MachBlockEvents -> Hash
-mbeBlockHash = either boeBlock bfeBlock
+mbeBlock :: MachBlockEvents -> Hash
+mbeBlock = mapMbe bfeBlock boeBlock eBlock
 
-mbeSetAdopted :: MachBlockEvents -> Int -> NominalDiffTime -> MachBlockEvents
-mbeSetAdopted   mbe d v = either (\x -> Left x { boeAdopted=Just v, boeChainDelta=d })   (\x -> Right x { bfeAdopted=Just v, bfeChainDelta=d }) mbe
+mbeError :: MachBlockEvents -> Maybe BPError
+mbeError = mapMbe (const Nothing) (const Nothing) Just
 
-mbeSetAnnounced, mbeSetSending, mbeSetNoticed, mbeSetFetched :: MachBlockEvents -> NominalDiffTime -> MachBlockEvents
-mbeSetAnnounced mbe v = either (\x -> Left x { boeAnnounced=Just v }) (\x -> Right x { bfeAnnounced=Just v }) mbe
-mbeSetSending   mbe v = either (\x -> Left x { boeSending=Just v })   (\x -> Right x { bfeSending=Just v }) mbe
-mbeSetNoticed   mbe v = either (\x -> Left x { boeNoticed=Just v })   (const $ error "mbeSetNoticed on a BFE.") mbe
-mbeSetFetched   mbe v = either (\x -> Left x { boeFetched=Just v })   (const $ error "mbeSetFetched on a BFE.") mbe
+mbeFailed :: MachBlockEvents -> Bool
+mbeFailed = isJust . mbeError
 
 -- | Machine's private view of all the blocks.
 type MachBlockMap
   =  Map.Map Hash MachBlockEvents
 
 blockMapHost :: MachBlockMap -> Host
-blockMapHost = either boeHost bfeHost . head . Map.elems
+blockMapHost = mapMbe bfeHost boeHost (loHost . eLO) . head . Map.elems
 
 blockMapMaxBlock :: MachBlockMap -> MachBlockEvents
 blockMapMaxBlock = maximumBy ordBlockEv . Map.elems
@@ -216,6 +282,7 @@ data BlockEvents
   , beAnnounced    :: !NominalDiffTime
   , beSending      :: !NominalDiffTime
   , beObservations :: [BlockObservation]
+  , beErrors       :: [BPError]
   }
   deriving (Generic, AE.FromJSON, AE.ToJSON, Show)
 
@@ -224,6 +291,7 @@ instance RenderTimeline BlockEvents where
     --  Width LeftPad
     [ Field 5 0 "block"     "block" "no."     $ IWord64 (unBlockNo . beBlockNo)
     , Field 5 0 "abs.slot"  "abs."  "slot#"   $ IWord64 (unSlotNo . beSlotNo)
+    , Field 5 0 "errors"    "error" "count"   $ IInt    (length . beErrors)
     ]
    where
      f w = nChunksEachOf 4 (w + 1) "Block forging events"
@@ -289,7 +357,7 @@ doBlockProp eventMaps = do
 
    chain          = rebuildChain eventMaps tipHash
    tipBlock       = getBlockForge eventMaps tipHash
-   tipHash        = rewindChain eventMaps 1 (mbeBlockHash finalBlockEv)
+   tipHash        = rewindChain eventMaps 1 (mbeBlock finalBlockEv)
    finalBlockEv   = maximumBy ordBlockEv $ blockMapMaxBlock <$> eventMaps
 
    rewindChain :: [MachBlockMap] -> Int -> Hash -> Hash
@@ -300,25 +368,29 @@ doBlockProp eventMaps = do
 
    getBlockForge :: [MachBlockMap] -> Hash -> BlockForgerEvents
    getBlockForge xs h =
-     either (error "Invariant failed: finalBlockEv isn't a forge.") id $
-            maximumBy ordBlockEv $
-            mapMaybe (Map.lookup h) xs
+     mapMaybe (Map.lookup h) xs
+     & find mbeForgP
+     & fromMaybe
+        (error $ mconcat
+         [ "Invariant failed: couldn't find a forge for hash ", show h
+         , "\nErrors:\n", show (intercalate "\n" $ fmap show $ errorMbes $ mapMaybe (Map.lookup h) xs)
+         ])
+     & mapMbe id (error "Silly invariant failed.") (error "Silly invariant failed.")
 
    rebuildChain :: [MachBlockMap] -> Hash -> [BlockEvents]
    rebuildChain machBlockMaps tip = go (Just tip) []
     where go Nothing  acc = acc
           go (Just h) acc =
-            let blkEvs@(forgerEv, _) = collectAllBlockEvents machBlockMaps h
-            in go (bfePrevBlock forgerEv)
-                  (liftBlockEvents blkEvs : acc)
+            case partitionMbes $ mapMaybe (Map.lookup h) machBlockMaps of
+              ([], _, ers) -> error $ mconcat
+                [ "No forger for hash ", show h
+                , "\nErrors:\n"
+                ] ++ intercalate "\n" (show <$> ers)
+              blkEvs@(forgerEv:_, oEvs, ers) ->
+                go (bfePrevBlock forgerEv) (liftBlockEvents forgerEv oEvs ers : acc)
 
-   collectAllBlockEvents :: [MachBlockMap] -> Hash -> (BlockForgerEvents, [BlockObserverEvents])
-   collectAllBlockEvents xs blk =
-     partitionEithers (mapMaybe (Map.lookup blk) xs)
-     & swap & (head *** id)
-
-   liftBlockEvents :: (BlockForgerEvents, [BlockObserverEvents]) -> BlockEvents
-   liftBlockEvents (BlockForgerEvents{..}, os) =
+   liftBlockEvents :: BlockForgerEvents -> [BlockObserverEvents] -> [BPError] -> BlockEvents
+   liftBlockEvents BlockForgerEvents{..} os errs =
      BlockEvents
      { beForger     = bfeHost
      , beBlock      = bfeBlock
@@ -342,6 +414,7 @@ doBlockProp eventMaps = do
            <*> Just boeChainDelta
            <*> Just boeAnnounced
            <*> Just boeSending
+     , beErrors = errs
      }
     where
       miss :: String -> Maybe a -> a
@@ -357,78 +430,108 @@ blockEventsFromLogObjects ci (fp, xs) =
   foldl (blockPropMachEventsStep ci fp) mempty xs
 
 blockPropMachEventsStep :: ChainInfo -> JsonLogfile -> MachBlockMap -> LogObject -> MachBlockMap
-blockPropMachEventsStep ci fp bMap = \case
+blockPropMachEventsStep ci (JsonLogfile fp) bMap lo = case lo of
   LogObject{loAt, loHost, loBody=LOBlockForged{loBlock,loPrev,loBlockNo,loSlotNo}} ->
-    mbmGetForger loHost loBlock bMap "LOBlockForged"
+    mbmGetForger lo loBlock bMap "LOBlockForged"
     & fromMaybe
-      (Right $ BlockForgerEvents
+      (MBFE $ BlockForgerEvents
         loHost loBlock loPrev loBlockNo loSlotNo (slotStart ci loSlotNo)
         (Just $ loAt `diffUTCTime` slotStart ci loSlotNo) Nothing 0 Nothing Nothing)
     & doInsert loBlock
   LogObject{loAt, loHost, loBody=LOChainSyncClientSeenHeader{loBlock,loBlockNo,loSlotNo}} ->
     let mbe0 = Map.lookup loBlock bMap
     in if isJust mbe0 then bMap else
-      (Left $
+      (MBOE $
        BlockObserverEvents
          loHost loBlock loBlockNo loSlotNo (slotStart ci loSlotNo)
          (Just $ loAt `diffUTCTime` slotStart ci loSlotNo) Nothing Nothing 0 Nothing Nothing)
       & doInsert loBlock
   LogObject{loAt, loHost, loBody=LOBlockFetchClientCompletedFetch{loBlock}} ->
-    let mbe0 = Left $ mbmGetObserver loHost loBlock bMap "LOBlockFetchClientCompletedFetch"
+    let mbe0 = mbmGetObserver lo loBlock bMap "LOBlockFetchClientCompletedFetch"
     in
-      mDeltaT loAt mbe0 [mbeNoticed]
-      & fromMaybe (err loHost loBlock "LOBlockFetchClientCompletedFetch leads fetching")
-      & mbeSetFetched mbe0
-      & doInsert loBlock
+      deltaTS "LOBlockFetchClientCompletedFetch"
+        loAt mbe0 [mbeNoticed]
+      <&> (\v ->
+           bimapMbe'
+           (const . Left $ fail' loBlock "LOBlockFetchClientCompletedFetch after BFE")
+           (\x -> Right x { boeFetched=Just v })
+           mbe0)
+      & doInsert loBlock . join either id
   LogObject{loAt, loHost, loBody=LOBlockAddedToCurrentChain{loBlock,loChainLengthDelta}} ->
     let mbe0 = Map.lookup loBlock bMap
-               & fromMaybe (err loHost loBlock "LOBlockAddedToCurrentChain leads")
+               & fromMaybe (fail loBlock "LOBlockAddedToCurrentChain")
     in if isJust (mbeAdopted mbe0) then bMap else
-      mDeltaT loAt mbe0 [mbeNoticed, mbeAcquired]
-      & fromMaybe (err loHost loBlock "LOBlockAddedToCurrentChain leads acquirement")
-      & mbeSetAdopted mbe0 loChainLengthDelta
-      & doInsert loBlock
+      deltaTS "LOBlockAddedToCurrentChain"
+        loAt mbe0 [mbeNoticed, mbeAcquired]
+      <&> (\v ->
+          bimapMbe
+          (\x -> x { bfeAdopted=Just v, bfeChainDelta=loChainLengthDelta })
+          (\x -> x { boeAdopted=Just v, boeChainDelta=loChainLengthDelta })
+          mbe0)
+      & doInsert loBlock . join either id
   LogObject{loAt, loHost, loBody=LOChainSyncServerSendHeader{loBlock}} ->
     let mbe0 = Map.lookup loBlock bMap
-               & fromMaybe (err loHost loBlock "LOChainSyncServerSendHeader leads")
+               & fromMaybe (fail loBlock "LOChainSyncServerSendHeader")
     in if isJust (mbeAnnounced mbe0) then bMap else
-      mDeltaT loAt mbe0 [mbeNoticed, mbeAcquired, mbeAdopted]
-      & fromMaybe (err loHost loBlock "LOChainSyncServerSendHeader leads adoption")
-      & mbeSetAnnounced mbe0
-      & doInsert loBlock
+      -- bimapMbe
+      -- (\x -> x { bfeAnnounced=Just $
+      --            fromMaybe (error "")
+      --            deltaT loAt mbe0 [Right mbeNoticed, Right mbeAcquired, Left mbeAdopted]})
+      -- (\x -> x { boeAnnounced=Just $ deltaT loAt mbe0 [Right mbeNoticed, Right mbeAcquired, Left mbeAdopted]})
+      -- mbe0
+      deltaT "LOChainSyncServerSendHeader"
+        loAt mbe0 [Right mbeNoticed, Right mbeAcquired, Left mbeAdopted]
+      <&> (\v ->
+          bimapMbe
+          (\x -> x { bfeAnnounced=Just v })
+          (\x -> x { boeAnnounced=Just v })
+          mbe0)
+      & doInsert loBlock . join either id
   LogObject{loAt, loHost, loBody=LOBlockFetchServerSending{loBlock}} ->
     let mbe0 = Map.lookup loBlock bMap
-               & fromMaybe (err loHost loBlock "LOBlockFetchServerSending leads")
+               & fromMaybe (fail loBlock "LOBlockFetchServerSending leads absolutely")
     in if isJust (mbeSending mbe0) then bMap else
-      mDeltaT loAt mbe0 [mbeNoticed, mbeAcquired, mbeAdopted, mbeAnnounced]
-      & fromMaybe (err loHost loBlock "LOBlockFetchServerSending leads announcement")
-      & mbeSetSending mbe0
-      & doInsert loBlock
+      deltaT "LOBlockFetchServerSending"
+        loAt mbe0 [Right mbeNoticed, Right mbeAcquired, Left mbeAdopted, Left mbeAnnounced]
+      <&> (\v ->
+           bimapMbe
+           (\x -> x { bfeSending=Just v })
+           (\x -> x { boeSending=Just v })
+           mbe0)
+      & doInsert loBlock . join either id
   _ -> bMap
  where
+   fail' :: Hash -> String -> BPError
+   fail' hash desc = BPError lo hash (Just fp) desc
+
+   fail :: Hash -> String -> MachBlockEvents
+   fail hash desc = MBE $ fail' hash desc
+
    doInsert :: Hash -> MachBlockEvents -> MachBlockMap
    doInsert k x = Map.insert k x bMap
 
-   mDeltaT :: UTCTime -> MachBlockEvents -> [MachBlockEvents -> Maybe NominalDiffTime] -> Maybe NominalDiffTime
-   mDeltaT t mbe mdtProjs =
-     (t `diffUTCTime`) <$> foldM (\tv mdt -> flip addUTCTime tv <$> mdt)
-                                 (mbeSlotStart mbe)
-                                 (($ mbe) <$> mdtProjs)
+   deltaTS :: String -> UTCTime -> MachBlockEvents -> [MachBlockEvents -> Maybe NominalDiffTime] -> Either MachBlockEvents NominalDiffTime
+   deltaTS desc t mbe = deltaT desc t mbe . fmap Right
 
-   err :: Host -> Hash -> String -> a
-   err ho ha desc = error $ mconcat
-     [ "In file ", show fp
-     , ", for host ", show ho
-     , ", for block ", show ha
-     , ": ", desc
-     ]
+   deltaT :: String -> UTCTime -> MachBlockEvents -> [Either (MachBlockEvents -> Maybe NominalDiffTime) (MachBlockEvents -> Maybe NominalDiffTime)] -> Either MachBlockEvents NominalDiffTime
+   deltaT desc t mbe mdtProjs =
+     (t `diffUTCTime`) <$>
+       foldM (\tv emdt ->
+                either
+                  (Right . fromMaybe (-0.01))
+                  (maybe (Left $ fail (mbeBlock mbe) (desc <> " leads")) Right)
+                  emdt
+                <&> flip addUTCTime tv)
+             (mapMbe bfeSlotStart boeSlotStart (const zeroUTCTime) mbe)
+             (join bimap ($ mbe) <$> mdtProjs)
 
-   mbmGetForger :: Host -> Hash -> MachBlockMap -> String -> Maybe MachBlockEvents
-   mbmGetForger ho ha m eDesc = Map.lookup ha m <&>
-     either (const $ err ho ha (eDesc <> " after a BlockObserverEvents")) Right
+   mbmGetForger :: LogObject -> Hash -> MachBlockMap -> String -> Maybe MachBlockEvents
+   mbmGetForger lo ha m eDesc = Map.lookup ha m <&>
+     bimapMbe' Right
+               (const.Left $ BPError lo ha (Just fp) (eDesc <> " after a BlockObserverEvents"))
 
-   mbmGetObserver :: Host -> Hash -> MachBlockMap -> String -> BlockObserverEvents
-   mbmGetObserver ho ha m eDesc = case Map.lookup ha m of
-     Just (Left x) -> x
-     Just (Right x) -> err ho ha (eDesc <> " after a BlockForgerEvents")
-     Nothing ->  err ho ha (eDesc <> " leads")
+   mbmGetObserver :: LogObject -> Hash -> MachBlockMap -> String -> MachBlockEvents
+   mbmGetObserver lo ha m eDesc = Map.lookup ha m <&>
+     bimapMbe' (const.Left $ BPError lo ha (Just fp) (eDesc <> " after a BlockForgerEvents"))
+               Right
+     & fromMaybe (MBE $ BPError lo ha (Just fp) (eDesc <> " as first block event"))

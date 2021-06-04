@@ -83,6 +83,38 @@ EOF
         ${time} locli 'analyse' 'block-propagation' \
             "${locli_args[@]}" "$adir"/*.flt.json;;
 
+    grep-filtered-logs | grep | g )
+        local usage="USAGE: wb analyse $op BLOCK [MACHSPEC=*] [RUN-NAME=current]"
+        local expr=$1
+        local mach=${2:-*}
+        local name=${3:-current}
+        local dir=$(run get "$name")
+        local adir=$dir/analysis
+
+        grep -h "$expr" "$adir"/logs-$mach.flt.json;;
+
+    list-blocks | blocks | bs )
+        local usage="USAGE: wb analyse $op [RUN-NAME=current]"
+        local name=${1:-current}
+        local dir=$(run get "$name")
+        local adir=$dir/analysis
+
+        fgrep -h "TraceForgedBlock" "$adir"/*.flt.json |
+            jq '{ at: .at, host: .host } * .data | del(.peer) | del(.slot)' -c |
+            sort | uniq;;
+
+    block-propagation-block | bpb )
+        local usage="USAGE: wb analyse $op BLOCK [RUN-NAME=current]"
+        local block=$1
+        local name=${2:-current}
+        local dir=$(run get "$name")
+        local adir=$dir/analysis
+
+        grep -h "$block" "$adir"/*.flt.json |
+            grep 'AddBlock\|TraceForgedBlock\|AddedToCurrentChain' |
+            jq '{ at: .at, host: .host } * .data | del(.peer) | del(.slot)' -c |
+            sort --stable | uniq;;
+
     machine-timeline | machine | mt )
         local usage="USAGE: wb analyse $op [RUN-NAME=current] [MACH-NAME=node-1]"
         local name=${1:-current}

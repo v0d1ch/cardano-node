@@ -12,32 +12,32 @@
 </span><span id="line-12"></span><span>
 </span><span id="line-13"></span><span class="annot"><a href="Test.Tasty.Hedgehog.Group.html#fromGroup"><span class="hs-identifier hs-type">fromGroup</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Group</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
 </span><span id="line-14"></span><span id="fromGroup"><span class="annot"><span class="annottext">fromGroup :: Group -&gt; TestTree
-</span><a href="Test.Tasty.Hedgehog.Group.html#fromGroup"><span class="hs-identifier hs-var hs-var">fromGroup</span></a></span></span><span> </span><span id="local-6989586621679205374"><span class="annot"><span class="annottext">Group
-</span><a href="#local-6989586621679205374"><span class="hs-identifier hs-var">group</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Test.Tasty.Hedgehog.Group.html#fromGroup"><span class="hs-identifier hs-var hs-var">fromGroup</span></a></span></span><span> </span><span id="local-6989586621679205478"><span class="annot"><span class="annottext">Group
+</span><a href="#local-6989586621679205478"><span class="hs-identifier hs-var">group</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-15"></span><span>    </span><span class="annot"><span class="annottext">TestName -&gt; [TestTree] -&gt; TestTree
 </span><span class="hs-identifier hs-var">testGroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">GroupName -&gt; TestName
 </span><span class="hs-identifier hs-var hs-var">unGroupName</span></span><span> </span><span class="annot"><span class="annottext">(GroupName -&gt; TestName) -&gt; GroupName -&gt; TestName
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Group -&gt; GroupName
 </span><span class="hs-identifier hs-var hs-var">groupName</span></span><span> </span><span class="annot"><span class="annottext">Group
-</span><a href="#local-6989586621679205374"><span class="hs-identifier hs-var">group</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([TestTree] -&gt; TestTree) -&gt; [TestTree] -&gt; TestTree
+</span><a href="#local-6989586621679205478"><span class="hs-identifier hs-var">group</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([TestTree] -&gt; TestTree) -&gt; [TestTree] -&gt; TestTree
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
 </span><span id="line-16"></span><span>      </span><span class="annot"><span class="annottext">((PropertyName, Property) -&gt; TestTree)
 -&gt; [(PropertyName, Property)] -&gt; [TestTree]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">(PropertyName, Property) -&gt; TestTree
-</span><a href="#local-6989586621679205371"><span class="hs-identifier hs-var">mkTestTree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Group -&gt; [(PropertyName, Property)]
+</span><a href="#local-6989586621679205475"><span class="hs-identifier hs-var">mkTestTree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Group -&gt; [(PropertyName, Property)]
 </span><span class="hs-identifier hs-var hs-var">groupProperties</span></span><span> </span><span class="annot"><span class="annottext">Group
-</span><a href="#local-6989586621679205374"><span class="hs-identifier hs-var">group</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679205478"><span class="hs-identifier hs-var">group</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-17"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-18"></span><span>    </span><span class="annot"><a href="#local-6989586621679205371"><span class="hs-identifier hs-type">mkTestTree</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PropertyName</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
-</span><span id="line-19"></span><span>    </span><span id="local-6989586621679205371"><span class="annot"><span class="annottext">mkTestTree :: (PropertyName, Property) -&gt; TestTree
-</span><a href="#local-6989586621679205371"><span class="hs-identifier hs-var hs-var">mkTestTree</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679205369"><span class="annot"><span class="annottext">PropertyName
-</span><a href="#local-6989586621679205369"><span class="hs-identifier hs-var">propName</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205368"><span class="annot"><span class="annottext">Property
-</span><a href="#local-6989586621679205368"><span class="hs-identifier hs-var">prop</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TestName -&gt; Property -&gt; TestTree
+</span><span id="line-18"></span><span>    </span><span class="annot"><a href="#local-6989586621679205475"><span class="hs-identifier hs-type">mkTestTree</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PropertyName</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-19"></span><span>    </span><span id="local-6989586621679205475"><span class="annot"><span class="annottext">mkTestTree :: (PropertyName, Property) -&gt; TestTree
+</span><a href="#local-6989586621679205475"><span class="hs-identifier hs-var hs-var">mkTestTree</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679205473"><span class="annot"><span class="annottext">PropertyName
+</span><a href="#local-6989586621679205473"><span class="hs-identifier hs-var">propName</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679205472"><span class="annot"><span class="annottext">Property
+</span><a href="#local-6989586621679205472"><span class="hs-identifier hs-var">prop</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TestName -&gt; Property -&gt; TestTree
 </span><span class="hs-identifier hs-var">testProperty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName -&gt; TestName
 </span><span class="hs-identifier hs-var hs-var">unPropertyName</span></span><span> </span><span class="annot"><span class="annottext">PropertyName
-</span><a href="#local-6989586621679205369"><span class="hs-identifier hs-var">propName</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Property
-</span><a href="#local-6989586621679205368"><span class="hs-identifier hs-var">prop</span></a></span><span>
+</span><a href="#local-6989586621679205473"><span class="hs-identifier hs-var">propName</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="#local-6989586621679205472"><span class="hs-identifier hs-var">prop</span></a></span><span>
 </span><span id="line-20"></span></pre></body></html>

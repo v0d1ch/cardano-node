@@ -20,14 +20,14 @@
 </span><span id="line-20"></span><span>
 </span><span id="line-21"></span><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderApplyMempoolPayloadErr"><span class="hs-identifier hs-type">renderApplyMempoolPayloadErr</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ApplyMempoolPayloadErr</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-22"></span><span id="renderApplyMempoolPayloadErr"><span class="annot"><span class="annottext">renderApplyMempoolPayloadErr :: ApplyMempoolPayloadErr -&gt; Text
-</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderApplyMempoolPayloadErr"><span class="hs-identifier hs-var hs-var">renderApplyMempoolPayloadErr</span></a></span></span><span> </span><span id="local-6989586621679417779"><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
-</span><a href="#local-6989586621679417779"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderApplyMempoolPayloadErr"><span class="hs-identifier hs-var hs-var">renderApplyMempoolPayloadErr</span></a></span></span><span> </span><span id="local-6989586621679419628"><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
+</span><a href="#local-6989586621679419628"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-23"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
-</span><a href="#local-6989586621679417779"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-24"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">MempoolTxErr</span></span><span> </span><span id="local-6989586621679417777"><span class="annot"><span class="annottext">UTxOValidationError
-</span><a href="#local-6989586621679417777"><span class="hs-identifier hs-var">ve</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">UTxOValidationError -&gt; Text
+</span><a href="#local-6989586621679419628"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-24"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">MempoolTxErr</span></span><span> </span><span id="local-6989586621679419626"><span class="annot"><span class="annottext">UTxOValidationError
+</span><a href="#local-6989586621679419626"><span class="hs-identifier hs-var">ve</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">UTxOValidationError -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderValidationError"><span class="hs-identifier hs-var">renderValidationError</span></a></span><span> </span><span class="annot"><span class="annottext">UTxOValidationError
-</span><a href="#local-6989586621679417777"><span class="hs-identifier hs-var">ve</span></a></span><span>
+</span><a href="#local-6989586621679419626"><span class="hs-identifier hs-var">ve</span></a></span><span>
 </span><span id="line-25"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">MempoolDlgErr</span></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Delegation error&quot;</span></span><span>
 </span><span id="line-26"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">MempoolUpdateProposalErr</span></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
@@ -38,33 +38,33 @@
 </span><span id="line-29"></span><span>
 </span><span id="line-30"></span><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderValidationError"><span class="hs-identifier hs-type">renderValidationError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">UTxOValidationError</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-31"></span><span id="renderValidationError"><span class="annot"><span class="annottext">renderValidationError :: UTxOValidationError -&gt; Text
-</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderValidationError"><span class="hs-identifier hs-var hs-var">renderValidationError</span></a></span></span><span> </span><span id="local-6989586621679417772"><span class="annot"><span class="annottext">UTxOValidationError
-</span><a href="#local-6989586621679417772"><span class="hs-identifier hs-var">ve</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderValidationError"><span class="hs-identifier hs-var hs-var">renderValidationError</span></a></span></span><span> </span><span id="local-6989586621679419621"><span class="annot"><span class="annottext">UTxOValidationError
+</span><a href="#local-6989586621679419621"><span class="hs-identifier hs-var">ve</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-32"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">UTxOValidationError
-</span><a href="#local-6989586621679417772"><span class="hs-identifier hs-var">ve</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-33"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">UTxOValidationTxValidationError</span></span><span> </span><span id="local-6989586621679417770"><span class="annot"><span class="annottext">TxValidationError
-</span><a href="#local-6989586621679417770"><span class="hs-identifier hs-var">tve</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TxValidationError -&gt; Text
+</span><a href="#local-6989586621679419621"><span class="hs-identifier hs-var">ve</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-33"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">UTxOValidationTxValidationError</span></span><span> </span><span id="local-6989586621679419619"><span class="annot"><span class="annottext">TxValidationError
+</span><a href="#local-6989586621679419619"><span class="hs-identifier hs-var">tve</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TxValidationError -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderTxValidationError"><span class="hs-identifier hs-var">renderTxValidationError</span></a></span><span> </span><span class="annot"><span class="annottext">TxValidationError
-</span><a href="#local-6989586621679417770"><span class="hs-identifier hs-var">tve</span></a></span><span>
-</span><span id="line-34"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">UTxOValidationUTxOError</span></span><span> </span><span id="local-6989586621679417767"><span class="annot"><span class="annottext">UTxOError
-</span><a href="#local-6989586621679417767"><span class="hs-identifier hs-var">ue</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">UTxOError -&gt; Text
+</span><a href="#local-6989586621679419619"><span class="hs-identifier hs-var">tve</span></a></span><span>
+</span><span id="line-34"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">UTxOValidationUTxOError</span></span><span> </span><span id="local-6989586621679419616"><span class="annot"><span class="annottext">UTxOError
+</span><a href="#local-6989586621679419616"><span class="hs-identifier hs-var">ue</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">UTxOError -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderUTxOError"><span class="hs-identifier hs-var">renderUTxOError</span></a></span><span> </span><span class="annot"><span class="annottext">UTxOError
-</span><a href="#local-6989586621679417767"><span class="hs-identifier hs-var">ue</span></a></span><span>
+</span><a href="#local-6989586621679419616"><span class="hs-identifier hs-var">ue</span></a></span><span>
 </span><span id="line-35"></span><span>
 </span><span id="line-36"></span><span>
 </span><span id="line-37"></span><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderTxValidationError"><span class="hs-identifier hs-type">renderTxValidationError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TxValidationError</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-38"></span><span id="renderTxValidationError"><span class="annot"><span class="annottext">renderTxValidationError :: TxValidationError -&gt; Text
-</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderTxValidationError"><span class="hs-identifier hs-var hs-var">renderTxValidationError</span></a></span></span><span> </span><span id="local-6989586621679417765"><span class="annot"><span class="annottext">TxValidationError
-</span><a href="#local-6989586621679417765"><span class="hs-identifier hs-var">tve</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderTxValidationError"><span class="hs-identifier hs-var hs-var">renderTxValidationError</span></a></span></span><span> </span><span id="local-6989586621679419614"><span class="annot"><span class="annottext">TxValidationError
+</span><a href="#local-6989586621679419614"><span class="hs-identifier hs-var">tve</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-39"></span><span>  </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Tx Validation: &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span>
 </span><span id="line-40"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">TxValidationError
-</span><a href="#local-6989586621679417765"><span class="hs-identifier hs-var">tve</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-41"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationLovelaceError</span></span><span> </span><span id="local-6989586621679417763"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679417763"><span class="hs-identifier hs-var">txt</span></a></span></span><span> </span><span id="local-6989586621679417762"><span class="annot"><span class="annottext">LovelaceError
-</span><a href="#local-6989586621679417762"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419614"><span class="hs-identifier hs-var">tve</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-41"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationLovelaceError</span></span><span> </span><span id="local-6989586621679419612"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679419612"><span class="hs-identifier hs-var">txt</span></a></span></span><span> </span><span id="local-6989586621679419611"><span class="annot"><span class="annottext">LovelaceError
+</span><a href="#local-6989586621679419611"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-42"></span><span>        </span><span class="annot"><span class="annottext">Format Text (Text -&gt; LovelaceError -&gt; Text)
 -&gt; Text -&gt; LovelaceError -&gt; Text
 forall a. Format Text a -&gt; a
@@ -89,12 +89,12 @@ forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Format Text (LovelaceError -&gt; Text)
 forall a r. Buildable a =&gt; Format r (a -&gt; r)
 </span><span class="hs-identifier hs-var">build</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679417763"><span class="hs-identifier hs-var">txt</span></a></span><span> </span><span class="annot"><span class="annottext">LovelaceError
-</span><a href="#local-6989586621679417762"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-43"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationFeeTooSmall</span></span><span> </span><span id="local-6989586621679417760"><span class="annot"><span class="annottext">Tx
-</span><a href="#local-6989586621679417760"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span id="local-6989586621679417759"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679417759"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679417758"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679417758"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419612"><span class="hs-identifier hs-var">txt</span></a></span><span> </span><span class="annot"><span class="annottext">LovelaceError
+</span><a href="#local-6989586621679419611"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-43"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationFeeTooSmall</span></span><span> </span><span id="local-6989586621679419609"><span class="annot"><span class="annottext">Tx
+</span><a href="#local-6989586621679419609"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span id="local-6989586621679419608"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679419608"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679419607"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679419607"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-44"></span><span>        </span><span class="annot"><span class="annottext">Format Text (Tx -&gt; Lovelace -&gt; Lovelace -&gt; Text)
 -&gt; Tx -&gt; Lovelace -&gt; Lovelace -&gt; Text
 forall a. Format Text a -&gt; a
@@ -135,13 +135,13 @@ forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Format Text (Lovelace -&gt; Text)
 forall a r. Buildable a =&gt; Format r (a -&gt; r)
 </span><span class="hs-identifier hs-var">build</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Tx
-</span><a href="#local-6989586621679417760"><span class="hs-identifier hs-var">tx</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679417758"><span class="hs-identifier hs-var">actual</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679417759"><span class="hs-identifier hs-var">expected</span></a></span><span>
-</span><span id="line-45"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationWitnessWrongSignature</span></span><span> </span><span id="local-6989586621679417756"><span class="annot"><span class="annottext">TxInWitness
-</span><a href="#local-6989586621679417756"><span class="hs-identifier hs-var">wit</span></a></span></span><span> </span><span id="local-6989586621679417755"><span class="annot"><span class="annottext">ProtocolMagicId
-</span><a href="#local-6989586621679417755"><span class="hs-identifier hs-var">pmid</span></a></span></span><span> </span><span id="local-6989586621679417754"><span class="annot"><span class="annottext">TxSigData
-</span><a href="#local-6989586621679417754"><span class="hs-identifier hs-var">sig</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419609"><span class="hs-identifier hs-var">tx</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679419607"><span class="hs-identifier hs-var">actual</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679419608"><span class="hs-identifier hs-var">expected</span></a></span><span>
+</span><span id="line-45"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationWitnessWrongSignature</span></span><span> </span><span id="local-6989586621679419605"><span class="annot"><span class="annottext">TxInWitness
+</span><a href="#local-6989586621679419605"><span class="hs-identifier hs-var">wit</span></a></span></span><span> </span><span id="local-6989586621679419604"><span class="annot"><span class="annottext">ProtocolMagicId
+</span><a href="#local-6989586621679419604"><span class="hs-identifier hs-var">pmid</span></a></span></span><span> </span><span id="local-6989586621679419603"><span class="annot"><span class="annottext">TxSigData
+</span><a href="#local-6989586621679419603"><span class="hs-identifier hs-var">sig</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-46"></span><span>        </span><span class="annot"><span class="annottext">Format Text (TxInWitness -&gt; Text -&gt; Text -&gt; Text)
 -&gt; TxInWitness -&gt; Text -&gt; Text -&gt; Text
 forall a. Format Text a -&gt; a
@@ -177,16 +177,16 @@ forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Format Text (Text -&gt; Text)
 forall r. Format r (Text -&gt; r)
 </span><span class="hs-identifier hs-var">stext</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">TxInWitness
-</span><a href="#local-6989586621679417756"><span class="hs-identifier hs-var">wit</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TxSigData -&gt; Text
+</span><a href="#local-6989586621679419605"><span class="hs-identifier hs-var">wit</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TxSigData -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">TxSigData
-</span><a href="#local-6989586621679417754"><span class="hs-identifier hs-var">sig</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; Text
+</span><a href="#local-6989586621679419603"><span class="hs-identifier hs-var">sig</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">ProtocolMagicId
-</span><a href="#local-6989586621679417755"><span class="hs-identifier hs-var">pmid</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-47"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationWitnessWrongKey</span></span><span> </span><span id="local-6989586621679417751"><span class="annot"><span class="annottext">TxInWitness
-</span><a href="#local-6989586621679417751"><span class="hs-identifier hs-var">wit</span></a></span></span><span> </span><span id="local-6989586621679417750"><span class="annot"><span class="annottext">Address
-</span><a href="#local-6989586621679417750"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419604"><span class="hs-identifier hs-var">pmid</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationWitnessWrongKey</span></span><span> </span><span id="local-6989586621679419600"><span class="annot"><span class="annottext">TxInWitness
+</span><a href="#local-6989586621679419600"><span class="hs-identifier hs-var">wit</span></a></span></span><span> </span><span id="local-6989586621679419599"><span class="annot"><span class="annottext">Address
+</span><a href="#local-6989586621679419599"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-48"></span><span>        </span><span class="annot"><span class="annottext">Format Text (TxInWitness -&gt; Address -&gt; Text)
 -&gt; TxInWitness -&gt; Address -&gt; Text
 forall a. Format Text a -&gt; a
@@ -210,10 +210,10 @@ forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Format Text (Address -&gt; Text)
 forall a r. Buildable a =&gt; Format r (a -&gt; r)
 </span><span class="hs-identifier hs-var">build</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">TxInWitness
-</span><a href="#local-6989586621679417751"><span class="hs-identifier hs-var">wit</span></a></span><span> </span><span class="annot"><span class="annottext">Address
-</span><a href="#local-6989586621679417750"><span class="hs-identifier hs-var">addr</span></a></span><span>
-</span><span id="line-49"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationMissingInput</span></span><span> </span><span id="local-6989586621679417748"><span class="annot"><span class="annottext">TxIn
-</span><a href="#local-6989586621679417748"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419600"><span class="hs-identifier hs-var">wit</span></a></span><span> </span><span class="annot"><span class="annottext">Address
+</span><a href="#local-6989586621679419599"><span class="hs-identifier hs-var">addr</span></a></span><span>
+</span><span id="line-49"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationMissingInput</span></span><span> </span><span id="local-6989586621679419597"><span class="annot"><span class="annottext">TxIn
+</span><a href="#local-6989586621679419597"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-50"></span><span>        </span><span class="annot"><span class="annottext">Format Text (TxIn -&gt; Text) -&gt; TxIn -&gt; Text
 forall a. Format Text a -&gt; a
 </span><span class="hs-identifier hs-var">sformat</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Format (TxIn -&gt; Text) (TxIn -&gt; Text)
@@ -223,36 +223,36 @@ forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span> </span><span class="annot"><span class="annottext">Format Text (TxIn -&gt; Text)
 forall a r. Buildable a =&gt; Format r (a -&gt; r)
 </span><span class="hs-identifier hs-var">build</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">TxIn
-</span><a href="#local-6989586621679417748"><span class="hs-identifier hs-var">tx</span></a></span><span>
+</span><a href="#local-6989586621679419597"><span class="hs-identifier hs-var">tx</span></a></span><span>
 </span><span id="line-51"></span><span>      </span><span class="hs-comment">-- Fields are &lt;expected&gt; &lt;actual&gt;</span><span>
-</span><span id="line-52"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationNetworkMagicMismatch</span></span><span> </span><span id="local-6989586621679417746"><span class="annot"><span class="annottext">NetworkMagic
-</span><a href="#local-6989586621679417746"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679417745"><span class="annot"><span class="annottext">NetworkMagic
-</span><a href="#local-6989586621679417745"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-52"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationNetworkMagicMismatch</span></span><span> </span><span id="local-6989586621679419595"><span class="annot"><span class="annottext">NetworkMagic
+</span><a href="#local-6989586621679419595"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679419594"><span class="annot"><span class="annottext">NetworkMagic
+</span><a href="#local-6989586621679419594"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-53"></span><span>        </span><span class="annot"><span class="annottext">[Text] -&gt; Text
 forall a. Monoid a =&gt; [a] -&gt; a
 </span><span class="hs-identifier hs-var">mconcat</span></span><span> </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Bad network magic  &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">NetworkMagic -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkMagic
-</span><a href="#local-6989586621679417745"><span class="hs-identifier hs-var">actual</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679419594"><span class="hs-identifier hs-var">actual</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;, expected &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">NetworkMagic -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkMagic
-</span><a href="#local-6989586621679417746"><span class="hs-identifier hs-var">expected</span></a></span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-54"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationTxTooLarge</span></span><span> </span><span id="local-6989586621679417743"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679417743"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679417742"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679417742"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679419595"><span class="hs-identifier hs-var">expected</span></a></span><span> </span><span class="hs-special">]</span><span>
+</span><span id="line-54"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">TxValidationTxTooLarge</span></span><span> </span><span id="local-6989586621679419592"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679419592"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span id="local-6989586621679419591"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679419591"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-55"></span><span>        </span><span class="annot"><span class="annottext">[Text] -&gt; Text
 forall a. Monoid a =&gt; [a] -&gt; a
 </span><span class="hs-identifier hs-var">mconcat</span></span><span> </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Tx is &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679417742"><span class="hs-identifier hs-var">actual</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679419591"><span class="hs-identifier hs-var">actual</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot; bytes, but expected &lt; &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679417743"><span class="hs-identifier hs-var">expected</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679419592"><span class="hs-identifier hs-var">expected</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot; bytes&quot;</span></span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-56"></span><span>      </span><span class="annot"><span class="annottext">TxValidationError
 </span><span class="hs-identifier hs-var">TxValidationUnknownAddressAttributes</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
@@ -265,16 +265,16 @@ forall a. Show a =&gt; a -&gt; Text
 </span><span id="line-60"></span><span>
 </span><span id="line-61"></span><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderUTxOError"><span class="hs-identifier hs-type">renderUTxOError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">UTxOError</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-62"></span><span id="renderUTxOError"><span class="annot"><span class="annottext">renderUTxOError :: UTxOError -&gt; Text
-</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderUTxOError"><span class="hs-identifier hs-var hs-var">renderUTxOError</span></a></span></span><span> </span><span id="local-6989586621679417739"><span class="annot"><span class="annottext">UTxOError
-</span><a href="#local-6989586621679417739"><span class="hs-identifier hs-var">ue</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderUTxOError"><span class="hs-identifier hs-var hs-var">renderUTxOError</span></a></span></span><span> </span><span id="local-6989586621679419588"><span class="annot"><span class="annottext">UTxOError
+</span><a href="#local-6989586621679419588"><span class="hs-identifier hs-var">ue</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-63"></span><span>  </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;UTxOError: &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span>
 </span><span id="line-64"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">UTxOError
-</span><a href="#local-6989586621679417739"><span class="hs-identifier hs-var">ue</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-65"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">UTxOMissingInput</span></span><span> </span><span id="local-6989586621679417737"><span class="annot"><span class="annottext">TxIn
-</span><a href="#local-6989586621679417737"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (TxIn -&gt; Text) -&gt; TxIn -&gt; Text
+</span><a href="#local-6989586621679419588"><span class="hs-identifier hs-var">ue</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-65"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">UTxOMissingInput</span></span><span> </span><span id="local-6989586621679419586"><span class="annot"><span class="annottext">TxIn
+</span><a href="#local-6989586621679419586"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (TxIn -&gt; Text) -&gt; TxIn -&gt; Text
 forall a. Format Text a -&gt; a
 </span><span class="hs-identifier hs-var">sformat</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Format (TxIn -&gt; Text) (TxIn -&gt; Text)
 </span><span class="hs-string">&quot;Lookup of tx &quot;</span></span><span class="annot"><span class="annottext">Format (TxIn -&gt; Text) (TxIn -&gt; Text)
@@ -287,12 +287,12 @@ forall a r. Buildable a =&gt; Format r (a -&gt; r)
 forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span class="annot"><span class="annottext">Format Text Text
 </span><span class="hs-string">&quot; failed&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">TxIn
-</span><a href="#local-6989586621679417737"><span class="hs-identifier hs-var">tx</span></a></span><span>
+</span><a href="#local-6989586621679419586"><span class="hs-identifier hs-var">tx</span></a></span><span>
 </span><span id="line-66"></span><span>      </span><span class="annot"><span class="annottext">UTxOError
 </span><span class="hs-identifier hs-var">UTxOOverlappingUnion</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Union or two overlapping UTxO sets&quot;</span></span><span>
 </span><span id="line-67"></span><span>
-</span><span id="line-68"></span><span id="local-6989586621679417801"><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-type">textShow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679417801"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679417801"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
+</span><span id="line-68"></span><span id="local-6989586621679419650"><span class="annot"><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-type">textShow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679419650"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679419650"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
 </span><span id="line-69"></span><span id="textShow"><span class="annot"><span class="annottext">textShow :: a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#textShow"><span class="hs-identifier hs-var hs-var">textShow</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Text) -&gt; (a -&gt; String) -&gt; a -&gt; Text

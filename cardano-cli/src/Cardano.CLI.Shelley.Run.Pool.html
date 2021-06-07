@@ -30,7 +30,7 @@
 </span><span id="line-30"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyPoolCmdReadKeyFileError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdReadKeyFileError"><span class="hs-identifier hs-var">ShelleyPoolCmdReadKeyFileError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Key.html#InputDecodeError"><span class="hs-identifier hs-type">InputDecodeError</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-31"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyPoolCmdWriteFileError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdWriteFileError"><span class="hs-identifier hs-var">ShelleyPoolCmdWriteFileError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-32"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyPoolCmdMetadataValidationError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdMetadataValidationError"><span class="hs-identifier hs-var">ShelleyPoolCmdMetadataValidationError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">StakePoolMetadataValidationError</span></a></span><span>
-</span><span id="line-33"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679309450"><span id="local-6989586621679309452"><span id="local-6989586621679309454"><span class="annot"><span class="annottext">Int -&gt; ShelleyPoolCmdError -&gt; ShowS
+</span><span id="line-33"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679311161"><span id="local-6989586621679311163"><span id="local-6989586621679311165"><span class="annot"><span class="annottext">Int -&gt; ShelleyPoolCmdError -&gt; ShowS
 [ShelleyPoolCmdError] -&gt; ShowS
 ShelleyPoolCmdError -&gt; String
 (Int -&gt; ShelleyPoolCmdError -&gt; ShowS)
@@ -49,30 +49,30 @@ $cshowsPrec :: Int -&gt; ShelleyPoolCmdError -&gt; ShowS
 </span><span id="line-34"></span><span>
 </span><span id="line-35"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#renderShelleyPoolCmdError"><span class="hs-identifier hs-type">renderShelleyPoolCmdError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-36"></span><span id="renderShelleyPoolCmdError"><span class="annot"><span class="annottext">renderShelleyPoolCmdError :: ShelleyPoolCmdError -&gt; Text
-</span><a href="Cardano.CLI.Shelley.Run.Pool.html#renderShelleyPoolCmdError"><span class="hs-identifier hs-var hs-var">renderShelleyPoolCmdError</span></a></span></span><span> </span><span id="local-6989586621679309448"><span class="annot"><span class="annottext">ShelleyPoolCmdError
-</span><a href="#local-6989586621679309448"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#renderShelleyPoolCmdError"><span class="hs-identifier hs-var hs-var">renderShelleyPoolCmdError</span></a></span></span><span> </span><span id="local-6989586621679311159"><span class="annot"><span class="annottext">ShelleyPoolCmdError
+</span><a href="#local-6989586621679311159"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-37"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ShelleyPoolCmdError
-</span><a href="#local-6989586621679309448"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-38"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdReadFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdReadFileError</span></a></span><span> </span><span id="local-6989586621679309447"><span class="annot"><span class="annottext">FileError TextEnvelopeError
-</span><a href="#local-6989586621679309447"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
+</span><a href="#local-6989586621679311159"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-38"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdReadFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdReadFileError</span></a></span><span> </span><span id="local-6989586621679311158"><span class="annot"><span class="annottext">FileError TextEnvelopeError
+</span><a href="#local-6989586621679311158"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FileError TextEnvelopeError -&gt; String
 forall e. Error e =&gt; e -&gt; String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">FileError TextEnvelopeError
-</span><a href="#local-6989586621679309447"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-39"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdReadKeyFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdReadKeyFileError</span></a></span><span> </span><span id="local-6989586621679309444"><span class="annot"><span class="annottext">FileError InputDecodeError
-</span><a href="#local-6989586621679309444"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
+</span><a href="#local-6989586621679311158"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-39"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdReadKeyFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdReadKeyFileError</span></a></span><span> </span><span id="local-6989586621679311155"><span class="annot"><span class="annottext">FileError InputDecodeError
+</span><a href="#local-6989586621679311155"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FileError InputDecodeError -&gt; String
 forall e. Error e =&gt; e -&gt; String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">FileError InputDecodeError
-</span><a href="#local-6989586621679309444"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-40"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdWriteFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdWriteFileError</span></a></span><span> </span><span id="local-6989586621679309443"><span class="annot"><span class="annottext">FileError ()
-</span><a href="#local-6989586621679309443"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
+</span><a href="#local-6989586621679311155"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-40"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdWriteFileError"><span class="hs-identifier hs-type">ShelleyPoolCmdWriteFileError</span></a></span><span> </span><span id="local-6989586621679311154"><span class="annot"><span class="annottext">FileError ()
+</span><a href="#local-6989586621679311154"><span class="hs-identifier hs-var">fileErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FileError () -&gt; String
 forall e. Error e =&gt; e -&gt; String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">FileError ()
-</span><a href="#local-6989586621679309443"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-41"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdMetadataValidationError"><span class="hs-identifier hs-type">ShelleyPoolCmdMetadataValidationError</span></a></span><span> </span><span id="local-6989586621679309442"><span class="annot"><span class="annottext">StakePoolMetadataValidationError
-</span><a href="#local-6989586621679309442"><span class="hs-identifier hs-var">validationErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679311154"><span class="hs-identifier hs-var">fileErr</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdMetadataValidationError"><span class="hs-identifier hs-type">ShelleyPoolCmdMetadataValidationError</span></a></span><span> </span><span id="local-6989586621679311153"><span class="annot"><span class="annottext">StakePoolMetadataValidationError
+</span><a href="#local-6989586621679311153"><span class="hs-identifier hs-var">validationErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-42"></span><span>      </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Error validating stake pool metadata: &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
@@ -80,24 +80,24 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">StakePoolMetadataValidationError -&gt; String
 forall e. Error e =&gt; e -&gt; String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">StakePoolMetadataValidationError
-</span><a href="#local-6989586621679309442"><span class="hs-identifier hs-var">validationErr</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311153"><span class="hs-identifier hs-var">validationErr</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-43"></span><span>
 </span><span id="line-44"></span><span>
 </span><span id="line-45"></span><span>
 </span><span id="line-46"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-type">runPoolCmd</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolCmd"><span class="hs-identifier hs-type">PoolCmd</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-47"></span><span id="runPoolCmd"><span class="annot"><span class="annottext">runPoolCmd :: PoolCmd -&gt; ExceptT ShelleyPoolCmdError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var hs-var">runPoolCmd</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolRegistrationCert"><span class="hs-identifier hs-type">PoolRegistrationCert</span></a></span><span> </span><span id="local-6989586621679309440"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309440"><span class="hs-identifier hs-var">sPvkey</span></a></span></span><span> </span><span id="local-6989586621679309439"><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
-</span><a href="#local-6989586621679309439"><span class="hs-identifier hs-var">vrfVkey</span></a></span></span><span> </span><span id="local-6989586621679309438"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309438"><span class="hs-identifier hs-var">pldg</span></a></span></span><span> </span><span id="local-6989586621679309437"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309437"><span class="hs-identifier hs-var">pCost</span></a></span></span><span> </span><span id="local-6989586621679309436"><span class="annot"><span class="annottext">Rational
-</span><a href="#local-6989586621679309436"><span class="hs-identifier hs-var">pMrgn</span></a></span></span><span> </span><span id="local-6989586621679309435"><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
-</span><a href="#local-6989586621679309435"><span class="hs-identifier hs-var">rwdVerFp</span></a></span></span><span> </span><span id="local-6989586621679309434"><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
-</span><a href="#local-6989586621679309434"><span class="hs-identifier hs-var">ownerVerFps</span></a></span></span><span> </span><span id="local-6989586621679309433"><span class="annot"><span class="annottext">[StakePoolRelay]
-</span><a href="#local-6989586621679309433"><span class="hs-identifier hs-var">relays</span></a></span></span><span> </span><span id="local-6989586621679309432"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679309432"><span class="hs-identifier hs-var">mbMetadata</span></a></span></span><span> </span><span id="local-6989586621679309431"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679309431"><span class="hs-identifier hs-var">network</span></a></span></span><span> </span><span id="local-6989586621679309430"><span class="annot"><span class="annottext">OutputFile
-</span><a href="#local-6989586621679309430"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var hs-var">runPoolCmd</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolRegistrationCert"><span class="hs-identifier hs-type">PoolRegistrationCert</span></a></span><span> </span><span id="local-6989586621679311151"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311151"><span class="hs-identifier hs-var">sPvkey</span></a></span></span><span> </span><span id="local-6989586621679311150"><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
+</span><a href="#local-6989586621679311150"><span class="hs-identifier hs-var">vrfVkey</span></a></span></span><span> </span><span id="local-6989586621679311149"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311149"><span class="hs-identifier hs-var">pldg</span></a></span></span><span> </span><span id="local-6989586621679311148"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311148"><span class="hs-identifier hs-var">pCost</span></a></span></span><span> </span><span id="local-6989586621679311147"><span class="annot"><span class="annottext">Rational
+</span><a href="#local-6989586621679311147"><span class="hs-identifier hs-var">pMrgn</span></a></span></span><span> </span><span id="local-6989586621679311146"><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
+</span><a href="#local-6989586621679311146"><span class="hs-identifier hs-var">rwdVerFp</span></a></span></span><span> </span><span id="local-6989586621679311145"><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
+</span><a href="#local-6989586621679311145"><span class="hs-identifier hs-var">ownerVerFps</span></a></span></span><span> </span><span id="local-6989586621679311144"><span class="annot"><span class="annottext">[StakePoolRelay]
+</span><a href="#local-6989586621679311144"><span class="hs-identifier hs-var">relays</span></a></span></span><span> </span><span id="local-6989586621679311143"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
+</span><a href="#local-6989586621679311143"><span class="hs-identifier hs-var">mbMetadata</span></a></span></span><span> </span><span id="local-6989586621679311142"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679311142"><span class="hs-identifier hs-var">network</span></a></span></span><span> </span><span id="local-6989586621679311141"><span class="annot"><span class="annottext">OutputFile
+</span><a href="#local-6989586621679311141"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-48"></span><span>  </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
 -&gt; VerificationKeyOrFile VrfKey
 -&gt; Lovelace
@@ -111,41 +111,41 @@ forall e. Error e =&gt; e -&gt; String
 -&gt; OutputFile
 -&gt; ExceptT ShelleyPoolCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRegistrationCert"><span class="hs-identifier hs-var">runStakePoolRegistrationCert</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309440"><span class="hs-identifier hs-var">sPvkey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
-</span><a href="#local-6989586621679309439"><span class="hs-identifier hs-var">vrfVkey</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309438"><span class="hs-identifier hs-var">pldg</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309437"><span class="hs-identifier hs-var">pCost</span></a></span><span> </span><span class="annot"><span class="annottext">Rational
-</span><a href="#local-6989586621679309436"><span class="hs-identifier hs-var">pMrgn</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
-</span><a href="#local-6989586621679309435"><span class="hs-identifier hs-var">rwdVerFp</span></a></span><span> </span><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
-</span><a href="#local-6989586621679309434"><span class="hs-identifier hs-var">ownerVerFps</span></a></span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay]
-</span><a href="#local-6989586621679309433"><span class="hs-identifier hs-var">relays</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679309432"><span class="hs-identifier hs-var">mbMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679309431"><span class="hs-identifier hs-var">network</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFile
-</span><a href="#local-6989586621679309430"><span class="hs-identifier hs-var">outfp</span></a></span><span>
-</span><span id="line-49"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolRetirementCert"><span class="hs-identifier hs-type">PoolRetirementCert</span></a></span><span> </span><span id="local-6989586621679309427"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309427"><span class="hs-identifier hs-var">sPvkeyFp</span></a></span></span><span> </span><span id="local-6989586621679309426"><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679309426"><span class="hs-identifier hs-var">retireEpoch</span></a></span></span><span> </span><span id="local-6989586621679309425"><span class="annot"><span class="annottext">OutputFile
-</span><a href="#local-6989586621679309425"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="#local-6989586621679311151"><span class="hs-identifier hs-var">sPvkey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
+</span><a href="#local-6989586621679311150"><span class="hs-identifier hs-var">vrfVkey</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311149"><span class="hs-identifier hs-var">pldg</span></a></span><span> </span><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311148"><span class="hs-identifier hs-var">pCost</span></a></span><span> </span><span class="annot"><span class="annottext">Rational
+</span><a href="#local-6989586621679311147"><span class="hs-identifier hs-var">pMrgn</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
+</span><a href="#local-6989586621679311146"><span class="hs-identifier hs-var">rwdVerFp</span></a></span><span> </span><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
+</span><a href="#local-6989586621679311145"><span class="hs-identifier hs-var">ownerVerFps</span></a></span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay]
+</span><a href="#local-6989586621679311144"><span class="hs-identifier hs-var">relays</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
+</span><a href="#local-6989586621679311143"><span class="hs-identifier hs-var">mbMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679311142"><span class="hs-identifier hs-var">network</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFile
+</span><a href="#local-6989586621679311141"><span class="hs-identifier hs-var">outfp</span></a></span><span>
+</span><span id="line-49"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolRetirementCert"><span class="hs-identifier hs-type">PoolRetirementCert</span></a></span><span> </span><span id="local-6989586621679311138"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311138"><span class="hs-identifier hs-var">sPvkeyFp</span></a></span></span><span> </span><span id="local-6989586621679311137"><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679311137"><span class="hs-identifier hs-var">retireEpoch</span></a></span></span><span> </span><span id="local-6989586621679311136"><span class="annot"><span class="annottext">OutputFile
+</span><a href="#local-6989586621679311136"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-50"></span><span>  </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
 -&gt; EpochNo -&gt; OutputFile -&gt; ExceptT ShelleyPoolCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRetirementCert"><span class="hs-identifier hs-var">runStakePoolRetirementCert</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309427"><span class="hs-identifier hs-var">sPvkeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679309426"><span class="hs-identifier hs-var">retireEpoch</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFile
-</span><a href="#local-6989586621679309425"><span class="hs-identifier hs-var">outfp</span></a></span><span>
-</span><span id="line-51"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolGetId"><span class="hs-identifier hs-type">PoolGetId</span></a></span><span> </span><span id="local-6989586621679309422"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309422"><span class="hs-identifier hs-var">sPvkey</span></a></span></span><span> </span><span id="local-6989586621679309421"><span class="annot"><span class="annottext">OutputFormat
-</span><a href="#local-6989586621679309421"><span class="hs-identifier hs-var">outputFormat</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311138"><span class="hs-identifier hs-var">sPvkeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679311137"><span class="hs-identifier hs-var">retireEpoch</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFile
+</span><a href="#local-6989586621679311136"><span class="hs-identifier hs-var">outfp</span></a></span><span>
+</span><span id="line-51"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolGetId"><span class="hs-identifier hs-type">PoolGetId</span></a></span><span> </span><span id="local-6989586621679311133"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311133"><span class="hs-identifier hs-var">sPvkey</span></a></span></span><span> </span><span id="local-6989586621679311132"><span class="annot"><span class="annottext">OutputFormat
+</span><a href="#local-6989586621679311132"><span class="hs-identifier hs-var">outputFormat</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
 -&gt; OutputFormat -&gt; ExceptT ShelleyPoolCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolId"><span class="hs-identifier hs-var">runPoolId</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309422"><span class="hs-identifier hs-var">sPvkey</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFormat
-</span><a href="#local-6989586621679309421"><span class="hs-identifier hs-var">outputFormat</span></a></span><span>
-</span><span id="line-52"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolMetadataHash"><span class="hs-identifier hs-type">PoolMetadataHash</span></a></span><span> </span><span id="local-6989586621679309418"><span class="annot"><span class="annottext">PoolMetadataFile
-</span><a href="#local-6989586621679309418"><span class="hs-identifier hs-var">poolMdFile</span></a></span></span><span> </span><span id="local-6989586621679309417"><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679309417"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PoolMetadataFile
+</span><a href="#local-6989586621679311133"><span class="hs-identifier hs-var">sPvkey</span></a></span><span> </span><span class="annot"><span class="annottext">OutputFormat
+</span><a href="#local-6989586621679311132"><span class="hs-identifier hs-var">outputFormat</span></a></span><span>
+</span><span id="line-52"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolMetadataHash"><span class="hs-identifier hs-type">PoolMetadataHash</span></a></span><span> </span><span id="local-6989586621679311129"><span class="annot"><span class="annottext">PoolMetadataFile
+</span><a href="#local-6989586621679311129"><span class="hs-identifier hs-var">poolMdFile</span></a></span></span><span> </span><span id="local-6989586621679311128"><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311128"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PoolMetadataFile
 -&gt; Maybe OutputFile -&gt; ExceptT ShelleyPoolCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolMetadataHash"><span class="hs-identifier hs-var">runPoolMetadataHash</span></a></span><span> </span><span class="annot"><span class="annottext">PoolMetadataFile
-</span><a href="#local-6989586621679309418"><span class="hs-identifier hs-var">poolMdFile</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679309417"><span class="hs-identifier hs-var">mOutFile</span></a></span><span>
+</span><a href="#local-6989586621679311129"><span class="hs-identifier hs-var">poolMdFile</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311128"><span class="hs-identifier hs-var">mOutFile</span></a></span><span>
 </span><span id="line-53"></span><span>
 </span><span id="line-54"></span><span>
 </span><span id="line-55"></span><span class="hs-comment">--</span><span>
@@ -190,31 +190,31 @@ forall e. Error e =&gt; e -&gt; String
 -&gt; OutputFile
 -&gt; ExceptT ShelleyPoolCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRegistrationCert"><span class="hs-identifier hs-var hs-var">runStakePoolRegistrationCert</span></a></span></span><span>
-</span><span id="line-85"></span><span>  </span><span id="local-6989586621679309415"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309415"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span></span><span>
-</span><span id="line-86"></span><span>  </span><span id="local-6989586621679309414"><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
-</span><a href="#local-6989586621679309414"><span class="hs-identifier hs-var">vrfVerKeyOrFile</span></a></span></span><span>
-</span><span id="line-87"></span><span>  </span><span id="local-6989586621679309413"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309413"><span class="hs-identifier hs-var">pldg</span></a></span></span><span>
-</span><span id="line-88"></span><span>  </span><span id="local-6989586621679309412"><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309412"><span class="hs-identifier hs-var">pCost</span></a></span></span><span>
-</span><span id="line-89"></span><span>  </span><span id="local-6989586621679309411"><span class="annot"><span class="annottext">Rational
-</span><a href="#local-6989586621679309411"><span class="hs-identifier hs-var">pMrgn</span></a></span></span><span>
-</span><span id="line-90"></span><span>  </span><span id="local-6989586621679309410"><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
-</span><a href="#local-6989586621679309410"><span class="hs-identifier hs-var">rwdStakeVerKeyOrFile</span></a></span></span><span>
-</span><span id="line-91"></span><span>  </span><span id="local-6989586621679309409"><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
-</span><a href="#local-6989586621679309409"><span class="hs-identifier hs-var">ownerStakeVerKeyOrFiles</span></a></span></span><span>
-</span><span id="line-92"></span><span>  </span><span id="local-6989586621679309408"><span class="annot"><span class="annottext">[StakePoolRelay]
-</span><a href="#local-6989586621679309408"><span class="hs-identifier hs-var">relays</span></a></span></span><span>
-</span><span id="line-93"></span><span>  </span><span id="local-6989586621679309407"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679309407"><span class="hs-identifier hs-var">mbMetadata</span></a></span></span><span>
-</span><span id="line-94"></span><span>  </span><span id="local-6989586621679309406"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679309406"><span class="hs-identifier hs-var">network</span></a></span></span><span>
-</span><span id="line-95"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679309404"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309404"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-85"></span><span>  </span><span id="local-6989586621679311126"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311126"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span></span><span>
+</span><span id="line-86"></span><span>  </span><span id="local-6989586621679311125"><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
+</span><a href="#local-6989586621679311125"><span class="hs-identifier hs-var">vrfVerKeyOrFile</span></a></span></span><span>
+</span><span id="line-87"></span><span>  </span><span id="local-6989586621679311124"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311124"><span class="hs-identifier hs-var">pldg</span></a></span></span><span>
+</span><span id="line-88"></span><span>  </span><span id="local-6989586621679311123"><span class="annot"><span class="annottext">Lovelace
+</span><a href="#local-6989586621679311123"><span class="hs-identifier hs-var">pCost</span></a></span></span><span>
+</span><span id="line-89"></span><span>  </span><span id="local-6989586621679311122"><span class="annot"><span class="annottext">Rational
+</span><a href="#local-6989586621679311122"><span class="hs-identifier hs-var">pMrgn</span></a></span></span><span>
+</span><span id="line-90"></span><span>  </span><span id="local-6989586621679311121"><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
+</span><a href="#local-6989586621679311121"><span class="hs-identifier hs-var">rwdStakeVerKeyOrFile</span></a></span></span><span>
+</span><span id="line-91"></span><span>  </span><span id="local-6989586621679311120"><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
+</span><a href="#local-6989586621679311120"><span class="hs-identifier hs-var">ownerStakeVerKeyOrFiles</span></a></span></span><span>
+</span><span id="line-92"></span><span>  </span><span id="local-6989586621679311119"><span class="annot"><span class="annottext">[StakePoolRelay]
+</span><a href="#local-6989586621679311119"><span class="hs-identifier hs-var">relays</span></a></span></span><span>
+</span><span id="line-93"></span><span>  </span><span id="local-6989586621679311118"><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
+</span><a href="#local-6989586621679311118"><span class="hs-identifier hs-var">mbMetadata</span></a></span></span><span>
+</span><span id="line-94"></span><span>  </span><span id="local-6989586621679311117"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679311117"><span class="hs-identifier hs-var">network</span></a></span></span><span>
+</span><span id="line-95"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679311115"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311115"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-96"></span><span>    </span><span class="hs-comment">-- Pool verification key</span><span>
-</span><span id="line-97"></span><span>    </span><span id="local-6989586621679309403"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309403"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
+</span><span id="line-97"></span><span>    </span><span id="local-6989586621679311114"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
+</span><a href="#local-6989586621679311114"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT
      (FileError InputDecodeError) IO (VerificationKey StakePoolKey)
 -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey StakePoolKey)
@@ -268,18 +268,18 @@ AsType keyrole
      (Either (FileError InputDecodeError) (VerificationKey keyrole))
 </span><a href="Cardano.CLI.Shelley.Key.html#readVerificationKeyOrFile"><span class="hs-identifier hs-var">readVerificationKeyOrFile</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309415"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span><span>
-</span><span id="line-100"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309400"><span class="annot"><span class="annottext">stakePoolId' :: Hash StakePoolKey
-</span><a href="#local-6989586621679309400"><span class="hs-identifier hs-var hs-var">stakePoolId'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey -&gt; Hash StakePoolKey
+</span><a href="#local-6989586621679311126"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span><span>
+</span><span id="line-100"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311111"><span class="annot"><span class="annottext">stakePoolId' :: Hash StakePoolKey
+</span><a href="#local-6989586621679311111"><span class="hs-identifier hs-var hs-var">stakePoolId'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey -&gt; Hash StakePoolKey
 forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309403"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span>
+</span><a href="#local-6989586621679311114"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span>
 </span><span id="line-101"></span><span>
 </span><span id="line-102"></span><span>    </span><span class="hs-comment">-- VRF verification key</span><span>
-</span><span id="line-103"></span><span>    </span><span id="local-6989586621679309398"><span class="annot"><span class="annottext">VerificationKey VrfKey
-</span><a href="#local-6989586621679309398"><span class="hs-identifier hs-var">vrfVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
+</span><span id="line-103"></span><span>    </span><span id="local-6989586621679311109"><span class="annot"><span class="annottext">VerificationKey VrfKey
+</span><a href="#local-6989586621679311109"><span class="hs-identifier hs-var">vrfVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT (FileError InputDecodeError) IO (VerificationKey VrfKey)
 -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey VrfKey)
 forall (m :: * -&gt; *) x y a.
@@ -322,18 +322,18 @@ AsType keyrole
      (Either (FileError InputDecodeError) (VerificationKey keyrole))
 </span><a href="Cardano.CLI.Shelley.Key.html#readVerificationKeyOrFile"><span class="hs-identifier hs-var">readVerificationKeyOrFile</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile VrfKey
-</span><a href="#local-6989586621679309414"><span class="hs-identifier hs-var">vrfVerKeyOrFile</span></a></span><span>
-</span><span id="line-106"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309396"><span class="annot"><span class="annottext">vrfKeyHash' :: Hash VrfKey
-</span><a href="#local-6989586621679309396"><span class="hs-identifier hs-var hs-var">vrfKeyHash'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey VrfKey -&gt; Hash VrfKey
+</span><a href="#local-6989586621679311125"><span class="hs-identifier hs-var">vrfVerKeyOrFile</span></a></span><span>
+</span><span id="line-106"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311107"><span class="annot"><span class="annottext">vrfKeyHash' :: Hash VrfKey
+</span><a href="#local-6989586621679311107"><span class="hs-identifier hs-var hs-var">vrfKeyHash'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey VrfKey -&gt; Hash VrfKey
 forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey VrfKey
-</span><a href="#local-6989586621679309398"><span class="hs-identifier hs-var">vrfVerKey</span></a></span><span>
+</span><a href="#local-6989586621679311109"><span class="hs-identifier hs-var">vrfVerKey</span></a></span><span>
 </span><span id="line-107"></span><span>
 </span><span id="line-108"></span><span>    </span><span class="hs-comment">-- Pool reward account</span><span>
-</span><span id="line-109"></span><span>    </span><span id="local-6989586621679309395"><span class="annot"><span class="annottext">VerificationKey StakeKey
-</span><a href="#local-6989586621679309395"><span class="hs-identifier hs-var">rwdStakeVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
+</span><span id="line-109"></span><span>    </span><span id="local-6989586621679311106"><span class="annot"><span class="annottext">VerificationKey StakeKey
+</span><a href="#local-6989586621679311106"><span class="hs-identifier hs-var">rwdStakeVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT
      (FileError InputDecodeError) IO (VerificationKey StakeKey)
 -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey StakeKey)
@@ -379,24 +379,24 @@ AsType keyrole
      (Either (FileError InputDecodeError) (VerificationKey keyrole))
 </span><a href="Cardano.CLI.Shelley.Key.html#readVerificationKeyOrFile"><span class="hs-identifier hs-var">readVerificationKeyOrFile</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakeKey
-</span><a href="#local-6989586621679309410"><span class="hs-identifier hs-var">rwdStakeVerKeyOrFile</span></a></span><span>
-</span><span id="line-112"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309393"><span class="annot"><span class="annottext">stakeCred :: StakeCredential
-</span><a href="#local-6989586621679309393"><span class="hs-identifier hs-var hs-var">stakeCred</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StakeKey -&gt; StakeCredential
+</span><a href="#local-6989586621679311121"><span class="hs-identifier hs-var">rwdStakeVerKeyOrFile</span></a></span><span>
+</span><span id="line-112"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311104"><span class="annot"><span class="annottext">stakeCred :: StakeCredential
+</span><a href="#local-6989586621679311104"><span class="hs-identifier hs-var hs-var">stakeCred</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StakeKey -&gt; StakeCredential
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">StakeCredentialByKey</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">VerificationKey StakeKey -&gt; Hash StakeKey
 forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakeKey
-</span><a href="#local-6989586621679309395"><span class="hs-identifier hs-var">rwdStakeVerKey</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-113"></span><span>        </span><span id="local-6989586621679309391"><span class="annot"><span class="annottext">rewardAccountAddr :: StakeAddress
-</span><a href="#local-6989586621679309391"><span class="hs-identifier hs-var hs-var">rewardAccountAddr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">NetworkId -&gt; StakeCredential -&gt; StakeAddress
+</span><a href="#local-6989586621679311106"><span class="hs-identifier hs-var">rwdStakeVerKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-113"></span><span>        </span><span id="local-6989586621679311102"><span class="annot"><span class="annottext">rewardAccountAddr :: StakeAddress
+</span><a href="#local-6989586621679311102"><span class="hs-identifier hs-var hs-var">rewardAccountAddr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">NetworkId -&gt; StakeCredential -&gt; StakeAddress
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">makeStakeAddress</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679309406"><span class="hs-identifier hs-var">network</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
-</span><a href="#local-6989586621679309393"><span class="hs-identifier hs-var">stakeCred</span></a></span><span>
+</span><a href="#local-6989586621679311117"><span class="hs-identifier hs-var">network</span></a></span><span> </span><span class="annot"><span class="annottext">StakeCredential
+</span><a href="#local-6989586621679311104"><span class="hs-identifier hs-var">stakeCred</span></a></span><span>
 </span><span id="line-114"></span><span>
 </span><span id="line-115"></span><span>    </span><span class="hs-comment">-- Pool owner(s)</span><span>
-</span><span id="line-116"></span><span>    </span><span id="local-6989586621679309389"><span class="annot"><span class="annottext">[VerificationKey StakeKey]
-</span><a href="#local-6989586621679309389"><span class="hs-identifier hs-var">sPoolOwnerVkeys</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span>
+</span><span id="line-116"></span><span>    </span><span id="local-6989586621679311100"><span class="annot"><span class="annottext">[VerificationKey StakeKey]
+</span><a href="#local-6989586621679311100"><span class="hs-identifier hs-var">sPoolOwnerVkeys</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span>
 </span><span id="line-117"></span><span>      </span><span class="annot"><span class="annottext">(VerificationKeyOrFile StakeKey
  -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey StakeKey))
 -&gt; [VerificationKeyOrFile StakeKey]
@@ -457,9 +457,9 @@ AsType keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span>
 </span><span id="line-121"></span><span>        </span><span class="hs-special">)</span><span>
 </span><span id="line-122"></span><span>        </span><span class="annot"><span class="annottext">[VerificationKeyOrFile StakeKey]
-</span><a href="#local-6989586621679309409"><span class="hs-identifier hs-var">ownerStakeVerKeyOrFiles</span></a></span><span>
-</span><span id="line-123"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309387"><span class="annot"><span class="annottext">stakePoolOwners' :: [Hash StakeKey]
-</span><a href="#local-6989586621679309387"><span class="hs-identifier hs-var hs-var">stakePoolOwners'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(VerificationKey StakeKey -&gt; Hash StakeKey)
+</span><a href="#local-6989586621679311120"><span class="hs-identifier hs-var">ownerStakeVerKeyOrFiles</span></a></span><span>
+</span><span id="line-123"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311098"><span class="annot"><span class="annottext">stakePoolOwners' :: [Hash StakeKey]
+</span><a href="#local-6989586621679311098"><span class="hs-identifier hs-var hs-var">stakePoolOwners'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(VerificationKey StakeKey -&gt; Hash StakeKey)
 -&gt; [VerificationKey StakeKey] -&gt; [Hash StakeKey]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakeKey -&gt; Hash StakeKey
@@ -467,10 +467,10 @@ forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">[VerificationKey StakeKey]
-</span><a href="#local-6989586621679309389"><span class="hs-identifier hs-var">sPoolOwnerVkeys</span></a></span><span>
+</span><a href="#local-6989586621679311100"><span class="hs-identifier hs-var">sPoolOwnerVkeys</span></a></span><span>
 </span><span id="line-124"></span><span>
-</span><span id="line-125"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309385"><span class="annot"><span class="annottext">stakePoolParams :: StakePoolParameters
-</span><a href="#local-6989586621679309385"><span class="hs-identifier hs-var hs-var">stakePoolParams</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-125"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311096"><span class="annot"><span class="annottext">stakePoolParams :: StakePoolParameters
+</span><a href="#local-6989586621679311096"><span class="hs-identifier hs-var hs-var">stakePoolParams</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-126"></span><span>          </span><span class="annot"><span class="annottext">StakePoolParameters :: Hash StakePoolKey
 -&gt; Hash VrfKey
 -&gt; Lovelace
@@ -484,37 +484,37 @@ VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">StakePoolParameters</span></a></span><span>
 </span><span id="line-127"></span><span>            </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">stakePoolId :: Hash StakePoolKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolId</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StakePoolKey
-</span><a href="#local-6989586621679309400"><span class="hs-identifier hs-var">stakePoolId'</span></a></span><span>
+</span><a href="#local-6989586621679311111"><span class="hs-identifier hs-var">stakePoolId'</span></a></span><span>
 </span><span id="line-128"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolVRF :: Hash VrfKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolVRF</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash VrfKey
-</span><a href="#local-6989586621679309396"><span class="hs-identifier hs-var">vrfKeyHash'</span></a></span><span>
+</span><a href="#local-6989586621679311107"><span class="hs-identifier hs-var">vrfKeyHash'</span></a></span><span>
 </span><span id="line-129"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolCost :: Lovelace
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolCost</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309412"><span class="hs-identifier hs-var">pCost</span></a></span><span>
+</span><a href="#local-6989586621679311123"><span class="hs-identifier hs-var">pCost</span></a></span><span>
 </span><span id="line-130"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMargin :: Rational
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolMargin</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Rational
-</span><a href="#local-6989586621679309411"><span class="hs-identifier hs-var">pMrgn</span></a></span><span>
+</span><a href="#local-6989586621679311122"><span class="hs-identifier hs-var">pMrgn</span></a></span><span>
 </span><span id="line-131"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolRewardAccount :: StakeAddress
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolRewardAccount</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StakeAddress
-</span><a href="#local-6989586621679309391"><span class="hs-identifier hs-var">rewardAccountAddr</span></a></span><span>
+</span><a href="#local-6989586621679311102"><span class="hs-identifier hs-var">rewardAccountAddr</span></a></span><span>
 </span><span id="line-132"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolPledge :: Lovelace
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolPledge</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Lovelace
-</span><a href="#local-6989586621679309413"><span class="hs-identifier hs-var">pldg</span></a></span><span>
+</span><a href="#local-6989586621679311124"><span class="hs-identifier hs-var">pldg</span></a></span><span>
 </span><span id="line-133"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolOwners :: [Hash StakeKey]
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolOwners</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Hash StakeKey]
-</span><a href="#local-6989586621679309387"><span class="hs-identifier hs-var">stakePoolOwners'</span></a></span><span>
+</span><a href="#local-6989586621679311098"><span class="hs-identifier hs-var">stakePoolOwners'</span></a></span><span>
 </span><span id="line-134"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolRelays :: [StakePoolRelay]
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolRelays</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[StakePoolRelay]
-</span><a href="#local-6989586621679309408"><span class="hs-identifier hs-var">relays</span></a></span><span>
+</span><a href="#local-6989586621679311119"><span class="hs-identifier hs-var">relays</span></a></span><span>
 </span><span id="line-135"></span><span>            </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">stakePoolMetadata :: Maybe StakePoolMetadataReference
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">stakePoolMetadata</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe StakePoolMetadataReference
-</span><a href="#local-6989586621679309407"><span class="hs-identifier hs-var">mbMetadata</span></a></span><span>
+</span><a href="#local-6989586621679311118"><span class="hs-identifier hs-var">mbMetadata</span></a></span><span>
 </span><span id="line-136"></span><span>            </span><span class="hs-special">}</span><span>
 </span><span id="line-137"></span><span>
-</span><span id="line-138"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309374"><span class="annot"><span class="annottext">registrationCert :: Certificate
-</span><a href="#local-6989586621679309374"><span class="hs-identifier hs-var hs-var">registrationCert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StakePoolParameters -&gt; Certificate
+</span><span id="line-138"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311085"><span class="annot"><span class="annottext">registrationCert :: Certificate
+</span><a href="#local-6989586621679311085"><span class="hs-identifier hs-var hs-var">registrationCert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StakePoolParameters -&gt; Certificate
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">makeStakePoolRegistrationCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">StakePoolParameters
-</span><a href="#local-6989586621679309385"><span class="hs-identifier hs-var">stakePoolParams</span></a></span><span>
+</span><a href="#local-6989586621679311096"><span class="hs-identifier hs-var">stakePoolParams</span></a></span><span>
 </span><span id="line-139"></span><span>
 </span><span id="line-140"></span><span>    </span><span class="annot"><span class="annottext">(FileError () -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT (FileError ()) IO ()
@@ -548,15 +548,15 @@ HasTextEnvelope a =&gt;
 String
 -&gt; Maybe TextEnvelopeDescr -&gt; a -&gt; IO (Either (FileError ()) ())
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">writeFileTextEnvelope</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309404"><span class="hs-identifier hs-var">outfp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TextEnvelopeDescr -&gt; Maybe TextEnvelopeDescr
+</span><a href="#local-6989586621679311115"><span class="hs-identifier hs-var">outfp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TextEnvelopeDescr -&gt; Maybe TextEnvelopeDescr
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
-</span><a href="#local-6989586621679309371"><span class="hs-identifier hs-var">registrationCertDesc</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Certificate
-</span><a href="#local-6989586621679309374"><span class="hs-identifier hs-var">registrationCert</span></a></span><span>
+</span><a href="#local-6989586621679311082"><span class="hs-identifier hs-var">registrationCertDesc</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Certificate
+</span><a href="#local-6989586621679311085"><span class="hs-identifier hs-var">registrationCert</span></a></span><span>
 </span><span id="line-143"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-144"></span><span>    </span><span class="annot"><a href="#local-6989586621679309371"><span class="hs-identifier hs-type">registrationCertDesc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">TextEnvelopeDescr</span></a></span><span>
-</span><span id="line-145"></span><span>    </span><span id="local-6989586621679309371"><span class="annot"><span class="annottext">registrationCertDesc :: TextEnvelopeDescr
-</span><a href="#local-6989586621679309371"><span class="hs-identifier hs-var hs-var">registrationCertDesc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
+</span><span id="line-144"></span><span>    </span><span class="annot"><a href="#local-6989586621679311082"><span class="hs-identifier hs-type">registrationCertDesc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">TextEnvelopeDescr</span></a></span><span>
+</span><span id="line-145"></span><span>    </span><span id="local-6989586621679311082"><span class="annot"><span class="annottext">registrationCertDesc :: TextEnvelopeDescr
+</span><a href="#local-6989586621679311082"><span class="hs-identifier hs-var hs-var">registrationCertDesc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
 </span><span class="hs-string">&quot;Stake Pool Registration Certificate&quot;</span></span><span>
 </span><span id="line-146"></span><span>
 </span><span id="line-147"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRetirementCert"><span class="hs-identifier hs-type">runStakePoolRetirementCert</span></a></span><span>
@@ -566,13 +566,13 @@ forall a. a -&gt; Maybe a
 </span><span id="line-151"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-152"></span><span id="runStakePoolRetirementCert"><span class="annot"><span class="annottext">runStakePoolRetirementCert :: VerificationKeyOrFile StakePoolKey
 -&gt; EpochNo -&gt; OutputFile -&gt; ExceptT ShelleyPoolCmdError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRetirementCert"><span class="hs-identifier hs-var hs-var">runStakePoolRetirementCert</span></a></span></span><span> </span><span id="local-6989586621679309370"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309370"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span></span><span> </span><span id="local-6989586621679309369"><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679309369"><span class="hs-identifier hs-var">retireEpoch</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679309368"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309368"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runStakePoolRetirementCert"><span class="hs-identifier hs-var hs-var">runStakePoolRetirementCert</span></a></span></span><span> </span><span id="local-6989586621679311081"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311081"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span></span><span> </span><span id="local-6989586621679311080"><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679311080"><span class="hs-identifier hs-var">retireEpoch</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679311079"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311079"><span class="hs-identifier hs-var">outfp</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-153"></span><span>    </span><span class="hs-comment">-- Pool verification key</span><span>
-</span><span id="line-154"></span><span>    </span><span id="local-6989586621679309367"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309367"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
+</span><span id="line-154"></span><span>    </span><span id="local-6989586621679311078"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
+</span><a href="#local-6989586621679311078"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT
      (FileError InputDecodeError) IO (VerificationKey StakePoolKey)
 -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey StakePoolKey)
@@ -626,20 +626,20 @@ AsType keyrole
      (Either (FileError InputDecodeError) (VerificationKey keyrole))
 </span><a href="Cardano.CLI.Shelley.Key.html#readVerificationKeyOrFile"><span class="hs-identifier hs-var">readVerificationKeyOrFile</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309370"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span><span>
+</span><a href="#local-6989586621679311081"><span class="hs-identifier hs-var">stakePoolVerKeyOrFile</span></a></span><span>
 </span><span id="line-157"></span><span>
-</span><span id="line-158"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679309366"><span class="annot"><span class="annottext">stakePoolId' :: Hash StakePoolKey
-</span><a href="#local-6989586621679309366"><span class="hs-identifier hs-var hs-var">stakePoolId'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey -&gt; Hash StakePoolKey
+</span><span id="line-158"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679311077"><span class="annot"><span class="annottext">stakePoolId' :: Hash StakePoolKey
+</span><a href="#local-6989586621679311077"><span class="hs-identifier hs-var hs-var">stakePoolId'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey -&gt; Hash StakePoolKey
 forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309367"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span>
-</span><span id="line-159"></span><span>        </span><span id="local-6989586621679309365"><span class="annot"><span class="annottext">retireCert :: Certificate
-</span><a href="#local-6989586621679309365"><span class="hs-identifier hs-var hs-var">retireCert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StakePoolKey -&gt; EpochNo -&gt; Certificate
+</span><a href="#local-6989586621679311078"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span>
+</span><span id="line-159"></span><span>        </span><span id="local-6989586621679311076"><span class="annot"><span class="annottext">retireCert :: Certificate
+</span><a href="#local-6989586621679311076"><span class="hs-identifier hs-var hs-var">retireCert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Hash StakePoolKey -&gt; EpochNo -&gt; Certificate
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">makeStakePoolRetirementCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">Hash StakePoolKey
-</span><a href="#local-6989586621679309366"><span class="hs-identifier hs-var">stakePoolId'</span></a></span><span> </span><span class="annot"><span class="annottext">EpochNo
-</span><a href="#local-6989586621679309369"><span class="hs-identifier hs-var">retireEpoch</span></a></span><span>
+</span><a href="#local-6989586621679311077"><span class="hs-identifier hs-var">stakePoolId'</span></a></span><span> </span><span class="annot"><span class="annottext">EpochNo
+</span><a href="#local-6989586621679311080"><span class="hs-identifier hs-var">retireEpoch</span></a></span><span>
 </span><span id="line-160"></span><span>
 </span><span id="line-161"></span><span>    </span><span class="annot"><span class="annottext">(FileError () -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT (FileError ()) IO ()
@@ -673,15 +673,15 @@ HasTextEnvelope a =&gt;
 String
 -&gt; Maybe TextEnvelopeDescr -&gt; a -&gt; IO (Either (FileError ()) ())
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">writeFileTextEnvelope</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309368"><span class="hs-identifier hs-var">outfp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TextEnvelopeDescr -&gt; Maybe TextEnvelopeDescr
+</span><a href="#local-6989586621679311079"><span class="hs-identifier hs-var">outfp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TextEnvelopeDescr -&gt; Maybe TextEnvelopeDescr
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
-</span><a href="#local-6989586621679309363"><span class="hs-identifier hs-var">retireCertDesc</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Certificate
-</span><a href="#local-6989586621679309365"><span class="hs-identifier hs-var">retireCert</span></a></span><span>
+</span><a href="#local-6989586621679311074"><span class="hs-identifier hs-var">retireCertDesc</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Certificate
+</span><a href="#local-6989586621679311076"><span class="hs-identifier hs-var">retireCert</span></a></span><span>
 </span><span id="line-164"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-165"></span><span>    </span><span class="annot"><a href="#local-6989586621679309363"><span class="hs-identifier hs-type">retireCertDesc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">TextEnvelopeDescr</span></a></span><span>
-</span><span id="line-166"></span><span>    </span><span id="local-6989586621679309363"><span class="annot"><span class="annottext">retireCertDesc :: TextEnvelopeDescr
-</span><a href="#local-6989586621679309363"><span class="hs-identifier hs-var hs-var">retireCertDesc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
+</span><span id="line-165"></span><span>    </span><span class="annot"><a href="#local-6989586621679311074"><span class="hs-identifier hs-type">retireCertDesc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">TextEnvelopeDescr</span></a></span><span>
+</span><span id="line-166"></span><span>    </span><span id="local-6989586621679311074"><span class="annot"><span class="annottext">retireCertDesc :: TextEnvelopeDescr
+</span><a href="#local-6989586621679311074"><span class="hs-identifier hs-var hs-var">retireCertDesc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TextEnvelopeDescr
 </span><span class="hs-string">&quot;Stake Pool Retirement Certificate&quot;</span></span><span>
 </span><span id="line-167"></span><span>
 </span><span id="line-168"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolId"><span class="hs-identifier hs-type">runPoolId</span></a></span><span>
@@ -690,11 +690,11 @@ forall a. a -&gt; Maybe a
 </span><span id="line-171"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-172"></span><span id="runPoolId"><span class="annot"><span class="annottext">runPoolId :: VerificationKeyOrFile StakePoolKey
 -&gt; OutputFormat -&gt; ExceptT ShelleyPoolCmdError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolId"><span class="hs-identifier hs-var hs-var">runPoolId</span></a></span></span><span> </span><span id="local-6989586621679309362"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309362"><span class="hs-identifier hs-var">verKeyOrFile</span></a></span></span><span> </span><span id="local-6989586621679309361"><span class="annot"><span class="annottext">OutputFormat
-</span><a href="#local-6989586621679309361"><span class="hs-identifier hs-var">outputFormat</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-173"></span><span>    </span><span id="local-6989586621679309360"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309360"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolId"><span class="hs-identifier hs-var hs-var">runPoolId</span></a></span></span><span> </span><span id="local-6989586621679311073"><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
+</span><a href="#local-6989586621679311073"><span class="hs-identifier hs-var">verKeyOrFile</span></a></span></span><span> </span><span id="local-6989586621679311072"><span class="annot"><span class="annottext">OutputFormat
+</span><a href="#local-6989586621679311072"><span class="hs-identifier hs-var">outputFormat</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-173"></span><span>    </span><span id="local-6989586621679311071"><span class="annot"><span class="annottext">VerificationKey StakePoolKey
+</span><a href="#local-6989586621679311071"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(FileError InputDecodeError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT
      (FileError InputDecodeError) IO (VerificationKey StakePoolKey)
 -&gt; ExceptT ShelleyPoolCmdError IO (VerificationKey StakePoolKey)
@@ -748,7 +748,7 @@ AsType keyrole
      (Either (FileError InputDecodeError) (VerificationKey keyrole))
 </span><a href="Cardano.CLI.Shelley.Key.html#readVerificationKeyOrFile"><span class="hs-identifier hs-var">readVerificationKeyOrFile</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKeyOrFile StakePoolKey
-</span><a href="#local-6989586621679309362"><span class="hs-identifier hs-var">verKeyOrFile</span></a></span><span>
+</span><a href="#local-6989586621679311073"><span class="hs-identifier hs-var">verKeyOrFile</span></a></span><span>
 </span><span id="line-176"></span><span>    </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT ShelleyPoolCmdError IO ()
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT ShelleyPoolCmdError IO ())
@@ -756,7 +756,7 @@ forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
 </span><span id="line-177"></span><span>      </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">OutputFormat
-</span><a href="#local-6989586621679309361"><span class="hs-identifier hs-var">outputFormat</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679311072"><span class="hs-identifier hs-var">outputFormat</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-178"></span><span>        </span><span class="annot"><span class="annottext">OutputFormat
 </span><a href="Cardano.CLI.Types.html#OutputFormatHex"><span class="hs-identifier hs-var">OutputFormatHex</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-179"></span><span>          </span><span class="annot"><span class="annottext">ByteString -&gt; IO ()
@@ -769,7 +769,7 @@ forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309360"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311071"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-180"></span><span>        </span><span class="annot"><span class="annottext">OutputFormat
 </span><a href="Cardano.CLI.Types.html#OutputFormatBech32"><span class="hs-identifier hs-var">OutputFormatBech32</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-181"></span><span>          </span><span class="annot"><span class="annottext">Text -&gt; IO ()
@@ -782,16 +782,16 @@ forall keyrole.
 Key keyrole =&gt;
 VerificationKey keyrole -&gt; Hash keyrole
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">verificationKeyHash</span></a></span><span> </span><span class="annot"><span class="annottext">VerificationKey StakePoolKey
-</span><a href="#local-6989586621679309360"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311071"><span class="hs-identifier hs-var">stakePoolVerKey</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-182"></span><span>
 </span><span id="line-183"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolMetadataHash"><span class="hs-identifier hs-type">runPoolMetadataHash</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolMetadataFile"><span class="hs-identifier hs-type">PoolMetadataFile</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-184"></span><span id="runPoolMetadataHash"><span class="annot"><span class="annottext">runPoolMetadataHash :: PoolMetadataFile
 -&gt; Maybe OutputFile -&gt; ExceptT ShelleyPoolCmdError IO ()
-</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolMetadataHash"><span class="hs-identifier hs-var hs-var">runPoolMetadataHash</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolMetadataFile"><span class="hs-identifier hs-type">PoolMetadataFile</span></a></span><span> </span><span id="local-6989586621679309351"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309351"><span class="hs-identifier hs-var">poolMDPath</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679309350"><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679309350"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-185"></span><span>  </span><span id="local-6989586621679309349"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679309349"><span class="hs-identifier hs-var">metadataBytes</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(IOException -&gt; ShelleyPoolCmdError)
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolMetadataHash"><span class="hs-identifier hs-var hs-var">runPoolMetadataHash</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolMetadataFile"><span class="hs-identifier hs-type">PoolMetadataFile</span></a></span><span> </span><span id="local-6989586621679311062"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311062"><span class="hs-identifier hs-var">poolMDPath</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679311061"><span class="annot"><span class="annottext">Maybe OutputFile
+</span><a href="#local-6989586621679311061"><span class="hs-identifier hs-var">mOutFile</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-185"></span><span>  </span><span id="local-6989586621679311060"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679311060"><span class="hs-identifier hs-var">metadataBytes</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(IOException -&gt; ShelleyPoolCmdError)
 -&gt; IO ByteString -&gt; ExceptT ShelleyPoolCmdError IO ByteString
 forall (m :: * -&gt; *) x a.
 MonadIO m =&gt;
@@ -807,16 +807,16 @@ cat b c -&gt; cat a b -&gt; cat a c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; IOException -&gt; FileError TextEnvelopeError
 forall e. String -&gt; IOException -&gt; FileError e
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">FileIOError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309351"><span class="hs-identifier hs-var">poolMDPath</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO ByteString -&gt; ExceptT ShelleyPoolCmdError IO ByteString)
+</span><a href="#local-6989586621679311062"><span class="hs-identifier hs-var">poolMDPath</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO ByteString -&gt; ExceptT ShelleyPoolCmdError IO ByteString)
 -&gt; IO ByteString -&gt; ExceptT ShelleyPoolCmdError IO ByteString
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
 </span><span id="line-186"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; IO ByteString
 </span><span class="hs-identifier hs-var">BS.readFile</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309351"><span class="hs-identifier hs-var">poolMDPath</span></a></span><span>
-</span><span id="line-187"></span><span>  </span><span class="hs-special">(</span><span id="local-6989586621679309346"><span class="annot"><span class="annottext">StakePoolMetadata
-</span><a href="#local-6989586621679309346"><span class="hs-identifier hs-var">_metadata</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679309345"><span class="annot"><span class="annottext">Hash StakePoolMetadata
-</span><a href="#local-6989586621679309345"><span class="hs-identifier hs-var">metadataHash</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span>
+</span><a href="#local-6989586621679311062"><span class="hs-identifier hs-var">poolMDPath</span></a></span><span>
+</span><span id="line-187"></span><span>  </span><span class="hs-special">(</span><span id="local-6989586621679311057"><span class="annot"><span class="annottext">StakePoolMetadata
+</span><a href="#local-6989586621679311057"><span class="hs-identifier hs-var">_metadata</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679311056"><span class="annot"><span class="annottext">Hash StakePoolMetadata
+</span><a href="#local-6989586621679311056"><span class="hs-identifier hs-var">metadataHash</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span>
 </span><span id="line-188"></span><span>      </span><span class="annot"><span class="annottext">(StakePoolMetadataValidationError -&gt; ShelleyPoolCmdError)
 -&gt; ExceptT
      StakePoolMetadataValidationError
@@ -875,9 +875,9 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
      StakePoolMetadataValidationError
      (StakePoolMetadata, Hash StakePoolMetadata)
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">validateAndHashStakePoolMetadata</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679309349"><span class="hs-identifier hs-var">metadataBytes</span></a></span><span>
+</span><a href="#local-6989586621679311060"><span class="hs-identifier hs-var">metadataBytes</span></a></span><span>
 </span><span id="line-191"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Maybe OutputFile
-</span><a href="#local-6989586621679309350"><span class="hs-identifier hs-var">mOutFile</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679311061"><span class="hs-identifier hs-var">mOutFile</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-192"></span><span>    </span><span class="annot"><span class="annottext">Maybe OutputFile
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT ShelleyPoolCmdError IO ()
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
@@ -888,9 +888,9 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">BS.putStrLn</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Hash StakePoolMetadata -&gt; ByteString
 forall a. SerialiseAsRawBytes a =&gt; a -&gt; ByteString
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">serialiseToRawBytesHex</span></a></span><span> </span><span class="annot"><span class="annottext">Hash StakePoolMetadata
-</span><a href="#local-6989586621679309345"><span class="hs-identifier hs-var">metadataHash</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-193"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679309343"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309343"><span class="hs-identifier hs-var">fpath</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679311056"><span class="hs-identifier hs-var">metadataHash</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-193"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#OutputFile"><span class="hs-identifier hs-type">OutputFile</span></a></span><span> </span><span id="local-6989586621679311054"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679311054"><span class="hs-identifier hs-var">fpath</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-194"></span><span>      </span><span class="annot"><span class="annottext">(IOException -&gt; ShelleyPoolCmdError)
 -&gt; IO () -&gt; ExceptT ShelleyPoolCmdError IO ()
 forall (m :: * -&gt; *) x a.
@@ -907,14 +907,14 @@ cat b c -&gt; cat a b -&gt; cat a c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; IOException -&gt; FileError ()
 forall e. String -&gt; IOException -&gt; FileError e
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">FileIOError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309343"><span class="hs-identifier hs-var">fpath</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311054"><span class="hs-identifier hs-var">fpath</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-195"></span><span>        </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT ShelleyPoolCmdError IO ())
 -&gt; IO () -&gt; ExceptT ShelleyPoolCmdError IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ByteString -&gt; IO ()
 </span><span class="hs-identifier hs-var">BS.writeFile</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679309343"><span class="hs-identifier hs-var">fpath</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Hash StakePoolMetadata -&gt; ByteString
+</span><a href="#local-6989586621679311054"><span class="hs-identifier hs-var">fpath</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Hash StakePoolMetadata -&gt; ByteString
 forall a. SerialiseAsRawBytes a =&gt; a -&gt; ByteString
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">serialiseToRawBytesHex</span></a></span><span> </span><span class="annot"><span class="annottext">Hash StakePoolMetadata
-</span><a href="#local-6989586621679309345"><span class="hs-identifier hs-var">metadataHash</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679311056"><span class="hs-identifier hs-var">metadataHash</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-196"></span></pre></body></html>

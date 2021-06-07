@@ -27,6 +27,7 @@ module Cardano.Benchmarking.GeneratorTx.Submission
   , TxSource
   , ReportRef
   , legacyTxSource
+  , walletTxSource
   , mkSubmissionSummary
   , submitThreadReport
   , submitSubmissionThreadStats
@@ -35,7 +36,7 @@ module Cardano.Benchmarking.GeneratorTx.Submission
   , tpsLimitedTxFeederShutdown
   ) where
 
-import           Prelude (String)
+import           Prelude (String, error)
 import           Cardano.Prelude hiding (ByteString, atomically, retry, state, threadDelay)
 
 import           Control.Concurrent (threadDelay)
@@ -61,6 +62,7 @@ import           Cardano.Benchmarking.Tracer
 import           Cardano.Benchmarking.Types
 
 import           Cardano.Benchmarking.GeneratorTx.SubmissionClient
+import           Cardano.Benchmarking.Wallet
 
 {-------------------------------------------------------------------------------
   Parametrisation & state
@@ -229,3 +231,52 @@ legacyTxSource txSendQueue = Active worker
               Nothing -> pure (False, [])
               Just Nothing -> pure (True, [])
               Just (Just tx) -> pure (False, [tx])
+
+walletTxSource :: forall era. WalletScript era -> TxSendQueue era -> TxSource era
+walletTxSource walletScript txSendQueue = Active $ worker walletScript
+ where
+  worker :: forall m blocking . MonadIO m => WalletScript era -> TokBlockingStyle blocking -> Req -> m (TxSource era, [Tx era])
+  worker script blocking req = do
+    (done, (dummyList :: [Tx era])) <- case blocking of
+       TokBlocking -> consumeTxsBlocking req
+       TokNonBlocking -> consumeTxsNonBlocking req
+    (txList, newScript) <- liftIO $ unFold script $ length dummyList
+    if done
+       then return (Exhausted, txList)
+       else return (Active $ worker newScript, txList)
+
+  consumeTxsBlocking ::
+       MonadIO m
+    => Req -> m (Bool, [Tx era])
+  consumeTxsBlocking req
+    = liftIO . STM.atomically $ go req []
+   where
+    go :: Req -> [Tx era] -> STM (Bool, [Tx era])
+    go 0 acc = pure (False, acc)
+    go n acc = STM.readTBQueue txSendQueue >>=
+      \case
+        Nothing -> pure (True, acc)
+        Just tx -> go (n - 1) (tx:acc)
+
+  consumeTxsNonBlocking ::
+       MonadIO m
+    => Req -> m (Bool, [Tx era])
+  consumeTxsNonBlocking req
+    = liftIO . STM.atomically $
+        if req==0 then pure (False, [])
+          else do
+            STM.tryReadTBQueue txSendQueue >>= \case
+              Nothing -> pure (False, [])
+              Just Nothing -> pure (True, [])
+              Just (Just tx) -> pure (False, [tx])
+
+  unFold :: WalletScript era -> Int -> IO ([Tx era], WalletScript era)
+  unFold script 0 = return ([], script)
+  unFold script n = do
+    next <- runWalletScript script
+    case next of
+      Done -> error "unexpected WalletScript Done" --return ([], script)
+      NextTx s tx -> do
+        (l, out) <- unFold s $ pred n
+        return (tx:l, out)
+      Error err -> error err

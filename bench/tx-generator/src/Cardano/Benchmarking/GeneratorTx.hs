@@ -19,6 +19,7 @@ module Cardano.Benchmarking.GeneratorTx
   , TPSRate(..)
   , TxAdditionalSize(..)
   , TxGenError
+  , walletBenchmark
   , asyncBenchmark
   , readSigningKey
   , runBenchmark
@@ -29,7 +30,7 @@ module Cardano.Benchmarking.GeneratorTx
   ) where
 
 import           Cardano.Prelude
-import           Prelude (id, String)
+import           Prelude (error, id, String)
 
 import qualified Control.Concurrent.STM as STM
 import           Control.Monad (fail)
@@ -59,6 +60,8 @@ import           Cardano.Benchmarking.GeneratorTx.SubmissionClient
 import           Cardano.Benchmarking.GeneratorTx.Tx
 import           Cardano.Benchmarking.GeneratorTx.SizedMetadata (mkMetadata)
 import           Cardano.Benchmarking.Tracer
+import           Cardano.Benchmarking.Wallet
+import qualified Cardano.Benchmarking.FundSet as FundSet
 
 import           Shelley.Spec.Ledger.API (ShelleyGenesis)
 import           Ouroboros.Network.Protocol.LocalTxSubmission.Type (SubmitResult (..))
@@ -466,3 +469,62 @@ handleTxSubmissionClientError
       [ "Exception while talking to peer "
       , " (", show (addrAddress remoteAddr), "): "
       , show err]
+
+walletBenchmark :: forall era. IsShelleyBasedEra era
+  => Tracer IO (TraceBenchTxSubmit TxId)
+  -> Tracer IO NodeToNodeSubmissionTrace
+  -> ConnectClient
+  -> String
+  -> NonEmpty NodeIPv4Address
+  -> TPSRate
+  -> SubmissionErrorPolicy
+  -> AsType era
+  -> WalletRef
+  -> Int
+  -> ExceptT TxGenError IO AsyncBenchmarkControl
+walletBenchmark
+  traceSubmit
+  traceN2N
+  connectClient
+  threadName
+  targets
+  tpsRate
+  errorPolicy
+  _era
+  walletRef
+  count
+  = liftIO $ do
+  traceDebug "******* Tx generator, phase 2: pay to recipients *******"
+
+  remoteAddresses <- forM targets lookupNodeAddress
+  let numTargets :: Natural = fromIntegral $ NE.length targets
+
+  traceDebug $ "******* Tx generator, launching Tx peers:  " ++ show (NE.length remoteAddresses) ++ " of them"
+
+  startTime <- Clock.getCurrentTime
+  txSendQueue <- STM.newTBQueueIO 32
+
+  reportRefs <- STM.atomically $ replicateM (fromIntegral numTargets) STM.newEmptyTMVar
+
+  allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
+    \(reportRef, remoteAddr) -> do
+      let errorHandler = handleTxSubmissionClientError traceSubmit remoteAddr reportRef errorPolicy
+          walletScript = benchmarkWalletScript walletRef (FundSet.SeqNumber count) 2 (FundSet.Target $ show remoteAddr)
+          client = txSubmissionClient
+                     traceN2N
+                     traceSubmit
+                     (walletTxSource walletScript txSendQueue)
+                     (submitSubmissionThreadStats reportRef)
+      async $ handle errorHandler (connectClient remoteAddr client)
+
+  tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate $ replicate count
+     $ (error "dummy transaction" :: Tx era)
+
+  let tpsFeederShutdown = do
+        cancel tpsFeeder
+        liftIO $ tpsLimitedTxFeederShutdown numTargets txSendQueue
+
+  return (tpsFeeder, allAsyncs, mkSubmissionSummary threadName startTime reportRefs, tpsFeederShutdown)
+ where
+  traceDebug :: String -> IO ()
+  traceDebug =   traceWith traceSubmit . TraceBenchTxSubDebug

@@ -36,7 +36,8 @@ import           Cardano.Api ( AsType(..), CardanoEra(..), InAnyCardanoEra(..), 
 import qualified Cardano.Benchmarking.FundSet as FundSet
 import           Cardano.Benchmarking.FundSet (FundInEra(..), Validity(..), liftAnyEra )
 import           Cardano.Benchmarking.GeneratorTx as Core
-                   (AsyncBenchmarkControl, asyncBenchmark, waitBenchmark, readSigningKey, secureGenesisFund, splitFunds, txGenerator, TxGenError)
+                   (AsyncBenchmarkControl, asyncBenchmark, waitBenchmark, walletBenchmark
+                   , readSigningKey, secureGenesisFund, splitFunds, txGenerator, TxGenError)
 
 import           Cardano.Benchmarking.GeneratorTx.Tx as Core (keyAddress, txInModeCardano)
 import           Cardano.Benchmarking.GeneratorTx.LocalProtocolDefinition as Core (startProtocol)
@@ -204,6 +205,8 @@ waitBenchmarkCore ctl = do
   _ <- liftIO $ runExceptT $ Core.waitBenchmark (btTxSubmit_ tracers) ctl
   return ()
 
+-- This the benchmark based on transaction lists.
+-- It is obsolte when the tx-list are replaced with the wallet data type.
 asyncBenchmarkCore :: ThreadName -> TxListName -> TPSRate -> ActionM AsyncBenchmarkControl
 asyncBenchmarkCore (ThreadName threadName) transactions tps = do
   tracers  <- get BenchTracers
@@ -266,6 +269,53 @@ waitForEra era = do
       traceError $ "Current era: " ++ show currentEra ++ " Waiting for: " ++ show era
       liftIO $ threadDelay 1_000_000
       waitForEra era
+
+localSubmitTx :: TxInMode CardanoMode -> ActionM (SubmitResult (TxValidationErrorInMode CardanoMode))
+localSubmitTx tx = do
+  submitTracer <- btTxSubmit_ <$> get BenchTracers
+  submit <- getLocalSubmitTx
+  ret <- liftIO $ submit tx
+  let
+    msg = case ret of
+      SubmitSuccess -> mconcat
+        [ "local submit success (" , show tx , ")"]
+      SubmitFail e -> mconcat
+        [ "local submit failed: " , show e , " (" , show tx , ")"]
+  liftIO $ traceWith submitTracer $ TraceBenchTxSubDebug msg
+  return ret
+
+runBenchmark :: ThreadName -> Int -> TPSRate -> ActionM ()
+runBenchmark (ThreadName threadName) txCount tps = do
+  tracers  <- get BenchTracers
+  targets  <- getUser TTargets
+  (Testnet networkMagic) <- get NetworkId
+  protocol <- get Protocol
+  ioManager <- askIOManager
+  era <- get $ User TEra
+  walletRef <- get GlobalWallet
+  let
+    connectClient :: ConnectClient
+    connectClient  = benchmarkConnectTxSubmit
+                       ioManager
+                       (btConnect_ tracers)
+                       (btSubmission_ tracers)
+                       (protocolToCodecConfig protocol)
+                       networkMagic
+
+    coreCall :: forall era. IsShelleyBasedEra era => AsType era -> ExceptT TxGenError IO AsyncBenchmarkControl
+    coreCall eraProxy = Core.walletBenchmark (btTxSubmit_ tracers) (btN2N_ tracers) connectClient
+                                               threadName targets tps LogErrors eraProxy walletRef txCount
+  ret <- liftIO $ runExceptT $ case era of
+    AnyCardanoEra AlonzoEra  -> coreCall AsAlonzoEra
+    AnyCardanoEra MaryEra    -> coreCall AsMaryEra
+    AnyCardanoEra AllegraEra -> coreCall AsAllegraEra
+    AnyCardanoEra ShelleyEra -> coreCall AsShelleyEra
+    AnyCardanoEra ByronEra   -> error "byron not supported"
+  case ret of
+    Left err -> liftTxGenError err
+    Right ctl -> do
+      setName (ThreadName threadName) ctl
+
 {-
 This is for dirty hacking and testing and quick-fixes.
 Its a function that can be called from the JSON scripts
@@ -274,6 +324,7 @@ and for which the JSON encoding is "reserved".
 reserved :: [String] -> ActionM ()
 reserved _ = do
   localCreateCoins
+  runBenchmark (ThreadName "walletBasedBenchmark") 1000 (fromInteger 10)
 --  throwE $ UserError "no dirty hack is implemented"
 
 localCreateCoins :: ActionM ()
@@ -294,16 +345,3 @@ localCreateCoins = do
       Left (_err :: String) -> return ()
       Right tx -> void $ localSubmitTx tx
 
-localSubmitTx :: TxInMode CardanoMode -> ActionM (SubmitResult (TxValidationErrorInMode CardanoMode))
-localSubmitTx tx = do
-  submitTracer <- btTxSubmit_ <$> get BenchTracers
-  submit <- getLocalSubmitTx
-  ret <- liftIO $ submit tx
-  let
-    msg = case ret of
-      SubmitSuccess -> mconcat
-        [ "local submit success (" , show tx , ")"]
-      SubmitFail e -> mconcat
-        [ "local submit failed: " , show e , " (" , show tx , ")"]
-  liftIO $ traceWith submitTracer $ TraceBenchTxSubDebug msg
-  return ret

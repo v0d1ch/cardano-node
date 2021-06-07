@@ -84,6 +84,8 @@ actionToJSON a = case a of
     -> object ["prepareTxList" .= name, "newKey" .= key, "fundList" .= fund ]
   AsyncBenchmark (ThreadName t) (TxListName txs) (TPSRate tps) 
     -> object ["asyncBenchmark" .= t, "txList" .= txs, "tps" .= tps]
+  RunBenchmark (ThreadName t) txCount (TPSRate tps)
+    -> object ["runBenchmark" .= t, "txCount" .= txCount, "tps" .= tps]
   WaitBenchmark (ThreadName t) ->  singleton "waitBenchmark" t
   CancelBenchmark (ThreadName t) ->  singleton "cancelBenchmark" t
   WaitForEra era -> singleton "waitForEra" era

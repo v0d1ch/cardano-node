@@ -35,6 +35,7 @@ data Action where
   SplitFundToList    :: !FundListName -> !KeyName -> !FundName -> Action
   PrepareTxList      :: !TxListName -> !KeyName -> !FundListName -> Action
   AsyncBenchmark     :: !ThreadName -> !TxListName -> TPSRate -> Action
+  RunBenchmark       :: !ThreadName -> !Int -> TPSRate -> Action
   WaitBenchmark      :: !ThreadName -> Action
   CancelBenchmark    :: !ThreadName -> Action
   Reserved           :: [String] -> Action
@@ -54,6 +55,7 @@ action a = case a of
   Delay t -> delay t
   PrepareTxList name key fund -> prepareTxList name key fund
   AsyncBenchmark thread txs tps -> asyncBenchmark thread txs tps
+  RunBenchmark thread count tps -> runBenchmark thread count tps
   WaitBenchmark thread -> waitBenchmark thread
   CancelBenchmark thread -> cancelBenchmark thread
   WaitForEra era -> waitForEra era

@@ -40,12 +40,12 @@
 </span><span id="line-40"></span><span>
 </span><span id="line-41"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Tracing.Kernel.html"><span class="hs-identifier">Cardano.Tracing.Kernel</span></a></span><span>
 </span><span id="line-42"></span><span>
-</span><span id="line-43"></span><span id="local-6989586621679404150"><span id="local-6989586621679404151"></span></span><span class="hs-keyword">data</span><span> </span><span id="Peer"><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-var">Peer</span></a></span></span><span> </span><span id="local-6989586621679404203"><span class="annot"><a href="#local-6989586621679404203"><span class="hs-identifier hs-type">blk</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-43"></span><span id="local-6989586621679404152"><span id="local-6989586621679404153"></span></span><span class="hs-keyword">data</span><span> </span><span id="Peer"><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-var">Peer</span></a></span></span><span> </span><span id="local-6989586621679404205"><span class="annot"><a href="#local-6989586621679404205"><span class="hs-identifier hs-type">blk</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-44"></span><span>  </span><span id="Peer"><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-var">Peer</span></a></span></span><span>
 </span><span id="line-45"></span><span>  </span><span class="hs-glyph">!</span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span>
-</span><span id="line-46"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404203"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-47"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PeerFetchStatus</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404203"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-48"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PeerFetchInFlight</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404203"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404205"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PeerFetchStatus</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404205"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span>  </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">PeerFetchInFlight</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404205"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-49"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(forall x. Peer blk -&gt; Rep (Peer blk) x)
 -&gt; (forall x. Rep (Peer blk) x -&gt; Peer blk) -&gt; Generic (Peer blk)
 forall x. Rep (Peer blk) x -&gt; Peer blk
@@ -57,7 +57,7 @@ forall blk x. Peer blk -&gt; Rep (Peer blk) x
 $cto :: forall blk x. Rep (Peer blk) x -&gt; Peer blk
 $cfrom :: forall blk x. Peer blk -&gt; Rep (Peer blk) x
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span>
-</span><span id="line-50"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679404140"><span id="local-6989586621679404142"><span id="local-6989586621679404144"><span class="annot"><span class="annottext">Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
+</span><span id="line-50"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679404142"><span id="local-6989586621679404144"><span id="local-6989586621679404146"><span class="annot"><span class="annottext">Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
 Proxy (Peer blk) -&gt; String
 (Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo))
 -&gt; (Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo))
@@ -76,20 +76,20 @@ wNoThunks :: Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
 $cwNoThunks :: forall blk. Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
 noThunks :: Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
 $cnoThunks :: forall blk. Context -&gt; Peer blk -&gt; IO (Maybe ThunkInfo)
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">NoThunks</span></span></span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AllowThunk</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404203"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span>
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">NoThunks</span></span></span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AllowThunk</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404205"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-51"></span><span>
-</span><span id="line-52"></span><span id="local-6989586621679404138"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404138"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-53"></span><span>    </span><span id="local-6989586621679404135"><span class="annot"><span class="annottext">rnf :: Peer blk -&gt; ()
+</span><span id="line-52"></span><span id="local-6989586621679404140"><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NFData</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404140"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-53"></span><span>    </span><span id="local-6989586621679404137"><span class="annot"><span class="annottext">rnf :: Peer blk -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">rnf</span></span></span><span> </span><span class="annot"><span class="annottext">Peer blk
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
 </span><span id="line-54"></span><span>
-</span><span id="line-55"></span><span id="local-6989586621679404133"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppPeer"><span class="hs-identifier hs-type">ppPeer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404133"><span class="hs-identifier hs-type">blk</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
+</span><span id="line-55"></span><span id="local-6989586621679404135"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppPeer"><span class="hs-identifier hs-type">ppPeer</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404135"><span class="hs-identifier hs-type">blk</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
 </span><span id="line-56"></span><span id="ppPeer"><span class="annot"><span class="annottext">ppPeer :: Peer blk -&gt; Text
-</span><a href="Cardano.Tracing.Peer.html#ppPeer"><span class="hs-identifier hs-var hs-var">ppPeer</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span id="local-6989586621679404132"><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404132"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404131"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
-</span><a href="#local-6989586621679404131"><span class="hs-identifier hs-var">_af</span></a></span></span><span> </span><span id="local-6989586621679404130"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404130"><span class="hs-identifier hs-var">status</span></a></span></span><span> </span><span id="local-6989586621679404129"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404129"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Tracing.Peer.html#ppPeer"><span class="hs-identifier hs-var hs-var">ppPeer</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span id="local-6989586621679404134"><span class="annot"><span class="annottext">RemoteConnectionId
+</span><a href="#local-6989586621679404134"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404133"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
+</span><a href="#local-6989586621679404133"><span class="hs-identifier hs-var">_af</span></a></span></span><span> </span><span id="local-6989586621679404132"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
+</span><a href="#local-6989586621679404132"><span class="hs-identifier hs-var">status</span></a></span></span><span> </span><span id="local-6989586621679404131"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
+</span><a href="#local-6989586621679404131"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-57"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Text) -&gt; String -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -98,13 +98,13 @@ forall r. PrintfType r =&gt; String -&gt; r
 </span><span class="hs-identifier hs-var">printf</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;%-15s %-8s %s&quot;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">RemoteConnectionId -&gt; String
 </span><a href="Cardano.Tracing.Peer.html#ppCid"><span class="hs-identifier hs-var">ppCid</span></a></span><span> </span><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404132"><span class="hs-identifier hs-var">cid</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk) -&gt; String
+</span><a href="#local-6989586621679404134"><span class="hs-identifier hs-var">cid</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk) -&gt; String
 forall header. PeerFetchStatus header -&gt; String
 </span><a href="Cardano.Tracing.Peer.html#ppStatus"><span class="hs-identifier hs-var">ppStatus</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404130"><span class="hs-identifier hs-var">status</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk) -&gt; String
+</span><a href="#local-6989586621679404132"><span class="hs-identifier hs-var">status</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk) -&gt; String
 forall header. PeerFetchInFlight header -&gt; String
 </span><a href="Cardano.Tracing.Peer.html#ppInFlight"><span class="hs-identifier hs-var">ppInFlight</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404129"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404131"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-58"></span><span>
 </span><span id="line-59"></span><span class="annot"><a href="Cardano.Tracing.Peer.html#ppCid"><span class="hs-identifier hs-type">ppCid</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-60"></span><span id="ppCid"><span class="annot"><span class="annottext">ppCid :: RemoteConnectionId -&gt; String
@@ -131,10 +131,10 @@ cat b c -&gt; cat a b -&gt; cat a c
 forall addr. ConnectionId addr -&gt; addr
 </span><span class="hs-identifier hs-var hs-var">remoteAddress</span></span><span>
 </span><span id="line-61"></span><span>
-</span><span id="line-62"></span><span id="local-6989586621679404302"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppInFlight"><span class="hs-identifier hs-type">ppInFlight</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PeerFetchInFlight</span></span><span> </span><span class="annot"><a href="#local-6989586621679404302"><span class="hs-identifier hs-type">header</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
+</span><span id="line-62"></span><span id="local-6989586621679404304"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppInFlight"><span class="hs-identifier hs-type">ppInFlight</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PeerFetchInFlight</span></span><span> </span><span class="annot"><a href="#local-6989586621679404304"><span class="hs-identifier hs-type">header</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
 </span><span id="line-63"></span><span id="ppInFlight"><span class="annot"><span class="annottext">ppInFlight :: PeerFetchInFlight header -&gt; String
-</span><a href="Cardano.Tracing.Peer.html#ppInFlight"><span class="hs-identifier hs-var hs-var">ppInFlight</span></a></span></span><span> </span><span id="local-6989586621679404120"><span class="annot"><span class="annottext">PeerFetchInFlight header
-</span><a href="#local-6989586621679404120"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Word -&gt; Int -&gt; SizeInBytes -&gt; String
+</span><a href="Cardano.Tracing.Peer.html#ppInFlight"><span class="hs-identifier hs-var hs-var">ppInFlight</span></a></span></span><span> </span><span id="local-6989586621679404122"><span class="annot"><span class="annottext">PeerFetchInFlight header
+</span><a href="#local-6989586621679404122"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Word -&gt; Int -&gt; SizeInBytes -&gt; String
 forall r. PrintfType r =&gt; String -&gt; r
 </span><span class="hs-identifier hs-var">printf</span></span><span>
 </span><span id="line-64"></span><span> </span><span class="annot"><span class="annottext">String
@@ -145,11 +145,11 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header -&gt; MaxSlotNo
 forall header. PeerFetchInFlight header -&gt; MaxSlotNo
 </span><span class="hs-identifier hs-var hs-var">peerFetchMaxSlotNo</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header
-</span><a href="#local-6989586621679404120"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404122"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-66"></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchInFlight header -&gt; Word
 forall header. PeerFetchInFlight header -&gt; Word
 </span><span class="hs-identifier hs-var hs-var">peerFetchReqsInFlight</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header
-</span><a href="#local-6989586621679404120"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404122"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-67"></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Set (Point header) -&gt; Int
 forall a. Set a -&gt; Int
 </span><span class="hs-identifier hs-var">Set.size</span></span><span> </span><span class="annot"><span class="annottext">(Set (Point header) -&gt; Int) -&gt; Set (Point header) -&gt; Int
@@ -157,25 +157,25 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header -&gt; Set (Point header)
 forall header. PeerFetchInFlight header -&gt; Set (Point header)
 </span><span class="hs-identifier hs-var hs-var">peerFetchBlocksInFlight</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header
-</span><a href="#local-6989586621679404120"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404122"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-68"></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PeerFetchInFlight header -&gt; SizeInBytes
 forall header. PeerFetchInFlight header -&gt; SizeInBytes
 </span><span class="hs-identifier hs-var hs-var">peerFetchBytesInFlight</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight header
-</span><a href="#local-6989586621679404120"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404122"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-69"></span><span>
 </span><span id="line-70"></span><span class="annot"><a href="Cardano.Tracing.Peer.html#ppMaxSlotNo"><span class="hs-identifier hs-type">ppMaxSlotNo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Net.MaxSlotNo</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-71"></span><span id="ppMaxSlotNo"><span class="annot"><span class="annottext">ppMaxSlotNo :: MaxSlotNo -&gt; String
 </span><a href="Cardano.Tracing.Peer.html#ppMaxSlotNo"><span class="hs-identifier hs-var hs-var">ppMaxSlotNo</span></a></span></span><span> </span><span class="annot"><span class="annottext">MaxSlotNo
 </span><span class="hs-identifier hs-var">Net.NoMaxSlotNo</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;???&quot;</span></span><span>
-</span><span id="line-72"></span><span class="annot"><a href="Cardano.Tracing.Peer.html#ppMaxSlotNo"><span class="hs-identifier hs-var">ppMaxSlotNo</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.MaxSlotNo</span></span><span> </span><span id="local-6989586621679404111"><span class="annot"><span class="annottext">SlotNo
-</span><a href="#local-6989586621679404111"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Word64 -&gt; String
+</span><span id="line-72"></span><span class="annot"><a href="Cardano.Tracing.Peer.html#ppMaxSlotNo"><span class="hs-identifier hs-var">ppMaxSlotNo</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.MaxSlotNo</span></span><span> </span><span id="local-6989586621679404113"><span class="annot"><span class="annottext">SlotNo
+</span><a href="#local-6989586621679404113"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Word64 -&gt; String
 forall a b. (Show a, ConvertText String b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SlotNo -&gt; Word64
 </span><span class="hs-identifier hs-var hs-var">unSlotNo</span></span><span> </span><span class="annot"><span class="annottext">SlotNo
-</span><a href="#local-6989586621679404111"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404113"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-73"></span><span>
-</span><span id="line-74"></span><span id="local-6989586621679404303"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppStatus"><span class="hs-identifier hs-type">ppStatus</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PeerFetchStatus</span></span><span> </span><span class="annot"><a href="#local-6989586621679404303"><span class="hs-identifier hs-type">header</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
+</span><span id="line-74"></span><span id="local-6989586621679404305"><span class="annot"><a href="Cardano.Tracing.Peer.html#ppStatus"><span class="hs-identifier hs-type">ppStatus</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">PeerFetchStatus</span></span><span> </span><span class="annot"><a href="#local-6989586621679404305"><span class="hs-identifier hs-type">header</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
 </span><span id="line-75"></span><span id="ppStatus"><span class="annot"><span class="annottext">ppStatus :: PeerFetchStatus header -&gt; String
 </span><a href="Cardano.Tracing.Peer.html#ppStatus"><span class="hs-identifier hs-var hs-var">ppStatus</span></a></span></span><span> </span><span class="annot"><span class="annottext">PeerFetchStatus header
 </span><span class="hs-identifier hs-var">PeerFetchStatusShutdown</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
@@ -189,12 +189,12 @@ forall a b. (Show a, ConvertText String b) =&gt; a -&gt; b
 </span><span id="line-78"></span><span class="annot"><a href="Cardano.Tracing.Peer.html#ppStatus"><span class="hs-identifier hs-var">ppStatus</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">PeerFetchStatusReady</span></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;ready&quot;</span></span><span>
 </span><span id="line-79"></span><span>
-</span><span id="line-80"></span><span id="local-6989586621679404106"><span class="annot"><a href="Cardano.Tracing.Peer.html#getCurrentPeers"><span class="hs-identifier hs-type">getCurrentPeers</span></a></span><span>
-</span><span id="line-81"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404106"><span class="hs-identifier hs-type">blk</span></a></span><span>
-</span><span id="line-82"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404106"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span>
+</span><span id="line-80"></span><span id="local-6989586621679404108"><span class="annot"><a href="Cardano.Tracing.Peer.html#getCurrentPeers"><span class="hs-identifier hs-type">getCurrentPeers</span></a></span><span>
+</span><span id="line-81"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404108"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-82"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404108"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span>
 </span><span id="line-83"></span><span id="getCurrentPeers"><span class="annot"><span class="annottext">getCurrentPeers :: NodeKernelData blk -&gt; IO [Peer blk]
-</span><a href="Cardano.Tracing.Peer.html#getCurrentPeers"><span class="hs-identifier hs-var hs-var">getCurrentPeers</span></a></span></span><span> </span><span id="local-6989586621679404105"><span class="annot"><span class="annottext">NodeKernelData blk
-</span><a href="#local-6989586621679404105"><span class="hs-identifier hs-var">nkd</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(NodeKernel IO RemoteConnectionId LocalConnectionId blk
+</span><a href="Cardano.Tracing.Peer.html#getCurrentPeers"><span class="hs-identifier hs-var hs-var">getCurrentPeers</span></a></span></span><span> </span><span id="local-6989586621679404107"><span class="annot"><span class="annottext">NodeKernelData blk
+</span><a href="#local-6989586621679404107"><span class="hs-identifier hs-var">nkd</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(NodeKernel IO RemoteConnectionId LocalConnectionId blk
  -&gt; IO [Peer blk])
 -&gt; NodeKernelData blk -&gt; IO (StrictMaybe [Peer blk])
 forall blk a.
@@ -205,8 +205,8 @@ forall blk a.
 forall blk.
 NodeKernel IO RemoteConnectionId LocalConnectionId blk
 -&gt; IO [Peer blk]
-</span><a href="#local-6989586621679404103"><span class="hs-identifier hs-var">extractPeers</span></a></span><span> </span><span class="annot"><span class="annottext">NodeKernelData blk
-</span><a href="#local-6989586621679404105"><span class="hs-identifier hs-var">nkd</span></a></span><span>
+</span><a href="#local-6989586621679404105"><span class="hs-identifier hs-var">extractPeers</span></a></span><span> </span><span class="annot"><span class="annottext">NodeKernelData blk
+</span><a href="#local-6989586621679404107"><span class="hs-identifier hs-var">nkd</span></a></span><span>
 </span><span id="line-84"></span><span>                      </span><span class="annot"><span class="annottext">IO (StrictMaybe [Peer blk])
 -&gt; (StrictMaybe [Peer blk] -&gt; [Peer blk]) -&gt; IO [Peer blk]
 forall (f :: * -&gt; *) a b. Functor f =&gt; f a -&gt; (a -&gt; b) -&gt; f b
@@ -216,31 +216,31 @@ forall a. a -&gt; StrictMaybe a -&gt; a
 forall a. Monoid a =&gt; a
 </span><span class="hs-identifier hs-var">mempty</span></span><span>
 </span><span id="line-85"></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-86"></span><span>  </span><span id="local-6989586621679404236"><span id="local-6989586621679404237"><span id="local-6989586621679404238"><span class="annot"><a href="#local-6989586621679404100"><span class="hs-identifier hs-type">tuple3pop</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679404238"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404237"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404236"><span class="hs-identifier hs-type">c</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679404238"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404237"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">)</span></span></span></span><span>
-</span><span id="line-87"></span><span>  </span><span id="local-6989586621679404100"><span class="annot"><span class="annottext">tuple3pop :: (a, b, c) -&gt; (a, b)
-</span><a href="#local-6989586621679404100"><span class="hs-identifier hs-var hs-var">tuple3pop</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679404099"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679404099"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679404098"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679404098"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">c
+</span><span id="line-86"></span><span>  </span><span id="local-6989586621679404238"><span id="local-6989586621679404239"><span id="local-6989586621679404240"><span class="annot"><a href="#local-6989586621679404102"><span class="hs-identifier hs-type">tuple3pop</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679404240"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404239"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404238"><span class="hs-identifier hs-type">c</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679404240"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679404239"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">)</span></span></span></span><span>
+</span><span id="line-87"></span><span>  </span><span id="local-6989586621679404102"><span class="annot"><span class="annottext">tuple3pop :: (a, b, c) -&gt; (a, b)
+</span><a href="#local-6989586621679404102"><span class="hs-identifier hs-var hs-var">tuple3pop</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679404101"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679404101"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679404100"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679404100"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">c
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679404099"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679404098"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404101"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679404100"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-88"></span><span>
-</span><span id="line-89"></span><span>  </span><span id="local-6989586621679404217"><span id="local-6989586621679404218"><span class="annot"><a href="#local-6989586621679404097"><span class="hs-identifier hs-type">getCandidates</span></a></span><span>
-</span><span id="line-90"></span><span>    </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">STM.StrictTVar</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><a href="#local-6989586621679404218"><span class="hs-identifier hs-type">peer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">STM.StrictTVar</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404217"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-91"></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">STM.STM</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><a href="#local-6989586621679404218"><span class="hs-identifier hs-type">peer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404217"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span></span></span><span>
-</span><span id="line-92"></span><span>  </span><span id="local-6989586621679404097"><span class="annot"><span class="annottext">getCandidates :: StrictTVar
+</span><span id="line-89"></span><span>  </span><span id="local-6989586621679404219"><span id="local-6989586621679404220"><span class="annot"><a href="#local-6989586621679404099"><span class="hs-identifier hs-type">getCandidates</span></a></span><span>
+</span><span id="line-90"></span><span>    </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">STM.StrictTVar</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><a href="#local-6989586621679404220"><span class="hs-identifier hs-type">peer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">STM.StrictTVar</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404219"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-91"></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">STM.STM</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><a href="#local-6989586621679404220"><span class="hs-identifier hs-type">peer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Net.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679404219"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-92"></span><span>  </span><span id="local-6989586621679404099"><span class="annot"><span class="annottext">getCandidates :: StrictTVar
   IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
 -&gt; STM IO (Map peer (AnchoredFragment (Header blk)))
-</span><a href="#local-6989586621679404097"><span class="hs-identifier hs-var hs-var">getCandidates</span></a></span></span><span> </span><span id="local-6989586621679404096"><span class="annot"><span class="annottext">StrictTVar
+</span><a href="#local-6989586621679404099"><span class="hs-identifier hs-var hs-var">getCandidates</span></a></span></span><span> </span><span id="local-6989586621679404098"><span class="annot"><span class="annottext">StrictTVar
   IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
-</span><a href="#local-6989586621679404096"><span class="hs-identifier hs-var">var</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StrictTVar
+</span><a href="#local-6989586621679404098"><span class="hs-identifier hs-var">var</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StrictTVar
   IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
 -&gt; STM
      IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
 forall (m :: * -&gt; *) a. MonadSTM m =&gt; StrictTVar m a -&gt; STM m a
 </span><span class="hs-identifier hs-var">STM.readTVar</span></span><span> </span><span class="annot"><span class="annottext">StrictTVar
   IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
-</span><a href="#local-6989586621679404096"><span class="hs-identifier hs-var">var</span></a></span><span> </span><span class="annot"><span class="annottext">STM (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
+</span><a href="#local-6989586621679404098"><span class="hs-identifier hs-var">var</span></a></span><span> </span><span class="annot"><span class="annottext">STM (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
 -&gt; (Map peer (StrictTVar IO (AnchoredFragment (Header blk)))
     -&gt; STM (Map peer (AnchoredFragment (Header blk))))
 -&gt; STM (Map peer (AnchoredFragment (Header blk)))
@@ -257,16 +257,16 @@ forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
 forall (m :: * -&gt; *) a. MonadSTM m =&gt; StrictTVar m a -&gt; STM m a
 </span><span class="hs-identifier hs-var">STM.readTVar</span></span><span>
 </span><span id="line-93"></span><span>
-</span><span id="line-94"></span><span>  </span><span id="local-6989586621679404268"><span class="annot"><a href="#local-6989586621679404103"><span class="hs-identifier hs-type">extractPeers</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679404268"><span class="hs-identifier hs-type">blk</span></a></span><span>
-</span><span id="line-95"></span><span>                </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404268"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span>
-</span><span id="line-96"></span><span>  </span><span id="local-6989586621679404103"><span class="annot"><span class="annottext">extractPeers :: NodeKernel IO RemoteConnectionId LocalConnectionId blk
+</span><span id="line-94"></span><span>  </span><span id="local-6989586621679404270"><span class="annot"><a href="#local-6989586621679404105"><span class="hs-identifier hs-type">extractPeers</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679404270"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-95"></span><span>                </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404270"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span>
+</span><span id="line-96"></span><span>  </span><span id="local-6989586621679404105"><span class="annot"><span class="annottext">extractPeers :: NodeKernel IO RemoteConnectionId LocalConnectionId blk
 -&gt; IO [Peer blk]
-</span><a href="#local-6989586621679404103"><span class="hs-identifier hs-var hs-var">extractPeers</span></a></span></span><span> </span><span id="local-6989586621679404093"><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
-</span><a href="#local-6989586621679404093"><span class="hs-identifier hs-var">kernel</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-97"></span><span>    </span><span id="local-6989586621679404092"><span class="annot"><span class="annottext">Map
+</span><a href="#local-6989586621679404105"><span class="hs-identifier hs-var hs-var">extractPeers</span></a></span></span><span> </span><span id="local-6989586621679404095"><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
+</span><a href="#local-6989586621679404095"><span class="hs-identifier hs-var">kernel</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-97"></span><span>    </span><span id="local-6989586621679404094"><span class="annot"><span class="annottext">Map
   RemoteConnectionId
   (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
-</span><a href="#local-6989586621679404092"><span class="hs-identifier hs-var">peerStates</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk),
+</span><a href="#local-6989586621679404094"><span class="hs-identifier hs-var">peerStates</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk),
   FetchClientStateVars IO (Header blk))
  -&gt; (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk)))
 -&gt; Map
@@ -281,7 +281,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
  FetchClientStateVars IO (Header blk))
 -&gt; (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
 forall a b c. (a, b, c) -&gt; (a, b)
-</span><a href="#local-6989586621679404100"><span class="hs-identifier hs-var">tuple3pop</span></a></span><span> </span><span class="annot"><span class="annottext">(Map
+</span><a href="#local-6989586621679404102"><span class="hs-identifier hs-var">tuple3pop</span></a></span><span> </span><span class="annot"><span class="annottext">(Map
    RemoteConnectionId
    (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk),
     FetchClientStateVars IO (Header blk))
@@ -432,10 +432,10 @@ NodeKernel m remotePeer localPeer blk
          FetchClientStateVars IO (Header blk)))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
-</span><a href="#local-6989586621679404093"><span class="hs-identifier hs-var">kernel</span></a></span><span>
+</span><a href="#local-6989586621679404095"><span class="hs-identifier hs-var">kernel</span></a></span><span>
 </span><span id="line-101"></span><span>                                     </span><span class="hs-special">)</span><span>
-</span><span id="line-102"></span><span>    </span><span id="local-6989586621679404087"><span class="annot"><span class="annottext">Map RemoteConnectionId (AnchoredFragment (Header blk))
-</span><a href="#local-6989586621679404087"><span class="hs-identifier hs-var">candidates</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">STM (Map RemoteConnectionId (AnchoredFragment (Header blk)))
+</span><span id="line-102"></span><span>    </span><span id="local-6989586621679404089"><span class="annot"><span class="annottext">Map RemoteConnectionId (AnchoredFragment (Header blk))
+</span><a href="#local-6989586621679404089"><span class="hs-identifier hs-var">candidates</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">STM (Map RemoteConnectionId (AnchoredFragment (Header blk)))
 -&gt; IO (Map RemoteConnectionId (AnchoredFragment (Header blk)))
 forall (m :: * -&gt; *) a.
 (MonadSTM m, HasCallStack) =&gt;
@@ -458,7 +458,7 @@ forall peer blk.
 StrictTVar
   IO (Map peer (StrictTVar IO (AnchoredFragment (Header blk))))
 -&gt; STM IO (Map peer (AnchoredFragment (Header blk)))
-</span><a href="#local-6989586621679404097"><span class="hs-identifier hs-var">getCandidates</span></a></span><span> </span><span class="annot"><span class="annottext">(StrictTVar
+</span><a href="#local-6989586621679404099"><span class="hs-identifier hs-var">getCandidates</span></a></span><span> </span><span class="annot"><span class="annottext">(StrictTVar
    IO
    (Map
       RemoteConnectionId (StrictTVar IO (AnchoredFragment (Header blk))))
@@ -489,10 +489,10 @@ NodeKernel m remotePeer localPeer blk
 -&gt; IO (Map RemoteConnectionId (AnchoredFragment (Header blk)))
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
-</span><a href="#local-6989586621679404093"><span class="hs-identifier hs-var">kernel</span></a></span><span>
+</span><a href="#local-6989586621679404095"><span class="hs-identifier hs-var">kernel</span></a></span><span>
 </span><span id="line-103"></span><span>
-</span><span id="line-104"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404085"><span class="annot"><span class="annottext">peers :: Map RemoteConnectionId (Peer blk)
-</span><a href="#local-6989586621679404085"><span class="hs-identifier hs-var hs-var">peers</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((RemoteConnectionId
+</span><span id="line-104"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404087"><span class="annot"><span class="annottext">peers :: Map RemoteConnectionId (Peer blk)
+</span><a href="#local-6989586621679404087"><span class="hs-identifier hs-var hs-var">peers</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((RemoteConnectionId
   -&gt; AnchoredFragment (Header blk) -&gt; Maybe (Peer blk))
  -&gt; Map RemoteConnectionId (AnchoredFragment (Header blk))
  -&gt; Map RemoteConnectionId (Peer blk))
@@ -507,16 +507,16 @@ forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
 -&gt; Map RemoteConnectionId (Peer blk)
 forall k a b. (k -&gt; a -&gt; Maybe b) -&gt; Map k a -&gt; Map k b
 </span><span class="hs-identifier hs-var">Map.mapMaybeWithKey</span></span><span> </span><span class="annot"><span class="annottext">Map RemoteConnectionId (AnchoredFragment (Header blk))
-</span><a href="#local-6989586621679404087"><span class="hs-identifier hs-var">candidates</span></a></span><span> </span><span class="annot"><span class="annottext">((RemoteConnectionId
+</span><a href="#local-6989586621679404089"><span class="hs-identifier hs-var">candidates</span></a></span><span> </span><span class="annot"><span class="annottext">((RemoteConnectionId
   -&gt; AnchoredFragment (Header blk) -&gt; Maybe (Peer blk))
  -&gt; Map RemoteConnectionId (Peer blk))
 -&gt; (RemoteConnectionId
     -&gt; AnchoredFragment (Header blk) -&gt; Maybe (Peer blk))
 -&gt; Map RemoteConnectionId (Peer blk)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679404082"><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404082"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404081"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
-</span><a href="#local-6989586621679404081"><span class="hs-identifier hs-var">af</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679404084"><span class="annot"><span class="annottext">RemoteConnectionId
+</span><a href="#local-6989586621679404084"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404083"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
+</span><a href="#local-6989586621679404083"><span class="hs-identifier hs-var">af</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-105"></span><span>                  </span><span class="annot"><span class="annottext">Maybe (Peer blk)
 -&gt; ((PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
     -&gt; Maybe (Peer blk))
@@ -527,9 +527,9 @@ forall b a. b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b
 </span><span class="hs-identifier hs-var">maybe</span></span><span> </span><span class="annot"><span class="annottext">Maybe (Peer blk)
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-106"></span><span>                        </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span id="local-6989586621679404079"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404079"><span class="hs-identifier hs-var">status</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679404078"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404078"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Peer blk -&gt; Maybe (Peer blk)
+</span><span id="line-106"></span><span>                        </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span id="local-6989586621679404081"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
+</span><a href="#local-6989586621679404081"><span class="hs-identifier hs-var">status</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679404080"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
+</span><a href="#local-6989586621679404080"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Peer blk -&gt; Maybe (Peer blk)
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(Peer blk -&gt; Maybe (Peer blk)) -&gt; Peer blk -&gt; Maybe (Peer blk)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -545,10 +545,10 @@ RemoteConnectionId
 -&gt; PeerFetchInFlight (Header blk)
 -&gt; Peer blk
 </span><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-var">Peer</span></a></span><span> </span><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404082"><span class="hs-identifier hs-var">cid</span></a></span><span> </span><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
-</span><a href="#local-6989586621679404081"><span class="hs-identifier hs-var">af</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404079"><span class="hs-identifier hs-var">status</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404078"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404084"><span class="hs-identifier hs-var">cid</span></a></span><span> </span><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
+</span><a href="#local-6989586621679404083"><span class="hs-identifier hs-var">af</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
+</span><a href="#local-6989586621679404081"><span class="hs-identifier hs-var">status</span></a></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
+</span><a href="#local-6989586621679404080"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-107"></span><span>                        </span><span class="annot"><span class="annottext">(Maybe
    (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
  -&gt; Maybe (Peer blk))
@@ -564,10 +564,10 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
      (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
 forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404082"><span class="hs-identifier hs-var">cid</span></a></span><span> </span><span class="annot"><span class="annottext">Map
+</span><a href="#local-6989586621679404084"><span class="hs-identifier hs-var">cid</span></a></span><span> </span><span class="annot"><span class="annottext">Map
   RemoteConnectionId
   (PeerFetchStatus (Header blk), PeerFetchInFlight (Header blk))
-</span><a href="#local-6989586621679404092"><span class="hs-identifier hs-var">peerStates</span></a></span><span>
+</span><a href="#local-6989586621679404094"><span class="hs-identifier hs-var">peerStates</span></a></span><span>
 </span><span id="line-108"></span><span>    </span><span class="annot"><span class="annottext">[Peer blk] -&gt; IO [Peer blk]
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">([Peer blk] -&gt; IO [Peer blk])
@@ -583,32 +583,32 @@ forall k a. Map k a -&gt; [a]
 -&gt; Map RemoteConnectionId (Peer blk) -&gt; IO [Peer blk]
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Map RemoteConnectionId (Peer blk)
-</span><a href="#local-6989586621679404085"><span class="hs-identifier hs-var">peers</span></a></span><span>
+</span><a href="#local-6989586621679404087"><span class="hs-identifier hs-var">peers</span></a></span><span>
 </span><span id="line-109"></span><span>
 </span><span id="line-110"></span><span class="hs-comment">-- | Trace peers list, it will be forwarded to an external process</span><span>
 </span><span id="line-111"></span><span class="hs-comment">--   (for example, to RTView service).</span><span>
-</span><span id="line-112"></span><span id="local-6989586621679404075"><span class="annot"><a href="Cardano.Tracing.Peer.html#tracePeers"><span class="hs-identifier hs-type">tracePeers</span></a></span><span>
+</span><span id="line-112"></span><span id="local-6989586621679404077"><span class="annot"><a href="Cardano.Tracing.Peer.html#tracePeers"><span class="hs-identifier hs-type">tracePeers</span></a></span><span>
 </span><span id="line-113"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Trace</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
-</span><span id="line-114"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404075"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-114"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404077"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-115"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
 </span><span id="line-116"></span><span id="tracePeers"><span class="annot"><span class="annottext">tracePeers :: Trace IO Text -&gt; [Peer blk] -&gt; IO ()
-</span><a href="Cardano.Tracing.Peer.html#tracePeers"><span class="hs-identifier hs-var hs-var">tracePeers</span></a></span></span><span> </span><span id="local-6989586621679404074"><span class="annot"><span class="annottext">Trace IO Text
-</span><a href="#local-6989586621679404074"><span class="hs-identifier hs-var">tr</span></a></span></span><span> </span><span id="local-6989586621679404073"><span class="annot"><span class="annottext">[Peer blk]
-</span><a href="#local-6989586621679404073"><span class="hs-identifier hs-var">peers</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-117"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404072"><span class="annot"><span class="annottext">tr' :: Trace IO Text
-</span><a href="#local-6989586621679404072"><span class="hs-identifier hs-var hs-var">tr'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Trace IO Text -&gt; Trace IO Text
+</span><a href="Cardano.Tracing.Peer.html#tracePeers"><span class="hs-identifier hs-var hs-var">tracePeers</span></a></span></span><span> </span><span id="local-6989586621679404076"><span class="annot"><span class="annottext">Trace IO Text
+</span><a href="#local-6989586621679404076"><span class="hs-identifier hs-var">tr</span></a></span></span><span> </span><span id="local-6989586621679404075"><span class="annot"><span class="annottext">[Peer blk]
+</span><a href="#local-6989586621679404075"><span class="hs-identifier hs-var">peers</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-117"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404074"><span class="annot"><span class="annottext">tr' :: Trace IO Text
+</span><a href="#local-6989586621679404074"><span class="hs-identifier hs-var hs-var">tr'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Trace IO Text -&gt; Trace IO Text
 forall (m :: * -&gt; *) a. Text -&gt; Trace m a -&gt; Trace m a
 </span><span class="hs-identifier hs-var">appendName</span></span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;metrics&quot;</span></span><span> </span><span class="annot"><span class="annottext">Trace IO Text
-</span><a href="#local-6989586621679404074"><span class="hs-identifier hs-var">tr</span></a></span><span>
-</span><span id="line-118"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404070"><span class="annot"><span class="annottext">tr'' :: Trace IO Text
-</span><a href="#local-6989586621679404070"><span class="hs-identifier hs-var hs-var">tr''</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Trace IO Text -&gt; Trace IO Text
+</span><a href="#local-6989586621679404076"><span class="hs-identifier hs-var">tr</span></a></span><span>
+</span><span id="line-118"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679404072"><span class="annot"><span class="annottext">tr'' :: Trace IO Text
+</span><a href="#local-6989586621679404072"><span class="hs-identifier hs-var hs-var">tr''</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Trace IO Text -&gt; Trace IO Text
 forall (m :: * -&gt; *) a. Text -&gt; Trace m a -&gt; Trace m a
 </span><span class="hs-identifier hs-var">appendName</span></span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peersFromNodeKernel&quot;</span></span><span> </span><span class="annot"><span class="annottext">Trace IO Text
-</span><a href="#local-6989586621679404072"><span class="hs-identifier hs-var">tr'</span></a></span><span>
-</span><span id="line-119"></span><span>  </span><span id="local-6989586621679404069"><span class="annot"><span class="annottext">LOMeta
-</span><a href="#local-6989586621679404069"><span class="hs-identifier hs-var">meta</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Severity -&gt; PrivacyAnnotation -&gt; IO LOMeta
+</span><a href="#local-6989586621679404074"><span class="hs-identifier hs-var">tr'</span></a></span><span>
+</span><span id="line-119"></span><span>  </span><span id="local-6989586621679404071"><span class="annot"><span class="annottext">LOMeta
+</span><a href="#local-6989586621679404071"><span class="hs-identifier hs-var">meta</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Severity -&gt; PrivacyAnnotation -&gt; IO LOMeta
 forall (m :: * -&gt; *).
 MonadIO m =&gt;
 Severity -&gt; PrivacyAnnotation -&gt; m LOMeta
@@ -620,8 +620,8 @@ forall (m :: * -&gt; *) a.
 MonadIO m =&gt;
 Trace m a -&gt; (LOMeta, LOContent a) -&gt; m ()
 </span><span class="hs-identifier hs-var">traceNamedObject</span></span><span> </span><span class="annot"><span class="annottext">Trace IO Text
-</span><a href="#local-6989586621679404070"><span class="hs-identifier hs-var">tr''</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LOMeta
-</span><a href="#local-6989586621679404069"><span class="hs-identifier hs-var">meta</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Object -&gt; LOContent Text
+</span><a href="#local-6989586621679404072"><span class="hs-identifier hs-var">tr''</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LOMeta
+</span><a href="#local-6989586621679404071"><span class="hs-identifier hs-var">meta</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Object -&gt; LOContent Text
 forall a. Object -&gt; LOContent a
 </span><span class="hs-identifier hs-var">LogStructured</span></span><span> </span><span class="annot"><span class="annottext">(Object -&gt; LOContent Text) -&gt; Object -&gt; LOContent Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -629,13 +629,13 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall a. ToObject a =&gt; TracingVerbosity -&gt; a -&gt; Object
 </span><span class="hs-identifier hs-var">toObject</span></span><span> </span><span class="annot"><span class="annottext">TracingVerbosity
 </span><span class="hs-identifier hs-var">MaximalVerbosity</span></span><span> </span><span class="annot"><span class="annottext">[Peer blk]
-</span><a href="#local-6989586621679404073"><span class="hs-identifier hs-var">peers</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404075"><span class="hs-identifier hs-var">peers</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-121"></span><span>
 </span><span id="line-122"></span><span class="hs-comment">-- | Instances for converting [Peer blk] to Object.</span><span>
 </span><span id="line-123"></span><span>
-</span><span id="line-124"></span><span id="local-6989586621679404062"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679404059"><span class="annot"><span class="hs-identifier hs-type">ToObject</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404062"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-125"></span><span>  </span><span id="local-6989586621679404057"><span class="annot"><span class="annottext">toObject :: TracingVerbosity -&gt; [Peer blk] -&gt; Object
-</span><a href="#local-6989586621679404057"><span class="hs-identifier hs-var hs-var hs-var hs-var">toObject</span></a></span></span><span> </span><span class="annot"><span class="annottext">TracingVerbosity
+</span><span id="line-124"></span><span id="local-6989586621679404064"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679404061"><span class="annot"><span class="hs-identifier hs-type">ToObject</span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404064"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">]</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-125"></span><span>  </span><span id="local-6989586621679404059"><span class="annot"><span class="annottext">toObject :: TracingVerbosity -&gt; [Peer blk] -&gt; Object
+</span><a href="#local-6989586621679404059"><span class="hs-identifier hs-var hs-var hs-var hs-var">toObject</span></a></span></span><span> </span><span class="annot"><span class="annottext">TracingVerbosity
 </span><span class="hs-identifier hs-var">MinimalVerbosity</span></span><span> </span><span class="annot"><span class="annottext">[Peer blk]
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Object
 forall a. ToObject a =&gt; HashMap Text a
@@ -644,9 +644,9 @@ forall a. ToObject a =&gt; HashMap Text a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Object
 forall a. ToObject a =&gt; HashMap Text a
 </span><span class="hs-identifier hs-var">emptyObject</span></span><span>
-</span><span id="line-127"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">toObject</span></span><span> </span><span id="local-6989586621679404055"><span class="annot"><span class="annottext">TracingVerbosity
-</span><a href="#local-6989586621679404055"><span class="hs-identifier hs-var">verb</span></a></span></span><span> </span><span id="local-6989586621679404054"><span class="annot"><span class="annottext">[Peer blk]
-</span><a href="#local-6989586621679404054"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[(Text, Value)] -&gt; Object
+</span><span id="line-127"></span><span>  </span><span class="annot"><span class="hs-identifier hs-var">toObject</span></span><span> </span><span id="local-6989586621679404057"><span class="annot"><span class="annottext">TracingVerbosity
+</span><a href="#local-6989586621679404057"><span class="hs-identifier hs-var">verb</span></a></span></span><span> </span><span id="local-6989586621679404056"><span class="annot"><span class="annottext">[Peer blk]
+</span><a href="#local-6989586621679404056"><span class="hs-identifier hs-var">xs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[(Text, Value)] -&gt; Object
 forall a. ToObject a =&gt; [(Text, a)] -&gt; HashMap Text a
 </span><span class="hs-identifier hs-var">mkObject</span></span><span>
 </span><span id="line-128"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
@@ -666,27 +666,27 @@ forall a. ToJSON a =&gt; a -&gt; Value
 forall (t :: * -&gt; *) b a.
 Foldable t =&gt;
 (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b
-</span><span class="hs-identifier hs-var">foldl'</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679404051"><span class="annot"><span class="annottext">[Object]
-</span><a href="#local-6989586621679404051"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span id="local-6989586621679404050"><span class="annot"><span class="annottext">Peer blk
-</span><a href="#local-6989586621679404050"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TracingVerbosity -&gt; Peer blk -&gt; Object
+</span><span class="hs-identifier hs-var">foldl'</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679404053"><span class="annot"><span class="annottext">[Object]
+</span><a href="#local-6989586621679404053"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span id="local-6989586621679404052"><span class="annot"><span class="annottext">Peer blk
+</span><a href="#local-6989586621679404052"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">TracingVerbosity -&gt; Peer blk -&gt; Object
 forall a. ToObject a =&gt; TracingVerbosity -&gt; a -&gt; Object
 </span><span class="hs-identifier hs-var">toObject</span></span><span> </span><span class="annot"><span class="annottext">TracingVerbosity
-</span><a href="#local-6989586621679404055"><span class="hs-identifier hs-var">verb</span></a></span><span> </span><span class="annot"><span class="annottext">Peer blk
-</span><a href="#local-6989586621679404050"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; [Object] -&gt; [Object]
+</span><a href="#local-6989586621679404057"><span class="hs-identifier hs-var">verb</span></a></span><span> </span><span class="annot"><span class="annottext">Peer blk
+</span><a href="#local-6989586621679404052"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Object -&gt; [Object] -&gt; [Object]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[Object]
-</span><a href="#local-6989586621679404051"><span class="hs-identifier hs-var">acc</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[Peer blk]
-</span><a href="#local-6989586621679404054"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404053"><span class="hs-identifier hs-var">acc</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[Peer blk]
+</span><a href="#local-6989586621679404056"><span class="hs-identifier hs-var">xs</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-131"></span><span>    </span><span class="hs-special">]</span></span><span>
 </span><span id="line-132"></span><span>
-</span><span id="line-133"></span><span id="local-6989586621679404049"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679404046"><span class="annot"><span class="hs-identifier hs-type">ToObject</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404049"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-134"></span><span>  </span><span id="local-6989586621679404045"><span class="annot"><span class="annottext">toObject :: TracingVerbosity -&gt; Peer blk -&gt; Object
-</span><a href="#local-6989586621679404045"><span class="hs-identifier hs-var hs-var hs-var hs-var">toObject</span></a></span></span><span> </span><span id="local-6989586621679404044"><span class="annot"><span class="annottext">TracingVerbosity
-</span><a href="#local-6989586621679404044"><span class="hs-identifier hs-var">_verb</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span id="local-6989586621679404043"><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404043"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404042"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
-</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">_af</span></a></span></span><span> </span><span id="local-6989586621679404041"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404041"><span class="hs-identifier hs-var">status</span></a></span></span><span> </span><span id="local-6989586621679404040"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404040"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-133"></span><span id="local-6989586621679404051"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679404048"><span class="annot"><span class="hs-identifier hs-type">ToObject</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679404051"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-134"></span><span>  </span><span id="local-6989586621679404047"><span class="annot"><span class="annottext">toObject :: TracingVerbosity -&gt; Peer blk -&gt; Object
+</span><a href="#local-6989586621679404047"><span class="hs-identifier hs-var hs-var hs-var hs-var">toObject</span></a></span></span><span> </span><span id="local-6989586621679404046"><span class="annot"><span class="annottext">TracingVerbosity
+</span><a href="#local-6989586621679404046"><span class="hs-identifier hs-var">_verb</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Peer.html#Peer"><span class="hs-identifier hs-type">Peer</span></a></span><span> </span><span id="local-6989586621679404045"><span class="annot"><span class="annottext">RemoteConnectionId
+</span><a href="#local-6989586621679404045"><span class="hs-identifier hs-var">cid</span></a></span></span><span> </span><span id="local-6989586621679404044"><span class="annot"><span class="annottext">AnchoredFragment (Header blk)
+</span><a href="#local-6989586621679404044"><span class="hs-identifier hs-var">_af</span></a></span></span><span> </span><span id="local-6989586621679404043"><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
+</span><a href="#local-6989586621679404043"><span class="hs-identifier hs-var">status</span></a></span></span><span> </span><span id="local-6989586621679404042"><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
+</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">inflight</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-135"></span><span>    </span><span class="annot"><span class="annottext">[(Text, Value)] -&gt; Object
 forall a. ToObject a =&gt; [(Text, a)] -&gt; HashMap Text a
 </span><span class="hs-identifier hs-var">mkObject</span></span><span> </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
@@ -713,7 +713,7 @@ forall addr. ConnectionId addr -&gt; addr
 </span><span class="hs-identifier hs-var hs-var">remoteAddress</span></span><span> </span><span class="annot"><span class="annottext">(RemoteConnectionId -&gt; Text) -&gt; RemoteConnectionId -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">RemoteConnectionId
-</span><a href="#local-6989586621679404043"><span class="hs-identifier hs-var">cid</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404045"><span class="hs-identifier hs-var">cid</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-136"></span><span>             </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peerStatus&quot;</span></span><span>    </span><span class="annot"><span class="annottext">Text -&gt; Value -&gt; (Text, Value)
 forall kv v. (KeyValue kv, ToJSON v) =&gt; Text -&gt; v -&gt; kv
@@ -732,7 +732,7 @@ forall header. PeerFetchStatus header -&gt; String
 -&gt; PeerFetchStatus (Header blk) -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchStatus (Header blk)
-</span><a href="#local-6989586621679404041"><span class="hs-identifier hs-var">status</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404043"><span class="hs-identifier hs-var">status</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-137"></span><span>             </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peerSlotNo&quot;</span></span><span>    </span><span class="annot"><span class="annottext">Text -&gt; Value -&gt; (Text, Value)
 forall kv v. (KeyValue kv, ToJSON v) =&gt; Text -&gt; v -&gt; kv
@@ -759,7 +759,7 @@ forall header. PeerFetchInFlight header -&gt; MaxSlotNo
 -&gt; PeerFetchInFlight (Header blk) -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404040"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-138"></span><span>             </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peerReqsInF&quot;</span></span><span>   </span><span class="annot"><span class="annottext">Text -&gt; Value -&gt; (Text, Value)
 forall kv v. (KeyValue kv, ToJSON v) =&gt; Text -&gt; v -&gt; kv
@@ -779,7 +779,7 @@ forall header. PeerFetchInFlight header -&gt; Word
 -&gt; PeerFetchInFlight (Header blk) -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404040"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-139"></span><span>             </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peerBlocksInF&quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Value -&gt; (Text, Value)
 forall kv v. (KeyValue kv, ToJSON v) =&gt; Text -&gt; v -&gt; kv
@@ -808,7 +808,7 @@ forall header. PeerFetchInFlight header -&gt; Set (Point header)
 -&gt; PeerFetchInFlight (Header blk) -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404040"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-140"></span><span>             </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;peerBytesInF&quot;</span></span><span>  </span><span class="annot"><span class="annottext">Text -&gt; Value -&gt; (Text, Value)
 forall kv v. (KeyValue kv, ToJSON v) =&gt; Text -&gt; v -&gt; kv
@@ -828,6 +828,6 @@ forall header. PeerFetchInFlight header -&gt; SizeInBytes
 -&gt; PeerFetchInFlight (Header blk) -&gt; Text
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PeerFetchInFlight (Header blk)
-</span><a href="#local-6989586621679404040"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679404042"><span class="hs-identifier hs-var">inflight</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-141"></span><span>             </span><span class="hs-special">]</span></span><span>
 </span><span id="line-142"></span></pre></body></html>

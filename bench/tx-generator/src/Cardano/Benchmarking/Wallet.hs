@@ -12,6 +12,9 @@ import Control.Concurrent.MVar
 
 import Cardano.Api
 
+import Cardano.Benchmarking.Types (NumberOfOutputsPerTx(..), NumberOfTxs(..)
+                                  -- NumberOfInputsPerTx(..),
+                                  )
 import Cardano.Benchmarking.GeneratorTx.Tx as Tx hiding (Fund)
 import Cardano.Benchmarking.FundSet as FundSet
 
@@ -173,16 +176,17 @@ data WalletStep era
 benchmarkWalletScript :: forall era .
      IsShelleyBasedEra era
   => WalletRef
-  -> SeqNumber
-  -> Int
+  -> NumberOfTxs
+  -> NumberOfOutputsPerTx
+  -- in this version : numberOfInputs == numberOfOutputs
   -> Target
   -> WalletScript era
-benchmarkWalletScript wRef maxCount numInputs targetNode
+benchmarkWalletScript wRef (NumberOfTxs maxCount) (NumberOfOutputsPerTx numInputs) targetNode
   = WalletScript (modifyMVarMasked wRef nextTx)
   where
-    nextCall = benchmarkWalletScript wRef maxCount numInputs targetNode
+    nextCall = benchmarkWalletScript wRef (NumberOfTxs maxCount) (NumberOfOutputsPerTx numInputs) targetNode
     nextTx :: Wallet -> IO (Wallet, WalletStep era)
-    nextTx w = if walletSeqNumber w > maxCount
+    nextTx w = if walletSeqNumber w > (SeqNumber $ fromIntegral maxCount)
       then return (w, Done)
       else case benchmarkTransaction w numInputs targetNode of
         Right (wNew, tx) -> return (wNew, NextTx nextCall tx)

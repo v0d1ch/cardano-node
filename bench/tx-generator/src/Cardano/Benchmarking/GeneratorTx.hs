@@ -480,7 +480,7 @@ walletBenchmark :: forall era. IsShelleyBasedEra era
   -> SubmissionErrorPolicy
   -> AsType era
   -> WalletRef
-  -> Int
+  -> NumberOfTxs
   -> ExceptT TxGenError IO AsyncBenchmarkControl
 walletBenchmark
   traceSubmit
@@ -509,7 +509,7 @@ walletBenchmark
   allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
     \(reportRef, remoteAddr) -> do
       let errorHandler = handleTxSubmissionClientError traceSubmit remoteAddr reportRef errorPolicy
-          walletScript = benchmarkWalletScript walletRef (FundSet.SeqNumber count) 2 (FundSet.Target $ show remoteAddr)
+          walletScript = benchmarkWalletScript walletRef count 2 (FundSet.Target $ show remoteAddr)
           client = txSubmissionClient
                      traceN2N
                      traceSubmit
@@ -517,8 +517,8 @@ walletBenchmark
                      (submitSubmissionThreadStats reportRef)
       async $ handle errorHandler (connectClient remoteAddr client)
 
-  tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate $ replicate count
-     $ (error "dummy transaction" :: Tx era)
+  tpsFeeder <- async $ tpsLimitedTxFeeder traceSubmit numTargets txSendQueue tpsRate
+                        $ replicate (fromIntegral $ unNumberOfTxs count) (error "dummy transaction" :: Tx era)
 
   let tpsFeederShutdown = do
         cancel tpsFeeder

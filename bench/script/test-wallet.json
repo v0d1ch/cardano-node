@@ -15,8 +15,9 @@
         ] },
     { "setLocalSocket": "run/current/node-0/node.socket" },
     { "readSigningKey": "pass-partout", "filePath": "run/current/genesis/utxo-keys/utxo1.skey" },
-    { "secureGenesisFund": "genFund", "genesisKey": "pass-partout", "fundKey": "pass-partout" },
+    { "importGenesisFund": "pass-partout", "fundKey": "pass-partout" },
     { "delay": 10 },
-    { "reserved" : [] },
+    { "createChange" : 1000, "count" : 2000 },
+    { "runBenchmark": "walletBasedBenchmark", "txCount": 1000, "tps": 10 },
     { "waitBenchmark": "walletBasedBenchmark" }
 ]

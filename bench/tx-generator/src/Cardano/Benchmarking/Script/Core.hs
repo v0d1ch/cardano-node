@@ -88,6 +88,7 @@ readSigningKey name filePath =
 getLocalSubmitTx :: ActionM LocalSubmitTx
 getLocalSubmitTx = submitTxToNodeLocal <$> getLocalConnectInfo
 
+--obsolete use importGenesisFund
 secureGenesisFund
    :: FundName
    -> KeyName
@@ -113,20 +114,6 @@ secureGenesisFund fundName destKey genesisKeyName = do
     Right fund -> do
       -- Todo : user only of two methods
       setName fundName fund -- Old method
-      initGlobalWallet networkId fundKey fund   -- New method 
-
-initGlobalWallet :: NetworkId -> SigningKey PaymentKey -> Fund -> ActionM ()
-initGlobalWallet networkId key ((txIn, outVal), skey) = do
-  wallet <- liftIO $ initWallet networkId key
-  liftIO (walletRefInsertFund wallet (FundSet.Fund $ mkFund outVal))
-  set GlobalWallet wallet
- where
-  mkFund = liftAnyEra $ \value -> FundInEra {
-    _fundTxIn = txIn
-  , _fundVal = value
-  , _fundSigningKey = skey
-  , _fundValidity = Confirmed
-  }
 
 splitFundN
    :: NumberOfTxs
@@ -284,7 +271,7 @@ localSubmitTx tx = do
   liftIO $ traceWith submitTracer $ TraceBenchTxSubDebug msg
   return ret
 
-runBenchmark :: ThreadName -> Int -> TPSRate -> ActionM ()
+runBenchmark :: ThreadName -> NumberOfTxs -> TPSRate -> ActionM ()
 runBenchmark (ThreadName threadName) txCount tps = do
   tracers  <- get BenchTracers
   targets  <- getUser TTargets
@@ -316,6 +303,68 @@ runBenchmark (ThreadName threadName) txCount tps = do
     Right ctl -> do
       setName (ThreadName threadName) ctl
 
+-- Todo: make it possible to import several funds
+-- (Split init and import)
+importGenesisFund
+   :: KeyName
+   -> KeyName
+   -> ActionM ()
+importGenesisFund genesisKeyName destKey= do
+  tracer <- btTxSubmit_ <$> get BenchTracers
+  localSubmit <- getLocalSubmitTx
+  networkId <- get NetworkId
+  genesis  <- get Genesis
+  fee      <- getUser TFee
+  ttl      <- getUser TTTL
+  fundKey  <- getName destKey
+  genesisKey  <- getName genesisKeyName
+  let
+    coreCall :: forall era. IsShelleyBasedEra era => AsType era -> ExceptT TxGenError IO Store.Fund
+    coreCall _proxy = do
+      let addr = Core.keyAddress @ era networkId fundKey
+      f <- Core.secureGenesisFund tracer localSubmit networkId genesis fee ttl genesisKey addr
+      return (f, fundKey)
+  liftCoreWithEra coreCall >>= \case
+    Left err -> liftTxGenError err
+    Right fund -> initGlobalWallet networkId fundKey fund
+
+-- Todo split init and import of funds
+initGlobalWallet :: NetworkId -> SigningKey PaymentKey -> Fund -> ActionM ()
+initGlobalWallet networkId key ((txIn, outVal), skey) = do
+  wallet <- liftIO $ initWallet networkId key
+  liftIO (walletRefInsertFund wallet (FundSet.Fund $ mkFund outVal))
+  set GlobalWallet wallet
+ where
+  mkFund = liftAnyEra $ \value -> FundInEra {
+    _fundTxIn = txIn
+  , _fundVal = value
+  , _fundSigningKey = skey
+  , _fundValidity = Confirmed
+  }
+
+
+
+createChange :: Lovelace -> Int -> ActionM ()
+createChange value count = do
+  wallet <- get GlobalWallet
+  let
+    coinsList = replicate count value
+    maxTxSize = 30
+    chunks = chunkList maxTxSize coinsList
+    createCoins :: forall era. IsShelleyBasedEra era => [Lovelace] -> AsType era -> ActionM (Either String (TxInMode CardanoMode))
+    createCoins coins _proxy = do
+      (tx :: Either String (Tx era)) <- liftIO $ walletRefCreateCoins wallet coins
+      return $ fmap txInModeCardano tx
+  forM_ chunks $ \coins -> do
+    gen <- withEra $ createCoins coins
+    case gen of
+      Left (_err :: String) -> return ()
+      Right tx -> void $ localSubmitTx tx
+ where
+  chunkList :: Int -> [a] -> [[a]]
+  chunkList _ [] = []
+  chunkList n xs = as : chunkList n bs where (as,bs) = splitAt n xs
+
 {-
 This is for dirty hacking and testing and quick-fixes.
 Its a function that can be called from the JSON scripts
@@ -323,25 +372,5 @@ and for which the JSON encoding is "reserved".
 -}
 reserved :: [String] -> ActionM ()
 reserved _ = do
-  localCreateCoins
-  runBenchmark (ThreadName "walletBasedBenchmark") 1000 (fromInteger 10)
---  throwE $ UserError "no dirty hack is implemented"
-
-localCreateCoins :: ActionM ()
-localCreateCoins = do
-  wallet <- get GlobalWallet
-  let
-    -- todo: fix hardcoded number of initial coins
-    outputs :: [[Lovelace]]
-    outputs = replicate 100 $ map fromInteger [20..50]
-
-    createCoins :: forall era. IsShelleyBasedEra era => [Lovelace] -> AsType era -> ActionM (Either String (TxInMode CardanoMode))
-    createCoins coins _proxy = do
-      (tx :: Either String (Tx era)) <- liftIO $ walletRefCreateCoins wallet coins
-      return $ fmap txInModeCardano tx
-  forM_ outputs $ \coins -> do
-    gen <- withEra $ createCoins coins
-    case gen of
-      Left (_err :: String) -> return ()
-      Right tx -> void $ localSubmitTx tx
+  throwE $ UserError "no dirty hack is implemented"
 

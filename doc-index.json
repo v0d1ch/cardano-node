@@ -6630,16 +6630,10 @@
     "link": "cardano-cli/Cardano-CLI-Types.html#t:TransferDirection"
   },
   {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TxOutAnyEra\">TxOutAnyEra</a> = <a href=\"#v:TxOutAnyEra\">TxOutAnyEra</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Address.html#t:AddressAny\" title=\"Cardano.Api.Address\">AddressAny</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Value.html#t:Value\" title=\"Cardano.Api.Value\">Value</a> (<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Maybe\" title=\"Distribution.Compat.Prelude.Internal\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/Data-Text.html#t:Text\" title=\"Data.Text\">Text</a>)",
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TxOutAnyEra\">TxOutAnyEra</a> = <a href=\"#v:TxOutAnyEra\">TxOutAnyEra</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Address.html#t:AddressAny\" title=\"Cardano.Api.Address\">AddressAny</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Value.html#t:Value\" title=\"Cardano.Api.Value\">Value</a> (<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Maybe\" title=\"Distribution.Compat.Prelude.Internal\">Maybe</a> (<a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Hash.html#t:Hash\" title=\"Cardano.Api.Hash\">Hash</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-ScriptData.html#t:ScriptData\" title=\"Cardano.Api.ScriptData\">ScriptData</a>))",
     "name": "TxOutAnyEra TxOutAnyEra",
     "module": "Cardano.CLI.Types",
     "link": "cardano-cli/Cardano-CLI-Types.html#t:TxOutAnyEra"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TxOutAnyEra-39-\">TxOutAnyEra'</a> = <a href=\"#v:TxOutAnyEra-39-\">TxOutAnyEra'</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Address.html#t:AddressAny\" title=\"Cardano.Api.Address\">AddressAny</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-Value.html#t:Value\" title=\"Cardano.Api.Value\">Value</a>",
-    "name": "TxOutAnyEra' TxOutAnyEra'",
-    "module": "Cardano.CLI.Types",
-    "link": "cardano-cli/Cardano-CLI-Types.html#t:TxOutAnyEra-39-"
   },
   {
     "display_html": "<span class=\"keyword\">newtype</span> <a href=\"#t:UpdateProposalFile\">UpdateProposalFile</a> = <a href=\"#v:UpdateProposalFile\">UpdateProposalFile</a> {<ul class=\"subs\"><li><a href=\"#v:unUpdateProposalFile\">unUpdateProposalFile</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:FilePath\" title=\"Distribution.Compat.Prelude.Internal\">FilePath</a></li></ul>}",
@@ -6664,12 +6658,6 @@
     "name": "Params Params poolParameters futurePoolParameters retiringEpoch",
     "module": "Cardano.CLI.Types",
     "link": "cardano-cli/Cardano-CLI-Types.html#t:Params"
-  },
-  {
-    "display_html": "<a href=\"#v:toTxOutanyEra\">toTxOutanyEra</a> &#8759; <a href=\"Cardano-CLI-Types.html#t:TxOutAnyEra-39-\" title=\"Cardano.CLI.Types\">TxOutAnyEra'</a> &#8594; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Maybe\" title=\"Distribution.Compat.Prelude.Internal\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/Data-Text.html#t:Text\" title=\"Data.Text\">Text</a> &#8594; <a href=\"Cardano-CLI-Types.html#t:TxOutAnyEra\" title=\"Cardano.CLI.Types\">TxOutAnyEra</a>",
-    "name": "toTxOutanyEra",
-    "module": "Cardano.CLI.Types",
-    "link": "cardano-cli/Cardano-CLI-Types.html#v:toTxOutanyEra"
   },
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:InputFormat\">InputFormat</a> a <span class=\"keyword\">where</span><ul class=\"subs\"><li><a href=\"#v:InputFormatBech32\">InputFormatBech32</a> &#8759; <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-SerialiseBech32.html#t:SerialiseAsBech32\" title=\"Cardano.Api.SerialiseBech32\">SerialiseAsBech32</a> a &#8658; <a href=\"Cardano-CLI-Shelley-Key.html#t:InputFormat\" title=\"Cardano.CLI.Shelley.Key\">InputFormat</a> a</li><li><a href=\"#v:InputFormatHex\">InputFormatHex</a> &#8759; <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-SerialiseRaw.html#t:SerialiseAsRawBytes\" title=\"Cardano.Api.SerialiseRaw\">SerialiseAsRawBytes</a> a &#8658; <a href=\"Cardano-CLI-Shelley-Key.html#t:InputFormat\" title=\"Cardano.CLI.Shelley.Key\">InputFormat</a> a</li><li><a href=\"#v:InputFormatTextEnvelope\">InputFormatTextEnvelope</a> &#8759; <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-SerialiseTextEnvelope.html#t:HasTextEnvelope\" title=\"Cardano.Api.SerialiseTextEnvelope\">HasTextEnvelope</a> a &#8658; <a href=\"Cardano-CLI-Shelley-Key.html#t:InputFormat\" title=\"Cardano.CLI.Shelley.Key\">InputFormat</a> a</li></ul>",
@@ -7098,12 +7086,6 @@
     "link": "cardano-cli/Cardano-CLI-Shelley-Run-Node.html#v:runNodeKeyGenVRF"
   },
   {
-    "display_html": "<a href=\"#v:parseTxOutAnyEra\">parseTxOutAnyEra</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/parsec-3.1.14.0/Text-Parsec-String.html#t:Parser\" title=\"Text.Parsec.String\">Parser</a> <a href=\"Cardano-CLI-Types.html#t:TxOutAnyEra-39-\" title=\"Cardano.CLI.Types\">TxOutAnyEra'</a>",
-    "name": "parseTxOutAnyEra",
-    "module": "Cardano.CLI.Mary.TxOutParser",
-    "link": "cardano-cli/Cardano-CLI-Mary-TxOutParser.html#v:parseTxOutAnyEra"
-  },
-  {
     "display_html": "<a href=\"#v:parseShelleyCommands\">parseShelleyCommands</a> &#8759; Parser <a href=\"Cardano-CLI-Shelley-Commands.html#t:ShelleyCommand\" title=\"Cardano.CLI.Shelley.Commands\">ShelleyCommand</a>",
     "name": "parseShelleyCommands",
     "module": "Cardano.CLI.Shelley.Parsers",
@@ -7116,7 +7098,7 @@
     "link": "cardano-cli/"
   },
   {
-    "display_html": "<a href=\"#v:parseTxIn\">parseTxIn</a> &#8759; Parser <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-TxBody.html#t:TxIn\" title=\"Cardano.Api.TxBody\">TxIn</a>",
+    "display_html": "<a href=\"#v:parseTxIn\">parseTxIn</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/parsec-3.1.14.0/Text-Parsec-String.html#t:Parser\" title=\"Text.Parsec.String\">Parser</a> <a href=\"file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/Cardano-Api-TxBody.html#t:TxIn\" title=\"Cardano.Api.TxBody\">TxIn</a>",
     "name": "parseTxIn",
     "module": "Cardano.CLI.Shelley.Parsers",
     "link": "cardano-cli/Cardano-CLI-Shelley-Parsers.html#v:parseTxIn"

@@ -16,7 +16,7 @@
 </span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Helpers.html"><span class="hs-identifier">Cardano.CLI.Helpers</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Helpers.html#textShow"><span class="hs-identifier">textShow</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Types.html"><span class="hs-identifier">Cardano.CLI.Types</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Types.html#SocketPath"><span class="hs-identifier">SocketPath</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-18"></span><span>
-</span><span id="line-19"></span><span class="hs-keyword">newtype</span><span> </span><span id="EnvSocketError"><span class="annot"><a href="Cardano.CLI.Environment.html#EnvSocketError"><span class="hs-identifier hs-var">EnvSocketError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="CliEnvVarLookup"><span class="annot"><a href="Cardano.CLI.Environment.html#CliEnvVarLookup"><span class="hs-identifier hs-var">CliEnvVarLookup</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679314716"><span id="local-6989586621679314718"><span id="local-6989586621679314720"><span class="annot"><span class="annottext">Int -&gt; EnvSocketError -&gt; ShowS
+</span><span id="line-19"></span><span class="hs-keyword">newtype</span><span> </span><span id="EnvSocketError"><span class="annot"><a href="Cardano.CLI.Environment.html#EnvSocketError"><span class="hs-identifier hs-var">EnvSocketError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="CliEnvVarLookup"><span class="annot"><a href="Cardano.CLI.Environment.html#CliEnvVarLookup"><span class="hs-identifier hs-var">CliEnvVarLookup</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679315037"><span id="local-6989586621679315039"><span id="local-6989586621679315041"><span class="annot"><span class="annottext">Int -&gt; EnvSocketError -&gt; ShowS
 [EnvSocketError] -&gt; ShowS
 EnvSocketError -&gt; String
 (Int -&gt; EnvSocketError -&gt; ShowS)
@@ -35,12 +35,12 @@ $cshowsPrec :: Int -&gt; EnvSocketError -&gt; ShowS
 </span><span id="line-20"></span><span>
 </span><span id="line-21"></span><span class="annot"><a href="Cardano.CLI.Environment.html#renderEnvSocketError"><span class="hs-identifier hs-type">renderEnvSocketError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Environment.html#EnvSocketError"><span class="hs-identifier hs-type">EnvSocketError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-22"></span><span id="renderEnvSocketError"><span class="annot"><span class="annottext">renderEnvSocketError :: EnvSocketError -&gt; Text
-</span><a href="Cardano.CLI.Environment.html#renderEnvSocketError"><span class="hs-identifier hs-var hs-var">renderEnvSocketError</span></a></span></span><span> </span><span id="local-6989586621679314714"><span class="annot"><span class="annottext">EnvSocketError
-</span><a href="#local-6989586621679314714"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Environment.html#renderEnvSocketError"><span class="hs-identifier hs-var hs-var">renderEnvSocketError</span></a></span></span><span> </span><span id="local-6989586621679315035"><span class="annot"><span class="annottext">EnvSocketError
+</span><a href="#local-6989586621679315035"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-23"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">EnvSocketError
-</span><a href="#local-6989586621679314714"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-24"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Environment.html#CliEnvVarLookup"><span class="hs-identifier hs-type">CliEnvVarLookup</span></a></span><span> </span><span id="local-6989586621679314713"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679314713"><span class="hs-identifier hs-var">txt</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679315035"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-24"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Environment.html#CliEnvVarLookup"><span class="hs-identifier hs-type">CliEnvVarLookup</span></a></span><span> </span><span id="local-6989586621679315034"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679315034"><span class="hs-identifier hs-var">txt</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-25"></span><span>      </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Error while looking up environment variable: CARDANO_NODE_SOCKET_PATH &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
@@ -50,7 +50,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text
 forall a. Show a =&gt; a -&gt; Text
 </span><a href="Cardano.CLI.Helpers.html#textShow"><span class="hs-identifier hs-var">textShow</span></a></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679314713"><span class="hs-identifier hs-var">txt</span></a></span><span>
+</span><a href="#local-6989586621679315034"><span class="hs-identifier hs-var">txt</span></a></span><span>
 </span><span id="line-26"></span><span>
 </span><span id="line-27"></span><span class="hs-comment">-- | Read the node socket path from the environment.</span><span>
 </span><span id="line-28"></span><span class="hs-comment">-- Fails if the environment variable is not set.</span><span>
@@ -70,7 +70,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; EnvSocketError
 </span><a href="Cardano.CLI.Environment.html#CliEnvVarLookup"><span class="hs-identifier hs-var">CliEnvVarLookup</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679314710"><span class="hs-identifier hs-var">envName</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SocketPath -&gt; ExceptT EnvSocketError IO SocketPath
+</span><a href="#local-6989586621679315031"><span class="hs-identifier hs-var">envName</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SocketPath -&gt; ExceptT EnvSocketError IO SocketPath
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(SocketPath -&gt; ExceptT EnvSocketError IO SocketPath)
 -&gt; (String -&gt; SocketPath)
@@ -89,10 +89,10 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; (a -&gt; m b) -&gt; m a -&gt; m b
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; IO (Maybe String)
 </span><span class="hs-identifier hs-var">lookupEnv</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679314710"><span class="hs-identifier hs-var">envName</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679315031"><span class="hs-identifier hs-var">envName</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-33"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-34"></span><span>    </span><span class="annot"><a href="#local-6989586621679314710"><span class="hs-identifier hs-type">envName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-35"></span><span>    </span><span id="local-6989586621679314710"><span class="annot"><span class="annottext">envName :: String
-</span><a href="#local-6989586621679314710"><span class="hs-identifier hs-var hs-var">envName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-34"></span><span>    </span><span class="annot"><a href="#local-6989586621679315031"><span class="hs-identifier hs-type">envName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-35"></span><span>    </span><span id="local-6989586621679315031"><span class="annot"><span class="annottext">envName :: String
+</span><a href="#local-6989586621679315031"><span class="hs-identifier hs-var hs-var">envName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;CARDANO_NODE_SOCKET_PATH&quot;</span></span><span>
 </span><span id="line-36"></span></pre></body></html>

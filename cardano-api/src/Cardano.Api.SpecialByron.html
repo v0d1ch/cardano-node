@@ -48,7 +48,7 @@
 </span><span id="line-48"></span><span class="hs-keyword">newtype</span><span> </span><span id="ByronUpdateProposal"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-var">ByronUpdateProposal</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-49"></span><span>    </span><span id="ByronUpdateProposal"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-var">ByronUpdateProposal</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="unByronUpdateProposal"><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; AProposal ByteString
 </span><a href="Cardano.Api.SpecialByron.html#unByronUpdateProposal"><span class="hs-identifier hs-var hs-var">unByronUpdateProposal</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AProposal</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span class="hs-special">}</span><span>
-</span><span id="line-50"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679424070"><span id="local-6989586621679424072"><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool
+</span><span id="line-50"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679433836"><span id="local-6989586621679433838"><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool
 (ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool)
 -&gt; (ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool)
 -&gt; Eq ByronUpdateProposal
@@ -57,7 +57,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool
 == :: ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool
 $c== :: ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679424063"><span id="local-6989586621679424065"><span id="local-6989586621679424067"><span class="annot"><span class="annottext">Int -&gt; ByronUpdateProposal -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679433829"><span id="local-6989586621679433831"><span id="local-6989586621679433833"><span class="annot"><span class="annottext">Int -&gt; ByronUpdateProposal -&gt; ShowS
 [ByronUpdateProposal] -&gt; ShowS
 ByronUpdateProposal -&gt; String
 (Int -&gt; ByronUpdateProposal -&gt; ShowS)
@@ -76,51 +76,51 @@ $cshowsPrec :: Int -&gt; ByronUpdateProposal -&gt; ShowS
 </span><span id="line-51"></span><span>
 </span><span id="line-52"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#HasTypeProxy"><span class="hs-identifier hs-type">HasTypeProxy</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-53"></span><span>  </span><span class="hs-keyword">data</span><span> </span><span id="AsType"><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-var">AsType</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AsByronUpdateProposal"><span class="annot"><a href="Cardano.Api.SpecialByron.html#AsByronUpdateProposal"><span class="hs-identifier hs-var">AsByronUpdateProposal</span></a></span></span><span>
-</span><span id="line-54"></span><span>  </span><span id="local-6989586621679424059"><span class="annot"><span class="annottext">proxyToAsType :: Proxy ByronUpdateProposal -&gt; AsType ByronUpdateProposal
+</span><span id="line-54"></span><span>  </span><span id="local-6989586621679433825"><span class="annot"><span class="annottext">proxyToAsType :: Proxy ByronUpdateProposal -&gt; AsType ByronUpdateProposal
 </span><a href="Cardano.Api.HasTypeProxy.html#proxyToAsType"><span class="hs-identifier hs-var hs-var hs-var hs-var">proxyToAsType</span></a></span></span><span> </span><span class="annot"><span class="annottext">Proxy ByronUpdateProposal
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AsType ByronUpdateProposal
 </span><a href="Cardano.Api.SpecialByron.html#AsByronUpdateProposal"><span class="hs-identifier hs-var">AsByronUpdateProposal</span></a></span><span>
 </span><span id="line-55"></span><span>
 </span><span id="line-56"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseRaw.html#SerialiseAsRawBytes"><span class="hs-identifier hs-type">SerialiseAsRawBytes</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-57"></span><span>  </span><span id="local-6989586621679424053"><span class="annot"><span class="annottext">serialiseToRawBytes :: ByronUpdateProposal -&gt; ByteString
-</span><a href="Cardano.Api.SerialiseRaw.html#serialiseToRawBytes"><span class="hs-identifier hs-var hs-var hs-var hs-var">serialiseToRawBytes</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679424051"><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679424051"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AProposal ByteString -&gt; ByteString
+</span><span id="line-57"></span><span>  </span><span id="local-6989586621679433819"><span class="annot"><span class="annottext">serialiseToRawBytes :: ByronUpdateProposal -&gt; ByteString
+</span><a href="Cardano.Api.SerialiseRaw.html#serialiseToRawBytes"><span class="hs-identifier hs-var hs-var hs-var hs-var">serialiseToRawBytes</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679433817"><span class="annot"><span class="annottext">AProposal ByteString
+</span><a href="#local-6989586621679433817"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AProposal ByteString -&gt; ByteString
 forall a. AProposal a -&gt; a
 </span><span class="hs-identifier hs-var hs-var">annotation</span></span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679424051"><span class="hs-identifier hs-var">proposal</span></a></span><span>
-</span><span id="line-58"></span><span>  </span><span id="local-6989586621679424050"><span class="annot"><span class="annottext">deserialiseFromRawBytes :: AsType ByronUpdateProposal
+</span><a href="#local-6989586621679433817"><span class="hs-identifier hs-var">proposal</span></a></span><span>
+</span><span id="line-58"></span><span>  </span><span id="local-6989586621679433816"><span class="annot"><span class="annottext">deserialiseFromRawBytes :: AsType ByronUpdateProposal
 -&gt; ByteString -&gt; Maybe ByronUpdateProposal
 </span><a href="Cardano.Api.SerialiseRaw.html#deserialiseFromRawBytes"><span class="hs-identifier hs-var hs-var hs-var hs-var">deserialiseFromRawBytes</span></a></span></span><span> </span><span class="annot"><span class="annottext">AsType ByronUpdateProposal
-</span><a href="Cardano.Api.SpecialByron.html#AsByronUpdateProposal"><span class="hs-identifier hs-var">AsByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679424048"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679424048"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-59"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679424047"><span class="annot"><span class="annottext">lBs :: ByteString
-</span><a href="#local-6989586621679424047"><span class="hs-identifier hs-var hs-var">lBs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
+</span><a href="Cardano.Api.SpecialByron.html#AsByronUpdateProposal"><span class="hs-identifier hs-var">AsByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679433814"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679433814"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-59"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679433813"><span class="annot"><span class="annottext">lBs :: ByteString
+</span><a href="#local-6989586621679433813"><span class="hs-identifier hs-var hs-var">lBs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
 </span><span class="hs-identifier hs-var">LB.fromStrict</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679424048"><span class="hs-identifier hs-var">bs</span></a></span><span>
+</span><a href="#local-6989586621679433814"><span class="hs-identifier hs-var">bs</span></a></span><span>
 </span><span id="line-60"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Either DecoderError (AProposal ByteSpan)
 forall a. FromCBOR a =&gt; ByteString -&gt; Either DecoderError a
 </span><span class="hs-identifier hs-var">Binary.decodeFull</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679424047"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-61"></span><span>        </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679424044"><span class="annot"><span class="annottext">DecoderError
-</span><a href="#local-6989586621679424044"><span class="hs-identifier hs-var">_deserFail</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ByronUpdateProposal
+</span><a href="#local-6989586621679433813"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-61"></span><span>        </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679433810"><span class="annot"><span class="annottext">DecoderError
+</span><a href="#local-6989586621679433810"><span class="hs-identifier hs-var">_deserFail</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ByronUpdateProposal
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-62"></span><span>        </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679424043"><span class="annot"><span class="annottext">AProposal ByteSpan
-</span><a href="#local-6989586621679424043"><span class="hs-identifier hs-var">proposal</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; Maybe ByronUpdateProposal
+</span><span id="line-62"></span><span>        </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679433809"><span class="annot"><span class="annottext">AProposal ByteSpan
+</span><a href="#local-6989586621679433809"><span class="hs-identifier hs-var">proposal</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; Maybe ByronUpdateProposal
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AProposal ByteString -&gt; ByronUpdateProposal
 </span><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-var">ByronUpdateProposal</span></a></span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679424042"><span class="hs-identifier hs-var">proposal'</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679433808"><span class="hs-identifier hs-var">proposal'</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-63"></span><span>          </span><span class="hs-keyword">where</span><span>
-</span><span id="line-64"></span><span>            </span><span class="annot"><a href="#local-6989586621679424042"><span class="hs-identifier hs-type">proposal'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AProposal</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-65"></span><span>            </span><span id="local-6989586621679424042"><span class="annot"><span class="annottext">proposal' :: AProposal ByteString
-</span><a href="#local-6989586621679424042"><span class="hs-identifier hs-var hs-var">proposal'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; AProposal ByteSpan -&gt; AProposal ByteString
+</span><span id="line-64"></span><span>            </span><span class="annot"><a href="#local-6989586621679433808"><span class="hs-identifier hs-type">proposal'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AProposal</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
+</span><span id="line-65"></span><span>            </span><span id="local-6989586621679433808"><span class="annot"><span class="annottext">proposal' :: AProposal ByteString
+</span><a href="#local-6989586621679433808"><span class="hs-identifier hs-var hs-var">proposal'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; AProposal ByteSpan -&gt; AProposal ByteString
 forall (f :: * -&gt; *).
 Functor f =&gt;
 ByteString -&gt; f ByteSpan -&gt; f ByteString
 </span><span class="hs-identifier hs-var">Binary.annotationBytes</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679424047"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="annot"><span class="annottext">AProposal ByteSpan
-</span><a href="#local-6989586621679424043"><span class="hs-identifier hs-var">proposal</span></a></span><span>
+</span><a href="#local-6989586621679433813"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="annot"><span class="annottext">AProposal ByteSpan
+</span><a href="#local-6989586621679433809"><span class="hs-identifier hs-var">proposal</span></a></span><span>
 </span><span id="line-66"></span><span>
 </span><span id="line-67"></span><span class="annot"><a href="Cardano.Api.SpecialByron.html#makeByronUpdateProposal"><span class="hs-identifier hs-type">makeByronUpdateProposal</span></a></span><span>
 </span><span id="line-68"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.NetworkId.html#NetworkId"><span class="hs-identifier hs-type">NetworkId</span></a></span><span>
@@ -139,26 +139,26 @@ ByteString -&gt; f ByteSpan -&gt; f ByteString
 -&gt; SomeByronSigningKey
 -&gt; ByronProtocolParametersUpdate
 -&gt; ByronUpdateProposal
-</span><a href="Cardano.Api.SpecialByron.html#makeByronUpdateProposal"><span class="hs-identifier hs-var hs-var">makeByronUpdateProposal</span></a></span></span><span> </span><span id="local-6989586621679424040"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679424040"><span class="hs-identifier hs-var">nId</span></a></span></span><span> </span><span id="local-6989586621679424039"><span class="annot"><span class="annottext">ProtocolVersion
-</span><a href="#local-6989586621679424039"><span class="hs-identifier hs-var">pVer</span></a></span></span><span> </span><span id="local-6989586621679424038"><span class="annot"><span class="annottext">SoftwareVersion
-</span><a href="#local-6989586621679424038"><span class="hs-identifier hs-var">sVer</span></a></span></span><span> </span><span id="local-6989586621679424037"><span class="annot"><span class="annottext">SystemTag
-</span><a href="#local-6989586621679424037"><span class="hs-identifier hs-var">sysTag</span></a></span></span><span> </span><span id="local-6989586621679424036"><span class="annot"><span class="annottext">InstallerHash
-</span><a href="#local-6989586621679424036"><span class="hs-identifier hs-var">insHash</span></a></span></span><span>
-</span><span id="line-77"></span><span>                          </span><span id="local-6989586621679424035"><span class="annot"><span class="annottext">SomeByronSigningKey
-</span><a href="#local-6989586621679424035"><span class="hs-identifier hs-var">bWit</span></a></span></span><span> </span><span id="local-6989586621679424034"><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424034"><span class="hs-identifier hs-var">paramsToUpdate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-78"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679424033"><span class="hs-identifier hs-type">nonAnnotatedProposal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AProposal</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-79"></span><span>      </span><span id="local-6989586621679424033"><span class="annot"><span class="annottext">nonAnnotatedProposal :: AProposal ()
-</span><a href="#local-6989586621679424033"><span class="hs-identifier hs-var hs-var">nonAnnotatedProposal</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; ProposalBody -&gt; SafeSigner -&gt; AProposal ()
+</span><a href="Cardano.Api.SpecialByron.html#makeByronUpdateProposal"><span class="hs-identifier hs-var hs-var">makeByronUpdateProposal</span></a></span></span><span> </span><span id="local-6989586621679433806"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679433806"><span class="hs-identifier hs-var">nId</span></a></span></span><span> </span><span id="local-6989586621679433805"><span class="annot"><span class="annottext">ProtocolVersion
+</span><a href="#local-6989586621679433805"><span class="hs-identifier hs-var">pVer</span></a></span></span><span> </span><span id="local-6989586621679433804"><span class="annot"><span class="annottext">SoftwareVersion
+</span><a href="#local-6989586621679433804"><span class="hs-identifier hs-var">sVer</span></a></span></span><span> </span><span id="local-6989586621679433803"><span class="annot"><span class="annottext">SystemTag
+</span><a href="#local-6989586621679433803"><span class="hs-identifier hs-var">sysTag</span></a></span></span><span> </span><span id="local-6989586621679433802"><span class="annot"><span class="annottext">InstallerHash
+</span><a href="#local-6989586621679433802"><span class="hs-identifier hs-var">insHash</span></a></span></span><span>
+</span><span id="line-77"></span><span>                          </span><span id="local-6989586621679433801"><span class="annot"><span class="annottext">SomeByronSigningKey
+</span><a href="#local-6989586621679433801"><span class="hs-identifier hs-var">bWit</span></a></span></span><span> </span><span id="local-6989586621679433800"><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
+</span><a href="#local-6989586621679433800"><span class="hs-identifier hs-var">paramsToUpdate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-78"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679433799"><span class="hs-identifier hs-type">nonAnnotatedProposal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">AProposal</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-79"></span><span>      </span><span id="local-6989586621679433799"><span class="annot"><span class="annottext">nonAnnotatedProposal :: AProposal ()
+</span><a href="#local-6989586621679433799"><span class="hs-identifier hs-var hs-var">nonAnnotatedProposal</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; ProposalBody -&gt; SafeSigner -&gt; AProposal ()
 </span><span class="hs-identifier hs-var">signProposal</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NetworkId -&gt; ProtocolMagicId
 </span><a href="Cardano.Api.NetworkId.html#toByronProtocolMagicId"><span class="hs-identifier hs-var">toByronProtocolMagicId</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679424040"><span class="hs-identifier hs-var">nId</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ProposalBody
-</span><a href="#local-6989586621679424032"><span class="hs-identifier hs-var">proposalBody</span></a></span><span> </span><span class="annot"><span class="annottext">SafeSigner
-</span><a href="#local-6989586621679424031"><span class="hs-identifier hs-var">noPassSigningKey</span></a></span><span>
-</span><span id="line-80"></span><span>      </span><span class="annot"><a href="#local-6989586621679424030"><span class="hs-identifier hs-type">annotatedPropBody</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.Annotated</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProposalBody</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-81"></span><span>      </span><span id="local-6989586621679424030"><span class="annot"><span class="annottext">annotatedPropBody :: Annotated ProposalBody ByteString
-</span><a href="#local-6989586621679424030"><span class="hs-identifier hs-var hs-var">annotatedPropBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated ProposalBody () -&gt; Annotated ProposalBody ByteString
+</span><a href="#local-6989586621679433806"><span class="hs-identifier hs-var">nId</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ProposalBody
+</span><a href="#local-6989586621679433798"><span class="hs-identifier hs-var">proposalBody</span></a></span><span> </span><span class="annot"><span class="annottext">SafeSigner
+</span><a href="#local-6989586621679433797"><span class="hs-identifier hs-var">noPassSigningKey</span></a></span><span>
+</span><span id="line-80"></span><span>      </span><span class="annot"><a href="#local-6989586621679433796"><span class="hs-identifier hs-type">annotatedPropBody</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.Annotated</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProposalBody</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
+</span><span id="line-81"></span><span>      </span><span id="local-6989586621679433796"><span class="annot"><span class="annottext">annotatedPropBody :: Annotated ProposalBody ByteString
+</span><a href="#local-6989586621679433796"><span class="hs-identifier hs-var hs-var">annotatedPropBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated ProposalBody () -&gt; Annotated ProposalBody ByteString
 forall a b. ToCBOR a =&gt; Annotated a b -&gt; Annotated a ByteString
 </span><span class="hs-identifier hs-var">Binary.reAnnotate</span></span><span> </span><span class="annot"><span class="annottext">(Annotated ProposalBody () -&gt; Annotated ProposalBody ByteString)
 -&gt; Annotated ProposalBody () -&gt; Annotated ProposalBody ByteString
@@ -166,58 +166,58 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">AProposal () -&gt; Annotated ProposalBody ()
 forall a. AProposal a -&gt; Annotated ProposalBody a
 </span><span class="hs-identifier hs-var hs-var">aBody</span></span><span> </span><span class="annot"><span class="annottext">AProposal ()
-</span><a href="#local-6989586621679424033"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span>
+</span><a href="#local-6989586621679433799"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span>
 </span><span id="line-82"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">AProposal ByteString -&gt; ByronUpdateProposal
 </span><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-var">ByronUpdateProposal</span></a></span><span>
 </span><span id="line-83"></span><span>       </span><span class="annot"><span class="annottext">(AProposal ByteString -&gt; ByronUpdateProposal)
 -&gt; AProposal ByteString -&gt; ByronUpdateProposal
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">AProposal ()
-</span><a href="#local-6989586621679424033"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">$sel:aBody:AProposal :: Annotated ProposalBody ByteString
+</span><a href="#local-6989586621679433799"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">$sel:aBody:AProposal :: Annotated ProposalBody ByteString
 </span><span class="hs-identifier hs-var">aBody</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated ProposalBody ByteString
-</span><a href="#local-6989586621679424030"><span class="hs-identifier hs-var">annotatedPropBody</span></a></span><span>
+</span><a href="#local-6989586621679433796"><span class="hs-identifier hs-var">annotatedPropBody</span></a></span><span>
 </span><span id="line-84"></span><span>                              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">$sel:annotation:AProposal :: ByteString
 </span><span class="hs-identifier hs-var">annotation</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AProposal () -&gt; ByteString
 forall a. ToCBOR a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">Binary.serialize'</span></span><span> </span><span class="annot"><span class="annottext">AProposal ()
-</span><a href="#local-6989586621679424033"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span>
+</span><a href="#local-6989586621679433799"><span class="hs-identifier hs-var">nonAnnotatedProposal</span></a></span><span>
 </span><span id="line-85"></span><span>                              </span><span class="hs-special">}</span><span>
 </span><span id="line-86"></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-87"></span><span>   </span><span class="annot"><a href="#local-6989586621679424032"><span class="hs-identifier hs-type">proposalBody</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProposalBody</span></span><span>
-</span><span id="line-88"></span><span>   </span><span id="local-6989586621679424032"><span class="annot"><span class="annottext">proposalBody :: ProposalBody
-</span><a href="#local-6989586621679424032"><span class="hs-identifier hs-var hs-var">proposalBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolVersion
+</span><span id="line-87"></span><span>   </span><span class="annot"><a href="#local-6989586621679433798"><span class="hs-identifier hs-type">proposalBody</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProposalBody</span></span><span>
+</span><span id="line-88"></span><span>   </span><span id="local-6989586621679433798"><span class="annot"><span class="annottext">proposalBody :: ProposalBody
+</span><a href="#local-6989586621679433798"><span class="hs-identifier hs-var hs-var">proposalBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolVersion
 -&gt; ProtocolParametersUpdate
 -&gt; SoftwareVersion
 -&gt; Map SystemTag InstallerHash
 -&gt; ProposalBody
 </span><span class="hs-identifier hs-var">ProposalBody</span></span><span> </span><span class="annot"><span class="annottext">ProtocolVersion
-</span><a href="#local-6989586621679424039"><span class="hs-identifier hs-var">pVer</span></a></span><span> </span><span class="annot"><span class="annottext">ProtocolParametersUpdate
-</span><a href="#local-6989586621679424027"><span class="hs-identifier hs-var">protocolParamsUpdate</span></a></span><span> </span><span class="annot"><span class="annottext">SoftwareVersion
-</span><a href="#local-6989586621679424038"><span class="hs-identifier hs-var">sVer</span></a></span><span> </span><span class="annot"><span class="annottext">Map SystemTag InstallerHash
-</span><a href="#local-6989586621679424026"><span class="hs-identifier hs-var">metaData</span></a></span><span>
+</span><a href="#local-6989586621679433805"><span class="hs-identifier hs-var">pVer</span></a></span><span> </span><span class="annot"><span class="annottext">ProtocolParametersUpdate
+</span><a href="#local-6989586621679433793"><span class="hs-identifier hs-var">protocolParamsUpdate</span></a></span><span> </span><span class="annot"><span class="annottext">SoftwareVersion
+</span><a href="#local-6989586621679433804"><span class="hs-identifier hs-var">sVer</span></a></span><span> </span><span class="annot"><span class="annottext">Map SystemTag InstallerHash
+</span><a href="#local-6989586621679433792"><span class="hs-identifier hs-var">metaData</span></a></span><span>
 </span><span id="line-89"></span><span>
-</span><span id="line-90"></span><span>   </span><span class="annot"><a href="#local-6989586621679424026"><span class="hs-identifier hs-type">metaData</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">M.Map</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">SystemTag</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">InstallerHash</span></span><span>
-</span><span id="line-91"></span><span>   </span><span id="local-6989586621679424026"><span class="annot"><span class="annottext">metaData :: Map SystemTag InstallerHash
-</span><a href="#local-6989586621679424026"><span class="hs-identifier hs-var hs-var">metaData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SystemTag -&gt; InstallerHash -&gt; Map SystemTag InstallerHash
+</span><span id="line-90"></span><span>   </span><span class="annot"><a href="#local-6989586621679433792"><span class="hs-identifier hs-type">metaData</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">M.Map</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">SystemTag</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">InstallerHash</span></span><span>
+</span><span id="line-91"></span><span>   </span><span id="local-6989586621679433792"><span class="annot"><span class="annottext">metaData :: Map SystemTag InstallerHash
+</span><a href="#local-6989586621679433792"><span class="hs-identifier hs-var hs-var">metaData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SystemTag -&gt; InstallerHash -&gt; Map SystemTag InstallerHash
 forall k a. k -&gt; a -&gt; Map k a
 </span><span class="hs-identifier hs-var">M.singleton</span></span><span> </span><span class="annot"><span class="annottext">SystemTag
-</span><a href="#local-6989586621679424037"><span class="hs-identifier hs-var">sysTag</span></a></span><span> </span><span class="annot"><span class="annottext">InstallerHash
-</span><a href="#local-6989586621679424036"><span class="hs-identifier hs-var">insHash</span></a></span><span>
+</span><a href="#local-6989586621679433803"><span class="hs-identifier hs-var">sysTag</span></a></span><span> </span><span class="annot"><span class="annottext">InstallerHash
+</span><a href="#local-6989586621679433802"><span class="hs-identifier hs-var">insHash</span></a></span><span>
 </span><span id="line-92"></span><span>
-</span><span id="line-93"></span><span>   </span><span class="annot"><a href="#local-6989586621679424031"><span class="hs-identifier hs-type">noPassSigningKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">SafeSigner</span></span><span>
-</span><span id="line-94"></span><span>   </span><span id="local-6989586621679424031"><span class="annot"><span class="annottext">noPassSigningKey :: SafeSigner
-</span><a href="#local-6989586621679424031"><span class="hs-identifier hs-var hs-var">noPassSigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SigningKey -&gt; SafeSigner
+</span><span id="line-93"></span><span>   </span><span class="annot"><a href="#local-6989586621679433797"><span class="hs-identifier hs-type">noPassSigningKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">SafeSigner</span></span><span>
+</span><span id="line-94"></span><span>   </span><span id="local-6989586621679433797"><span class="annot"><span class="annottext">noPassSigningKey :: SafeSigner
+</span><a href="#local-6989586621679433797"><span class="hs-identifier hs-var hs-var">noPassSigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SigningKey -&gt; SafeSigner
 </span><span class="hs-identifier hs-var">noPassSafeSigner</span></span><span> </span><span class="annot"><span class="annottext">(SigningKey -&gt; SafeSigner) -&gt; SigningKey -&gt; SafeSigner
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">SomeByronSigningKey -&gt; SigningKey
 </span><a href="Cardano.Api.KeysByron.html#toByronSigningKey"><span class="hs-identifier hs-var">toByronSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">SomeByronSigningKey
-</span><a href="#local-6989586621679424035"><span class="hs-identifier hs-var">bWit</span></a></span><span>
+</span><a href="#local-6989586621679433801"><span class="hs-identifier hs-var">bWit</span></a></span><span>
 </span><span id="line-95"></span><span>
-</span><span id="line-96"></span><span>   </span><span class="annot"><a href="#local-6989586621679424027"><span class="hs-identifier hs-type">protocolParamsUpdate</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProtocolParametersUpdate</span></span><span>
-</span><span id="line-97"></span><span>   </span><span id="local-6989586621679424027"><span class="annot"><span class="annottext">protocolParamsUpdate :: ProtocolParametersUpdate
-</span><a href="#local-6989586621679424027"><span class="hs-identifier hs-var hs-var">protocolParamsUpdate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; ProtocolParametersUpdate
+</span><span id="line-96"></span><span>   </span><span class="annot"><a href="#local-6989586621679433793"><span class="hs-identifier hs-type">protocolParamsUpdate</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProtocolParametersUpdate</span></span><span>
+</span><span id="line-97"></span><span>   </span><span id="local-6989586621679433793"><span class="annot"><span class="annottext">protocolParamsUpdate :: ProtocolParametersUpdate
+</span><a href="#local-6989586621679433793"><span class="hs-identifier hs-var hs-var">protocolParamsUpdate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; ProtocolParametersUpdate
 </span><a href="Cardano.Api.SpecialByron.html#makeProtocolParametersUpdate"><span class="hs-identifier hs-var">makeProtocolParametersUpdate</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424034"><span class="hs-identifier hs-var">paramsToUpdate</span></a></span><span>
+</span><a href="#local-6989586621679433800"><span class="hs-identifier hs-var">paramsToUpdate</span></a></span><span>
 </span><span id="line-98"></span><span>
 </span><span id="line-99"></span><span class="hs-keyword">data</span><span> </span><span id="ByronProtocolParametersUpdate"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronProtocolParametersUpdate"><span class="hs-identifier hs-var">ByronProtocolParametersUpdate</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-100"></span><span>  </span><span id="ByronProtocolParametersUpdate"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronProtocolParametersUpdate"><span class="hs-identifier hs-var">ByronProtocolParametersUpdate</span></a></span></span><span>
@@ -267,7 +267,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="Cardano.Api.SpecialByron.html#bPpuUnlockStakeEpoch"><span class="hs-identifier hs-var hs-var">bPpuUnlockStakeEpoch</span></a></span></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">EpochNumber</span></span><span class="hs-special">)</span><span>
 </span><span id="line-131"></span><span>      </span><span class="hs-comment">-- ^ This has been re-purposed for unlocking the OuroborosBFT logic in the software.</span><span>
 </span><span id="line-132"></span><span>      </span><span class="hs-comment">-- Relevant: [CDEC-610](https://iohk.myjetbrains.com/youtrack/issue/CDEC-610)</span><span>
-</span><span id="line-133"></span><span>    </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679424003"><span id="local-6989586621679424005"><span id="local-6989586621679424007"><span class="annot"><span class="annottext">Int -&gt; ByronProtocolParametersUpdate -&gt; ShowS
+</span><span id="line-133"></span><span>    </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679433769"><span id="local-6989586621679433771"><span id="local-6989586621679433773"><span class="annot"><span class="annottext">Int -&gt; ByronProtocolParametersUpdate -&gt; ShowS
 [ByronProtocolParametersUpdate] -&gt; ShowS
 ByronProtocolParametersUpdate -&gt; String
 (Int -&gt; ByronProtocolParametersUpdate -&gt; ShowS)
@@ -288,8 +288,8 @@ $cshowsPrec :: Int -&gt; ByronProtocolParametersUpdate -&gt; ShowS
 </span><span id="line-136"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronProtocolParametersUpdate"><span class="hs-identifier hs-type">ByronProtocolParametersUpdate</span></a></span><span>
 </span><span id="line-137"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ProtocolParametersUpdate</span></span><span>
 </span><span id="line-138"></span><span id="makeProtocolParametersUpdate"><span class="annot"><span class="annottext">makeProtocolParametersUpdate :: ByronProtocolParametersUpdate -&gt; ProtocolParametersUpdate
-</span><a href="Cardano.Api.SpecialByron.html#makeProtocolParametersUpdate"><span class="hs-identifier hs-var hs-var">makeProtocolParametersUpdate</span></a></span></span><span> </span><span id="local-6989586621679424002"><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.SpecialByron.html#makeProtocolParametersUpdate"><span class="hs-identifier hs-var hs-var">makeProtocolParametersUpdate</span></a></span></span><span> </span><span id="local-6989586621679433768"><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-139"></span><span>  </span><span class="annot"><span class="annottext">ProtocolParametersUpdate :: Maybe Word16
 -&gt; Maybe Natural
 -&gt; Maybe Natural
@@ -309,76 +309,76 @@ $cshowsPrec :: Int -&gt; ByronProtocolParametersUpdate -&gt; ShowS
 </span><span id="line-140"></span><span>    </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">ppuScriptVersion :: Maybe Word16
 </span><span class="hs-identifier hs-var">ppuScriptVersion</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Word16
 </span><a href="Cardano.Api.SpecialByron.html#bPpuScriptVersion"><span class="hs-identifier hs-var hs-var">bPpuScriptVersion</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-141"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuSlotDuration :: Maybe Natural
 </span><span class="hs-identifier hs-var">ppuSlotDuration</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Natural
 </span><a href="Cardano.Api.SpecialByron.html#bPpuSlotDuration"><span class="hs-identifier hs-var hs-var">bPpuSlotDuration</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-142"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuMaxBlockSize :: Maybe Natural
 </span><span class="hs-identifier hs-var">ppuMaxBlockSize</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Natural
 </span><a href="Cardano.Api.SpecialByron.html#bPpuMaxBlockSize"><span class="hs-identifier hs-var hs-var">bPpuMaxBlockSize</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-143"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuMaxHeaderSize :: Maybe Natural
 </span><span class="hs-identifier hs-var">ppuMaxHeaderSize</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Natural
 </span><a href="Cardano.Api.SpecialByron.html#bPpuMaxHeaderSize"><span class="hs-identifier hs-var hs-var">bPpuMaxHeaderSize</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-144"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuMaxTxSize :: Maybe Natural
 </span><span class="hs-identifier hs-var">ppuMaxTxSize</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Natural
 </span><a href="Cardano.Api.SpecialByron.html#bPpuMaxTxSize"><span class="hs-identifier hs-var hs-var">bPpuMaxTxSize</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-145"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuMaxProposalSize :: Maybe Natural
 </span><span class="hs-identifier hs-var">ppuMaxProposalSize</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe Natural
 </span><a href="Cardano.Api.SpecialByron.html#bPpuMaxProposalSize"><span class="hs-identifier hs-var hs-var">bPpuMaxProposalSize</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-146"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuMpcThd :: Maybe LovelacePortion
 </span><span class="hs-identifier hs-var">ppuMpcThd</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe LovelacePortion
 </span><a href="Cardano.Api.SpecialByron.html#bPpuMpcThd"><span class="hs-identifier hs-var hs-var">bPpuMpcThd</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-147"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuHeavyDelThd :: Maybe LovelacePortion
 </span><span class="hs-identifier hs-var">ppuHeavyDelThd</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe LovelacePortion
 </span><a href="Cardano.Api.SpecialByron.html#bPpuHeavyDelThd"><span class="hs-identifier hs-var hs-var">bPpuHeavyDelThd</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-148"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuUpdateVoteThd :: Maybe LovelacePortion
 </span><span class="hs-identifier hs-var">ppuUpdateVoteThd</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe LovelacePortion
 </span><a href="Cardano.Api.SpecialByron.html#bPpuUpdateVoteThd"><span class="hs-identifier hs-var hs-var">bPpuUpdateVoteThd</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-149"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuUpdateProposalThd :: Maybe LovelacePortion
 </span><span class="hs-identifier hs-var">ppuUpdateProposalThd</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe LovelacePortion
 </span><a href="Cardano.Api.SpecialByron.html#bPpuUpdateProposalThd"><span class="hs-identifier hs-var hs-var">bPpuUpdateProposalThd</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-150"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuUpdateProposalTTL :: Maybe SlotNumber
 </span><span class="hs-identifier hs-var">ppuUpdateProposalTTL</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe SlotNumber
 </span><a href="Cardano.Api.SpecialByron.html#bPpuUpdateProposalTTL"><span class="hs-identifier hs-var hs-var">bPpuUpdateProposalTTL</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-151"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuSoftforkRule :: Maybe SoftforkRule
 </span><span class="hs-identifier hs-var">ppuSoftforkRule</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe SoftforkRule
 </span><a href="Cardano.Api.SpecialByron.html#bPpuSoftforkRule"><span class="hs-identifier hs-var hs-var">bPpuSoftforkRule</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-152"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuTxFeePolicy :: Maybe TxFeePolicy
 </span><span class="hs-identifier hs-var">ppuTxFeePolicy</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe TxFeePolicy
 </span><a href="Cardano.Api.SpecialByron.html#bPpuTxFeePolicy"><span class="hs-identifier hs-var hs-var">bPpuTxFeePolicy</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-153"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ppuUnlockStakeEpoch :: Maybe EpochNumber
 </span><span class="hs-identifier hs-var">ppuUnlockStakeEpoch</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate -&gt; Maybe EpochNumber
 </span><a href="Cardano.Api.SpecialByron.html#bPpuUnlockStakeEpoch"><span class="hs-identifier hs-var hs-var">bPpuUnlockStakeEpoch</span></a></span><span> </span><span class="annot"><span class="annottext">ByronProtocolParametersUpdate
-</span><a href="#local-6989586621679424002"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
+</span><a href="#local-6989586621679433768"><span class="hs-identifier hs-var">apiPpu</span></a></span><span>
 </span><span id="line-154"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-155"></span><span>
 </span><span id="line-156"></span><span class="annot"><a href="Cardano.Api.SpecialByron.html#toByronLedgerUpdateProposal"><span class="hs-identifier hs-type">toByronLedgerUpdateProposal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Mempool.GenTx</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronBlock</span></span><span>
 </span><span id="line-157"></span><span id="toByronLedgerUpdateProposal"><span class="annot"><span class="annottext">toByronLedgerUpdateProposal :: ByronUpdateProposal -&gt; GenTx ByronBlock
-</span><a href="Cardano.Api.SpecialByron.html#toByronLedgerUpdateProposal"><span class="hs-identifier hs-var hs-var">toByronLedgerUpdateProposal</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679423986"><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679423986"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.SpecialByron.html#toByronLedgerUpdateProposal"><span class="hs-identifier hs-var hs-var">toByronLedgerUpdateProposal</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679433752"><span class="annot"><span class="annottext">AProposal ByteString
+</span><a href="#local-6989586621679433752"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-158"></span><span>  </span><span class="annot"><span class="annottext">UpId -&gt; AProposal ByteString -&gt; GenTx ByronBlock
 </span><span class="hs-identifier hs-var">Mempool.ByronUpdateProposal</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AProposal ByteString -&gt; UpId
 </span><span class="hs-identifier hs-var">recoverUpId</span></span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679423986"><span class="hs-identifier hs-var">proposal</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679423986"><span class="hs-identifier hs-var">proposal</span></a></span><span>
+</span><a href="#local-6989586621679433752"><span class="hs-identifier hs-var">proposal</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
+</span><a href="#local-6989586621679433752"><span class="hs-identifier hs-var">proposal</span></a></span><span>
 </span><span id="line-159"></span><span>
 </span><span id="line-160"></span><span class="hs-comment">-- | Byron era votes</span><span>
 </span><span id="line-161"></span><span>
 </span><span id="line-162"></span><span class="hs-keyword">newtype</span><span> </span><span id="ByronVote"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-var">ByronVote</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="ByronVote"><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-var">ByronVote</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="unByronVote"><span class="annot"><span class="annottext">ByronVote -&gt; AVote ByteString
 </span><a href="Cardano.Api.SpecialByron.html#unByronVote"><span class="hs-identifier hs-var hs-var">unByronVote</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span> </span><span class="hs-special">}</span><span>
-</span><span id="line-163"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679423979"><span id="local-6989586621679423981"><span class="annot"><span class="annottext">ByronVote -&gt; ByronVote -&gt; Bool
+</span><span id="line-163"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679433745"><span id="local-6989586621679433747"><span class="annot"><span class="annottext">ByronVote -&gt; ByronVote -&gt; Bool
 (ByronVote -&gt; ByronVote -&gt; Bool)
 -&gt; (ByronVote -&gt; ByronVote -&gt; Bool) -&gt; Eq ByronVote
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -386,7 +386,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: ByronVote -&gt; ByronVote -&gt; Bool
 == :: ByronVote -&gt; ByronVote -&gt; Bool
 $c== :: ByronVote -&gt; ByronVote -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679423973"><span id="local-6989586621679423975"><span id="local-6989586621679423977"><span class="annot"><span class="annottext">Int -&gt; ByronVote -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679433739"><span id="local-6989586621679433741"><span id="local-6989586621679433743"><span class="annot"><span class="annottext">Int -&gt; ByronVote -&gt; ShowS
 [ByronVote] -&gt; ShowS
 ByronVote -&gt; String
 (Int -&gt; ByronVote -&gt; ShowS)
@@ -405,15 +405,15 @@ $cshowsPrec :: Int -&gt; ByronVote -&gt; ShowS
 </span><span id="line-164"></span><span>
 </span><span id="line-165"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#HasTypeProxy"><span class="hs-identifier hs-type">HasTypeProxy</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-166"></span><span>  </span><span class="hs-keyword">data</span><span> </span><span id="AsType"><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-var">AsType</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AsByronVote"><span class="annot"><a href="Cardano.Api.SpecialByron.html#AsByronVote"><span class="hs-identifier hs-var">AsByronVote</span></a></span></span><span>
-</span><span id="line-167"></span><span>  </span><span id="local-6989586621679423971"><span class="annot"><span class="annottext">proxyToAsType :: Proxy ByronVote -&gt; AsType ByronVote
-</span><a href="#local-6989586621679423971"><span class="hs-identifier hs-var hs-var hs-var hs-var">proxyToAsType</span></a></span></span><span> </span><span class="annot"><span class="annottext">Proxy ByronVote
+</span><span id="line-167"></span><span>  </span><span id="local-6989586621679433737"><span class="annot"><span class="annottext">proxyToAsType :: Proxy ByronVote -&gt; AsType ByronVote
+</span><a href="#local-6989586621679433737"><span class="hs-identifier hs-var hs-var hs-var hs-var">proxyToAsType</span></a></span></span><span> </span><span class="annot"><span class="annottext">Proxy ByronVote
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AsType ByronVote
 </span><a href="Cardano.Api.SpecialByron.html#AsByronVote"><span class="hs-identifier hs-var">AsByronVote</span></a></span><span>
 </span><span id="line-168"></span><span>
 </span><span id="line-169"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseRaw.html#SerialiseAsRawBytes"><span class="hs-identifier hs-type">SerialiseAsRawBytes</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-170"></span><span>  </span><span id="local-6989586621679423967"><span class="annot"><span class="annottext">serialiseToRawBytes :: ByronVote -&gt; ByteString
-</span><a href="#local-6989586621679423967"><span class="hs-identifier hs-var hs-var hs-var hs-var">serialiseToRawBytes</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span id="local-6989586621679423966"><span class="annot"><span class="annottext">AVote ByteString
-</span><a href="#local-6989586621679423966"><span class="hs-identifier hs-var">vote</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AVote () -&gt; ByteString
+</span><span id="line-170"></span><span>  </span><span id="local-6989586621679433733"><span class="annot"><span class="annottext">serialiseToRawBytes :: ByronVote -&gt; ByteString
+</span><a href="#local-6989586621679433733"><span class="hs-identifier hs-var hs-var hs-var hs-var">serialiseToRawBytes</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span id="local-6989586621679433732"><span class="annot"><span class="annottext">AVote ByteString
+</span><a href="#local-6989586621679433732"><span class="hs-identifier hs-var">vote</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AVote () -&gt; ByteString
 forall a. ToCBOR a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">Binary.serialize'</span></span><span> </span><span class="annot"><span class="annottext">(AVote () -&gt; ByteString) -&gt; AVote () -&gt; ByteString
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -422,25 +422,25 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">() -&gt; ByteString -&gt; ()
 forall a b. a -&gt; b -&gt; a
 </span><span class="hs-identifier hs-var">const</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">AVote ByteString
-</span><a href="#local-6989586621679423966"><span class="hs-identifier hs-var">vote</span></a></span><span>
-</span><span id="line-171"></span><span>  </span><span id="local-6989586621679423964"><span class="annot"><span class="annottext">deserialiseFromRawBytes :: AsType ByronVote -&gt; ByteString -&gt; Maybe ByronVote
-</span><a href="#local-6989586621679423964"><span class="hs-identifier hs-var hs-var hs-var hs-var">deserialiseFromRawBytes</span></a></span></span><span> </span><span class="annot"><span class="annottext">AsType ByronVote
-</span><a href="Cardano.Api.SpecialByron.html#AsByronVote"><span class="hs-identifier hs-var">AsByronVote</span></a></span><span> </span><span id="local-6989586621679423963"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423963"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-172"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679423962"><span class="annot"><span class="annottext">lBs :: ByteString
-</span><a href="#local-6989586621679423962"><span class="hs-identifier hs-var hs-var">lBs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
+</span><a href="#local-6989586621679433732"><span class="hs-identifier hs-var">vote</span></a></span><span>
+</span><span id="line-171"></span><span>  </span><span id="local-6989586621679433730"><span class="annot"><span class="annottext">deserialiseFromRawBytes :: AsType ByronVote -&gt; ByteString -&gt; Maybe ByronVote
+</span><a href="#local-6989586621679433730"><span class="hs-identifier hs-var hs-var hs-var hs-var">deserialiseFromRawBytes</span></a></span></span><span> </span><span class="annot"><span class="annottext">AsType ByronVote
+</span><a href="Cardano.Api.SpecialByron.html#AsByronVote"><span class="hs-identifier hs-var">AsByronVote</span></a></span><span> </span><span id="local-6989586621679433729"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679433729"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-172"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679433728"><span class="annot"><span class="annottext">lBs :: ByteString
+</span><a href="#local-6989586621679433728"><span class="hs-identifier hs-var hs-var">lBs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
 </span><span class="hs-identifier hs-var">LB.fromStrict</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423963"><span class="hs-identifier hs-var">bs</span></a></span><span>
+</span><a href="#local-6989586621679433729"><span class="hs-identifier hs-var">bs</span></a></span><span>
 </span><span id="line-173"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Either DecoderError (AVote ByteSpan)
 forall a. FromCBOR a =&gt; ByteString -&gt; Either DecoderError a
 </span><span class="hs-identifier hs-var">Binary.decodeFull</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423962"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-174"></span><span>         </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679423961"><span class="annot"><span class="annottext">DecoderError
-</span><a href="#local-6989586621679423961"><span class="hs-identifier hs-var">_deserFail</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ByronVote
+</span><a href="#local-6989586621679433728"><span class="hs-identifier hs-var">lBs</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-174"></span><span>         </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679433727"><span class="annot"><span class="annottext">DecoderError
+</span><a href="#local-6989586621679433727"><span class="hs-identifier hs-var">_deserFail</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe ByronVote
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-175"></span><span>         </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679423960"><span class="annot"><span class="annottext">AVote ByteSpan
-</span><a href="#local-6989586621679423960"><span class="hs-identifier hs-var">vote</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronVote -&gt; Maybe ByronVote
+</span><span id="line-175"></span><span>         </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679433726"><span class="annot"><span class="annottext">AVote ByteSpan
+</span><a href="#local-6989586621679433726"><span class="hs-identifier hs-var">vote</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronVote -&gt; Maybe ByronVote
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(ByronVote -&gt; Maybe ByronVote)
 -&gt; (AVote ByteString -&gt; ByronVote)
@@ -452,21 +452,21 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 -&gt; AVote ByteString -&gt; Maybe ByronVote
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">AVote ByteSpan -&gt; ByteString -&gt; AVote ByteString
-</span><a href="#local-6989586621679423958"><span class="hs-identifier hs-var">annotateVote</span></a></span><span> </span><span class="annot"><span class="annottext">AVote ByteSpan
-</span><a href="#local-6989586621679423960"><span class="hs-identifier hs-var">vote</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423962"><span class="hs-identifier hs-var">lBs</span></a></span><span>
+</span><a href="#local-6989586621679433724"><span class="hs-identifier hs-var">annotateVote</span></a></span><span> </span><span class="annot"><span class="annottext">AVote ByteSpan
+</span><a href="#local-6989586621679433726"><span class="hs-identifier hs-var">vote</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679433728"><span class="hs-identifier hs-var">lBs</span></a></span><span>
 </span><span id="line-176"></span><span>   </span><span class="hs-keyword">where</span><span>
-</span><span id="line-177"></span><span>    </span><span class="annot"><a href="#local-6989586621679423958"><span class="hs-identifier hs-type">annotateVote</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.ByteSpan</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">LB.ByteString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-178"></span><span>    </span><span id="local-6989586621679423958"><span class="annot"><span class="annottext">annotateVote :: AVote ByteSpan -&gt; ByteString -&gt; AVote ByteString
-</span><a href="#local-6989586621679423958"><span class="hs-identifier hs-var hs-var">annotateVote</span></a></span></span><span> </span><span id="local-6989586621679423957"><span class="annot"><span class="annottext">AVote ByteSpan
-</span><a href="#local-6989586621679423957"><span class="hs-identifier hs-var">vote</span></a></span></span><span> </span><span id="local-6989586621679423956"><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423956"><span class="hs-identifier hs-var">bs'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; AVote ByteSpan -&gt; AVote ByteString
+</span><span id="line-177"></span><span>    </span><span class="annot"><a href="#local-6989586621679433724"><span class="hs-identifier hs-type">annotateVote</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.ByteSpan</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">LB.ByteString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
+</span><span id="line-178"></span><span>    </span><span id="local-6989586621679433724"><span class="annot"><span class="annottext">annotateVote :: AVote ByteSpan -&gt; ByteString -&gt; AVote ByteString
+</span><a href="#local-6989586621679433724"><span class="hs-identifier hs-var hs-var">annotateVote</span></a></span></span><span> </span><span id="local-6989586621679433723"><span class="annot"><span class="annottext">AVote ByteSpan
+</span><a href="#local-6989586621679433723"><span class="hs-identifier hs-var">vote</span></a></span></span><span> </span><span id="local-6989586621679433722"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679433722"><span class="hs-identifier hs-var">bs'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; AVote ByteSpan -&gt; AVote ByteString
 forall (f :: * -&gt; *).
 Functor f =&gt;
 ByteString -&gt; f ByteSpan -&gt; f ByteString
 </span><span class="hs-identifier hs-var">Binary.annotationBytes</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679423956"><span class="hs-identifier hs-var">bs'</span></a></span><span> </span><span class="annot"><span class="annottext">AVote ByteSpan
-</span><a href="#local-6989586621679423957"><span class="hs-identifier hs-var">vote</span></a></span><span>
+</span><a href="#local-6989586621679433722"><span class="hs-identifier hs-var">bs'</span></a></span><span> </span><span class="annot"><span class="annottext">AVote ByteSpan
+</span><a href="#local-6989586621679433723"><span class="hs-identifier hs-var">vote</span></a></span><span>
 </span><span id="line-179"></span><span>
 </span><span id="line-180"></span><span>
 </span><span id="line-181"></span><span class="annot"><a href="Cardano.Api.SpecialByron.html#makeByronVote"><span class="hs-identifier hs-type">makeByronVote</span></a></span><span>
@@ -477,28 +477,28 @@ ByteString -&gt; f ByteSpan -&gt; f ByteString
 </span><span id="line-186"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span>
 </span><span id="line-187"></span><span id="makeByronVote"><span class="annot"><span class="annottext">makeByronVote :: NetworkId
 -&gt; SomeByronSigningKey -&gt; ByronUpdateProposal -&gt; Bool -&gt; ByronVote
-</span><a href="Cardano.Api.SpecialByron.html#makeByronVote"><span class="hs-identifier hs-var hs-var">makeByronVote</span></a></span></span><span> </span><span id="local-6989586621679423955"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679423955"><span class="hs-identifier hs-var">nId</span></a></span></span><span> </span><span id="local-6989586621679423954"><span class="annot"><span class="annottext">SomeByronSigningKey
-</span><a href="#local-6989586621679423954"><span class="hs-identifier hs-var">sKey</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679423953"><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679423953"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679423952"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679423952"><span class="hs-identifier hs-var">yesOrNo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-188"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679423951"><span class="annot"><span class="annottext">signingKey :: SigningKey
-</span><a href="#local-6989586621679423951"><span class="hs-identifier hs-var hs-var">signingKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SomeByronSigningKey -&gt; SigningKey
+</span><a href="Cardano.Api.SpecialByron.html#makeByronVote"><span class="hs-identifier hs-var hs-var">makeByronVote</span></a></span></span><span> </span><span id="local-6989586621679433721"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679433721"><span class="hs-identifier hs-var">nId</span></a></span></span><span> </span><span id="local-6989586621679433720"><span class="annot"><span class="annottext">SomeByronSigningKey
+</span><a href="#local-6989586621679433720"><span class="hs-identifier hs-var">sKey</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronUpdateProposal"><span class="hs-identifier hs-type">ByronUpdateProposal</span></a></span><span> </span><span id="local-6989586621679433719"><span class="annot"><span class="annottext">AProposal ByteString
+</span><a href="#local-6989586621679433719"><span class="hs-identifier hs-var">proposal</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679433718"><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679433718"><span class="hs-identifier hs-var">yesOrNo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-188"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679433717"><span class="annot"><span class="annottext">signingKey :: SigningKey
+</span><a href="#local-6989586621679433717"><span class="hs-identifier hs-var hs-var">signingKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SomeByronSigningKey -&gt; SigningKey
 </span><a href="Cardano.Api.KeysByron.html#toByronSigningKey"><span class="hs-identifier hs-var">toByronSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">SomeByronSigningKey
-</span><a href="#local-6989586621679423954"><span class="hs-identifier hs-var">sKey</span></a></span><span>
-</span><span id="line-189"></span><span>      </span><span class="annot"><a href="#local-6989586621679423950"><span class="hs-identifier hs-type">nonAnnotatedVote</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-190"></span><span>      </span><span id="local-6989586621679423950"><span class="annot"><span class="annottext">nonAnnotatedVote :: AVote ()
-</span><a href="#local-6989586621679423950"><span class="hs-identifier hs-var hs-var">nonAnnotatedVote</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; SigningKey -&gt; UpId -&gt; Bool -&gt; AVote ()
+</span><a href="#local-6989586621679433720"><span class="hs-identifier hs-var">sKey</span></a></span><span>
+</span><span id="line-189"></span><span>      </span><span class="annot"><a href="#local-6989586621679433716"><span class="hs-identifier hs-type">nonAnnotatedVote</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronVote.AVote</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-190"></span><span>      </span><span id="local-6989586621679433716"><span class="annot"><span class="annottext">nonAnnotatedVote :: AVote ()
+</span><a href="#local-6989586621679433716"><span class="hs-identifier hs-var hs-var">nonAnnotatedVote</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ProtocolMagicId -&gt; SigningKey -&gt; UpId -&gt; Bool -&gt; AVote ()
 </span><span class="hs-identifier hs-var">mkVote</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NetworkId -&gt; ProtocolMagicId
 </span><a href="Cardano.Api.NetworkId.html#toByronProtocolMagicId"><span class="hs-identifier hs-var">toByronProtocolMagicId</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679423955"><span class="hs-identifier hs-var">nId</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">SigningKey
-</span><a href="#local-6989586621679423951"><span class="hs-identifier hs-var">signingKey</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AProposal ByteString -&gt; UpId
+</span><a href="#local-6989586621679433721"><span class="hs-identifier hs-var">nId</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">SigningKey
+</span><a href="#local-6989586621679433717"><span class="hs-identifier hs-var">signingKey</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AProposal ByteString -&gt; UpId
 </span><span class="hs-identifier hs-var">recoverUpId</span></span><span> </span><span class="annot"><span class="annottext">AProposal ByteString
-</span><a href="#local-6989586621679423953"><span class="hs-identifier hs-var">proposal</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679423952"><span class="hs-identifier hs-var">yesOrNo</span></a></span><span>
-</span><span id="line-191"></span><span>      </span><span class="annot"><a href="#local-6989586621679423949"><span class="hs-identifier hs-type">annotatedProposalId</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.Annotated</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">UpId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
-</span><span id="line-192"></span><span>      </span><span id="local-6989586621679423949"><span class="annot"><span class="annottext">annotatedProposalId :: Annotated UpId ByteString
-</span><a href="#local-6989586621679423949"><span class="hs-identifier hs-var hs-var">annotatedProposalId</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated UpId () -&gt; Annotated UpId ByteString
+</span><a href="#local-6989586621679433719"><span class="hs-identifier hs-var">proposal</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679433718"><span class="hs-identifier hs-var">yesOrNo</span></a></span><span>
+</span><span id="line-191"></span><span>      </span><span class="annot"><a href="#local-6989586621679433715"><span class="hs-identifier hs-type">annotatedProposalId</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Binary.Annotated</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">UpId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByteString</span></span><span>
+</span><span id="line-192"></span><span>      </span><span id="local-6989586621679433715"><span class="annot"><span class="annottext">annotatedProposalId :: Annotated UpId ByteString
+</span><a href="#local-6989586621679433715"><span class="hs-identifier hs-var hs-var">annotatedProposalId</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated UpId () -&gt; Annotated UpId ByteString
 forall a b. ToCBOR a =&gt; Annotated a b -&gt; Annotated a ByteString
 </span><span class="hs-identifier hs-var">Binary.reAnnotate</span></span><span> </span><span class="annot"><span class="annottext">(Annotated UpId () -&gt; Annotated UpId ByteString)
 -&gt; Annotated UpId () -&gt; Annotated UpId ByteString
@@ -506,28 +506,28 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">AVote () -&gt; Annotated UpId ()
 forall a. AVote a -&gt; Annotated UpId a
 </span><span class="hs-identifier hs-var hs-var">ByronVote.aProposalId</span></span><span> </span><span class="annot"><span class="annottext">AVote ()
-</span><a href="#local-6989586621679423950"><span class="hs-identifier hs-var">nonAnnotatedVote</span></a></span><span>
+</span><a href="#local-6989586621679433716"><span class="hs-identifier hs-var">nonAnnotatedVote</span></a></span><span>
 </span><span id="line-193"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">AVote ByteString -&gt; ByronVote
 </span><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-var">ByronVote</span></a></span><span>
 </span><span id="line-194"></span><span>       </span><span class="annot"><span class="annottext">(AVote ByteString -&gt; ByronVote) -&gt; AVote ByteString -&gt; ByronVote
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">AVote ()
-</span><a href="#local-6989586621679423950"><span class="hs-identifier hs-var">nonAnnotatedVote</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">aProposalId :: Annotated UpId ByteString
+</span><a href="#local-6989586621679433716"><span class="hs-identifier hs-var">nonAnnotatedVote</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">aProposalId :: Annotated UpId ByteString
 </span><span class="hs-identifier hs-var">ByronVote.aProposalId</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated UpId ByteString
-</span><a href="#local-6989586621679423949"><span class="hs-identifier hs-var">annotatedProposalId</span></a></span><span>
+</span><a href="#local-6989586621679433715"><span class="hs-identifier hs-var">annotatedProposalId</span></a></span><span>
 </span><span id="line-195"></span><span>                          </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">annotation :: ByteString
 </span><span class="hs-identifier hs-var">ByronVote.annotation</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Annotated UpId ByteString -&gt; ByteString
 forall b a. Annotated b a -&gt; a
 </span><span class="hs-identifier hs-var hs-var">Binary.annotation</span></span><span> </span><span class="annot"><span class="annottext">Annotated UpId ByteString
-</span><a href="#local-6989586621679423949"><span class="hs-identifier hs-var">annotatedProposalId</span></a></span><span>
+</span><a href="#local-6989586621679433715"><span class="hs-identifier hs-var">annotatedProposalId</span></a></span><span>
 </span><span id="line-196"></span><span>                          </span><span class="hs-special">}</span><span>
 </span><span id="line-197"></span><span>
 </span><span id="line-198"></span><span class="annot"><a href="Cardano.Api.SpecialByron.html#toByronLedgertoByronVote"><span class="hs-identifier hs-type">toByronLedgertoByronVote</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Mempool.GenTx</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ByronBlock</span></span><span>
 </span><span id="line-199"></span><span id="toByronLedgertoByronVote"><span class="annot"><span class="annottext">toByronLedgertoByronVote :: ByronVote -&gt; GenTx ByronBlock
-</span><a href="Cardano.Api.SpecialByron.html#toByronLedgertoByronVote"><span class="hs-identifier hs-var hs-var">toByronLedgertoByronVote</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span id="local-6989586621679423945"><span class="annot"><span class="annottext">AVote ByteString
-</span><a href="#local-6989586621679423945"><span class="hs-identifier hs-var">vote</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VoteId -&gt; AVote ByteString -&gt; GenTx ByronBlock
+</span><a href="Cardano.Api.SpecialByron.html#toByronLedgertoByronVote"><span class="hs-identifier hs-var hs-var">toByronLedgertoByronVote</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.SpecialByron.html#ByronVote"><span class="hs-identifier hs-type">ByronVote</span></a></span><span> </span><span id="local-6989586621679433711"><span class="annot"><span class="annottext">AVote ByteString
+</span><a href="#local-6989586621679433711"><span class="hs-identifier hs-var">vote</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">VoteId -&gt; AVote ByteString -&gt; GenTx ByronBlock
 </span><span class="hs-identifier hs-var">Mempool.ByronUpdateVote</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AVote ByteString -&gt; VoteId
 </span><span class="hs-identifier hs-var">recoverVoteId</span></span><span> </span><span class="annot"><span class="annottext">AVote ByteString
-</span><a href="#local-6989586621679423945"><span class="hs-identifier hs-var">vote</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">AVote ByteString
-</span><a href="#local-6989586621679423945"><span class="hs-identifier hs-var">vote</span></a></span><span>
+</span><a href="#local-6989586621679433711"><span class="hs-identifier hs-var">vote</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">AVote ByteString
+</span><a href="#local-6989586621679433711"><span class="hs-identifier hs-var">vote</span></a></span><span>
 </span><span id="line-200"></span></pre></body></html>

@@ -23,7 +23,7 @@
 </span><span id="line-23"></span><span class="hs-comment">{- HLINT ignore &quot;Reduce duplication&quot; -}</span><span>
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="hs-keyword">newtype</span><span> </span><span id="ByronQueryError"><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryError"><span class="hs-identifier hs-var">ByronQueryError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="ByronQueryEnvVarSocketErr"><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryEnvVarSocketErr"><span class="hs-identifier hs-var">ByronQueryEnvVarSocketErr</span></a></span></span><span> </span><span class="annot"><a href="Cardano.CLI.Environment.html#EnvSocketError"><span class="hs-identifier hs-type">EnvSocketError</span></a></span><span>
-</span><span id="line-26"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679317679"><span id="local-6989586621679317681"><span id="local-6989586621679317683"><span class="annot"><span class="annottext">Int -&gt; ByronQueryError -&gt; ShowS
+</span><span id="line-26"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679317663"><span id="local-6989586621679317665"><span id="local-6989586621679317667"><span class="annot"><span class="annottext">Int -&gt; ByronQueryError -&gt; ShowS
 [ByronQueryError] -&gt; ShowS
 ByronQueryError -&gt; String
 (Int -&gt; ByronQueryError -&gt; ShowS)
@@ -42,14 +42,14 @@ $cshowsPrec :: Int -&gt; ByronQueryError -&gt; ShowS
 </span><span id="line-27"></span><span>
 </span><span id="line-28"></span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#renderByronQueryError"><span class="hs-identifier hs-type">renderByronQueryError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryError"><span class="hs-identifier hs-type">ByronQueryError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-29"></span><span id="renderByronQueryError"><span class="annot"><span class="annottext">renderByronQueryError :: ByronQueryError -&gt; Text
-</span><a href="Cardano.CLI.Byron.Query.html#renderByronQueryError"><span class="hs-identifier hs-var hs-var">renderByronQueryError</span></a></span></span><span> </span><span id="local-6989586621679317677"><span class="annot"><span class="annottext">ByronQueryError
-</span><a href="#local-6989586621679317677"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Byron.Query.html#renderByronQueryError"><span class="hs-identifier hs-var hs-var">renderByronQueryError</span></a></span></span><span> </span><span id="local-6989586621679317661"><span class="annot"><span class="annottext">ByronQueryError
+</span><a href="#local-6989586621679317661"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-30"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ByronQueryError
-</span><a href="#local-6989586621679317677"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-31"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryEnvVarSocketErr"><span class="hs-identifier hs-type">ByronQueryEnvVarSocketErr</span></a></span><span> </span><span id="local-6989586621679317676"><span class="annot"><span class="annottext">EnvSocketError
-</span><a href="#local-6989586621679317676"><span class="hs-identifier hs-var">sockEnvErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnvSocketError -&gt; Text
+</span><a href="#local-6989586621679317661"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-31"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryEnvVarSocketErr"><span class="hs-identifier hs-type">ByronQueryEnvVarSocketErr</span></a></span><span> </span><span id="local-6989586621679317660"><span class="annot"><span class="annottext">EnvSocketError
+</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">sockEnvErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnvSocketError -&gt; Text
 </span><a href="Cardano.CLI.Environment.html#renderEnvSocketError"><span class="hs-identifier hs-var">renderEnvSocketError</span></a></span><span> </span><span class="annot"><span class="annottext">EnvSocketError
-</span><a href="#local-6989586621679317676"><span class="hs-identifier hs-var">sockEnvErr</span></a></span><span>
+</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">sockEnvErr</span></a></span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="hs-comment">--------------------------------------------------------------------------------</span><span>
 </span><span id="line-34"></span><span class="hs-comment">-- Query local node's chain tip</span><span>
@@ -57,10 +57,10 @@ $cshowsPrec :: Int -&gt; ByronQueryError -&gt; ShowS
 </span><span id="line-36"></span><span>
 </span><span id="line-37"></span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#runGetLocalNodeTip"><span class="hs-identifier hs-type">runGetLocalNodeTip</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">NetworkId</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Byron.Query.html#ByronQueryError"><span class="hs-identifier hs-type">ByronQueryError</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-38"></span><span id="runGetLocalNodeTip"><span class="annot"><span class="annottext">runGetLocalNodeTip :: NetworkId -&gt; ExceptT ByronQueryError IO ()
-</span><a href="Cardano.CLI.Byron.Query.html#runGetLocalNodeTip"><span class="hs-identifier hs-var hs-var">runGetLocalNodeTip</span></a></span></span><span> </span><span id="local-6989586621679317675"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679317675"><span class="hs-identifier hs-var">networkId</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-39"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Types.html#SocketPath"><span class="hs-identifier hs-type">SocketPath</span></a></span><span> </span><span id="local-6989586621679317673"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317673"><span class="hs-identifier hs-var">sockPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(EnvSocketError -&gt; ByronQueryError)
+</span><a href="Cardano.CLI.Byron.Query.html#runGetLocalNodeTip"><span class="hs-identifier hs-var hs-var">runGetLocalNodeTip</span></a></span></span><span> </span><span id="local-6989586621679317659"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679317659"><span class="hs-identifier hs-var">networkId</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-39"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Types.html#SocketPath"><span class="hs-identifier hs-type">SocketPath</span></a></span><span> </span><span id="local-6989586621679317657"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679317657"><span class="hs-identifier hs-var">sockPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(EnvSocketError -&gt; ByronQueryError)
 -&gt; ExceptT EnvSocketError IO SocketPath
 -&gt; ExceptT ByronQueryError IO SocketPath
 forall (m :: * -&gt; *) x y a.
@@ -70,18 +70,18 @@ Functor m =&gt;
 </span><a href="Cardano.CLI.Byron.Query.html#ByronQueryEnvVarSocketErr"><span class="hs-identifier hs-var">ByronQueryEnvVarSocketErr</span></a></span><span>
 </span><span id="line-40"></span><span>                           </span><span class="annot"><span class="annottext">ExceptT EnvSocketError IO SocketPath
 </span><a href="Cardano.CLI.Environment.html#readEnvSocketPath"><span class="hs-identifier hs-var">readEnvSocketPath</span></a></span><span>
-</span><span id="line-41"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679317672"><span class="annot"><span class="annottext">connctInfo :: LocalNodeConnectInfo ByronMode
-</span><a href="#local-6989586621679317672"><span class="hs-identifier hs-var hs-var">connctInfo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-41"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679317656"><span class="annot"><span class="annottext">connctInfo :: LocalNodeConnectInfo ByronMode
+</span><a href="#local-6989586621679317656"><span class="hs-identifier hs-var hs-var">connctInfo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-42"></span><span>          </span><span class="annot"><span class="annottext">LocalNodeConnectInfo :: forall mode.
 ConsensusModeParams mode
 -&gt; NetworkId -&gt; String -&gt; LocalNodeConnectInfo mode
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">LocalNodeConnectInfo</span></a></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-43"></span><span>            </span><span class="annot"><span class="annottext">localNodeSocketPath :: String
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">localNodeSocketPath</span></a></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317673"><span class="hs-identifier hs-var">sockPath</span></a></span><span class="hs-special">,</span><span>
+</span><a href="#local-6989586621679317657"><span class="hs-identifier hs-var">sockPath</span></a></span><span class="hs-special">,</span><span>
 </span><span id="line-44"></span><span>            </span><span class="annot"><span class="annottext">localNodeNetworkId :: NetworkId
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">localNodeNetworkId</span></a></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679317675"><span class="hs-identifier hs-var">networkId</span></a></span><span class="hs-special">,</span><span>
+</span><a href="#local-6989586621679317659"><span class="hs-identifier hs-var">networkId</span></a></span><span class="hs-special">,</span><span>
 </span><span id="line-45"></span><span>            </span><span class="annot"><span class="annottext">localConsensusModeParams :: ConsensusModeParams ByronMode
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">localConsensusModeParams</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">EpochSlots -&gt; ConsensusModeParams ByronMode
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ByronModeParams</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; EpochSlots
@@ -89,8 +89,8 @@ ConsensusModeParams mode
 </span><span class="hs-number">21600</span></span><span class="hs-special">)</span><span>
 </span><span id="line-46"></span><span>          </span><span class="hs-special">}</span><span>
 </span><span id="line-47"></span><span>
-</span><span id="line-48"></span><span>    </span><span id="local-6989586621679317665"><span class="annot"><span class="annottext">ChainTip
-</span><a href="#local-6989586621679317665"><span class="hs-identifier hs-var">tip</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO ChainTip -&gt; ExceptT ByronQueryError IO ChainTip
+</span><span id="line-48"></span><span>    </span><span id="local-6989586621679317649"><span class="annot"><span class="annottext">ChainTip
+</span><a href="#local-6989586621679317649"><span class="hs-identifier hs-var">tip</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO ChainTip -&gt; ExceptT ByronQueryError IO ChainTip
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO ChainTip -&gt; ExceptT ByronQueryError IO ChainTip)
 -&gt; IO ChainTip -&gt; ExceptT ByronQueryError IO ChainTip
@@ -98,7 +98,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">LocalNodeConnectInfo ByronMode -&gt; IO ChainTip
 forall mode. LocalNodeConnectInfo mode -&gt; IO ChainTip
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">getLocalChainTip</span></a></span><span> </span><span class="annot"><span class="annottext">LocalNodeConnectInfo ByronMode
-</span><a href="#local-6989586621679317672"><span class="hs-identifier hs-var">connctInfo</span></a></span><span>
+</span><a href="#local-6989586621679317656"><span class="hs-identifier hs-var">connctInfo</span></a></span><span>
 </span><span id="line-49"></span><span>    </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT ByronQueryError IO ()
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; ExceptT ByronQueryError IO ())
@@ -126,7 +126,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ChainTip -&gt; ByteString
 forall a. ToJSON a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">encodePretty</span></span><span> </span><span class="annot"><span class="annottext">ChainTip
-</span><a href="#local-6989586621679317665"><span class="hs-identifier hs-var">tip</span></a></span><span>
+</span><a href="#local-6989586621679317649"><span class="hs-identifier hs-var">tip</span></a></span><span>
 </span><span id="line-50"></span><span>
 </span><span id="line-51"></span><span>
 </span><span id="line-52"></span></pre></body></html>

@@ -28,10 +28,10 @@
 </span><span id="line-28"></span><span class="hs-comment">--TODO: replace this with the new stuff from Cardano.Api.Protocol</span><span>
 </span><span id="line-29"></span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#mkNodeClientProtocol"><span class="hs-identifier hs-type">mkNodeClientProtocol</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.27.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">Protocol</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.27.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SomeNodeClientProtocol</span></a></span><span>
 </span><span id="line-30"></span><span id="mkNodeClientProtocol"><span class="annot"><span class="annottext">mkNodeClientProtocol :: Protocol -&gt; SomeNodeClientProtocol
-</span><a href="Cardano.Chairman.Commands.Run.html#mkNodeClientProtocol"><span class="hs-identifier hs-var hs-var">mkNodeClientProtocol</span></a></span></span><span> </span><span id="local-6989586621679190657"><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190657"><span class="hs-identifier hs-var">protocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Chairman.Commands.Run.html#mkNodeClientProtocol"><span class="hs-identifier hs-var hs-var">mkNodeClientProtocol</span></a></span></span><span> </span><span id="local-6989586621679190609"><span class="annot"><span class="annottext">Protocol
+</span><a href="#local-6989586621679190609"><span class="hs-identifier hs-var">protocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-31"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190657"><span class="hs-identifier hs-var">protocol</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679190609"><span class="hs-identifier hs-var">protocol</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-32"></span><span>    </span><span class="annot"><span class="annottext">Protocol
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.27.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">ByronProtocol</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-33"></span><span>      </span><span class="annot"><span class="annottext">EpochSlots -&gt; SomeNodeClientProtocol
@@ -109,8 +109,8 @@ forall (f :: * -&gt; *) a. HasCompleter f =&gt; Completer -&gt; Mod f a
 </span><span id="line-65"></span><span>
 </span><span id="line-66"></span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#parseSocketPath"><span class="hs-identifier hs-type">parseSocketPath</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.27.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">SocketPath</span></a></span><span>
 </span><span id="line-67"></span><span id="parseSocketPath"><span class="annot"><span class="annottext">parseSocketPath :: Text -&gt; Parser SocketPath
-</span><a href="Cardano.Chairman.Commands.Run.html#parseSocketPath"><span class="hs-identifier hs-var hs-var">parseSocketPath</span></a></span></span><span> </span><span id="local-6989586621679190634"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679190634"><span class="hs-identifier hs-var">helpMessage</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Chairman.Commands.Run.html#parseSocketPath"><span class="hs-identifier hs-var hs-var">parseSocketPath</span></a></span></span><span> </span><span id="local-6989586621679190586"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679190586"><span class="hs-identifier hs-var">helpMessage</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-68"></span><span>  </span><span class="annot"><span class="annottext">FilePath -&gt; SocketPath
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.27.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">SocketPath</span></a></span><span> </span><span class="annot"><span class="annottext">(FilePath -&gt; SocketPath) -&gt; Parser FilePath -&gt; Parser SocketPath
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -129,7 +129,7 @@ forall (f :: * -&gt; *) a. FilePath -&gt; Mod f a
 </span><span class="hs-identifier hs-var">help</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Text -&gt; FilePath
 forall a b. ConvertText a b =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">toS</span></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679190634"><span class="hs-identifier hs-var">helpMessage</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679190586"><span class="hs-identifier hs-var">helpMessage</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-71"></span><span>    </span><span class="annot"><span class="annottext">Mod OptionFields FilePath
 -&gt; Mod OptionFields FilePath -&gt; Mod OptionFields FilePath
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
@@ -370,34 +370,34 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><span id="line-121"></span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#run"><span class="hs-identifier hs-type">run</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#RunOpts"><span class="hs-identifier hs-type">RunOpts</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-122"></span><span id="run"><span class="annot"><span class="annottext">run :: RunOpts -&gt; IO ()
 </span><a href="Cardano.Chairman.Commands.Run.html#run"><span class="hs-identifier hs-var hs-var">run</span></a></span></span><span> </span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#RunOpts"><span class="hs-identifier hs-type">RunOpts</span></a></span><span>
-</span><span id="line-123"></span><span>    </span><span class="hs-special">{</span><span> </span><span id="local-6989586621679190617"><span class="annot"><span class="annottext">DiffTime
+</span><span id="line-123"></span><span>    </span><span class="hs-special">{</span><span> </span><span id="local-6989586621679190569"><span class="annot"><span class="annottext">DiffTime
 caRunningTime :: DiffTime
 caRunningTime :: RunOpts -&gt; DiffTime
-</span><a href="#local-6989586621679190617"><span class="hs-identifier hs-var hs-var">caRunningTime</span></a></span></span><span>
-</span><span id="line-124"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190616"><span class="annot"><span class="annottext">BlockNo
+</span><a href="#local-6989586621679190569"><span class="hs-identifier hs-var hs-var">caRunningTime</span></a></span></span><span>
+</span><span id="line-124"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190568"><span class="annot"><span class="annottext">BlockNo
 caMinProgress :: BlockNo
 caMinProgress :: RunOpts -&gt; BlockNo
-</span><a href="#local-6989586621679190616"><span class="hs-identifier hs-var hs-var">caMinProgress</span></a></span></span><span>
-</span><span id="line-125"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190615"><span class="annot"><span class="annottext">[SocketPath]
+</span><a href="#local-6989586621679190568"><span class="hs-identifier hs-var hs-var">caMinProgress</span></a></span></span><span>
+</span><span id="line-125"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190567"><span class="annot"><span class="annottext">[SocketPath]
 caSocketPaths :: [SocketPath]
 caSocketPaths :: RunOpts -&gt; [SocketPath]
-</span><a href="#local-6989586621679190615"><span class="hs-identifier hs-var hs-var">caSocketPaths</span></a></span></span><span>
-</span><span id="line-126"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190614"><span class="annot"><span class="annottext">ConfigYamlFilePath
+</span><a href="#local-6989586621679190567"><span class="hs-identifier hs-var hs-var">caSocketPaths</span></a></span></span><span>
+</span><span id="line-126"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190566"><span class="annot"><span class="annottext">ConfigYamlFilePath
 caConfigYaml :: ConfigYamlFilePath
 caConfigYaml :: RunOpts -&gt; ConfigYamlFilePath
-</span><a href="#local-6989586621679190614"><span class="hs-identifier hs-var hs-var">caConfigYaml</span></a></span></span><span>
-</span><span id="line-127"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190613"><span class="annot"><span class="annottext">SecurityParam
+</span><a href="#local-6989586621679190566"><span class="hs-identifier hs-var hs-var">caConfigYaml</span></a></span></span><span>
+</span><span id="line-127"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190565"><span class="annot"><span class="annottext">SecurityParam
 caSecurityParam :: SecurityParam
 caSecurityParam :: RunOpts -&gt; SecurityParam
-</span><a href="#local-6989586621679190613"><span class="hs-identifier hs-var hs-var">caSecurityParam</span></a></span></span><span>
-</span><span id="line-128"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190612"><span class="annot"><span class="annottext">NetworkMagic
+</span><a href="#local-6989586621679190565"><span class="hs-identifier hs-var hs-var">caSecurityParam</span></a></span></span><span>
+</span><span id="line-128"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190564"><span class="annot"><span class="annottext">NetworkMagic
 caNetworkMagic :: NetworkMagic
 caNetworkMagic :: RunOpts -&gt; NetworkMagic
-</span><a href="#local-6989586621679190612"><span class="hs-identifier hs-var hs-var">caNetworkMagic</span></a></span></span><span>
+</span><a href="#local-6989586621679190564"><span class="hs-identifier hs-var hs-var">caNetworkMagic</span></a></span></span><span>
 </span><span id="line-129"></span><span>    </span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-130"></span><span>
-</span><span id="line-131"></span><span>  </span><span id="local-6989586621679190611"><span class="annot"><span class="annottext">PartialNodeConfiguration
-</span><a href="#local-6989586621679190611"><span class="hs-identifier hs-var">partialNc</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO PartialNodeConfiguration -&gt; IO PartialNodeConfiguration
+</span><span id="line-131"></span><span>  </span><span id="local-6989586621679190563"><span class="annot"><span class="annottext">PartialNodeConfiguration
+</span><a href="#local-6989586621679190563"><span class="hs-identifier hs-var">partialNc</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO PartialNodeConfiguration -&gt; IO PartialNodeConfiguration
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO PartialNodeConfiguration -&gt; IO PartialNodeConfiguration)
 -&gt; (Maybe ConfigYamlFilePath -&gt; IO PartialNodeConfiguration)
@@ -413,14 +413,14 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ConfigYamlFilePath -&gt; Maybe ConfigYamlFilePath
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">ConfigYamlFilePath
-</span><a href="#local-6989586621679190614"><span class="hs-identifier hs-var">caConfigYaml</span></a></span><span>
+</span><a href="#local-6989586621679190566"><span class="hs-identifier hs-var">caConfigYaml</span></a></span><span>
 </span><span id="line-132"></span><span>
-</span><span id="line-133"></span><span>  </span><span id="local-6989586621679190608"><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190608"><span class="hs-identifier hs-var">ptcl</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">PartialNodeConfiguration -&gt; Either Text Protocol
+</span><span id="line-133"></span><span>  </span><span id="local-6989586621679190560"><span class="annot"><span class="annottext">Protocol
+</span><a href="#local-6989586621679190560"><span class="hs-identifier hs-var">ptcl</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">PartialNodeConfiguration -&gt; Either Text Protocol
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.27.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">pncProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">PartialNodeConfiguration
-</span><a href="#local-6989586621679190611"><span class="hs-identifier hs-var">partialNc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-134"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679190607"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679190607"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text -&gt; IO Protocol
+</span><a href="#local-6989586621679190563"><span class="hs-identifier hs-var">partialNc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-134"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679190559"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679190559"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text -&gt; IO Protocol
 forall a. HasCallStack =&gt; Text -&gt; a
 </span><span class="hs-identifier hs-var">panic</span></span><span> </span><span class="annot"><span class="annottext">(Text -&gt; IO Protocol) -&gt; Text -&gt; IO Protocol
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -428,17 +428,17 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-string">&quot;Chairman error: &quot;</span></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679190607"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-135"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679190605"><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190605"><span class="hs-identifier hs-var">protocol</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Protocol -&gt; IO Protocol
+</span><a href="#local-6989586621679190559"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-135"></span><span>            </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679190557"><span class="annot"><span class="annottext">Protocol
+</span><a href="#local-6989586621679190557"><span class="hs-identifier hs-var">protocol</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Protocol -&gt; IO Protocol
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190605"><span class="hs-identifier hs-var">protocol</span></a></span><span>
+</span><a href="#local-6989586621679190557"><span class="hs-identifier hs-var">protocol</span></a></span><span>
 </span><span id="line-136"></span><span>
-</span><span id="line-137"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679190604"><span class="annot"><span class="annottext">someNodeClientProtocol :: SomeNodeClientProtocol
-</span><a href="#local-6989586621679190604"><span class="hs-identifier hs-var hs-var">someNodeClientProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Protocol -&gt; SomeNodeClientProtocol
+</span><span id="line-137"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679190556"><span class="annot"><span class="annottext">someNodeClientProtocol :: SomeNodeClientProtocol
+</span><a href="#local-6989586621679190556"><span class="hs-identifier hs-var hs-var">someNodeClientProtocol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Protocol -&gt; SomeNodeClientProtocol
 </span><a href="Cardano.Chairman.Commands.Run.html#mkNodeClientProtocol"><span class="hs-identifier hs-var">mkNodeClientProtocol</span></a></span><span> </span><span class="annot"><span class="annottext">Protocol
-</span><a href="#local-6989586621679190608"><span class="hs-identifier hs-var">ptcl</span></a></span><span>
+</span><a href="#local-6989586621679190560"><span class="hs-identifier hs-var">ptcl</span></a></span><span>
 </span><span id="line-138"></span><span>
 </span><span id="line-139"></span><span>  </span><span class="annot"><span class="annottext">Tracer IO FilePath
 -&gt; SomeNodeClientProtocol
@@ -455,33 +455,33 @@ forall a. Tracer IO a -&gt; Tracer IO a
 forall (m :: * -&gt; *). MonadIO m =&gt; Tracer m FilePath
 </span><span class="hs-identifier hs-var">stdoutTracer</span></span><span class="hs-special">)</span><span>
 </span><span id="line-141"></span><span>    </span><span class="annot"><span class="annottext">SomeNodeClientProtocol
-</span><a href="#local-6989586621679190604"><span class="hs-identifier hs-var">someNodeClientProtocol</span></a></span><span>
+</span><a href="#local-6989586621679190556"><span class="hs-identifier hs-var">someNodeClientProtocol</span></a></span><span>
 </span><span id="line-142"></span><span>    </span><span class="annot"><span class="annottext">NetworkMagic
-</span><a href="#local-6989586621679190612"><span class="hs-identifier hs-var">caNetworkMagic</span></a></span><span>
+</span><a href="#local-6989586621679190564"><span class="hs-identifier hs-var">caNetworkMagic</span></a></span><span>
 </span><span id="line-143"></span><span>    </span><span class="annot"><span class="annottext">SecurityParam
-</span><a href="#local-6989586621679190613"><span class="hs-identifier hs-var">caSecurityParam</span></a></span><span>
+</span><a href="#local-6989586621679190565"><span class="hs-identifier hs-var">caSecurityParam</span></a></span><span>
 </span><span id="line-144"></span><span>    </span><span class="annot"><span class="annottext">DiffTime
-</span><a href="#local-6989586621679190617"><span class="hs-identifier hs-var">caRunningTime</span></a></span><span>
+</span><a href="#local-6989586621679190569"><span class="hs-identifier hs-var">caRunningTime</span></a></span><span>
 </span><span id="line-145"></span><span>    </span><span class="annot"><span class="annottext">BlockNo
-</span><a href="#local-6989586621679190616"><span class="hs-identifier hs-var">caMinProgress</span></a></span><span>
+</span><a href="#local-6989586621679190568"><span class="hs-identifier hs-var">caMinProgress</span></a></span><span>
 </span><span id="line-146"></span><span>    </span><span class="annot"><span class="annottext">[SocketPath]
-</span><a href="#local-6989586621679190615"><span class="hs-identifier hs-var">caSocketPaths</span></a></span><span>
+</span><a href="#local-6989586621679190567"><span class="hs-identifier hs-var">caSocketPaths</span></a></span><span>
 </span><span id="line-147"></span><span>
 </span><span id="line-148"></span><span>  </span><span class="annot"><span class="annottext">() -&gt; IO ()
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-149"></span><span>
-</span><span id="line-150"></span><span id="local-6989586621679190681"><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#timed"><span class="hs-identifier hs-type">timed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679190681"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679190681"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-150"></span><span id="local-6989586621679190633"><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#timed"><span class="hs-identifier hs-type">timed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679190633"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="#local-6989586621679190633"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-151"></span><span id="timed"><span class="annot"><span class="annottext">timed :: Tracer IO a -&gt; Tracer IO a
-</span><a href="Cardano.Chairman.Commands.Run.html#timed"><span class="hs-identifier hs-var hs-var">timed</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span id="local-6989586621679190601"><span class="annot"><span class="annottext">a -&gt; IO ()
-</span><a href="#local-6989586621679190601"><span class="hs-identifier hs-var">runTracer</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(a -&gt; IO ()) -&gt; Tracer IO a
+</span><a href="Cardano.Chairman.Commands.Run.html#timed"><span class="hs-identifier hs-var hs-var">timed</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Tracer</span></span><span> </span><span id="local-6989586621679190553"><span class="annot"><span class="annottext">a -&gt; IO ()
+</span><a href="#local-6989586621679190553"><span class="hs-identifier hs-var">runTracer</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(a -&gt; IO ()) -&gt; Tracer IO a
 forall (m :: * -&gt; *) a. (a -&gt; m ()) -&gt; Tracer m a
 </span><span class="hs-identifier hs-var">Tracer</span></span><span> </span><span class="annot"><span class="annottext">((a -&gt; IO ()) -&gt; Tracer IO a) -&gt; (a -&gt; IO ()) -&gt; Tracer IO a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679190600"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679190600"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-152"></span><span>  </span><span id="local-6989586621679190599"><span class="annot"><span class="annottext">UTCTime
-</span><a href="#local-6989586621679190599"><span class="hs-identifier hs-var">ts</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO UTCTime
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679190552"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679190552"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-152"></span><span>  </span><span id="local-6989586621679190551"><span class="annot"><span class="annottext">UTCTime
+</span><a href="#local-6989586621679190551"><span class="hs-identifier hs-var">ts</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO UTCTime
 </span><span class="hs-identifier hs-var">DTC.getCurrentTime</span></span><span>
 </span><span id="line-153"></span><span>  </span><span class="annot"><span class="annottext">FilePath -&gt; IO ()
 </span><span class="hs-identifier hs-var">IO.putStr</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FilePath
@@ -490,13 +490,13 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">UTCTime -&gt; FilePath
 forall a b. (Show a, ConvertText FilePath b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">UTCTime
-</span><a href="#local-6989586621679190599"><span class="hs-identifier hs-var">ts</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; FilePath
+</span><a href="#local-6989586621679190551"><span class="hs-identifier hs-var">ts</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; FilePath
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">FilePath
 </span><span class="hs-string">&quot;] &quot;</span></span><span class="hs-special">)</span><span>
 </span><span id="line-154"></span><span>  </span><span class="annot"><span class="annottext">a -&gt; IO ()
-</span><a href="#local-6989586621679190601"><span class="hs-identifier hs-var">runTracer</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679190600"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><a href="#local-6989586621679190553"><span class="hs-identifier hs-var">runTracer</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679190552"><span class="hs-identifier hs-var">a</span></a></span><span>
 </span><span id="line-155"></span><span>
 </span><span id="line-156"></span><span class="annot"><a href="Cardano.Chairman.Commands.Run.html#cmdRun"><span class="hs-identifier hs-type">cmdRun</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Mod</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CommandFields</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-157"></span><span id="cmdRun"><span class="annot"><span class="annottext">cmdRun :: Mod CommandFields (IO ())

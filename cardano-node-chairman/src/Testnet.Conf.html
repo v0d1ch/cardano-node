@@ -34,14 +34,14 @@
 </span><a href="Testnet.Conf.html#socketDir"><span class="hs-identifier hs-var hs-var">socketDir</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span>
 </span><span id="line-29"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="testnetMagic"><span class="annot"><span class="annottext">Conf -&gt; Int
 </span><a href="Testnet.Conf.html#testnetMagic"><span class="hs-identifier hs-var hs-var">testnetMagic</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
-</span><span id="line-30"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679190959"><span id="local-6989586621679190961"><span class="annot"><span class="annottext">Conf -&gt; Conf -&gt; Bool
+</span><span id="line-30"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679190911"><span id="local-6989586621679190913"><span class="annot"><span class="annottext">Conf -&gt; Conf -&gt; Bool
 (Conf -&gt; Conf -&gt; Bool) -&gt; (Conf -&gt; Conf -&gt; Bool) -&gt; Eq Conf
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 /= :: Conf -&gt; Conf -&gt; Bool
 $c/= :: Conf -&gt; Conf -&gt; Bool
 == :: Conf -&gt; Conf -&gt; Bool
 $c== :: Conf -&gt; Conf -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190952"><span id="local-6989586621679190954"><span id="local-6989586621679190956"><span class="annot"><span class="annottext">Int -&gt; Conf -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679190904"><span id="local-6989586621679190906"><span id="local-6989586621679190908"><span class="annot"><span class="annottext">Int -&gt; Conf -&gt; ShowS
 [Conf] -&gt; ShowS
 Conf -&gt; FilePath
 (Int -&gt; Conf -&gt; ShowS)
@@ -58,11 +58,11 @@ $cshowsPrec :: Int -&gt; Conf -&gt; ShowS
 </span><span id="line-31"></span><span>
 </span><span id="line-32"></span><span class="annot"><a href="Testnet.Conf.html#mkConf"><span class="hs-identifier hs-type">mkConf</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">FilePath</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="annot"><a href="Testnet.Conf.html#Conf"><span class="hs-identifier hs-type">Conf</span></a></span><span>
 </span><span id="line-33"></span><span id="mkConf"><span class="annot"><span class="annottext">mkConf :: FilePath -&gt; Maybe Int -&gt; Integration Conf
-</span><a href="Testnet.Conf.html#mkConf"><span class="hs-identifier hs-var hs-var">mkConf</span></a></span></span><span> </span><span id="local-6989586621679190950"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190950"><span class="hs-identifier hs-var">tempAbsPath</span></a></span></span><span> </span><span id="local-6989586621679190949"><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679190949"><span class="hs-identifier hs-var">maybeMagic</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-34"></span><span>  </span><span id="local-6989586621679190948"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679190948"><span class="hs-identifier hs-var">testnetMagic</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO Int -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) Int
+</span><a href="Testnet.Conf.html#mkConf"><span class="hs-identifier hs-var hs-var">mkConf</span></a></span></span><span> </span><span id="local-6989586621679190902"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190902"><span class="hs-identifier hs-var">tempAbsPath</span></a></span></span><span> </span><span id="local-6989586621679190901"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679190901"><span class="hs-identifier hs-var">maybeMagic</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679190900"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679190900"><span class="hs-identifier hs-var">testnetMagic</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO Int -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) Int
 forall (m :: * -&gt; *) a.
 (MonadTest m, MonadIO m, HasCallStack, Show a) =&gt;
 IO a -&gt; m a
@@ -79,9 +79,9 @@ forall a (m :: * -&gt; *). (Random a, MonadIO m) =&gt; (a, a) -&gt; m a
 </span><span class="hs-number">2000</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO Int
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679190949"><span class="hs-identifier hs-var">maybeMagic</span></a></span><span>
-</span><span id="line-35"></span><span>  </span><span id="local-6989586621679190944"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190944"><span class="hs-identifier hs-var">tempBaseAbsPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190901"><span class="hs-identifier hs-var">maybeMagic</span></a></span><span>
+</span><span id="line-35"></span><span>  </span><span id="local-6989586621679190896"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190896"><span class="hs-identifier hs-var">tempBaseAbsPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *) a.
 (MonadTest m, HasCallStack, Show a) =&gt;
@@ -93,9 +93,9 @@ a -&gt; m a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 </span><span class="hs-identifier hs-var">FP.takeDirectory</span></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190950"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span>
-</span><span id="line-36"></span><span>  </span><span id="local-6989586621679190941"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190941"><span class="hs-identifier hs-var">tempRelPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190902"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span>
+</span><span id="line-36"></span><span>  </span><span id="local-6989586621679190893"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190893"><span class="hs-identifier hs-var">tempRelPath</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *) a.
 (MonadTest m, HasCallStack, Show a) =&gt;
@@ -107,10 +107,10 @@ a -&gt; m a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; ShowS
 </span><span class="hs-identifier hs-var">FP.makeRelative</span></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190944"><span class="hs-identifier hs-var">tempBaseAbsPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190950"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span>
-</span><span id="line-37"></span><span>  </span><span id="local-6989586621679190939"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190939"><span class="hs-identifier hs-var">base</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
+</span><a href="#local-6989586621679190896"><span class="hs-identifier hs-var">tempBaseAbsPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190902"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span>
+</span><span id="line-37"></span><span>  </span><span id="local-6989586621679190891"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190891"><span class="hs-identifier hs-var">base</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *) a.
 (MonadTest m, MonadCatch m, HasCallStack, Show a) =&gt;
@@ -118,8 +118,8 @@ m a -&gt; m a
 </span><span class="hs-identifier hs-var">H.noteShowM</span></span><span> </span><span class="annot"><span class="annottext">PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *). (MonadTest m, MonadIO m) =&gt; m FilePath
 </span><span class="hs-identifier hs-var">H.getProjectBase</span></span><span>
-</span><span id="line-38"></span><span>  </span><span id="local-6989586621679190936"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190936"><span class="hs-identifier hs-var">socketDir</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679190888"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190888"><span class="hs-identifier hs-var">socketDir</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *) a.
 (MonadTest m, HasCallStack, Show a) =&gt;
@@ -130,18 +130,18 @@ a -&gt; m a
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190941"><span class="hs-identifier hs-var">tempRelPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; ShowS
+</span><a href="#local-6989586621679190893"><span class="hs-identifier hs-var">tempRelPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; ShowS
 </span><span class="hs-operator hs-var">&lt;/&gt;</span></span><span> </span><span class="annot"><span class="annottext">FilePath
 </span><span class="hs-string">&quot;socket&quot;</span></span><span>
-</span><span id="line-39"></span><span>  </span><span id="local-6989586621679190935"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190935"><span class="hs-identifier hs-var">logDir</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span id="line-39"></span><span>  </span><span id="local-6989586621679190887"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190887"><span class="hs-identifier hs-var">logDir</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath
 -&gt; FilePath
 -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) FilePath
 forall (m :: * -&gt; *).
 (MonadTest m, HasCallStack) =&gt;
 FilePath -&gt; FilePath -&gt; m FilePath
 </span><span class="hs-identifier hs-var">H.noteTempFile</span></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679190950"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679190902"><span class="hs-identifier hs-var">tempAbsPath</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
 </span><span class="hs-string">&quot;/logs&quot;</span></span><span>
 </span><span id="line-40"></span><span>
 </span><span id="line-41"></span><span>  </span><span class="annot"><span class="annottext">Conf -&gt; Integration Conf
@@ -172,5 +172,5 @@ logDir :: FilePath
 tempBaseAbsPath :: FilePath
 tempRelPath :: FilePath
 tempAbsPath :: FilePath
-</span><a href="#local-6989586621679190935"><span class="hs-glyph hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">..</span></a></span><span class="hs-special">}</span><span>
+</span><a href="#local-6989586621679190887"><span class="hs-glyph hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">..</span></a></span><span class="hs-special">}</span><span>
 </span><span id="line-42"></span></pre></body></html>

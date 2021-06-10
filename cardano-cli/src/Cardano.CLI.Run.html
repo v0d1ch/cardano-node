@@ -39,7 +39,7 @@
 </span><span id="line-39"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="DeprecatedShelleySubcommand"><span class="annot"><a href="Cardano.CLI.Run.html#DeprecatedShelleySubcommand"><span class="hs-identifier hs-var">DeprecatedShelleySubcommand</span></a></span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span>
 </span><span id="line-40"></span><span>
 </span><span id="line-41"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="DisplayVersion"><span class="annot"><a href="Cardano.CLI.Run.html#DisplayVersion"><span class="hs-identifier hs-var">DisplayVersion</span></a></span></span><span>
-</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679320222"><span id="local-6989586621679320224"><span id="local-6989586621679320226"><span class="annot"><span class="annottext">Int -&gt; ClientCommand -&gt; ShowS
+</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679320218"><span id="local-6989586621679320220"><span id="local-6989586621679320222"><span class="annot"><span class="annottext">Int -&gt; ClientCommand -&gt; ShowS
 [ClientCommand] -&gt; ShowS
 ClientCommand -&gt; String
 (Int -&gt; ClientCommand -&gt; ShowS)
@@ -59,7 +59,7 @@ $cshowsPrec :: Int -&gt; ClientCommand -&gt; ShowS
 </span><span id="line-44"></span><span class="hs-keyword">data</span><span> </span><span id="ClientCommandErrors"><span class="annot"><a href="Cardano.CLI.Run.html#ClientCommandErrors"><span class="hs-identifier hs-var">ClientCommandErrors</span></a></span></span><span>
 </span><span id="line-45"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="ByronClientError"><span class="annot"><a href="Cardano.CLI.Run.html#ByronClientError"><span class="hs-identifier hs-var">ByronClientError</span></a></span></span><span> </span><span class="annot"><a href="Cardano.CLI.Byron.Run.html#ByronClientCmdError"><span class="hs-identifier hs-type">ByronClientCmdError</span></a></span><span>
 </span><span id="line-46"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyClientError"><span class="annot"><a href="Cardano.CLI.Run.html#ShelleyClientError"><span class="hs-identifier hs-var">ShelleyClientError</span></a></span></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyClientCmdError"><span class="hs-identifier hs-type">ShelleyClientCmdError</span></a></span><span>
-</span><span id="line-47"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679320213"><span id="local-6989586621679320215"><span id="local-6989586621679320217"><span class="annot"><span class="annottext">Int -&gt; ClientCommandErrors -&gt; ShowS
+</span><span id="line-47"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679320209"><span id="local-6989586621679320211"><span id="local-6989586621679320213"><span class="annot"><span class="annottext">Int -&gt; ClientCommandErrors -&gt; ShowS
 [ClientCommandErrors] -&gt; ShowS
 ClientCommandErrors -&gt; String
 (Int -&gt; ClientCommandErrors -&gt; ShowS)
@@ -78,8 +78,8 @@ $cshowsPrec :: Int -&gt; ClientCommandErrors -&gt; ShowS
 </span><span id="line-48"></span><span>
 </span><span id="line-49"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-type">runClientCommand</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Run.html#ClientCommand"><span class="hs-identifier hs-type">ClientCommand</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="Cardano.CLI.Run.html#ClientCommandErrors"><span class="hs-identifier hs-type">ClientCommandErrors</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-50"></span><span id="runClientCommand"><span class="annot"><span class="annottext">runClientCommand :: ClientCommand -&gt; ExceptT ClientCommandErrors IO ()
-</span><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var hs-var">runClientCommand</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ByronCommand"><span class="hs-identifier hs-type">ByronCommand</span></a></span><span> </span><span id="local-6989586621679320212"><span class="annot"><span class="annottext">ByronCommand
-</span><a href="#local-6989586621679320212"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ByronClientCmdError -&gt; ClientCommandErrors)
+</span><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var hs-var">runClientCommand</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ByronCommand"><span class="hs-identifier hs-type">ByronCommand</span></a></span><span> </span><span id="local-6989586621679320208"><span class="annot"><span class="annottext">ByronCommand
+</span><a href="#local-6989586621679320208"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ByronClientCmdError -&gt; ClientCommandErrors)
 -&gt; ExceptT ByronClientCmdError IO ()
 -&gt; ExceptT ClientCommandErrors IO ()
 forall (m :: * -&gt; *) x y a.
@@ -93,9 +93,9 @@ Functor m =&gt;
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ByronCommand -&gt; ExceptT ByronClientCmdError IO ()
 </span><a href="Cardano.CLI.Byron.Run.html#runByronClientCommand"><span class="hs-identifier hs-var">runByronClientCommand</span></a></span><span> </span><span class="annot"><span class="annottext">ByronCommand
-</span><a href="#local-6989586621679320212"><span class="hs-identifier hs-var">c</span></a></span><span>
-</span><span id="line-51"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var">runClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span id="local-6989586621679320211"><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320211"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyClientCmdError -&gt; ClientCommandErrors)
+</span><a href="#local-6989586621679320208"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><span id="line-51"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var">runClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span id="local-6989586621679320207"><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyClientCmdError -&gt; ClientCommandErrors)
 -&gt; ExceptT ShelleyClientCmdError IO ()
 -&gt; ExceptT ClientCommandErrors IO ()
 forall (m :: * -&gt; *) x y a.
@@ -103,16 +103,16 @@ Functor m =&gt;
 (x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
 </span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyCommand -&gt; ShelleyClientCmdError -&gt; ClientCommandErrors
 </span><a href="Cardano.CLI.Run.html#ShelleyClientError"><span class="hs-identifier hs-var">ShelleyClientError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320211"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyClientCmdError IO ()
+</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyClientCmdError IO ()
  -&gt; ExceptT ClientCommandErrors IO ())
 -&gt; ExceptT ShelleyClientCmdError IO ()
 -&gt; ExceptT ClientCommandErrors IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand -&gt; ExceptT ShelleyClientCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320211"><span class="hs-identifier hs-var">c</span></a></span><span>
-</span><span id="line-52"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var">runClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#DeprecatedShelleySubcommand"><span class="hs-identifier hs-type">DeprecatedShelleySubcommand</span></a></span><span> </span><span id="local-6989586621679320210"><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320210"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><span id="line-52"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var">runClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#DeprecatedShelleySubcommand"><span class="hs-identifier hs-type">DeprecatedShelleySubcommand</span></a></span><span> </span><span id="local-6989586621679320206"><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-53"></span><span>  </span><span class="annot"><span class="annottext">(ShelleyClientCmdError -&gt; ClientCommandErrors)
 -&gt; ExceptT ShelleyClientCmdError IO ()
 -&gt; ExceptT ClientCommandErrors IO ()
@@ -121,7 +121,7 @@ Functor m =&gt;
 (x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
 </span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyCommand -&gt; ShelleyClientCmdError -&gt; ClientCommandErrors
 </span><a href="Cardano.CLI.Run.html#ShelleyClientError"><span class="hs-identifier hs-var">ShelleyClientError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320210"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-54"></span><span>    </span><span class="annot"><span class="annottext">(ExceptT ShelleyClientCmdError IO ()
  -&gt; ExceptT ClientCommandErrors IO ())
 -&gt; ExceptT ShelleyClientCmdError IO ()
@@ -140,49 +140,49 @@ ExceptT e m () -&gt; ExceptT e m ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand -&gt; ExceptT ShelleyClientCmdError IO ()
 </span><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320210"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-56"></span><span class="annot"><a href="Cardano.CLI.Run.html#runClientCommand"><span class="hs-identifier hs-var">runClientCommand</span></a></span><span> </span><span class="annot"><span class="annottext">ClientCommand
 </span><a href="Cardano.CLI.Run.html#DisplayVersion"><span class="hs-identifier hs-var">DisplayVersion</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExceptT ClientCommandErrors IO ()
 </span><a href="Cardano.CLI.Run.html#runDisplayVersion"><span class="hs-identifier hs-var">runDisplayVersion</span></a></span><span>
 </span><span id="line-57"></span><span>
 </span><span id="line-58"></span><span class="annot"><a href="Cardano.CLI.Run.html#renderClientCommandError"><span class="hs-identifier hs-type">renderClientCommandError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Run.html#ClientCommandErrors"><span class="hs-identifier hs-type">ClientCommandErrors</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-59"></span><span id="renderClientCommandError"><span class="annot"><span class="annottext">renderClientCommandError :: ClientCommandErrors -&gt; Text
-</span><a href="Cardano.CLI.Run.html#renderClientCommandError"><span class="hs-identifier hs-var hs-var">renderClientCommandError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ByronClientError"><span class="hs-identifier hs-type">ByronClientError</span></a></span><span> </span><span id="local-6989586621679320207"><span class="annot"><span class="annottext">ByronClientCmdError
-</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Run.html#renderClientCommandError"><span class="hs-identifier hs-var hs-var">renderClientCommandError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ByronClientError"><span class="hs-identifier hs-type">ByronClientError</span></a></span><span> </span><span id="local-6989586621679320203"><span class="annot"><span class="annottext">ByronClientCmdError
+</span><a href="#local-6989586621679320203"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-60"></span><span>  </span><span class="annot"><span class="annottext">ByronClientCmdError -&gt; Text
 </span><a href="Cardano.CLI.Byron.Run.html#renderByronClientCmdError"><span class="hs-identifier hs-var">renderByronClientCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ByronClientCmdError
-</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-61"></span><span class="annot"><a href="Cardano.CLI.Run.html#renderClientCommandError"><span class="hs-identifier hs-var">renderClientCommandError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ShelleyClientError"><span class="hs-identifier hs-type">ShelleyClientError</span></a></span><span> </span><span id="local-6989586621679320206"><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">cmd</span></a></span></span><span> </span><span id="local-6989586621679320205"><span class="annot"><span class="annottext">ShelleyClientCmdError
-</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="#local-6989586621679320203"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-61"></span><span class="annot"><a href="Cardano.CLI.Run.html#renderClientCommandError"><span class="hs-identifier hs-var">renderClientCommandError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Run.html#ShelleyClientError"><span class="hs-identifier hs-type">ShelleyClientError</span></a></span><span> </span><span id="local-6989586621679320202"><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679320202"><span class="hs-identifier hs-var">cmd</span></a></span></span><span> </span><span id="local-6989586621679320201"><span class="annot"><span class="annottext">ShelleyClientCmdError
+</span><a href="#local-6989586621679320201"><span class="hs-identifier hs-var">err</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-62"></span><span>  </span><span class="annot"><span class="annottext">ShelleyCommand -&gt; ShelleyClientCmdError -&gt; Text
 </span><a href="Cardano.CLI.Shelley.Run.html#renderShelleyClientCmdError"><span class="hs-identifier hs-var">renderShelleyClientCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
-</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyClientCmdError
-</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><a href="#local-6989586621679320202"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyClientCmdError
+</span><a href="#local-6989586621679320201"><span class="hs-identifier hs-var">err</span></a></span><span>
 </span><span id="line-63"></span><span>
 </span><span id="line-64"></span><span class="hs-comment">-- | Combine an 'ExceptT' that will write a warning message to @stderr@ with</span><span>
 </span><span id="line-65"></span><span class="hs-comment">-- the provided 'ExceptT'.</span><span>
-</span><span id="line-66"></span><span id="local-6989586621679320255"><span id="local-6989586621679320256"><span class="annot"><a href="Cardano.CLI.Run.html#ioExceptTWithWarning"><span class="hs-identifier hs-type">ioExceptTWithWarning</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679320256"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320255"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320256"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320255"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320256"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-66"></span><span id="local-6989586621679320251"><span id="local-6989586621679320252"><span class="annot"><a href="Cardano.CLI.Run.html#ioExceptTWithWarning"><span class="hs-identifier hs-type">ioExceptTWithWarning</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679320252"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320251"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320252"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320251"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320252"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span></span><span>
 </span><span id="line-67"></span><span id="ioExceptTWithWarning"><span class="annot"><span class="annottext">ioExceptTWithWarning :: Text -&gt; ExceptT e m () -&gt; ExceptT e m ()
-</span><a href="Cardano.CLI.Run.html#ioExceptTWithWarning"><span class="hs-identifier hs-var hs-var">ioExceptTWithWarning</span></a></span></span><span> </span><span id="local-6989586621679320203"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679320203"><span class="hs-identifier hs-var">warningMsg</span></a></span></span><span> </span><span id="local-6989586621679320202"><span class="annot"><span class="annottext">ExceptT e m ()
-</span><a href="#local-6989586621679320202"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.CLI.Run.html#ioExceptTWithWarning"><span class="hs-identifier hs-var hs-var">ioExceptTWithWarning</span></a></span></span><span> </span><span id="local-6989586621679320199"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679320199"><span class="hs-identifier hs-var">warningMsg</span></a></span></span><span> </span><span id="local-6989586621679320198"><span class="annot"><span class="annottext">ExceptT e m ()
+</span><a href="#local-6989586621679320198"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-68"></span><span>  </span><span class="annot"><span class="annottext">IO () -&gt; ExceptT e m ()
 forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
 </span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Handle -&gt; Text -&gt; IO ()
 </span><span class="hs-identifier hs-var">Text.hPutStrLn</span></span><span> </span><span class="annot"><span class="annottext">Handle
 </span><span class="hs-identifier hs-var">stderr</span></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679320203"><span class="hs-identifier hs-var">warningMsg</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ExceptT e m () -&gt; ExceptT e m () -&gt; ExceptT e m ()
+</span><a href="#local-6989586621679320199"><span class="hs-identifier hs-var">warningMsg</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ExceptT e m () -&gt; ExceptT e m () -&gt; ExceptT e m ()
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExceptT e m ()
-</span><a href="#local-6989586621679320202"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><a href="#local-6989586621679320198"><span class="hs-identifier hs-var">e</span></a></span><span>
 </span><span id="line-69"></span><span>
 </span><span id="line-70"></span><span class="hs-comment">-- | Used in the event that Shelley-related commands are run using the</span><span>
 </span><span id="line-71"></span><span class="hs-comment">-- now-deprecated \&quot;shelley\&quot; subcommand.</span><span>
-</span><span id="line-72"></span><span id="local-6989586621679320268"><span id="local-6989586621679320270"><span class="annot"><a href="Cardano.CLI.Run.html#runShelleyClientCommandWithDeprecationWarning"><span class="hs-identifier hs-type">runShelleyClientCommandWithDeprecationWarning</span></a></span><span>
-</span><span id="line-73"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679320270"><span class="hs-identifier hs-type">m</span></a></span><span>
-</span><span id="line-74"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320268"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320270"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-75"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320268"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320270"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-72"></span><span id="local-6989586621679320264"><span id="local-6989586621679320266"><span class="annot"><a href="Cardano.CLI.Run.html#runShelleyClientCommandWithDeprecationWarning"><span class="hs-identifier hs-type">runShelleyClientCommandWithDeprecationWarning</span></a></span><span>
+</span><span id="line-73"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679320266"><span class="hs-identifier hs-type">m</span></a></span><span>
+</span><span id="line-74"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320264"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320266"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-75"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">ExceptT</span></span><span> </span><span class="annot"><a href="#local-6989586621679320264"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679320266"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span></span><span>
 </span><span id="line-76"></span><span id="runShelleyClientCommandWithDeprecationWarning"><span class="annot"><span class="annottext">runShelleyClientCommandWithDeprecationWarning :: ExceptT e m () -&gt; ExceptT e m ()
 </span><a href="Cardano.CLI.Run.html#runShelleyClientCommandWithDeprecationWarning"><span class="hs-identifier hs-var hs-var">runShelleyClientCommandWithDeprecationWarning</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-77"></span><span>    </span><span class="annot"><span class="annottext">Text -&gt; ExceptT e m () -&gt; ExceptT e m ()
@@ -190,11 +190,11 @@ forall (m :: * -&gt; *) e.
 MonadIO m =&gt;
 Text -&gt; ExceptT e m () -&gt; ExceptT e m ()
 </span><a href="Cardano.CLI.Run.html#ioExceptTWithWarning"><span class="hs-identifier hs-var">ioExceptTWithWarning</span></a></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679320198"><span class="hs-identifier hs-var">warningMsg</span></a></span><span>
+</span><a href="#local-6989586621679320194"><span class="hs-identifier hs-var">warningMsg</span></a></span><span>
 </span><span id="line-78"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-79"></span><span>    </span><span class="annot"><a href="#local-6989586621679320198"><span class="hs-identifier hs-type">warningMsg</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
-</span><span id="line-80"></span><span>    </span><span id="local-6989586621679320198"><span class="annot"><span class="annottext">warningMsg :: Text
-</span><a href="#local-6989586621679320198"><span class="hs-identifier hs-var hs-var">warningMsg</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-79"></span><span>    </span><span class="annot"><a href="#local-6989586621679320194"><span class="hs-identifier hs-type">warningMsg</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
+</span><span id="line-80"></span><span>    </span><span id="local-6989586621679320194"><span class="annot"><span class="annottext">warningMsg :: Text
+</span><a href="#local-6989586621679320194"><span class="hs-identifier hs-var hs-var">warningMsg</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-81"></span><span>      </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;WARNING: The \&quot;shelley\&quot; subcommand is now deprecated and will be &quot;</span></span><span>
 </span><span id="line-82"></span><span>        </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Text
@@ -221,7 +221,7 @@ forall a. Monoid a =&gt; [a] -&gt; a
 </span><span class="hs-identifier hs-var">mconcat</span></span><span>
 </span><span id="line-87"></span><span>                </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;cardano-cli &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Version -&gt; Text
-</span><a href="#local-6989586621679320195"><span class="hs-identifier hs-var">renderVersion</span></a></span><span> </span><span class="annot"><span class="annottext">Version
+</span><a href="#local-6989586621679320191"><span class="hs-identifier hs-var">renderVersion</span></a></span><span> </span><span class="annot"><span class="annottext">Version
 </span><a href="Paths_cardano_cli.html#version"><span class="hs-identifier hs-var">version</span></a></span><span>
 </span><span id="line-88"></span><span>                </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot; - &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
@@ -235,15 +235,15 @@ forall a. Monoid a =&gt; [a] -&gt; a
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-identifier hs-var">compilerName</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;-&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Version -&gt; Text
-</span><a href="#local-6989586621679320195"><span class="hs-identifier hs-var">renderVersion</span></a></span><span> </span><span class="annot"><span class="annottext">Version
+</span><a href="#local-6989586621679320191"><span class="hs-identifier hs-var">renderVersion</span></a></span><span> </span><span class="annot"><span class="annottext">Version
 </span><span class="hs-identifier hs-var">compilerVersion</span></span><span>
 </span><span id="line-90"></span><span>                </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;\ngit rev &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-config-0.1.0.0/noopt/doc/html/cardano-config/src"><span class="hs-identifier hs-var">gitRev</span></a></span><span>
 </span><span id="line-91"></span><span>                </span><span class="hs-special">]</span><span>
 </span><span id="line-92"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-93"></span><span>    </span><span id="local-6989586621679320195"><span class="annot"><span class="annottext">renderVersion :: Version -&gt; Text
-</span><a href="#local-6989586621679320195"><span class="hs-identifier hs-var hs-var">renderVersion</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
+</span><span id="line-93"></span><span>    </span><span id="local-6989586621679320191"><span class="annot"><span class="annottext">renderVersion :: Version -&gt; Text
+</span><a href="#local-6989586621679320191"><span class="hs-identifier hs-var hs-var">renderVersion</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Text) -&gt; (Version -&gt; String) -&gt; Version -&gt; Text
 forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
 Category cat =&gt;

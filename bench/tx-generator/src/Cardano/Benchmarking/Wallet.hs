@@ -114,7 +114,7 @@ genTx key networkId inFunds outValues
     , txValidityRange = (TxValidityNoLowerBound, upperBound)
     , txMetadata = TxMetadataNone
     , txAuxScripts = TxAuxScriptsNone
-    , txAuxScriptData = TxAuxScriptDataNone
+    , txExtraScriptData = BuildTxWith TxExtraScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone

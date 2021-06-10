@@ -73,7 +73,7 @@ mkGenesisTransaction key _payloadSize ttl fee txins txouts
     , txValidityRange = (TxValidityNoLowerBound, validityUpperBound)
     , txMetadata = TxMetadataNone
     , txAuxScripts = TxAuxScriptsNone
-    , txAuxScriptData = TxAuxScriptDataNone
+    , txExtraScriptData = BuildTxWith TxExtraScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone
@@ -114,7 +114,7 @@ mkTransaction key metadata ttl fee txins txouts
     , txValidityRange = (TxValidityNoLowerBound, mkValidityUpperBound ttl)
     , txMetadata = metadata
     , txAuxScripts = TxAuxScriptsNone
-    , txAuxScriptData = TxAuxScriptDataNone
+    , txExtraScriptData = BuildTxWith TxExtraScriptDataNone
     , txExtraKeyWits = TxExtraKeyWitnessesNone
     , txProtocolParams = BuildTxWith Nothing
     , txWithdrawals = TxWithdrawalsNone

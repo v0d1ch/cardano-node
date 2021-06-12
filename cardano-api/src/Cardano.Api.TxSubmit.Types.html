@@ -42,7 +42,7 @@
 </span><span id="line-39"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TxSubmitDecodeFail"><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitDecodeFail"><span class="hs-identifier hs-var">TxSubmitDecodeFail</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">DecoderError</span></span><span>
 </span><span id="line-40"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TxSubmitBadTx"><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitBadTx"><span class="hs-identifier hs-var">TxSubmitBadTx</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-41"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TxSubmitFail"><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitFail"><span class="hs-identifier hs-var">TxSubmitFail</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">ApplyMempoolPayloadErr</span></span><span>
-</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679428666"><span id="local-6989586621679428668"><span class="annot"><span class="annottext">TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool
+</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679429975"><span id="local-6989586621679429977"><span class="annot"><span class="annottext">TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool
 (TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool)
 -&gt; (TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool) -&gt; Eq TxSubmitStatus
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -52,47 +52,47 @@ $c/= :: TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool
 $c== :: TxSubmitStatus -&gt; TxSubmitStatus -&gt; Bool
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span>
 </span><span id="line-43"></span><span>
-</span><span id="line-44"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679428658"><span id="local-6989586621679428660"><span id="local-6989586621679428662"><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitStatus"><span class="hs-identifier hs-type">TxSubmitStatus</span></a></span></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-45"></span><span>  </span><span id="local-6989586621679428656"><span class="annot"><span class="annottext">toJSON :: TxSubmitStatus -&gt; Value
+</span><span id="line-44"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679429967"><span id="local-6989586621679429969"><span id="local-6989586621679429971"><span class="annot"><span class="hs-identifier hs-type">ToJSON</span></span><span> </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitStatus"><span class="hs-identifier hs-type">TxSubmitStatus</span></a></span></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-45"></span><span>  </span><span id="local-6989586621679429965"><span class="annot"><span class="annottext">toJSON :: TxSubmitStatus -&gt; Value
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">toJSON</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TxSubmitStatus -&gt; Value
 </span><a href="Cardano.Api.TxSubmit.Types.html#convertJson"><span class="hs-identifier hs-var">convertJson</span></a></span><span>
 </span><span id="line-46"></span><span>
 </span><span id="line-47"></span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#convertJson"><span class="hs-identifier hs-type">convertJson</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitStatus"><span class="hs-identifier hs-type">TxSubmitStatus</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Value</span></span><span>
 </span><span id="line-48"></span><span id="convertJson"><span class="annot"><span class="annottext">convertJson :: TxSubmitStatus -&gt; Value
-</span><a href="Cardano.Api.TxSubmit.Types.html#convertJson"><span class="hs-identifier hs-var hs-var">convertJson</span></a></span></span><span> </span><span id="local-6989586621679428653"><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428653"><span class="hs-identifier hs-var">st</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.Types.html#convertJson"><span class="hs-identifier hs-var hs-var">convertJson</span></a></span></span><span> </span><span id="local-6989586621679429962"><span class="annot"><span class="annottext">TxSubmitStatus
+</span><a href="#local-6989586621679429962"><span class="hs-identifier hs-var">st</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-49"></span><span>    </span><span class="annot"><span class="annottext">[Pair] -&gt; Value
 </span><span class="hs-identifier hs-var">Aeson.object</span></span><span>
 </span><span id="line-50"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;status&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Value
 </span><span class="hs-identifier hs-var">String</span></span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679428650"><span class="hs-identifier hs-var">statusMsg</span></a></span><span> </span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679429959"><span class="hs-identifier hs-var">statusMsg</span></a></span><span> </span><span class="hs-special">)</span><span>
 </span><span id="line-51"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;message&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Value
 </span><span class="hs-identifier hs-var">String</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TxSubmitStatus -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.Types.html#renderTxSubmitStatus"><span class="hs-identifier hs-var">renderTxSubmitStatus</span></a></span><span> </span><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428653"><span class="hs-identifier hs-var">st</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679429962"><span class="hs-identifier hs-var">st</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">)</span><span>
 </span><span id="line-52"></span><span>      </span><span class="hs-special">]</span><span>
 </span><span id="line-53"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-54"></span><span>    </span><span class="annot"><a href="#local-6989586621679428650"><span class="hs-identifier hs-type">statusMsg</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
-</span><span id="line-55"></span><span>    </span><span id="local-6989586621679428650"><span class="annot"><span class="annottext">statusMsg :: Text
-</span><a href="#local-6989586621679428650"><span class="hs-identifier hs-var hs-var">statusMsg</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-54"></span><span>    </span><span class="annot"><a href="#local-6989586621679429959"><span class="hs-identifier hs-type">statusMsg</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
+</span><span id="line-55"></span><span>    </span><span id="local-6989586621679429959"><span class="annot"><span class="annottext">statusMsg :: Text
+</span><a href="#local-6989586621679429959"><span class="hs-identifier hs-var hs-var">statusMsg</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-56"></span><span>      </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428653"><span class="hs-identifier hs-var">st</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679429962"><span class="hs-identifier hs-var">st</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-57"></span><span>        </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitOk"><span class="hs-identifier hs-type">TxSubmitOk</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;success&quot;</span></span><span>
-</span><span id="line-58"></span><span>        </span><span id="local-6989586621679428649"><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428649"><span class="hs-identifier hs-var">_other</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span id="line-58"></span><span>        </span><span id="local-6989586621679429958"><span class="annot"><span class="annottext">TxSubmitStatus
+</span><a href="#local-6989586621679429958"><span class="hs-identifier hs-var">_other</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;fail&quot;</span></span><span>
 </span><span id="line-59"></span><span>
 </span><span id="line-60"></span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#renderTxSubmitStatus"><span class="hs-identifier hs-type">renderTxSubmitStatus</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitStatus"><span class="hs-identifier hs-type">TxSubmitStatus</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span>
 </span><span id="line-61"></span><span id="renderTxSubmitStatus"><span class="annot"><span class="annottext">renderTxSubmitStatus :: TxSubmitStatus -&gt; Text
-</span><a href="Cardano.Api.TxSubmit.Types.html#renderTxSubmitStatus"><span class="hs-identifier hs-var hs-var">renderTxSubmitStatus</span></a></span></span><span> </span><span id="local-6989586621679428648"><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428648"><span class="hs-identifier hs-var">st</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Cardano.Api.TxSubmit.Types.html#renderTxSubmitStatus"><span class="hs-identifier hs-var hs-var">renderTxSubmitStatus</span></a></span></span><span> </span><span id="local-6989586621679429957"><span class="annot"><span class="annottext">TxSubmitStatus
+</span><a href="#local-6989586621679429957"><span class="hs-identifier hs-var">st</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-62"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">TxSubmitStatus
-</span><a href="#local-6989586621679428648"><span class="hs-identifier hs-var">st</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-63"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitOk"><span class="hs-identifier hs-type">TxSubmitOk</span></a></span><span> </span><span id="local-6989586621679428647"><span class="annot"><span class="annottext">TxId
-</span><a href="#local-6989586621679428647"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (TxId -&gt; Text) -&gt; TxId -&gt; Text
+</span><a href="#local-6989586621679429957"><span class="hs-identifier hs-var">st</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-63"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitOk"><span class="hs-identifier hs-type">TxSubmitOk</span></a></span><span> </span><span id="local-6989586621679429956"><span class="annot"><span class="annottext">TxId
+</span><a href="#local-6989586621679429956"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (TxId -&gt; Text) -&gt; TxId -&gt; Text
 forall a. Format Text a -&gt; a
 </span><span class="hs-identifier hs-var">sformat</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Format (TxId -&gt; Text) (TxId -&gt; Text)
 </span><span class="hs-string">&quot;Tx &quot;</span></span><span class="annot"><span class="annottext">Format (TxId -&gt; Text) (TxId -&gt; Text)
@@ -105,33 +105,33 @@ forall a r. Buildable a =&gt; Format r (a -&gt; r)
 forall r a r'. Format r a -&gt; Format r' r -&gt; Format r' a
 </span><span class="hs-operator hs-var">%</span></span><span class="annot"><span class="annottext">Format Text Text
 </span><span class="hs-string">&quot; submitted successfully&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">TxId
-</span><a href="#local-6989586621679428647"><span class="hs-identifier hs-var">tx</span></a></span><span>
+</span><a href="#local-6989586621679429956"><span class="hs-identifier hs-var">tx</span></a></span><span>
 </span><span id="line-64"></span><span>    </span><span class="annot"><span class="annottext">TxSubmitStatus
 </span><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitDecodeHex"><span class="hs-identifier hs-var">TxSubmitDecodeHex</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Provided data was hex encoded and this webapi expects raw binary&quot;</span></span><span>
 </span><span id="line-65"></span><span>    </span><span class="annot"><span class="annottext">TxSubmitStatus
 </span><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitEmpty"><span class="hs-identifier hs-var">TxSubmitEmpty</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Provided transaction has zero length&quot;</span></span><span>
-</span><span id="line-66"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitDecodeFail"><span class="hs-identifier hs-type">TxSubmitDecodeFail</span></a></span><span> </span><span id="local-6989586621679428646"><span class="annot"><span class="annottext">DecoderError
-</span><a href="#local-6989586621679428646"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (DecoderError -&gt; Text) -&gt; DecoderError -&gt; Text
+</span><span id="line-66"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitDecodeFail"><span class="hs-identifier hs-type">TxSubmitDecodeFail</span></a></span><span> </span><span id="local-6989586621679429955"><span class="annot"><span class="annottext">DecoderError
+</span><a href="#local-6989586621679429955"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Format Text (DecoderError -&gt; Text) -&gt; DecoderError -&gt; Text
 forall a. Format Text a -&gt; a
 </span><span class="hs-identifier hs-var">sformat</span></span><span> </span><span class="annot"><span class="annottext">Format Text (DecoderError -&gt; Text)
 forall a r. Buildable a =&gt; Format r (a -&gt; r)
 </span><span class="hs-identifier hs-var">build</span></span><span> </span><span class="annot"><span class="annottext">DecoderError
-</span><a href="#local-6989586621679428646"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-67"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitBadTx"><span class="hs-identifier hs-type">TxSubmitBadTx</span></a></span><span> </span><span id="local-6989586621679428645"><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679428645"><span class="hs-identifier hs-var">tt</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Text] -&gt; Text
+</span><a href="#local-6989586621679429955"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-67"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitBadTx"><span class="hs-identifier hs-type">TxSubmitBadTx</span></a></span><span> </span><span id="local-6989586621679429954"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679429954"><span class="hs-identifier hs-var">tt</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Text] -&gt; Text
 forall a. Monoid a =&gt; [a] -&gt; a
 </span><span class="hs-identifier hs-var">mconcat</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;Transactions of type '&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
-</span><a href="#local-6989586621679428645"><span class="hs-identifier hs-var">tt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679429954"><span class="hs-identifier hs-var">tt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
 </span><span class="hs-string">&quot;' not supported&quot;</span></span><span class="hs-special">]</span><span>
-</span><span id="line-68"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitFail"><span class="hs-identifier hs-type">TxSubmitFail</span></a></span><span> </span><span id="local-6989586621679428644"><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
-</span><a href="#local-6989586621679428644"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ApplyMempoolPayloadErr -&gt; Text
+</span><span id="line-68"></span><span>    </span><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#TxSubmitFail"><span class="hs-identifier hs-type">TxSubmitFail</span></a></span><span> </span><span id="local-6989586621679429953"><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
+</span><a href="#local-6989586621679429953"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ApplyMempoolPayloadErr -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.ErrorRender.html#renderApplyMempoolPayloadErr"><span class="hs-identifier hs-var">renderApplyMempoolPayloadErr</span></a></span><span> </span><span class="annot"><span class="annottext">ApplyMempoolPayloadErr
-</span><a href="#local-6989586621679428644"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><a href="#local-6989586621679429953"><span class="hs-identifier hs-var">err</span></a></span><span>
 </span><span id="line-69"></span><span>
-</span><span id="line-70"></span><span id="local-6989586621679428642"><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#textShow"><span class="hs-identifier hs-type">textShow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679428642"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679428642"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
+</span><span id="line-70"></span><span id="local-6989586621679429951"><span class="annot"><a href="Cardano.Api.TxSubmit.Types.html#textShow"><span class="hs-identifier hs-type">textShow</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679429951"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679429951"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span></span><span>
 </span><span id="line-71"></span><span id="textShow"><span class="annot"><span class="annottext">textShow :: a -&gt; Text
 </span><a href="Cardano.Api.TxSubmit.Types.html#textShow"><span class="hs-identifier hs-var hs-var">textShow</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Text
 </span><span class="hs-identifier hs-var">Text.pack</span></span><span> </span><span class="annot"><span class="annottext">(FilePath -&gt; Text) -&gt; (a -&gt; FilePath) -&gt; a -&gt; Text

@@ -36,45 +36,45 @@
 </span><span id="line-36"></span><span class="hs-comment">-- This function is simple, but if you are doing input selection then you</span><span>
 </span><span id="line-37"></span><span class="hs-comment">-- probably want to consider estimateTransactionFee.</span><span>
 </span><span id="line-38"></span><span class="hs-comment">--</span><span>
-</span><span id="line-39"></span><span class="annot"><a href="Cardano.Api.Fees.html#transactionFee"><span class="hs-identifier hs-type">transactionFee</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679440489"><span class="annot"><a href="#local-6989586621679440489"><span class="hs-identifier hs-type">era</span></a></span></span><span class="hs-operator">.</span><span>
-</span><span id="line-40"></span><span>                  </span><span class="annot"><a href="Cardano.Api.Eras.html#IsShelleyBasedEra"><span class="hs-identifier hs-type">IsShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679440489"><span class="hs-identifier hs-type">era</span></a></span><span>
+</span><span id="line-39"></span><span class="annot"><a href="Cardano.Api.Fees.html#transactionFee"><span class="hs-identifier hs-type">transactionFee</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679441810"><span class="annot"><a href="#local-6989586621679441810"><span class="hs-identifier hs-type">era</span></a></span></span><span class="hs-operator">.</span><span>
+</span><span id="line-40"></span><span>                  </span><span class="annot"><a href="Cardano.Api.Eras.html#IsShelleyBasedEra"><span class="hs-identifier hs-type">IsShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679441810"><span class="hs-identifier hs-type">era</span></a></span><span>
 </span><span id="line-41"></span><span>               </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-comment">-- ^ The fixed tx fee</span><span>
 </span><span id="line-42"></span><span>               </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-comment">-- ^ The tx fee per byte</span><span>
-</span><span id="line-43"></span><span>               </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Tx.html#Tx"><span class="hs-identifier hs-type">Tx</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679440489"><span class="hs-identifier hs-type">era</span></a></span><span>
+</span><span id="line-43"></span><span>               </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Tx.html#Tx"><span class="hs-identifier hs-type">Tx</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679441810"><span class="hs-identifier hs-type">era</span></a></span><span>
 </span><span id="line-44"></span><span>               </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-type">Lovelace</span></a></span><span>
 </span><span id="line-45"></span><span id="transactionFee"><span class="annot"><span class="annottext">transactionFee :: Natural -&gt; Natural -&gt; Tx era -&gt; Lovelace
-</span><a href="Cardano.Api.Fees.html#transactionFee"><span class="hs-identifier hs-var hs-var">transactionFee</span></a></span></span><span> </span><span id="local-6989586621679440474"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440474"><span class="hs-identifier hs-var">txFeeFixed</span></a></span></span><span> </span><span id="local-6989586621679440473"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440473"><span class="hs-identifier hs-var">txFeePerByte</span></a></span></span><span> </span><span id="local-6989586621679440472"><span class="annot"><span class="annottext">Tx era
-</span><a href="#local-6989586621679440472"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-46"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679440471"><span class="annot"><span class="annottext">a :: Integer
-</span><a href="#local-6989586621679440471"><span class="hs-identifier hs-var hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Integer
+</span><a href="Cardano.Api.Fees.html#transactionFee"><span class="hs-identifier hs-var hs-var">transactionFee</span></a></span></span><span> </span><span id="local-6989586621679441795"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679441795"><span class="hs-identifier hs-var">txFeeFixed</span></a></span></span><span> </span><span id="local-6989586621679441794"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679441794"><span class="hs-identifier hs-var">txFeePerByte</span></a></span></span><span> </span><span id="local-6989586621679441793"><span class="annot"><span class="annottext">Tx era
+</span><a href="#local-6989586621679441793"><span class="hs-identifier hs-var">tx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441792"><span class="annot"><span class="annottext">a :: Integer
+</span><a href="#local-6989586621679441792"><span class="hs-identifier hs-var hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Integer
 forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440473"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span>
-</span><span id="line-47"></span><span>      </span><span id="local-6989586621679440470"><span class="annot"><span class="annottext">b :: Integer
-</span><a href="#local-6989586621679440470"><span class="hs-identifier hs-var hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Integer
+</span><a href="#local-6989586621679441794"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span>
+</span><span id="line-47"></span><span>      </span><span id="local-6989586621679441791"><span class="annot"><span class="annottext">b :: Integer
+</span><a href="#local-6989586621679441791"><span class="hs-identifier hs-var hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Integer
 forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440474"><span class="hs-identifier hs-var">txFeeFixed</span></a></span><span>
+</span><a href="#local-6989586621679441795"><span class="hs-identifier hs-var">txFeeFixed</span></a></span><span>
 </span><span id="line-48"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Tx era
-</span><a href="#local-6989586621679440472"><span class="hs-identifier hs-var">tx</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679441793"><span class="hs-identifier hs-var">tx</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-49"></span><span>       </span><span class="annot"><a href="Cardano.Api.Tx.html#ShelleyTx"><span class="hs-identifier hs-type">ShelleyTx</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyBasedEra era
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679440468"><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
-</span><a href="#local-6989586621679440468"><span class="hs-identifier hs-var">tx'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679440467"><span class="annot"><span class="annottext">x :: Integer
-</span><a href="#local-6989586621679440467"><span class="hs-identifier hs-var hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era) -&gt; Integer
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679441789"><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
+</span><a href="#local-6989586621679441789"><span class="hs-identifier hs-var">tx'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441788"><span class="annot"><span class="annottext">x :: Integer
+</span><a href="#local-6989586621679441788"><span class="hs-identifier hs-var hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era) -&gt; Integer
 forall k (x :: k) r a. HasField x r a =&gt; r -&gt; a
 </span><span class="hs-identifier hs-var">getField</span></span><span> </span><span class="hs-glyph">@</span><span class="annot"><span class="hs-string">&quot;txsize&quot;</span></span><span> </span><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
-</span><a href="#local-6989586621679440468"><span class="hs-identifier hs-var">tx'</span></a></span><span>
+</span><a href="#local-6989586621679441789"><span class="hs-identifier hs-var">tx'</span></a></span><span>
 </span><span id="line-50"></span><span>                          </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-var">Lovelace</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679440471"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
+</span><a href="#local-6989586621679441792"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679440467"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
+</span><a href="#local-6989586621679441788"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679440470"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679441791"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-51"></span><span>       </span><span class="hs-comment">--TODO: This can be made to work for Byron txs too. Do that: fill in this case</span><span>
 </span><span id="line-52"></span><span>       </span><span class="hs-comment">-- and remove the IsShelleyBasedEra constraint.</span><span>
 </span><span id="line-53"></span><span>       </span><span class="annot"><a href="Cardano.Api.Tx.html#ByronTx"><span class="hs-identifier hs-type">ByronTx</span></a></span><span> </span><span class="annot"><span class="annottext">ATxAux ByteString
@@ -94,12 +94,12 @@ forall era. IsShelleyBasedEra era =&gt; ShelleyBasedEra era
 </span><span id="line-64"></span><span class="hs-comment">-- contain all the things not subject to coin selection (such as script inputs,</span><span>
 </span><span id="line-65"></span><span class="hs-comment">-- metadata, withdrawals, certs etc)</span><span>
 </span><span id="line-66"></span><span class="hs-comment">--</span><span>
-</span><span id="line-67"></span><span class="annot"><a href="Cardano.Api.Fees.html#estimateTransactionFee"><span class="hs-identifier hs-type">estimateTransactionFee</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679440460"><span class="annot"><a href="#local-6989586621679440460"><span class="hs-identifier hs-type">era</span></a></span></span><span class="hs-operator">.</span><span>
-</span><span id="line-68"></span><span>                          </span><span class="annot"><a href="Cardano.Api.Eras.html#IsShelleyBasedEra"><span class="hs-identifier hs-type">IsShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679440460"><span class="hs-identifier hs-type">era</span></a></span><span>
+</span><span id="line-67"></span><span class="annot"><a href="Cardano.Api.Fees.html#estimateTransactionFee"><span class="hs-identifier hs-type">estimateTransactionFee</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679441781"><span class="annot"><a href="#local-6989586621679441781"><span class="hs-identifier hs-type">era</span></a></span></span><span class="hs-operator">.</span><span>
+</span><span id="line-68"></span><span>                          </span><span class="annot"><a href="Cardano.Api.Eras.html#IsShelleyBasedEra"><span class="hs-identifier hs-type">IsShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679441781"><span class="hs-identifier hs-type">era</span></a></span><span>
 </span><span id="line-69"></span><span>                       </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.NetworkId.html#NetworkId"><span class="hs-identifier hs-type">NetworkId</span></a></span><span>
 </span><span id="line-70"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-comment">-- ^ The fixed tx fee</span><span>
 </span><span id="line-71"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span> </span><span class="hs-comment">-- ^ The tx fee per byte</span><span>
-</span><span id="line-72"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Tx.html#Tx"><span class="hs-identifier hs-type">Tx</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679440460"><span class="hs-identifier hs-type">era</span></a></span><span>
+</span><span id="line-72"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Tx.html#Tx"><span class="hs-identifier hs-type">Tx</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679441781"><span class="hs-identifier hs-type">era</span></a></span><span>
 </span><span id="line-73"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-comment">-- ^ The number of extra UTxO transaction inputs</span><span>
 </span><span id="line-74"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-comment">-- ^ The number of extra transaction outputs</span><span>
 </span><span id="line-75"></span><span>                       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-comment">-- ^ The number of extra Shelley key witnesses</span><span>
@@ -114,194 +114,194 @@ forall era. IsShelleyBasedEra era =&gt; ShelleyBasedEra era
 -&gt; Int
 -&gt; Int
 -&gt; Lovelace
-</span><a href="Cardano.Api.Fees.html#estimateTransactionFee"><span class="hs-identifier hs-var hs-var">estimateTransactionFee</span></a></span></span><span> </span><span id="local-6989586621679440459"><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679440459"><span class="hs-identifier hs-var">nw</span></a></span></span><span> </span><span id="local-6989586621679440458"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440458"><span class="hs-identifier hs-var">txFeeFixed</span></a></span></span><span> </span><span id="local-6989586621679440457"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440457"><span class="hs-identifier hs-var">txFeePerByte</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Tx.html#ShelleyTx"><span class="hs-identifier hs-type">ShelleyTx</span></a></span><span> </span><span id="local-6989586621679440456"><span class="annot"><span class="annottext">ShelleyBasedEra era
-</span><a href="#local-6989586621679440456"><span class="hs-identifier hs-var">era</span></a></span></span><span> </span><span id="local-6989586621679440455"><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
-</span><a href="#local-6989586621679440455"><span class="hs-identifier hs-var">tx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-79"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-type">Lovelace</span></a></span><span> </span><span id="local-6989586621679440454"><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679440454"><span class="hs-identifier hs-var">baseFee</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Tx era -&gt; Lovelace
+</span><a href="Cardano.Api.Fees.html#estimateTransactionFee"><span class="hs-identifier hs-var hs-var">estimateTransactionFee</span></a></span></span><span> </span><span id="local-6989586621679441780"><span class="annot"><span class="annottext">NetworkId
+</span><a href="#local-6989586621679441780"><span class="hs-identifier hs-var">nw</span></a></span></span><span> </span><span id="local-6989586621679441779"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679441779"><span class="hs-identifier hs-var">txFeeFixed</span></a></span></span><span> </span><span id="local-6989586621679441778"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679441778"><span class="hs-identifier hs-var">txFeePerByte</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Tx.html#ShelleyTx"><span class="hs-identifier hs-type">ShelleyTx</span></a></span><span> </span><span id="local-6989586621679441777"><span class="annot"><span class="annottext">ShelleyBasedEra era
+</span><a href="#local-6989586621679441777"><span class="hs-identifier hs-var">era</span></a></span></span><span> </span><span id="local-6989586621679441776"><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
+</span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var">tx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-79"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-type">Lovelace</span></a></span><span> </span><span id="local-6989586621679441775"><span class="annot"><span class="annottext">Integer
+</span><a href="#local-6989586621679441775"><span class="hs-identifier hs-var">baseFee</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Tx era -&gt; Lovelace
 forall era.
 IsShelleyBasedEra era =&gt;
 Natural -&gt; Natural -&gt; Tx era -&gt; Lovelace
 </span><a href="Cardano.Api.Fees.html#transactionFee"><span class="hs-identifier hs-var">transactionFee</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440458"><span class="hs-identifier hs-var">txFeeFixed</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440457"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyBasedEra era -&gt; Tx (ShelleyLedgerEra era) -&gt; Tx era
+</span><a href="#local-6989586621679441779"><span class="hs-identifier hs-var">txFeeFixed</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679441778"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyBasedEra era -&gt; Tx (ShelleyLedgerEra era) -&gt; Tx era
 forall era.
 ShelleyBasedEra era -&gt; Tx (ShelleyLedgerEra era) -&gt; Tx era
 </span><a href="Cardano.Api.Tx.html#ShelleyTx"><span class="hs-identifier hs-var">ShelleyTx</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyBasedEra era
-</span><a href="#local-6989586621679440456"><span class="hs-identifier hs-var">era</span></a></span><span> </span><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
-</span><a href="#local-6989586621679440455"><span class="hs-identifier hs-var">tx</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-80"></span><span>     </span><span class="hs-keyword">in</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440453"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440453"><span class="hs-identifier hs-var">nInputs</span></a></span></span><span> </span><span id="local-6989586621679440452"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440452"><span class="hs-identifier hs-var">nOutputs</span></a></span></span><span> </span><span id="local-6989586621679440451"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440451"><span class="hs-identifier hs-var">nShelleyKeyWitnesses</span></a></span></span><span> </span><span id="local-6989586621679440450"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440450"><span class="hs-identifier hs-var">nByronKeyWitnesses</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679441777"><span class="hs-identifier hs-var">era</span></a></span><span> </span><span class="annot"><span class="annottext">Tx (ShelleyLedgerEra era)
+</span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var">tx</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-80"></span><span>     </span><span class="hs-keyword">in</span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679441774"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441774"><span class="hs-identifier hs-var">nInputs</span></a></span></span><span> </span><span id="local-6989586621679441773"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441773"><span class="hs-identifier hs-var">nOutputs</span></a></span></span><span> </span><span id="local-6989586621679441772"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441772"><span class="hs-identifier hs-var">nShelleyKeyWitnesses</span></a></span></span><span> </span><span id="local-6989586621679441771"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441771"><span class="hs-identifier hs-var">nByronKeyWitnesses</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-81"></span><span>
 </span><span id="line-82"></span><span>        </span><span class="hs-comment">--TODO: this is fragile. Move something like this to the ledger and</span><span>
 </span><span id="line-83"></span><span>        </span><span class="hs-comment">-- make it robust, based on the txsize calculation.</span><span>
-</span><span id="line-84"></span><span>        </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679440449"><span class="hs-identifier hs-type">extraBytes</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
-</span><span id="line-85"></span><span>            </span><span id="local-6989586621679440449"><span class="annot"><span class="annottext">extraBytes :: Int
-</span><a href="#local-6989586621679440449"><span class="hs-identifier hs-var hs-var">extraBytes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440453"><span class="hs-identifier hs-var">nInputs</span></a></span><span>               </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-84"></span><span>        </span><span class="hs-keyword">let</span><span> </span><span class="annot"><a href="#local-6989586621679441770"><span class="hs-identifier hs-type">extraBytes</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
+</span><span id="line-85"></span><span>            </span><span id="local-6989586621679441770"><span class="annot"><span class="annottext">extraBytes :: Int
+</span><a href="#local-6989586621679441770"><span class="hs-identifier hs-var hs-var">extraBytes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441774"><span class="hs-identifier hs-var">nInputs</span></a></span><span>               </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440448"><span class="hs-identifier hs-var">sizeInput</span></a></span><span>
+</span><a href="#local-6989586621679441769"><span class="hs-identifier hs-var">sizeInput</span></a></span><span>
 </span><span id="line-86"></span><span>                       </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440452"><span class="hs-identifier hs-var">nOutputs</span></a></span><span>              </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441773"><span class="hs-identifier hs-var">nOutputs</span></a></span><span>              </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440447"><span class="hs-identifier hs-var">sizeOutput</span></a></span><span>
+</span><a href="#local-6989586621679441768"><span class="hs-identifier hs-var">sizeOutput</span></a></span><span>
 </span><span id="line-87"></span><span>                       </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440450"><span class="hs-identifier hs-var">nByronKeyWitnesses</span></a></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441771"><span class="hs-identifier hs-var">nByronKeyWitnesses</span></a></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440446"><span class="hs-identifier hs-var">sizeByronKeyWitnesses</span></a></span><span>
+</span><a href="#local-6989586621679441767"><span class="hs-identifier hs-var">sizeByronKeyWitnesses</span></a></span><span>
 </span><span id="line-88"></span><span>                       </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440451"><span class="hs-identifier hs-var">nShelleyKeyWitnesses</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441772"><span class="hs-identifier hs-var">nShelleyKeyWitnesses</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440445"><span class="hs-identifier hs-var">sizeShelleyKeyWitnesses</span></a></span><span>
+</span><a href="#local-6989586621679441766"><span class="hs-identifier hs-var">sizeShelleyKeyWitnesses</span></a></span><span>
 </span><span id="line-89"></span><span>
 </span><span id="line-90"></span><span>         </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Lovelace
 </span><a href="Cardano.Api.Value.html#Lovelace"><span class="hs-identifier hs-var">Lovelace</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679440454"><span class="hs-identifier hs-var">baseFee</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
+</span><a href="#local-6989586621679441775"><span class="hs-identifier hs-var">baseFee</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Integer
 forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679440457"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
+</span><a href="#local-6989586621679441778"><span class="hs-identifier hs-var">txFeePerByte</span></a></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Integer
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Integer
 forall a. Integral a =&gt; a -&gt; Integer
 </span><span class="hs-identifier hs-var">toInteger</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440449"><span class="hs-identifier hs-var">extraBytes</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679441770"><span class="hs-identifier hs-var">extraBytes</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-91"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-92"></span><span>    </span><span id="local-6989586621679440448"><span class="annot"><span class="annottext">sizeInput :: Int
-</span><a href="#local-6989586621679440448"><span class="hs-identifier hs-var hs-var">sizeInput</span></a></span></span><span>               </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440444"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-92"></span><span>    </span><span id="local-6989586621679441769"><span class="annot"><span class="annottext">sizeInput :: Int
+</span><a href="#local-6989586621679441769"><span class="hs-identifier hs-var hs-var">sizeInput</span></a></span></span><span>               </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441765"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440443"><span class="hs-identifier hs-var">uint</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441764"><span class="hs-identifier hs-var">uint</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440442"><span class="hs-identifier hs-var">hashObj</span></a></span><span>
-</span><span id="line-93"></span><span>    </span><span id="local-6989586621679440447"><span class="annot"><span class="annottext">sizeOutput :: Int
-</span><a href="#local-6989586621679440447"><span class="hs-identifier hs-var hs-var">sizeOutput</span></a></span></span><span>              </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440444"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441763"><span class="hs-identifier hs-var">hashObj</span></a></span><span>
+</span><span id="line-93"></span><span>    </span><span id="local-6989586621679441768"><span class="annot"><span class="annottext">sizeOutput :: Int
+</span><a href="#local-6989586621679441768"><span class="hs-identifier hs-var hs-var">sizeOutput</span></a></span></span><span>              </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441765"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440443"><span class="hs-identifier hs-var">uint</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441764"><span class="hs-identifier hs-var">uint</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440441"><span class="hs-identifier hs-var">address</span></a></span><span>
-</span><span id="line-94"></span><span>    </span><span id="local-6989586621679440446"><span class="annot"><span class="annottext">sizeByronKeyWitnesses :: Int
-</span><a href="#local-6989586621679440446"><span class="hs-identifier hs-var hs-var">sizeByronKeyWitnesses</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440444"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441762"><span class="hs-identifier hs-var">address</span></a></span><span>
+</span><span id="line-94"></span><span>    </span><span id="local-6989586621679441767"><span class="annot"><span class="annottext">sizeByronKeyWitnesses :: Int
+</span><a href="#local-6989586621679441767"><span class="hs-identifier hs-var hs-var">sizeByronKeyWitnesses</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441765"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440440"><span class="hs-identifier hs-var">keyObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441761"><span class="hs-identifier hs-var">keyObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440439"><span class="hs-identifier hs-var">sigObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441760"><span class="hs-identifier hs-var">sigObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440438"><span class="hs-identifier hs-var">ccodeObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441759"><span class="hs-identifier hs-var">ccodeObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440437"><span class="hs-identifier hs-var">attrsObj</span></a></span><span>
-</span><span id="line-95"></span><span>    </span><span id="local-6989586621679440445"><span class="annot"><span class="annottext">sizeShelleyKeyWitnesses :: Int
-</span><a href="#local-6989586621679440445"><span class="hs-identifier hs-var hs-var">sizeShelleyKeyWitnesses</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440444"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441758"><span class="hs-identifier hs-var">attrsObj</span></a></span><span>
+</span><span id="line-95"></span><span>    </span><span id="local-6989586621679441766"><span class="annot"><span class="annottext">sizeShelleyKeyWitnesses :: Int
+</span><a href="#local-6989586621679441766"><span class="hs-identifier hs-var hs-var">sizeShelleyKeyWitnesses</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441765"><span class="hs-identifier hs-var">smallArray</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440440"><span class="hs-identifier hs-var">keyObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441761"><span class="hs-identifier hs-var">keyObj</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440439"><span class="hs-identifier hs-var">sigObj</span></a></span><span>
+</span><a href="#local-6989586621679441760"><span class="hs-identifier hs-var">sigObj</span></a></span><span>
 </span><span id="line-96"></span><span>
-</span><span id="line-97"></span><span>    </span><span id="local-6989586621679440444"><span class="annot"><span class="annottext">smallArray :: Int
-</span><a href="#local-6989586621679440444"><span class="hs-identifier hs-var hs-var">smallArray</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-97"></span><span>    </span><span id="local-6989586621679441765"><span class="annot"><span class="annottext">smallArray :: Int
+</span><a href="#local-6989586621679441765"><span class="hs-identifier hs-var hs-var">smallArray</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span>
-</span><span id="line-98"></span><span>    </span><span id="local-6989586621679440443"><span class="annot"><span class="annottext">uint :: Int
-</span><a href="#local-6989586621679440443"><span class="hs-identifier hs-var hs-var">uint</span></a></span></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-98"></span><span>    </span><span id="local-6989586621679441764"><span class="annot"><span class="annottext">uint :: Int
+</span><a href="#local-6989586621679441764"><span class="hs-identifier hs-var hs-var">uint</span></a></span></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">5</span></span><span>
 </span><span id="line-99"></span><span>
-</span><span id="line-100"></span><span>    </span><span id="local-6989586621679440442"><span class="annot"><span class="annottext">hashObj :: Int
-</span><a href="#local-6989586621679440442"><span class="hs-identifier hs-var hs-var">hashObj</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-100"></span><span>    </span><span id="local-6989586621679441763"><span class="annot"><span class="annottext">hashObj :: Int
+</span><a href="#local-6989586621679441763"><span class="hs-identifier hs-var hs-var">hashObj</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440436"><span class="hs-identifier hs-var">hashLen</span></a></span><span>
-</span><span id="line-101"></span><span>    </span><span id="local-6989586621679440436"><span class="annot"><span class="annottext">hashLen :: Int
-</span><a href="#local-6989586621679440436"><span class="hs-identifier hs-var hs-var">hashLen</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441757"><span class="hs-identifier hs-var">hashLen</span></a></span><span>
+</span><span id="line-101"></span><span>    </span><span id="local-6989586621679441757"><span class="annot"><span class="annottext">hashLen :: Int
+</span><a href="#local-6989586621679441757"><span class="hs-identifier hs-var hs-var">hashLen</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">32</span></span><span>
 </span><span id="line-102"></span><span>
-</span><span id="line-103"></span><span>    </span><span id="local-6989586621679440440"><span class="annot"><span class="annottext">keyObj :: Int
-</span><a href="#local-6989586621679440440"><span class="hs-identifier hs-var hs-var">keyObj</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-103"></span><span>    </span><span id="local-6989586621679441761"><span class="annot"><span class="annottext">keyObj :: Int
+</span><a href="#local-6989586621679441761"><span class="hs-identifier hs-var hs-var">keyObj</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440435"><span class="hs-identifier hs-var">keyLen</span></a></span><span>
-</span><span id="line-104"></span><span>    </span><span id="local-6989586621679440435"><span class="annot"><span class="annottext">keyLen :: Int
-</span><a href="#local-6989586621679440435"><span class="hs-identifier hs-var hs-var">keyLen</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441756"><span class="hs-identifier hs-var">keyLen</span></a></span><span>
+</span><span id="line-104"></span><span>    </span><span id="local-6989586621679441756"><span class="annot"><span class="annottext">keyLen :: Int
+</span><a href="#local-6989586621679441756"><span class="hs-identifier hs-var hs-var">keyLen</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">32</span></span><span>
 </span><span id="line-105"></span><span>
-</span><span id="line-106"></span><span>    </span><span id="local-6989586621679440439"><span class="annot"><span class="annottext">sigObj :: Int
-</span><a href="#local-6989586621679440439"><span class="hs-identifier hs-var hs-var">sigObj</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-106"></span><span>    </span><span id="local-6989586621679441760"><span class="annot"><span class="annottext">sigObj :: Int
+</span><a href="#local-6989586621679441760"><span class="hs-identifier hs-var hs-var">sigObj</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440434"><span class="hs-identifier hs-var">sigLen</span></a></span><span>
-</span><span id="line-107"></span><span>    </span><span id="local-6989586621679440434"><span class="annot"><span class="annottext">sigLen :: Int
-</span><a href="#local-6989586621679440434"><span class="hs-identifier hs-var hs-var">sigLen</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441755"><span class="hs-identifier hs-var">sigLen</span></a></span><span>
+</span><span id="line-107"></span><span>    </span><span id="local-6989586621679441755"><span class="annot"><span class="annottext">sigLen :: Int
+</span><a href="#local-6989586621679441755"><span class="hs-identifier hs-var hs-var">sigLen</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">64</span></span><span>
 </span><span id="line-108"></span><span>
-</span><span id="line-109"></span><span>    </span><span id="local-6989586621679440438"><span class="annot"><span class="annottext">ccodeObj :: Int
-</span><a href="#local-6989586621679440438"><span class="hs-identifier hs-var hs-var">ccodeObj</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-109"></span><span>    </span><span id="local-6989586621679441759"><span class="annot"><span class="annottext">ccodeObj :: Int
+</span><a href="#local-6989586621679441759"><span class="hs-identifier hs-var hs-var">ccodeObj</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440433"><span class="hs-identifier hs-var">ccodeLen</span></a></span><span>
-</span><span id="line-110"></span><span>    </span><span id="local-6989586621679440433"><span class="annot"><span class="annottext">ccodeLen :: Int
-</span><a href="#local-6989586621679440433"><span class="hs-identifier hs-var hs-var">ccodeLen</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441754"><span class="hs-identifier hs-var">ccodeLen</span></a></span><span>
+</span><span id="line-110"></span><span>    </span><span id="local-6989586621679441754"><span class="annot"><span class="annottext">ccodeLen :: Int
+</span><a href="#local-6989586621679441754"><span class="hs-identifier hs-var hs-var">ccodeLen</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">32</span></span><span>
 </span><span id="line-111"></span><span>
-</span><span id="line-112"></span><span>    </span><span id="local-6989586621679440441"><span class="annot"><span class="annottext">address :: Int
-</span><a href="#local-6989586621679440441"><span class="hs-identifier hs-var hs-var">address</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-112"></span><span>    </span><span id="local-6989586621679441762"><span class="annot"><span class="annottext">address :: Int
+</span><a href="#local-6989586621679441762"><span class="hs-identifier hs-var hs-var">address</span></a></span></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440432"><span class="hs-identifier hs-var">addrHeader</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679441753"><span class="hs-identifier hs-var">addrHeader</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">*</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440431"><span class="hs-identifier hs-var">addrHashLen</span></a></span><span>
-</span><span id="line-113"></span><span>    </span><span id="local-6989586621679440432"><span class="annot"><span class="annottext">addrHeader :: Int
-</span><a href="#local-6989586621679440432"><span class="hs-identifier hs-var hs-var">addrHeader</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679441752"><span class="hs-identifier hs-var">addrHashLen</span></a></span><span>
+</span><span id="line-113"></span><span>    </span><span id="local-6989586621679441753"><span class="annot"><span class="annottext">addrHeader :: Int
+</span><a href="#local-6989586621679441753"><span class="hs-identifier hs-var hs-var">addrHeader</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span>
-</span><span id="line-114"></span><span>    </span><span id="local-6989586621679440431"><span class="annot"><span class="annottext">addrHashLen :: Int
-</span><a href="#local-6989586621679440431"><span class="hs-identifier hs-var hs-var">addrHashLen</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-114"></span><span>    </span><span id="local-6989586621679441752"><span class="annot"><span class="annottext">addrHashLen :: Int
+</span><a href="#local-6989586621679441752"><span class="hs-identifier hs-var hs-var">addrHashLen</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">28</span></span><span>
 </span><span id="line-115"></span><span>
-</span><span id="line-116"></span><span>    </span><span id="local-6989586621679440437"><span class="annot"><span class="annottext">attrsObj :: Int
-</span><a href="#local-6989586621679440437"><span class="hs-identifier hs-var hs-var">attrsObj</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span id="line-116"></span><span>    </span><span id="local-6989586621679441758"><span class="annot"><span class="annottext">attrsObj :: Int
+</span><a href="#local-6989586621679441758"><span class="hs-identifier hs-var hs-var">attrsObj</span></a></span></span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Int
 </span><span class="hs-identifier hs-var">BS.length</span></span><span> </span><span class="annot"><span class="annottext">ByteString
-</span><a href="#local-6989586621679440429"><span class="hs-identifier hs-var">attributes</span></a></span><span>
-</span><span id="line-117"></span><span>    </span><span id="local-6989586621679440429"><span class="annot"><span class="annottext">attributes :: ByteString
-</span><a href="#local-6989586621679440429"><span class="hs-identifier hs-var hs-var">attributes</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Attributes AddrAttributes -&gt; ByteString
+</span><a href="#local-6989586621679441750"><span class="hs-identifier hs-var">attributes</span></a></span><span>
+</span><span id="line-117"></span><span>    </span><span id="local-6989586621679441750"><span class="annot"><span class="annottext">attributes :: ByteString
+</span><a href="#local-6989586621679441750"><span class="hs-identifier hs-var hs-var">attributes</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Attributes AddrAttributes -&gt; ByteString
 forall a. ToCBOR a =&gt; a -&gt; ByteString
 </span><span class="hs-identifier hs-var">CBOR.serialize'</span></span><span> </span><span class="annot"><span class="annottext">(Attributes AddrAttributes -&gt; ByteString)
 -&gt; Attributes AddrAttributes -&gt; ByteString
@@ -312,13 +312,13 @@ forall h. h -&gt; Attributes h
 </span><span class="hs-identifier hs-var">Byron.mkAttributes</span></span><span> </span><span class="annot"><span class="annottext">AddrAttributes :: Maybe HDAddressPayload -&gt; NetworkMagic -&gt; AddrAttributes
 </span><span class="hs-identifier hs-type">Byron.AddrAttributes</span></span><span> </span><span class="hs-special">{</span><span>
 </span><span id="line-119"></span><span>                      </span><span class="annot"><span class="annottext">aaVKDerivationPath :: Maybe HDAddressPayload
-</span><a href="#local-6989586621679440425"><span class="hs-identifier hs-var">Byron.aaVKDerivationPath</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe HDAddressPayload
+</span><a href="#local-6989586621679441746"><span class="hs-identifier hs-var">Byron.aaVKDerivationPath</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe HDAddressPayload
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span class="hs-special">,</span><span>
 </span><span id="line-120"></span><span>                      </span><span class="annot"><span class="annottext">aaNetworkMagic :: NetworkMagic
-</span><a href="#local-6989586621679440424"><span class="hs-identifier hs-var">Byron.aaNetworkMagic</span></a></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">NetworkId -&gt; NetworkMagic
+</span><a href="#local-6989586621679441745"><span class="hs-identifier hs-var">Byron.aaNetworkMagic</span></a></span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">NetworkId -&gt; NetworkMagic
 </span><a href="Cardano.Api.NetworkId.html#toByronNetworkMagic"><span class="hs-identifier hs-var">toByronNetworkMagic</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkId
-</span><a href="#local-6989586621679440459"><span class="hs-identifier hs-var">nw</span></a></span><span>
+</span><a href="#local-6989586621679441780"><span class="hs-identifier hs-var">nw</span></a></span><span>
 </span><span id="line-121"></span><span>                    </span><span class="hs-special">}</span><span>
 </span><span id="line-122"></span><span>
 </span><span id="line-123"></span><span class="hs-comment">--TODO: This can be made to work for Byron txs too. Do that: fill in this case</span><span>
@@ -330,6 +330,6 @@ forall a. Maybe a
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-126"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ShelleyBasedEra era
 forall era. IsShelleyBasedEra era =&gt; ShelleyBasedEra era
-</span><a href="Cardano.Api.Eras.html#shelleyBasedEra"><span class="hs-identifier hs-var">shelleyBasedEra</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Eras.html#ShelleyBasedEra"><span class="hs-identifier hs-type">ShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679440460"><span class="hs-identifier hs-type">era</span></a></span><span> </span><span class="hs-keyword">of</span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>
+</span><a href="Cardano.Api.Eras.html#shelleyBasedEra"><span class="hs-identifier hs-var">shelleyBasedEra</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Eras.html#ShelleyBasedEra"><span class="hs-identifier hs-type">ShelleyBasedEra</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679441781"><span class="hs-identifier hs-type">era</span></a></span><span> </span><span class="hs-keyword">of</span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>
 </span><span id="line-127"></span><span>
 </span><span id="line-128"></span></pre></body></html>

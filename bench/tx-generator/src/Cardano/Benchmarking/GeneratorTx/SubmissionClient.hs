@@ -94,19 +94,16 @@ type LocalState era = (TxSource era, UnAcked (Tx era), SubmissionThreadStats)
 type EndOfProtocolCallback m = SubmissionThreadStats -> m ()
 
 txSubmissionClient
-  :: forall m era tx txid gentx gentxid .
+  :: forall m era tx.
      ( MonadIO m, MonadFail m
      , IsShelleyBasedEra era
      , tx      ~ Tx era
-     , txid    ~ TxId
-     , gentx   ~ GenTx CardanoBlock
-     , gentxid ~ GenTxId CardanoBlock
      )
   => Tracer m NodeToNodeSubmissionTrace
-  -> Tracer m (TraceBenchTxSubmit txid)
+  -> Tracer m (TraceBenchTxSubmit TxId)
   -> TxSource era
   -> EndOfProtocolCallback m
-  -> TxSubmissionClient gentxid gentx m ()
+  -> TxSubmissionClient (GenTxId CardanoBlock) (GenTx CardanoBlock) m ()
 txSubmissionClient tr bmtr initialTxSource endOfProtocolCallback =
   TxSubmissionClient $
     pure $ client (initialTxSource, UnAcked [], SubmissionThreadStats 0 0 0)
@@ -129,7 +126,7 @@ txSubmissionClient tr bmtr initialTxSource endOfProtocolCallback =
   -- Sadly, we can't just return what we want, we instead have to
   -- communicate via IORefs, because..
   -- The () return type is forced by Ouroboros.Network.NodeToNode.connectTo
-  client ::LocalState era -> ClientStIdle gentxid gentx m ()
+  client ::LocalState era -> ClientStIdle (GenTxId CardanoBlock) (GenTx CardanoBlock) m ()
 
   client localState = ClientStIdle
     { recvMsgRequestTxIds = requestTxIds localState
@@ -141,7 +138,7 @@ txSubmissionClient tr bmtr initialTxSource endOfProtocolCallback =
     -> TokBlockingStyle blocking
     -> Word16
     -> Word16
-    -> m (ClientStTxIds blocking gentxid gentx m ())
+    -> m (ClientStTxIds blocking (GenTxId CardanoBlock) (GenTx CardanoBlock) m ())
   requestTxIds state blocking ackNum reqNum = do
     let ack = Ack $ fromIntegral ackNum
         req = Req $ fromIntegral reqNum
@@ -173,7 +170,7 @@ txSubmissionClient tr bmtr initialTxSource endOfProtocolCallback =
     -> [GenTxId CardanoBlock]
     -> m (ClientStTxs (GenTxId CardanoBlock) (GenTx CardanoBlock) m ())
   requestTxs (txSource, unAcked, stats) txIds = do
-    let  reqTxIds :: [txid]
+    let  reqTxIds :: [TxId]
          reqTxIds = fmap fromGenTxId txIds
     traceWith tr $ ReqTxs (length reqTxIds)
     let UnAcked ua = unAcked
@@ -193,17 +190,17 @@ txSubmissionClient tr bmtr initialTxSource endOfProtocolCallback =
               , stsUnavailable =
                 stsUnavailable stats + Unav (length missIds)}))
 
-  txToIdSize :: tx -> (gentxid, TxSizeInBytes)
+  txToIdSize :: tx -> (GenTxId CardanoBlock, TxSizeInBytes)
   txToIdSize = (Mempool.txId &&& txInBlockSize) . toGenTx
 
-  toGenTx :: tx -> gentx
+  toGenTx :: tx -> GenTx CardanoBlock
   toGenTx tx = case (shelleyBasedEra @ era , tx) of
     (ShelleyBasedEraShelley, ShelleyTx _ tx') -> GenTxShelley (mkShelleyTx tx')
     (ShelleyBasedEraAllegra, ShelleyTx _ tx') -> GenTxAllegra (mkShelleyTx tx')
     (ShelleyBasedEraMary, ShelleyTx _ tx') -> GenTxMary (mkShelleyTx tx')
     (ShelleyBasedEraAlonzo, ShelleyTx _ tx') -> GenTxAlonzo (mkShelleyTx tx')
 
-  fromGenTxId :: gentxid -> txid
+  fromGenTxId :: GenTxId CardanoBlock -> TxId
   fromGenTxId (Block.GenTxIdShelley (Mempool.ShelleyTxId i)) = fromShelleyTxId i
   fromGenTxId (Block.GenTxIdAllegra (Mempool.ShelleyTxId i)) = fromShelleyTxId i
   fromGenTxId (Block.GenTxIdMary    (Mempool.ShelleyTxId i)) = fromShelleyTxId i

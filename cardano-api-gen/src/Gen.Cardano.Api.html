@@ -20,34 +20,34 @@
 </span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Gen</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Gen</span></span><span>
 </span><span id="line-21"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Range</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Range</span></span><span>
 </span><span id="line-22"></span><span>
-</span><span id="line-23"></span><span id="local-6989586621679181399"><span id="local-6989586621679181400"><span class="annot"><a href="Gen.Cardano.Api.html#genMetadata"><span class="hs-identifier hs-type">genMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181400"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181400"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Metadata</span></span><span> </span><span class="annot"><a href="#local-6989586621679181399"><span class="hs-identifier hs-type">era</span></a></span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-23"></span><span id="local-6989586621679181400"><span id="local-6989586621679181401"><span class="annot"><a href="Gen.Cardano.Api.html#genMetadata"><span class="hs-identifier hs-type">genMetadata</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181401"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181401"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Metadata</span></span><span> </span><span class="annot"><a href="#local-6989586621679181400"><span class="hs-identifier hs-type">era</span></a></span><span class="hs-special">)</span></span></span><span>
 </span><span id="line-24"></span><span id="genMetadata"><span class="annot"><span class="annottext">genMetadata :: m (Metadata era)
 </span><a href="Gen.Cardano.Api.html#genMetadata"><span class="hs-identifier hs-var hs-var">genMetadata</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-25"></span><span>  </span><span id="local-6989586621679181398"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679181398"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Int
+</span><span id="line-25"></span><span>  </span><span id="local-6989586621679181399"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679181399"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Int
 forall (m :: * -&gt; *) a. (MonadGen m, Integral a) =&gt; Range a -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.integral</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">15</span></span><span class="hs-special">)</span><span>
-</span><span id="line-26"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679181395"><span class="annot"><span class="annottext">indexes :: [Word64]
-</span><a href="#local-6989586621679181395"><span class="hs-identifier hs-var hs-var">indexes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Word64) -&gt; [Int] -&gt; [Word64]
+</span><span id="line-26"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679181396"><span class="annot"><span class="annottext">indexes :: [Word64]
+</span><a href="#local-6989586621679181396"><span class="hs-identifier hs-var hs-var">indexes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Word64) -&gt; [Int] -&gt; [Word64]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679181393"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679181393"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Word64
+</span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679181394"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679181394"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Word64
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679181393"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word64</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679181394"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word64</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-glyph">..</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679181398"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span><span class="hs-special">]</span><span>
-</span><span id="line-27"></span><span>  </span><span id="local-6989586621679181392"><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181392"><span class="hs-identifier hs-var">mDatums</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
+</span><a href="#local-6989586621679181399"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-27"></span><span>  </span><span id="local-6989586621679181393"><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181393"><span class="hs-identifier hs-var">mDatums</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
 forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Range Int
 forall a. a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.singleton</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679181398"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m Metadatum
+</span><a href="#local-6989586621679181399"><span class="hs-identifier hs-var">numberOfIndicies</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m Metadatum
 forall (m :: * -&gt; *). MonadGen m =&gt; m Metadatum
 </span><a href="Gen.Cardano.Api.html#genMetadatum"><span class="hs-identifier hs-var">genMetadatum</span></a></span><span>
 </span><span id="line-28"></span><span>  </span><span class="annot"><span class="annottext">Metadata era -&gt; m (Metadata era)
@@ -76,14 +76,14 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">[Word64] -&gt; [Metadatum] -&gt; [(Word64, Metadatum)]
 forall a b. [a] -&gt; [b] -&gt; [(a, b)]
 </span><span class="hs-identifier hs-var">zip</span></span><span> </span><span class="annot"><span class="annottext">[Word64]
-</span><a href="#local-6989586621679181395"><span class="hs-identifier hs-var">indexes</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181392"><span class="hs-identifier hs-var">mDatums</span></a></span><span>
+</span><a href="#local-6989586621679181396"><span class="hs-identifier hs-var">indexes</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181393"><span class="hs-identifier hs-var">mDatums</span></a></span><span>
 </span><span id="line-29"></span><span>
-</span><span id="line-30"></span><span id="local-6989586621679181455"><span class="annot"><a href="Gen.Cardano.Api.html#genMetadatum"><span class="hs-identifier hs-type">genMetadatum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181455"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181455"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Metadatum</span></span></span><span>
+</span><span id="line-30"></span><span id="local-6989586621679181456"><span class="annot"><a href="Gen.Cardano.Api.html#genMetadatum"><span class="hs-identifier hs-type">genMetadatum</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181456"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181456"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Metadatum</span></span></span><span>
 </span><span id="line-31"></span><span id="genMetadatum"><span class="annot"><span class="annottext">genMetadatum :: m Metadatum
 </span><a href="Gen.Cardano.Api.html#genMetadatum"><span class="hs-identifier hs-var hs-var">genMetadatum</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-32"></span><span>  </span><span id="local-6989586621679181385"><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181385"><span class="hs-identifier hs-var">int</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
+</span><span id="line-32"></span><span>  </span><span id="local-6989586621679181386"><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181386"><span class="hs-identifier hs-var">int</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
 forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -99,8 +99,8 @@ forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">100</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-33"></span><span>  </span><span id="local-6989586621679181382"><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181382"><span class="hs-identifier hs-var">bytes</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
+</span><span id="line-33"></span><span>  </span><span id="local-6989586621679181383"><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181383"><span class="hs-identifier hs-var">bytes</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
 forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -116,8 +116,8 @@ forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">20</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-34"></span><span>  </span><span id="local-6989586621679181379"><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181379"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679181380"><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181380"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m Metadatum -&gt; m [Metadatum]
 forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
 </span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -135,81 +135,81 @@ forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-number">20</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m Char
 forall (m :: * -&gt; *). MonadGen m =&gt; m Char
 </span><span class="hs-identifier hs-var">Gen.alphaNum</span></span><span class="hs-special">)</span><span>
-</span><span id="line-35"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679181375"><span class="annot"><span class="annottext">mDatumList :: [Metadatum]
-</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var hs-var">mDatumList</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181385"><span class="hs-identifier hs-var">int</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; [Metadatum] -&gt; [Metadatum]
+</span><span id="line-35"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679181376"><span class="annot"><span class="annottext">mDatumList :: [Metadatum]
+</span><a href="#local-6989586621679181376"><span class="hs-identifier hs-var hs-var">mDatumList</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Metadatum]
+</span><a href="#local-6989586621679181386"><span class="hs-identifier hs-var">int</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; [Metadatum] -&gt; [Metadatum]
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181382"><span class="hs-identifier hs-var">bytes</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; [Metadatum] -&gt; [Metadatum]
+</span><a href="#local-6989586621679181383"><span class="hs-identifier hs-var">bytes</span></a></span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; [Metadatum] -&gt; [Metadatum]
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181379"><span class="hs-identifier hs-var">str</span></a></span><span>
+</span><a href="#local-6989586621679181380"><span class="hs-identifier hs-var">str</span></a></span><span>
 </span><span id="line-36"></span><span>
-</span><span id="line-37"></span><span>  </span><span id="local-6989586621679181374"><span class="annot"><span class="annottext">Metadatum
-</span><a href="#local-6989586621679181374"><span class="hs-identifier hs-var">singleMetadatum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; m Metadatum
+</span><span id="line-37"></span><span>  </span><span id="local-6989586621679181375"><span class="annot"><span class="annottext">Metadatum
+</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">singleMetadatum</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; m Metadatum
 forall (m :: * -&gt; *) a. MonadGen m =&gt; [a] -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.element</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">mDatumList</span></a></span><span>
+</span><a href="#local-6989586621679181376"><span class="hs-identifier hs-var">mDatumList</span></a></span><span>
 </span><span id="line-38"></span><span>
 </span><span id="line-39"></span><span>  </span><span class="annot"><span class="annottext">[Metadatum] -&gt; m Metadatum
 forall (m :: * -&gt; *) a. MonadGen m =&gt; [a] -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.element</span></span><span>
 </span><span id="line-40"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">List</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">mDatumList</span></a></span><span>
+</span><a href="#local-6989586621679181376"><span class="hs-identifier hs-var">mDatumList</span></a></span><span>
 </span><span id="line-41"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[(Metadatum, Metadatum)] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">Map</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Metadatum
-</span><a href="#local-6989586621679181374"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Metadatum
-</span><a href="#local-6989586621679181374"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Metadatum
+</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
 </span><span id="line-42"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[(Metadatum, Metadatum)] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">Map</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Metadatum] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">List</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">mDatumList</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Metadatum
-</span><a href="#local-6989586621679181374"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679181376"><span class="hs-identifier hs-var">mDatumList</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Metadatum
+</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
 </span><span id="line-43"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[(Metadatum, Metadatum)] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">Map</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Metadatum
-</span><a href="#local-6989586621679181374"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; Metadatum
+</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">singleMetadatum</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[Metadatum] -&gt; Metadatum
 </span><span class="hs-identifier hs-var">List</span></span><span> </span><span class="annot"><span class="annottext">[Metadatum]
-</span><a href="#local-6989586621679181375"><span class="hs-identifier hs-var">mDatumList</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679181376"><span class="hs-identifier hs-var">mDatumList</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
 </span><span id="line-44"></span><span>    </span><span class="hs-special">]</span><span>
 </span><span id="line-45"></span><span>
-</span><span id="line-46"></span><span id="local-6989586621679181422"><span class="annot"><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-type">genCoin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181422"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Range</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integer</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181422"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ledger.Coin</span></span></span><span>
+</span><span id="line-46"></span><span id="local-6989586621679181423"><span class="annot"><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-type">genCoin</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181423"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Range</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integer</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181423"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ledger.Coin</span></span></span><span>
 </span><span id="line-47"></span><span id="genCoin"><span class="annot"><span class="annottext">genCoin :: Range Integer -&gt; m Coin
-</span><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-var hs-var">genCoin</span></a></span></span><span> </span><span id="local-6989586621679181369"><span class="annot"><span class="annottext">Range Integer
-</span><a href="#local-6989586621679181369"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-48"></span><span>  </span><span id="local-6989586621679181368"><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679181368"><span class="hs-identifier hs-var">unCoin'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Integer
+</span><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-var hs-var">genCoin</span></a></span></span><span> </span><span id="local-6989586621679181370"><span class="annot"><span class="annottext">Range Integer
+</span><a href="#local-6989586621679181370"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-48"></span><span>  </span><span id="local-6989586621679181369"><span class="annot"><span class="annottext">Integer
+</span><a href="#local-6989586621679181369"><span class="hs-identifier hs-var">unCoin'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Integer
 forall (m :: * -&gt; *) a. (MonadGen m, Integral a) =&gt; Range a -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.integral</span></span><span> </span><span class="annot"><span class="annottext">Range Integer
-</span><a href="#local-6989586621679181369"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><a href="#local-6989586621679181370"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-49"></span><span>  </span><span class="annot"><span class="annottext">Coin -&gt; m Coin
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">(Coin -&gt; m Coin) -&gt; Coin -&gt; m Coin
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Integer -&gt; Coin
 </span><span class="hs-identifier hs-var">Ledger.Coin</span></span><span> </span><span class="annot"><span class="annottext">Integer
-</span><a href="#local-6989586621679181368"><span class="hs-identifier hs-var">unCoin'</span></a></span><span>
+</span><a href="#local-6989586621679181369"><span class="hs-identifier hs-var">unCoin'</span></a></span><span>
 </span><span id="line-50"></span><span>
-</span><span id="line-51"></span><span id="local-6989586621679181406"><span class="annot"><a href="Gen.Cardano.Api.html#genLanguage"><span class="hs-identifier hs-type">genLanguage</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.Language</span></span></span><span>
+</span><span id="line-51"></span><span id="local-6989586621679181407"><span class="annot"><a href="Gen.Cardano.Api.html#genLanguage"><span class="hs-identifier hs-type">genLanguage</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181407"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181407"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.Language</span></span></span><span>
 </span><span id="line-52"></span><span id="genLanguage"><span class="annot"><span class="annottext">genLanguage :: m Language
 </span><a href="Gen.Cardano.Api.html#genLanguage"><span class="hs-identifier hs-var hs-var">genLanguage</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Language -&gt; m Language
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Language
 </span><span class="hs-identifier hs-var">Alonzo.PlutusV1</span></span><span>
 </span><span id="line-53"></span><span>
-</span><span id="line-54"></span><span id="local-6989586621679181404"><span class="annot"><a href="Gen.Cardano.Api.html#genPrices"><span class="hs-identifier hs-type">genPrices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181404"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181404"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.Prices</span></span></span><span>
+</span><span id="line-54"></span><span id="local-6989586621679181405"><span class="annot"><a href="Gen.Cardano.Api.html#genPrices"><span class="hs-identifier hs-type">genPrices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.Prices</span></span></span><span>
 </span><span id="line-55"></span><span id="genPrices"><span class="annot"><span class="annottext">genPrices :: m Prices
 </span><a href="Gen.Cardano.Api.html#genPrices"><span class="hs-identifier hs-var hs-var">genPrices</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-56"></span><span>  </span><span id="local-6989586621679181363"><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181363"><span class="hs-identifier hs-var">prMem'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
+</span><span id="line-56"></span><span>  </span><span id="local-6989586621679181364"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679181364"><span class="hs-identifier hs-var">prMem'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
 forall (m :: * -&gt; *). MonadGen m =&gt; Range Integer -&gt; m Coin
 </span><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-var">genCoin</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Range Integer
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span>
-</span><span id="line-57"></span><span>  </span><span id="local-6989586621679181362"><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181362"><span class="hs-identifier hs-var">prSteps'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
+</span><span id="line-57"></span><span>  </span><span id="local-6989586621679181363"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679181363"><span class="hs-identifier hs-var">prSteps'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
 forall (m :: * -&gt; *). MonadGen m =&gt; Range Integer -&gt; m Coin
 </span><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-var">genCoin</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Range Integer
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -223,25 +223,25 @@ forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-type">Alonzo.Prices</span></span><span>
 </span><span id="line-60"></span><span>    </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">prMem :: Coin
 </span><span class="hs-identifier hs-var">Alonzo.prMem</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181363"><span class="hs-identifier hs-var">prMem'</span></a></span><span>
+</span><a href="#local-6989586621679181364"><span class="hs-identifier hs-var">prMem'</span></a></span><span>
 </span><span id="line-61"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">prSteps :: Coin
 </span><span class="hs-identifier hs-var">Alonzo.prSteps</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181362"><span class="hs-identifier hs-var">prSteps'</span></a></span><span>
+</span><a href="#local-6989586621679181363"><span class="hs-identifier hs-var">prSteps'</span></a></span><span>
 </span><span id="line-62"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-63"></span><span>
-</span><span id="line-64"></span><span id="local-6989586621679181403"><span class="annot"><a href="Gen.Cardano.Api.html#genExUnits"><span class="hs-identifier hs-type">genExUnits</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181403"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181403"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.ExUnits</span></span></span><span>
+</span><span id="line-64"></span><span id="local-6989586621679181404"><span class="annot"><a href="Gen.Cardano.Api.html#genExUnits"><span class="hs-identifier hs-type">genExUnits</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181404"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181404"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.ExUnits</span></span></span><span>
 </span><span id="line-65"></span><span id="genExUnits"><span class="annot"><span class="annottext">genExUnits :: m ExUnits
 </span><a href="Gen.Cardano.Api.html#genExUnits"><span class="hs-identifier hs-var hs-var">genExUnits</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-66"></span><span>  </span><span id="local-6989586621679181357"><span class="annot"><span class="annottext">Word64
-</span><a href="#local-6989586621679181357"><span class="hs-identifier hs-var">exUnitsMem'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Word64 -&gt; m Word64
+</span><span id="line-66"></span><span>  </span><span id="local-6989586621679181358"><span class="annot"><span class="annottext">Word64
+</span><a href="#local-6989586621679181358"><span class="hs-identifier hs-var">exUnitsMem'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Word64 -&gt; m Word64
 forall (m :: * -&gt; *). MonadGen m =&gt; Range Word64 -&gt; m Word64
 </span><span class="hs-identifier hs-var">Gen.word64</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; Word64 -&gt; Range Word64
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Word64
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Word64
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span>
-</span><span id="line-67"></span><span>  </span><span id="local-6989586621679181355"><span class="annot"><span class="annottext">Word64
-</span><a href="#local-6989586621679181355"><span class="hs-identifier hs-var">exUnitsSteps'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Word64 -&gt; m Word64
+</span><span id="line-67"></span><span>  </span><span id="local-6989586621679181356"><span class="annot"><span class="annottext">Word64
+</span><a href="#local-6989586621679181356"><span class="hs-identifier hs-var">exUnitsSteps'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Word64 -&gt; m Word64
 forall (m :: * -&gt; *). MonadGen m =&gt; Range Word64 -&gt; m Word64
 </span><span class="hs-identifier hs-var">Gen.word64</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; Word64 -&gt; Range Word64
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -254,53 +254,53 @@ forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-type">Alonzo.ExUnits</span></span><span>
 </span><span id="line-69"></span><span>    </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">exUnitsMem :: Word64
 </span><span class="hs-identifier hs-var">Alonzo.exUnitsMem</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Word64
-</span><a href="#local-6989586621679181357"><span class="hs-identifier hs-var">exUnitsMem'</span></a></span><span>
+</span><a href="#local-6989586621679181358"><span class="hs-identifier hs-var">exUnitsMem'</span></a></span><span>
 </span><span id="line-70"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">exUnitsSteps :: Word64
 </span><span class="hs-identifier hs-var">Alonzo.exUnitsSteps</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Word64
-</span><a href="#local-6989586621679181355"><span class="hs-identifier hs-var">exUnitsSteps'</span></a></span><span>
+</span><a href="#local-6989586621679181356"><span class="hs-identifier hs-var">exUnitsSteps'</span></a></span><span>
 </span><span id="line-71"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-72"></span><span>
-</span><span id="line-73"></span><span id="local-6989586621679181405"><span class="annot"><a href="Gen.Cardano.Api.html#genCostModel"><span class="hs-identifier hs-type">genCostModel</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Range</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integer</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><a href="#local-6989586621679181405"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.CostModel</span></span></span><span>
+</span><span id="line-73"></span><span id="local-6989586621679181406"><span class="annot"><a href="Gen.Cardano.Api.html#genCostModel"><span class="hs-identifier hs-type">genCostModel</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Range</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Text</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Integer</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><a href="#local-6989586621679181406"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.CostModel</span></span></span><span>
 </span><span id="line-74"></span><span id="genCostModel"><span class="annot"><span class="annottext">genCostModel :: Range Int -&gt; m Text -&gt; m Integer -&gt; m CostModel
-</span><a href="Gen.Cardano.Api.html#genCostModel"><span class="hs-identifier hs-var hs-var">genCostModel</span></a></span></span><span> </span><span id="local-6989586621679181350"><span class="annot"><span class="annottext">Range Int
-</span><a href="#local-6989586621679181350"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679181349"><span class="annot"><span class="annottext">m Text
-</span><a href="#local-6989586621679181349"><span class="hs-identifier hs-var">gt</span></a></span></span><span> </span><span id="local-6989586621679181348"><span class="annot"><span class="annottext">m Integer
-</span><a href="#local-6989586621679181348"><span class="hs-identifier hs-var">gi</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-75"></span><span>  </span><span id="local-6989586621679181347"><span class="annot"><span class="annottext">Map Text Integer
-</span><a href="#local-6989586621679181347"><span class="hs-identifier hs-var">map'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m (Text, Integer) -&gt; m (Map Text Integer)
+</span><a href="Gen.Cardano.Api.html#genCostModel"><span class="hs-identifier hs-var hs-var">genCostModel</span></a></span></span><span> </span><span id="local-6989586621679181351"><span class="annot"><span class="annottext">Range Int
+</span><a href="#local-6989586621679181351"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679181350"><span class="annot"><span class="annottext">m Text
+</span><a href="#local-6989586621679181350"><span class="hs-identifier hs-var">gt</span></a></span></span><span> </span><span id="local-6989586621679181349"><span class="annot"><span class="annottext">m Integer
+</span><a href="#local-6989586621679181349"><span class="hs-identifier hs-var">gi</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-75"></span><span>  </span><span id="local-6989586621679181348"><span class="annot"><span class="annottext">Map Text Integer
+</span><a href="#local-6989586621679181348"><span class="hs-identifier hs-var">map'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m (Text, Integer) -&gt; m (Map Text Integer)
 forall (m :: * -&gt; *) k v.
 (MonadGen m, Ord k) =&gt;
 Range Int -&gt; m (k, v) -&gt; m (Map k v)
 </span><span class="hs-identifier hs-var">Gen.map</span></span><span> </span><span class="annot"><span class="annottext">Range Int
-</span><a href="#local-6989586621679181350"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="hs-special">,</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Text -&gt; Integer -&gt; (Text, Integer))
+</span><a href="#local-6989586621679181351"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="hs-special">,</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Text -&gt; Integer -&gt; (Text, Integer))
 -&gt; m Text -&gt; m (Integer -&gt; (Text, Integer))
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">m Text
-</span><a href="#local-6989586621679181349"><span class="hs-identifier hs-var">gt</span></a></span><span> </span><span class="annot"><span class="annottext">m (Integer -&gt; (Text, Integer)) -&gt; m Integer -&gt; m (Text, Integer)
+</span><a href="#local-6989586621679181350"><span class="hs-identifier hs-var">gt</span></a></span><span> </span><span class="annot"><span class="annottext">m (Integer -&gt; (Text, Integer)) -&gt; m Integer -&gt; m (Text, Integer)
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">m Integer
-</span><a href="#local-6989586621679181348"><span class="hs-identifier hs-var">gi</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679181349"><span class="hs-identifier hs-var">gi</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-76"></span><span>  </span><span class="annot"><span class="annottext">CostModel -&gt; m CostModel
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">(CostModel -&gt; m CostModel) -&gt; CostModel -&gt; m CostModel
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Map Text Integer -&gt; CostModel
 </span><span class="hs-identifier hs-var">Alonzo.CostModel</span></span><span> </span><span class="annot"><span class="annottext">Map Text Integer
-</span><a href="#local-6989586621679181347"><span class="hs-identifier hs-var">map'</span></a></span><span>
+</span><a href="#local-6989586621679181348"><span class="hs-identifier hs-var">map'</span></a></span><span>
 </span><span id="line-77"></span><span>
-</span><span id="line-78"></span><span id="local-6989586621679181344"><span class="annot"><a href="Gen.Cardano.Api.html#genAlonzoGenesis"><span class="hs-identifier hs-type">genAlonzoGenesis</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181344"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181344"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.AlonzoGenesis</span></span></span><span>
+</span><span id="line-78"></span><span id="local-6989586621679181345"><span class="annot"><a href="Gen.Cardano.Api.html#genAlonzoGenesis"><span class="hs-identifier hs-type">genAlonzoGenesis</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadGen</span></span><span> </span><span class="annot"><a href="#local-6989586621679181345"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679181345"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Alonzo.AlonzoGenesis</span></span></span><span>
 </span><span id="line-79"></span><span id="genAlonzoGenesis"><span class="annot"><span class="annottext">genAlonzoGenesis :: m AlonzoGenesis
 </span><a href="Gen.Cardano.Api.html#genAlonzoGenesis"><span class="hs-identifier hs-var hs-var">genAlonzoGenesis</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-80"></span><span>  </span><span id="local-6989586621679181343"><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181343"><span class="hs-identifier hs-var">coinsPerUTxOWord</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
+</span><span id="line-80"></span><span>  </span><span id="local-6989586621679181344"><span class="annot"><span class="annottext">Coin
+</span><a href="#local-6989586621679181344"><span class="hs-identifier hs-var">coinsPerUTxOWord</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Integer -&gt; m Coin
 forall (m :: * -&gt; *). MonadGen m =&gt; Range Integer -&gt; m Coin
 </span><a href="Gen.Cardano.Api.html#genCoin"><span class="hs-identifier hs-var">genCoin</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Integer -&gt; Integer -&gt; Range Integer
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">5</span></span><span class="hs-special">)</span><span>
-</span><span id="line-81"></span><span>  </span><span id="local-6989586621679181342"><span class="annot"><span class="annottext">Map Language CostModel
-</span><a href="#local-6989586621679181342"><span class="hs-identifier hs-var">costmdls'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m (Language, CostModel) -&gt; m (Map Language CostModel)
+</span><span id="line-81"></span><span>  </span><span id="local-6989586621679181343"><span class="annot"><span class="annottext">Map Language CostModel
+</span><a href="#local-6989586621679181343"><span class="hs-identifier hs-var">costmdls'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; m (Language, CostModel) -&gt; m (Map Language CostModel)
 forall (m :: * -&gt; *) k v.
 (MonadGen m, Ord k) =&gt;
 Range Int -&gt; m (k, v) -&gt; m (Map k v)
@@ -346,36 +346,36 @@ forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Integer
 </span><span class="hs-number">100</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-86"></span><span>  </span><span id="local-6989586621679181341"><span class="annot"><span class="annottext">Prices
-</span><a href="#local-6989586621679181341"><span class="hs-identifier hs-var">prices'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m Prices
+</span><span id="line-86"></span><span>  </span><span id="local-6989586621679181342"><span class="annot"><span class="annottext">Prices
+</span><a href="#local-6989586621679181342"><span class="hs-identifier hs-var">prices'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m Prices
 forall (m :: * -&gt; *). MonadGen m =&gt; m Prices
 </span><a href="Gen.Cardano.Api.html#genPrices"><span class="hs-identifier hs-var">genPrices</span></a></span><span>
-</span><span id="line-87"></span><span>  </span><span id="local-6989586621679181340"><span class="annot"><span class="annottext">ExUnits
-</span><a href="#local-6989586621679181340"><span class="hs-identifier hs-var">maxTxExUnits'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m ExUnits
+</span><span id="line-87"></span><span>  </span><span id="local-6989586621679181341"><span class="annot"><span class="annottext">ExUnits
+</span><a href="#local-6989586621679181341"><span class="hs-identifier hs-var">maxTxExUnits'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m ExUnits
 forall (m :: * -&gt; *). MonadGen m =&gt; m ExUnits
 </span><a href="Gen.Cardano.Api.html#genExUnits"><span class="hs-identifier hs-var">genExUnits</span></a></span><span>
-</span><span id="line-88"></span><span>  </span><span id="local-6989586621679181339"><span class="annot"><span class="annottext">ExUnits
-</span><a href="#local-6989586621679181339"><span class="hs-identifier hs-var">maxBlockExUnits'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m ExUnits
+</span><span id="line-88"></span><span>  </span><span id="local-6989586621679181340"><span class="annot"><span class="annottext">ExUnits
+</span><a href="#local-6989586621679181340"><span class="hs-identifier hs-var">maxBlockExUnits'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m ExUnits
 forall (m :: * -&gt; *). MonadGen m =&gt; m ExUnits
 </span><a href="Gen.Cardano.Api.html#genExUnits"><span class="hs-identifier hs-var">genExUnits</span></a></span><span>
-</span><span id="line-89"></span><span>  </span><span id="local-6989586621679181338"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181338"><span class="hs-identifier hs-var">maxValSize'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
+</span><span id="line-89"></span><span>  </span><span id="local-6989586621679181339"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679181339"><span class="hs-identifier hs-var">maxValSize'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
 forall (m :: * -&gt; *) a. (MonadGen m, Integral a) =&gt; Range a -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.integral</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Range Natural
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span>
-</span><span id="line-90"></span><span>  </span><span id="local-6989586621679181337"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181337"><span class="hs-identifier hs-var">collateralPercentage'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
+</span><span id="line-90"></span><span>  </span><span id="local-6989586621679181338"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679181338"><span class="hs-identifier hs-var">collateralPercentage'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
 forall (m :: * -&gt; *) a. (MonadGen m, Integral a) =&gt; Range a -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.integral</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Range Natural
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
 </span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span>
-</span><span id="line-91"></span><span>  </span><span id="local-6989586621679181336"><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181336"><span class="hs-identifier hs-var">maxCollateralInputs'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
+</span><span id="line-91"></span><span>  </span><span id="local-6989586621679181337"><span class="annot"><span class="annottext">Natural
+</span><a href="#local-6989586621679181337"><span class="hs-identifier hs-var">maxCollateralInputs'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Range Natural -&gt; m Natural
 forall (m :: * -&gt; *) a. (MonadGen m, Integral a) =&gt; Range a -&gt; m a
 </span><span class="hs-identifier hs-var">Gen.integral</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Range Natural
 forall a. Integral a =&gt; a -&gt; a -&gt; Range a
@@ -397,27 +397,27 @@ forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-type">Alonzo.AlonzoGenesis</span></span><span>
 </span><span id="line-94"></span><span>    </span><span class="hs-special">{</span><span> </span><span class="annot"><span class="annottext">coinsPerUTxOWord :: Coin
 </span><span class="hs-identifier hs-var">Alonzo.coinsPerUTxOWord</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Coin
-</span><a href="#local-6989586621679181343"><span class="hs-identifier hs-var">coinsPerUTxOWord</span></a></span><span>
+</span><a href="#local-6989586621679181344"><span class="hs-identifier hs-var">coinsPerUTxOWord</span></a></span><span>
 </span><span id="line-95"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">costmdls :: Map Language CostModel
 </span><span class="hs-identifier hs-var">Alonzo.costmdls</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Map Language CostModel
-</span><a href="#local-6989586621679181342"><span class="hs-identifier hs-var">costmdls'</span></a></span><span>
+</span><a href="#local-6989586621679181343"><span class="hs-identifier hs-var">costmdls'</span></a></span><span>
 </span><span id="line-96"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">prices :: Prices
 </span><span class="hs-identifier hs-var">Alonzo.prices</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Prices
-</span><a href="#local-6989586621679181341"><span class="hs-identifier hs-var">prices'</span></a></span><span>
+</span><a href="#local-6989586621679181342"><span class="hs-identifier hs-var">prices'</span></a></span><span>
 </span><span id="line-97"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">maxTxExUnits :: ExUnits
 </span><span class="hs-identifier hs-var">Alonzo.maxTxExUnits</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExUnits
-</span><a href="#local-6989586621679181340"><span class="hs-identifier hs-var">maxTxExUnits'</span></a></span><span>
+</span><a href="#local-6989586621679181341"><span class="hs-identifier hs-var">maxTxExUnits'</span></a></span><span>
 </span><span id="line-98"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">maxBlockExUnits :: ExUnits
 </span><span class="hs-identifier hs-var">Alonzo.maxBlockExUnits</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExUnits
-</span><a href="#local-6989586621679181339"><span class="hs-identifier hs-var">maxBlockExUnits'</span></a></span><span>
+</span><a href="#local-6989586621679181340"><span class="hs-identifier hs-var">maxBlockExUnits'</span></a></span><span>
 </span><span id="line-99"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">maxValSize :: Natural
 </span><span class="hs-identifier hs-var">Alonzo.maxValSize</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181338"><span class="hs-identifier hs-var">maxValSize'</span></a></span><span>
+</span><a href="#local-6989586621679181339"><span class="hs-identifier hs-var">maxValSize'</span></a></span><span>
 </span><span id="line-100"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">collateralPercentage :: Natural
 </span><span class="hs-identifier hs-var">Alonzo.collateralPercentage</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181337"><span class="hs-identifier hs-var">collateralPercentage'</span></a></span><span>
+</span><a href="#local-6989586621679181338"><span class="hs-identifier hs-var">collateralPercentage'</span></a></span><span>
 </span><span id="line-101"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">maxCollateralInputs :: Natural
 </span><span class="hs-identifier hs-var">Alonzo.maxCollateralInputs</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural
-</span><a href="#local-6989586621679181336"><span class="hs-identifier hs-var">maxCollateralInputs'</span></a></span><span>
+</span><a href="#local-6989586621679181337"><span class="hs-identifier hs-var">maxCollateralInputs'</span></a></span><span>
 </span><span id="line-102"></span><span>    </span><span class="hs-special">}</span><span>
 </span><span id="line-103"></span></pre></body></html>

@@ -288,10 +288,12 @@ runBenchmark (ThreadName threadName) txCount tps = do
                        (btSubmission_ tracers)
                        (protocolToCodecConfig protocol)
                        networkMagic
+    walletScript :: forall era. IsShelleyBasedEra era => FundSet.Target -> WalletScript era
+    walletScript = benchmarkWalletScript walletRef txCount 2
 
     coreCall :: forall era. IsShelleyBasedEra era => AsType era -> ExceptT TxGenError IO AsyncBenchmarkControl
     coreCall eraProxy = Core.walletBenchmark (btTxSubmit_ tracers) (btN2N_ tracers) connectClient
-                                               threadName targets tps LogErrors eraProxy walletRef txCount
+                                               threadName targets tps LogErrors eraProxy txCount walletScript
   ret <- liftIO $ runExceptT $ case era of
     AnyCardanoEra AlonzoEra  -> coreCall AsAlonzoEra
     AnyCardanoEra MaryEra    -> coreCall AsMaryEra
@@ -341,8 +343,6 @@ initGlobalWallet networkId key ((txIn, outVal), skey) = do
   , _fundSigningKey = skey
   , _fundValidity = Confirmed
   }
-
-
 
 createChange :: Lovelace -> Int -> ActionM ()
 createChange value count = do

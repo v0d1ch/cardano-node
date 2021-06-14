@@ -479,8 +479,8 @@ walletBenchmark :: forall era. IsShelleyBasedEra era
   -> TPSRate
   -> SubmissionErrorPolicy
   -> AsType era
-  -> WalletRef
   -> NumberOfTxs
+  -> (FundSet.Target -> WalletScript era)
   -> ExceptT TxGenError IO AsyncBenchmarkControl
 walletBenchmark
   traceSubmit
@@ -491,8 +491,8 @@ walletBenchmark
   tpsRate
   errorPolicy
   _era
-  walletRef
   count
+  walletScript
   = liftIO $ do
   traceDebug "******* Tx generator, phase 2: pay to recipients *******"
 
@@ -509,11 +509,10 @@ walletBenchmark
   allAsyncs <- forM (zip reportRefs $ NE.toList remoteAddresses) $
     \(reportRef, remoteAddr) -> do
       let errorHandler = handleTxSubmissionClientError traceSubmit remoteAddr reportRef errorPolicy
-          walletScript = benchmarkWalletScript walletRef count 2 (FundSet.Target $ show remoteAddr)
           client = txSubmissionClient
                      traceN2N
                      traceSubmit
-                     (walletTxSource walletScript txSendQueue)
+                     (walletTxSource (walletScript (FundSet.Target $ show remoteAddr)) txSendQueue)
                      (submitSubmissionThreadStats reportRef)
       async $ handle errorHandler (connectClient remoteAddr client)
 

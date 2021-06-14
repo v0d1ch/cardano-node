@@ -8,11 +8,8 @@ import Prelude
 
 import qualified Data.ByteString.Char8 as BSC
 import Control.Monad.Trans.Except
-import Cardano.CLI.Shelley.Script
-  ( ScriptDecodeError (..)
-  , deserialiseScriptInAnyLang
-  , readFileScriptInAnyLang
-  )
+
+import Cardano.CLI.Shelley.Script (readFileScriptInAnyLang)
 
 import Cardano.Api
 import Cardano.Benchmarking.FundSet

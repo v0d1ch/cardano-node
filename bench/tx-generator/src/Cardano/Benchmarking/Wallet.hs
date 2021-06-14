@@ -137,10 +137,22 @@ benchmarkTransaction :: forall era. IsShelleyBasedEra era
   -> Int
   -> Target
   -> Either String (Wallet, Tx era)
-benchmarkTransaction wallet numInputs targetNode = do
+benchmarkTransaction wallet numInputs targetNode =
+  walletTransaction wallet numInputs targetNode fundsToTx
+ where
+  fundsToTx w inputFunds outValues
+    = genTx (walletKey w) (walletNetworkId w) inputFunds outValues
+
+walletTransaction :: forall era. IsShelleyBasedEra era
+  => Wallet
+  -> Int
+  -> Target
+  -> (Wallet -> [Fund] -> [Lovelace] -> Either String (Tx era, TxId) )
+  -> Either String (Wallet, Tx era)
+walletTransaction wallet numInputs targetNode fundsToTx = do
   inputFunds <- findInputFunds (walletFunds wallet) targetNode
   let outValues = map getFundLovelace inputFunds
-  (tx, txId) <- genTx (walletKey wallet) (walletNetworkId wallet) inputFunds outValues
+  (tx, txId) <- fundsToTx wallet inputFunds outValues
   let
     newFunds = zipWith (mkNewFund txId) [TxIx 0 ..] outValues
     newWallet = (walletUpdateFunds wallet newFunds inputFunds) {walletSeqNumber = newSeqNumber}

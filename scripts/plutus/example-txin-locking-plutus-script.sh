@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -x
 set -e
 # Unoffiical bash strict mode.
 # See: http://redsymbol.net/articles/unofficial-bash-strict-mode/
@@ -29,14 +30,14 @@ utxoaddr=$(cardano-cli address build --testnet-magic 42 --payment-verification-k
 utxo=$(cardano-cli query utxo --address $utxoaddr --cardano-mode --testnet-magic 42 --out-file example/work/utxo.json)
 
 txin=$(jq -r 'keys[]' example/work/utxo.json)
-
+#100000000000000
 cardano-cli transaction build-raw \
   --alonzo-era \
   --fee 0 \
   --tx-in $txin \
-  --tx-out $plutusscriptaddr+500000000 \
+  --tx-out $plutusscriptaddr+50000000000000 \
   --tx-out-datum-hash 9e1199a988ba72ffd6e9c269cadb3b53b5f360ff99f112d9b2ee30c4d74ad88b \
-  --tx-out $utxoaddr+500000000 \
+  --tx-out $utxoaddr+50000000000000 \
   --out-file example/work/create-datum-output.body
 
 cardano-cli transaction sign \
@@ -49,7 +50,7 @@ cardano-cli transaction sign \
 cardano-cli transaction submit --tx-file example/work/create-datum-output.tx --testnet-magic 42
 
 echo "Pausing for 5 seconds..."
-sleep 5
+sleep 60
 
 # Step 2
 # After "locking" the tx output at the script address, we can now can attempt to spend
@@ -76,9 +77,15 @@ cardano-cli transaction build-raw \
   --fee 400000000 \
   --tx-in $plutusutxotxin \
   --tx-in-collateral $txinCollateral \
+<<<<<<< Updated upstream
   --tx-out "$dummyaddress+100000000" \
   --tx-in-script-file $plutusscriptinuse \
   --tx-in-datum-value 42 \
+=======
+  --tx-out $utxoaddr+50000000000000 \
+  --tx-in-script-file ./scripts/plutus/always-succeeds-txin.plutus \
+  --datum-value 42 \
+>>>>>>> Stashed changes
   --protocol-params-file example/pparams.json\
   --tx-in-redeemer-value 42 \
   --tx-in-execution-units "(200000000,200000000)" \

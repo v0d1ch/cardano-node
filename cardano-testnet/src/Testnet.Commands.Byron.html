@@ -22,7 +22,7 @@
 </span><a href="Testnet.Commands.Byron.html#maybeTestnetMagic"><span class="hs-identifier hs-var hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
 </span><span id="line-22"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="testnetOptions"><span class="annot"><span class="annottext">ByronOptions -&gt; TestnetOptions
 </span><a href="Testnet.Commands.Byron.html#testnetOptions"><span class="hs-identifier hs-var hs-var">testnetOptions</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Testnet.Byron.html#TestnetOptions"><span class="hs-identifier hs-type">TestnetOptions</span></a></span><span>
-</span><span id="line-23"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679094230"><span id="local-6989586621679094232"><span class="annot"><span class="annottext">ByronOptions -&gt; ByronOptions -&gt; Bool
+</span><span id="line-23"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679094258"><span id="local-6989586621679094260"><span class="annot"><span class="annottext">ByronOptions -&gt; ByronOptions -&gt; Bool
 (ByronOptions -&gt; ByronOptions -&gt; Bool)
 -&gt; (ByronOptions -&gt; ByronOptions -&gt; Bool) -&gt; Eq ByronOptions
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -30,7 +30,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: ByronOptions -&gt; ByronOptions -&gt; Bool
 == :: ByronOptions -&gt; ByronOptions -&gt; Bool
 $c== :: ByronOptions -&gt; ByronOptions -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094223"><span id="local-6989586621679094225"><span id="local-6989586621679094227"><span class="annot"><span class="annottext">Int -&gt; ByronOptions -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679094251"><span id="local-6989586621679094253"><span id="local-6989586621679094255"><span class="annot"><span class="annottext">Int -&gt; ByronOptions -&gt; ShowS
 [ByronOptions] -&gt; ShowS
 ByronOptions -&gt; String
 (Int -&gt; ByronOptions -&gt; ShowS)
@@ -301,15 +301,15 @@ forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
 </span><span id="line-73"></span><span>
 </span><span id="line-74"></span><span class="annot"><a href="Testnet.Commands.Byron.html#runByronOptions"><span class="hs-identifier hs-type">runByronOptions</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Testnet.Commands.Byron.html#ByronOptions"><span class="hs-identifier hs-type">ByronOptions</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-75"></span><span id="runByronOptions"><span class="annot"><span class="annottext">runByronOptions :: ByronOptions -&gt; IO ()
-</span><a href="Testnet.Commands.Byron.html#runByronOptions"><span class="hs-identifier hs-var hs-var">runByronOptions</span></a></span></span><span> </span><span id="local-6989586621679094203"><span class="annot"><span class="annottext">ByronOptions
-</span><a href="#local-6989586621679094203"><span class="hs-identifier hs-var">opts</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; (Conf -&gt; Integration [String]) -&gt; IO ()
+</span><a href="Testnet.Commands.Byron.html#runByronOptions"><span class="hs-identifier hs-var hs-var">runByronOptions</span></a></span></span><span> </span><span id="local-6989586621679094231"><span class="annot"><span class="annottext">ByronOptions
+</span><a href="#local-6989586621679094231"><span class="hs-identifier hs-var">opts</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; (Conf -&gt; Integration [String]) -&gt; IO ()
 forall a. Maybe Int -&gt; (Conf -&gt; Integration a) -&gt; IO ()
 </span><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-var">runTestnet</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ByronOptions -&gt; Maybe Int
 </span><a href="Testnet.Commands.Byron.html#maybeTestnetMagic"><span class="hs-identifier hs-var hs-var">maybeTestnetMagic</span></a></span><span> </span><span class="annot"><span class="annottext">ByronOptions
-</span><a href="#local-6989586621679094203"><span class="hs-identifier hs-var">opts</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Conf -&gt; Integration [String]
+</span><a href="#local-6989586621679094231"><span class="hs-identifier hs-var">opts</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Conf -&gt; Integration [String]
 </span><a href="Testnet.Byron.html#testnet"><span class="hs-identifier hs-var">Testnet.Byron.testnet</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ByronOptions -&gt; TestnetOptions
 </span><a href="Testnet.Commands.Byron.html#testnetOptions"><span class="hs-identifier hs-var hs-var">testnetOptions</span></a></span><span> </span><span class="annot"><span class="annottext">ByronOptions
-</span><a href="#local-6989586621679094203"><span class="hs-identifier hs-var">opts</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679094231"><span class="hs-identifier hs-var">opts</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-76"></span><span>
 </span><span id="line-77"></span><span class="annot"><a href="Testnet.Commands.Byron.html#cmdByron"><span class="hs-identifier hs-type">cmdByron</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Mod</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CommandFields</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-78"></span><span id="cmdByron"><span class="annot"><span class="annottext">cmdByron :: Mod CommandFields (IO ())

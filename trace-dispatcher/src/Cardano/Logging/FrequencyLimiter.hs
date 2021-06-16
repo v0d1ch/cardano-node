@@ -49,7 +49,7 @@ instance LogFormatting LimitingMessage where
         , "numSuppressed" .= Number (fromIntegral num)
         ]
   asMetrics (StartLimiting _txt) = []
-  asMetrics (StopLimiting txt num) = [IntM (Just ("SuppressedMessages " <> txt))
+  asMetrics (StopLimiting txt num) = [IntM ["SuppressedMessages " <> txt]
                                         (fromIntegral num)]
 
 data FrequencyRec a = FrequencyRec {

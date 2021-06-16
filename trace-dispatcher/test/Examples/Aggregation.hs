@@ -28,8 +28,8 @@ instance A.ToJSON BaseStats where
 instance LogFormatting BaseStats where
   forMachine = mempty
   asMetrics BaseStats {..} =
-    [ DoubleM (Just "measure") bsMeasure
-    , DoubleM (Just "sum") bsSum]
+    [ DoubleM ["measure"] bsMeasure
+    , DoubleM ["sum"] bsSum]
 
 baseStatsDocumented :: Documented Double
 baseStatsDocumented =

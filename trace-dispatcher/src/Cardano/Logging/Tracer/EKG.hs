@@ -32,11 +32,9 @@ ekgTracer storeOrServer = liftIO $ do
     output _ _ (LoggingContext{}, Just _c, _v) =
       pure ()
 
-    setIt registeredGauges _registeredLabels namespace (IntM mbText theInt) = do
+    setIt registeredGauges _registeredLabels _namespace (IntM ns theInt) = do
       registeredMap <- readIORef registeredGauges
-      let name = case mbText of
-                    Nothing -> intercalate "." namespace
-                    Just t  -> intercalate "." (t : namespace)
+      let name = intercalate "." ns
       case Map.lookup name registeredMap of
         Just gauge -> Gauge.set gauge (fromIntegral theInt)
         Nothing -> do
@@ -46,11 +44,9 @@ ekgTracer storeOrServer = liftIO $ do
           let registeredGauges' = Map.insert name gauge registeredMap
           writeIORef registeredGauges registeredGauges'
           Gauge.set gauge (fromIntegral theInt)
-    setIt _registeredGauges registeredLabels namespace (DoubleM mbText theDouble) = do
+    setIt _registeredGauges registeredLabels _namespace (DoubleM ns theDouble) = do
       registeredMap <- readIORef registeredLabels
-      let name = case mbText of
-                    Nothing -> intercalate "." namespace
-                    Just t  -> intercalate "." (t : namespace)
+      let name = intercalate "." ns
       case Map.lookup name registeredMap of
         Just label -> Label.set label ((pack . show) theDouble)
         Nothing -> do

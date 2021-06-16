@@ -174,8 +174,7 @@ setPrivacy p (Trace tr) = Trace $
 withPrivacy :: Monad m => (a -> Privacy) -> Trace m a -> Trace m a
 withPrivacy fs (Trace tr) = Trace $
     T.contramap
-      (\
-        (lc, mbC, e) -> if isJust (lcPrivacy lc)
+      (\ (lc, mbC, e) -> if isJust (lcPrivacy lc)
                             then (lc, mbC, e)
                             else (lc {lcPrivacy = Just (fs e)}, mbC, e))
       tr

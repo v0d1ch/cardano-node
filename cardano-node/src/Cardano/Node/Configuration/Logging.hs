@@ -161,7 +161,7 @@ createLoggingLayer
   -> SomeConsensusProtocol
   -> NL.Trace IO NL.FormattedMessage
   -> ExceptT ConfigError IO LoggingLayer
-createLoggingLayer topt ver nodeConfig' p ntrace = do
+createLoggingLayer topt ver nodeConfig' p _ntrace = do
   logConfig <- loggingCLIConfiguration $
     if ncLoggingSwitch nodeConfig'
     -- Re-interpret node config again, as logging 'Configuration':
@@ -252,7 +252,7 @@ createLoggingLayer topt ver nodeConfig' p ntrace = do
 
      when (ncLogMetrics nodeConfig) $
        -- Record node metrics, if configured
-       startCapturingMetrics topt trace ntrace
+       startCapturingMetrics topt trace
 
    mkLogLayer :: Configuration -> Switchboard Text -> Maybe EKGDirect -> Trace IO Text -> LoggingLayer
    mkLogLayer logConfig switchBoard mbEkgDirect trace =
@@ -277,20 +277,11 @@ createLoggingLayer topt ver nodeConfig' p ntrace = do
 
    startCapturingMetrics :: TraceOptions
     -> Trace IO Text
-    -> NL.Trace IO NL.FormattedMessage
     -> IO ()
-   startCapturingMetrics (TraceDispatcher _) _tr trn = do
-      trn' <- NL.humanFormatter True "Cardano" trn
-      let trNs' = NL.appendName "Resources" $ NL.appendName "Node" trn'
-      let trNs  = {--withSeverityResources--} trNs'
-      void . Async.async . forever $ do
-        readResourceStats
-          >>= maybe (pure ())
-                (traceResourceStatsN trNs)
-        Conc.threadDelay 1000000 -- TODO:  make configurable
-                            -- in microseconds
+   startCapturingMetrics (TraceDispatcher _) _tr = do
+      pure ()
 
-   startCapturingMetrics _ tr _trn = do
+   startCapturingMetrics _ tr = do
      void . Async.async . forever $ do
        readResourceStats
          >>= maybe (pure ())
@@ -310,18 +301,6 @@ createLoggingLayer topt ver nodeConfig' p ntrace = do
      traceCounter "RTS.gcticks"      tr . fromIntegral $ rCentiGC rs
      traceCounter "RTS.mutticks"     tr . fromIntegral $ rCentiMut rs
      traceCounter "Stat.threads"     tr . fromIntegral $ rThreads rs
-
-   traceResourceStatsN :: NL.Trace IO Integer -> ResourceStats -> IO ()
-   traceResourceStatsN tr rs = do
-     NL.traceNamed tr "Stat.Cputicks"    (fromIntegral $ rCentiCpu rs)
-     NL.traceNamed tr "Mem.Resident"     (fromIntegral $ rRSS rs)
-     NL.traceNamed tr "RTS.GcLiveBytes"  (fromIntegral $ rLive rs)
-     NL.traceNamed tr "RTS.GcMajorNum"   (fromIntegral $ rGcsMajor rs)
-     NL.traceNamed tr "RTS.GcMinorNum"   (fromIntegral $ rGcsMinor rs)
-     NL.traceNamed tr "RTS.Gcticks"      (fromIntegral $ rCentiGC rs)
-     NL.traceNamed tr "RTS.Mutticks"     (fromIntegral $ rCentiMut rs)
-     NL.traceNamed tr "Stat.Threads"     (fromIntegral $ rThreads rs)
-
 
 traceCounter
   :: Text

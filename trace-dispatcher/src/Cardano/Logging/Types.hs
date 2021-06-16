@@ -8,7 +8,8 @@
 
 
 module Cardano.Logging.Types (
-    LogFormatting(..)
+    Trace(..)
+  , LogFormatting(..)
   , Metric(..)
   , mkObject
   , emptyObject
@@ -16,7 +17,6 @@ module Cardano.Logging.Types (
   , DocMsg(..)
   , LoggingContext(..)
   , emptyLoggingContext
-  , Trace(..)
   , Namespace
   , DetailLevel(..)
   , Privacy(..)
@@ -93,11 +93,11 @@ class LogFormatting a where
 
 data Metric
   -- | An integer metric.
-  -- If a text is given it is appended as last element to the namespace
-    = IntM (Maybe Text) Integer
+  -- If the text array is not empty is appended as last elements to the namespace
+    = IntM [Text] Integer
   -- | A double metric.
-  -- If a text is given it is appended as last element to the namespace
-    | DoubleM (Maybe Text) Double
+  -- If the text array is not empty is appended as last elements to the namespace
+    | DoubleM [Text] Double
   deriving (Show, Eq)
 
 -- | A helper function for creating an |Object| given a list of pairs, named items,
@@ -305,14 +305,14 @@ instance LogFormatting b => LogFormatting (Folding a b) where
 instance LogFormatting Double where
   forMachine _dtal d = mkObject [ "val" .= AE.String ((pack . show) d)]
   forHuman d         = (pack . show) d
-  asMetrics d        = [DoubleM Nothing d]
+  asMetrics d        = [DoubleM [] d]
 
 instance LogFormatting Int where
   forMachine _dtal i = mkObject [ "val" .= AE.String ((pack . show) i)]
   forHuman i         = (pack . show) i
-  asMetrics i        = [IntM Nothing (fromIntegral i)]
+  asMetrics i        = [IntM [] (fromIntegral i)]
 
 instance LogFormatting Integer where
   forMachine _dtal i = mkObject [ "val" .= AE.String ((pack . show) i)]
   forHuman i         = (pack . show) i
-  asMetrics i        = [IntM Nothing i]
+  asMetrics i        = [IntM [] i]

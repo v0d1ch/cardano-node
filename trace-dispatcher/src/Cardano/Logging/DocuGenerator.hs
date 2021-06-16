@@ -145,16 +145,18 @@ documentMarkdown (Documented documented) tracers = do
                   (intersperse (singleton '\n')
                     (map
                       (\case
-                        (IntM mbT i) -> fromText "Integer metrics:\n"
-                          <> case mbT of
-                              Nothing -> mempty
-                              Just n -> asCode (fromText n <> singleton ' '
-                                        <> fromString (show i))
-                        (DoubleM mbT i) -> fromText "Double metrics:\n"
-                          <> case mbT of
-                              Nothing -> mempty
-                              Just n -> asCode (fromText n <> singleton ' '
-                                        <> fromString (show i)))
+                        (IntM ns i) ->
+                          fromText "Integer metrics:\n"
+                          <> asCode (mconcat $ intersperse (singleton '.')
+                                              (map fromText ns))
+                          <> singleton ' '
+                          <> fromString (show i)
+                        (DoubleM ns i) ->
+                          fromText "Double metrics:\n"
+                          <> asCode (mconcat $ intersperse (singleton '.')
+                                              (map fromText ns))
+                          <> singleton ' '
+                          <> fromString (show i))
                       l))
         ]
 
@@ -193,7 +195,7 @@ documentMarkdown (Documented documented) tracers = do
                             <> asCode "Metrics"
     backendFormatToText (be, FormattedHuman c _) = asCode (fromString (show be))
                             <> fromText " / "
-                            <> asCode ("Human" <> if c then "coloured" else "") 
+                            <> asCode ("Human" <> if c then "coloured" else "")
     backendFormatToText (be, FormattedMachine _) = asCode (fromString (show be))
                             <> fromText " / "
                             <> asCode "Machine"

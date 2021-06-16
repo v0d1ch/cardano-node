@@ -24,18 +24,20 @@ import           Network.Mux (MuxTrace (..), WithMuxBearer (..))
 import qualified Network.Socket as Socket
 
 import           Cardano.Logging
-import qualified "trace-dispatcher" Control.Tracer as NT
 import           Cardano.Prelude hiding (trace)
 import           Cardano.TraceDispatcher.ChainDB.Combinators
 import           Cardano.TraceDispatcher.ChainDB.Docu
-import           Cardano.TraceDispatcher.Era.ConvertTxId
-import           Cardano.TraceDispatcher.Formatting ()
 import           Cardano.TraceDispatcher.Consensus.Combinators
 import           Cardano.TraceDispatcher.Consensus.Docu
 import           Cardano.TraceDispatcher.Consensus.StateInfo
+import           Cardano.TraceDispatcher.Era.ConvertTxId
+import           Cardano.TraceDispatcher.Formatting ()
+import           Cardano.TraceDispatcher.Metrics (docResourceStats,
+                     startResourceTracer)
 import           Cardano.TraceDispatcher.Network.Combinators
 import           Cardano.TraceDispatcher.Network.Docu
 import           Cardano.TraceDispatcher.Network.Formatting ()
+import qualified "trace-dispatcher" Control.Tracer as NT
 
 
 import           Cardano.Node.Configuration.Logging (EKGDirect)
@@ -48,14 +50,13 @@ import           Cardano.Tracing.OrphanInstances.Common (ToObject)
 import           Cardano.Tracing.Tracers
 import           "contra-tracer" Control.Tracer (Tracer (..), nullTracer)
 
-import           Ouroboros.Consensus.Block (CannotForge, ForgeStateUpdateError,
-                     Point)
+import           Ouroboros.Consensus.Block (CannotForge, ForgeStateUpdateError)
 import           Ouroboros.Consensus.BlockchainTime.WallClock.Util
                      (TraceBlockchainTimeEvent (..))
 import           Ouroboros.Consensus.Byron.Ledger.Config (BlockConfig)
-import           Ouroboros.Consensus.Ledger.Query (Query)
 import           Ouroboros.Consensus.Ledger.Inspect (LedgerUpdate,
                      LedgerWarning)
+import           Ouroboros.Consensus.Ledger.Query (Query)
 import           Ouroboros.Consensus.Ledger.SupportsMempool (ApplyTxErr, GenTx,
                      GenTxId, HasTxId, HasTxs)
 import           Ouroboros.Consensus.Ledger.SupportsProtocol
@@ -78,7 +79,7 @@ import qualified Ouroboros.Consensus.Shelley.Protocol.HotKey as HotKey
 import qualified Ouroboros.Consensus.Storage.ChainDB as ChainDB
 import           Ouroboros.Consensus.Storage.Serialisation (SerialisedHeader)
 
-import           Ouroboros.Network.Block (Serialised, Tip)
+import           Ouroboros.Network.Block (Point (..), Serialised, Tip)
 import qualified Ouroboros.Network.BlockFetch.ClientState as BlockFetch
 import           Ouroboros.Network.BlockFetch.Decision
 import qualified Ouroboros.Network.Diffusion as ND
@@ -112,12 +113,12 @@ type Peer = NtN.ConnectionId Socket.SockAddr
 data MessageOrLimit m = Message m | Limit LimitingMessage
 
 instance (LogFormatting m) => LogFormatting (MessageOrLimit m) where
-  forMachine dtal (Message m)   = forMachine dtal m
-  forMachine dtal (Limit m)     = forMachine dtal m
-  forHuman (Message m)          = forHuman m
-  forHuman (Limit m)            = forHuman m
-  asMetrics (Message m)         = asMetrics m
-  asMetrics (Limit m)           = asMetrics m
+  forMachine dtal (Message m) = forMachine dtal m
+  forMachine dtal (Limit m)   = forMachine dtal m
+  forHuman (Message m) = forHuman m
+  forHuman (Limit m)   = forHuman m
+  asMetrics (Message m) = asMetrics m
+  asMetrics (Limit m)   = asMetrics m
 
 -- | Construct a tracer according to the requirements for cardano node.
 --
@@ -443,6 +444,12 @@ mkDispatchTracers _blockConfig (TraceDispatcher _trSel) _tr _nodeKern _ekgDirect
                 severityDiffusionInit
                 allPublic
                 trBase trForward mbTrEKG
+    rsTr   <- mkCardanoTracer
+                "Resources"
+                (\ _ -> [])
+                (\ _ -> Info)
+                allPublic
+                trBase trForward mbTrEKG
 
     configureTracers trConfig docChainDBTraceEvent    [cdbmTr]
     configureTracers trConfig docChainSyncClientEvent [cscTr]
@@ -478,7 +485,18 @@ mkDispatchTracers _blockConfig (TraceDispatcher _trSel) _tr _nodeKern _ekgDirect
     configureTracers trConfig docHandshake            [hsTr]
     configureTracers trConfig docLocalHandshake       [lhsTr]
     configureTracers trConfig docDiffusionInit        [diTr]
+    configureTracers trConfig docResourceStats        [rsTr]
 
+-- -- TODO JNF Code for debugging frequency limiting
+--     void . forkIO $
+--       sendContinously
+--         0.1
+--         cdbmTr
+--         (ChainDB.TraceOpenEvent
+--           (ChainDB.OpenedDB (Point Origin) (Point Origin)))
+-- -- End of  debugging code
+
+    startResourceTracer rsTr
 
     pure Tracers
       { chainDBTracer = Tracer (traceWith cdbmTr)
@@ -528,6 +546,17 @@ mkDispatchTracers _blockConfig (TraceDispatcher _trSel) _tr _nodeKern _ekgDirect
 mkDispatchTracers blockConfig tOpts tr nodeKern ekgDirect _ _ _ _ =
   mkTracers blockConfig tOpts tr nodeKern ekgDirect
 
+-- -- TODO JNF Code for debugging frequency limiting
+-- sendContinously ::
+--      Double
+--   -> Trace IO m
+--   -> m
+--   -> IO ()
+-- sendContinously delay tracer message = do
+--   threadDelay (round (delay * 1000000.0))
+--   traceWith tracer message
+--   sendContinously delay tracer message
+-- -- End of  debugging code
 
 docTracers :: forall blk t.
   ( Show t

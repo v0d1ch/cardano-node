@@ -54,4 +54,5 @@ instance ConvertRawHash blk
   forMachine dtal p = mkObject
         [ "kind" .= String "Point"
         , "slot" .= unSlotNo (realPointSlot p)
-        , "hash" .= renderHeaderHashForDetails (Proxy @blk) dtal (realPointHash p) ]
+        , "hash" .= renderHeaderHashForDetails (Proxy @blk) dtal (realPointHash p)
+        ]

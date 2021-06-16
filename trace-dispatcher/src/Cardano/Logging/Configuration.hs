@@ -38,6 +38,8 @@ import           Cardano.Logging.FrequencyLimiter (LimitingMessage (..),
 import           Cardano.Logging.Trace (filterTraceBySeverity, setDetails)
 import           Cardano.Logging.Types
 
+-- import           Debug.Trace
+
 -- | Call this function at initialisation, and later for reconfiguration
 configureTracers :: Monad m => TraceConfig -> Documented a -> [Trace m a]-> m ()
 configureTracers config (Documented documented) tracers = do
@@ -86,11 +88,13 @@ withNamespaceConfig name extract withConfig tr = do
                   T.traceWith (unpackTrace tt) (lc, Nothing, a)
         Left (_cmap, Nothing) -> error ("Missing configuration " <> name <> " ns " <> show (lcNamespace lc))
     mkTrace ref (lc, Just Reset, a) = do
+--      trace ("mkTrace Reset  " <> show (lcNamespace lc)) $ pure ()
       liftIO $ writeIORef ref (Left (Map.empty, Nothing))
       tt <- withConfig Nothing tr
       T.traceWith (unpackTrace tt) (lc, Just Reset, a)
 
     mkTrace ref (lc, Just (Config c), m) = do
+--      trace ("mkTrace Config  " <> show (lcNamespace lc)) $ pure ()
       ! val <- extract c (lcNamespace lc)
       eitherConf <- liftIO $ readIORef ref
       case eitherConf of
@@ -121,7 +125,7 @@ withNamespaceConfig name extract withConfig tr = do
           case nub (Map.elems cmap) of
             []     -> -- trace ("mkTrace Optimize empty " <> show (lcNamespace lc)) $
                       -- This will never be called!?
-                      pure ()
+                        pure ()
             [val]  -> do
                         -- trace ("mkTrace Optimize one "  <> show (lcNamespace lc)
                         --   <> " val " <> show val) $ pure ()
@@ -244,8 +248,8 @@ withLimitersFromConfig tr trl = do
         \case
           (lc, Nothing, v) -> do
             T.traceWith trli (lc, Nothing, v)
-          (lc, Just c, v) -> do
-            T.traceWith (tr' <> trli) (lc, Just c, v)
+          (lc, Just c, v) -> do -- TODO JNF assumes both traces unite again
+            T.traceWith tr' (lc, Just c, v)
 
 -- -----------------------------------------------------------------------------
 -- Configuration file

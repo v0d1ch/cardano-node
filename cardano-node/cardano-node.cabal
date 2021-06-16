@@ -86,6 +86,7 @@ library
                        Cardano.TraceDispatcher.Consensus.Formatting
                        Cardano.TraceDispatcher.Consensus.Combinators
                        Cardano.TraceDispatcher.Consensus.StateInfo
+                       Cardano.TraceDispatcher.Metrics
                        Cardano.TraceDispatcher.Network.Docu
                        Cardano.TraceDispatcher.Network.Formatting
                        Cardano.TraceDispatcher.Network.Combinators

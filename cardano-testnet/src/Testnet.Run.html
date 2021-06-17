@@ -24,9 +24,9 @@
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="annot"><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-type">testnetProperty</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Testnet.Conf.html#Conf"><span class="hs-identifier hs-type">H.Conf</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Property</span></span><span>
 </span><span id="line-26"></span><span id="testnetProperty"><span class="annot"><span class="annottext">testnetProperty :: Maybe Int -&gt; (Conf -&gt; Integration ()) -&gt; Property
-</span><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-var hs-var">testnetProperty</span></a></span></span><span> </span><span id="local-6989586621679099401"><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679099401"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679099400"><span class="annot"><span class="annottext">Conf -&gt; Integration ()
-</span><a href="#local-6989586621679099400"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HasCallStack =&gt; Integration () -&gt; Property
+</span><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-var hs-var">testnetProperty</span></a></span></span><span> </span><span id="local-6989586621679095683"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679095683"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679095682"><span class="annot"><span class="annottext">Conf -&gt; Integration ()
+</span><a href="#local-6989586621679095682"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HasCallStack =&gt; Integration () -&gt; Property
 Integration () -&gt; Property
 </span><a href="Test.Base.html#integration"><span class="hs-identifier hs-var">H.integration</span></a></span><span> </span><span class="annot"><span class="annottext">(Integration () -&gt; Property)
 -&gt; ((FilePath -&gt; Integration ()) -&gt; Integration ())
@@ -48,13 +48,13 @@ FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
 </span><span class="hs-string">&quot;chairman&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; Integration ()) -&gt; Property)
 -&gt; (FilePath -&gt; Integration ()) -&gt; Property
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679099395"><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679099395"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-27"></span><span>  </span><span id="local-6989586621679099394"><span class="annot"><span class="annottext">Conf
-</span><a href="#local-6989586621679099394"><span class="hs-identifier hs-var">conf</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Maybe Int -&gt; Integration Conf
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679095677"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679095677"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-27"></span><span>  </span><span id="local-6989586621679095676"><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679095676"><span class="hs-identifier hs-var">conf</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Maybe Int -&gt; Integration Conf
 </span><a href="Testnet.Conf.html#mkConf"><span class="hs-identifier hs-var">H.mkConf</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
-</span><a href="#local-6989586621679099395"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679099401"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span>
+</span><a href="#local-6989586621679095677"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679095683"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span>
 </span><span id="line-28"></span><span>
 </span><span id="line-29"></span><span>  </span><span class="hs-comment">-- Fork a thread to keep alive indefinitely any resources allocated by testnet.</span><span>
 </span><span id="line-30"></span><span>  </span><span class="annot"><span class="annottext">PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId
@@ -102,20 +102,20 @@ forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
 -&gt; Integration () -&gt; Integration ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Conf -&gt; Integration ()
-</span><a href="#local-6989586621679099400"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
-</span><a href="#local-6989586621679099394"><span class="hs-identifier hs-var">conf</span></a></span><span>
+</span><a href="#local-6989586621679095682"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679095676"><span class="hs-identifier hs-var">conf</span></a></span><span>
 </span><span id="line-33"></span><span>
 </span><span id="line-34"></span><span>  </span><span class="annot"><span class="annottext">Integration ()
 forall (m :: * -&gt; *) a. (MonadTest m, HasCallStack) =&gt; m a
 </span><span class="hs-identifier hs-var">H.failure</span></span><span> </span><span class="hs-comment">-- Intentional failure to force failure report</span><span>
 </span><span id="line-35"></span><span>
-</span><span id="line-36"></span><span id="local-6989586621679099385"><span class="annot"><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-type">runTestnet</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Testnet.Conf.html#Conf"><span class="hs-identifier hs-type">H.Conf</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="annot"><a href="#local-6989586621679099385"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
+</span><span id="line-36"></span><span id="local-6989586621679095667"><span class="annot"><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-type">runTestnet</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Testnet.Conf.html#Conf"><span class="hs-identifier hs-type">H.Conf</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="annot"><a href="#local-6989586621679095667"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
 </span><span id="line-37"></span><span id="runTestnet"><span class="annot"><span class="annottext">runTestnet :: Maybe Int -&gt; (Conf -&gt; Integration a) -&gt; IO ()
-</span><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-var hs-var">runTestnet</span></a></span></span><span> </span><span id="local-6989586621679099384"><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679099384"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679099383"><span class="annot"><span class="annottext">Conf -&gt; Integration a
-</span><a href="#local-6989586621679099383"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-38"></span><span>  </span><span id="local-6989586621679099382"><span class="annot"><span class="annottext">TVar Bool
-</span><a href="#local-6989586621679099382"><span class="hs-identifier hs-var">tvRunning</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; IO (TVar Bool)
+</span><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-var hs-var">runTestnet</span></a></span></span><span> </span><span id="local-6989586621679095666"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679095666"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679095665"><span class="annot"><span class="annottext">Conf -&gt; Integration a
+</span><a href="#local-6989586621679095665"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679095664"><span class="annot"><span class="annottext">TVar Bool
+</span><a href="#local-6989586621679095664"><span class="hs-identifier hs-var">tvRunning</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; IO (TVar Bool)
 forall a. a -&gt; IO (TVar a)
 </span><span class="hs-identifier hs-var">STM.newTVarIO</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
@@ -130,19 +130,19 @@ forall (m :: * -&gt; *). MonadIO m =&gt; Property -&gt; m Bool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; (Conf -&gt; Integration ()) -&gt; Property
 </span><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-var">testnetProperty</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int
-</span><a href="#local-6989586621679099384"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span> </span><span class="annot"><span class="annottext">((Conf -&gt; Integration ()) -&gt; Property)
+</span><a href="#local-6989586621679095666"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span> </span><span class="annot"><span class="annottext">((Conf -&gt; Integration ()) -&gt; Property)
 -&gt; (Conf -&gt; Integration ()) -&gt; Property
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679099379"><span class="annot"><span class="annottext">Conf
-</span><a href="#local-6989586621679099379"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679095661"><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679095661"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-41"></span><span>    </span><span class="annot"><span class="annottext">Integration a -&gt; Integration ()
 forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
 </span><span class="hs-identifier hs-var">void</span></span><span> </span><span class="annot"><span class="annottext">(Integration a -&gt; Integration ())
 -&gt; Integration a -&gt; Integration ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Conf -&gt; Integration a
-</span><a href="#local-6989586621679099383"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
-</span><a href="#local-6989586621679099379"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679095665"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679095661"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-42"></span><span>    </span><span class="annot"><span class="annottext">IO () -&gt; Integration ()
 forall (m :: * -&gt; *) a.
 (MonadTest m, MonadIO m, HasCallStack) =&gt;
@@ -157,17 +157,17 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">TVar Bool -&gt; Bool -&gt; STM ()
 forall a. TVar a -&gt; a -&gt; STM ()
 </span><span class="hs-identifier hs-var">STM.writeTVar</span></span><span> </span><span class="annot"><span class="annottext">TVar Bool
-</span><a href="#local-6989586621679099382"><span class="hs-identifier hs-var">tvRunning</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679095664"><span class="hs-identifier hs-var">tvRunning</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
 </span><span id="line-43"></span><span>
-</span><span id="line-44"></span><span>  </span><span id="local-6989586621679099375"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679099375"><span class="hs-identifier hs-var">running</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">TVar Bool -&gt; IO Bool
+</span><span id="line-44"></span><span>  </span><span id="local-6989586621679095657"><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679095657"><span class="hs-identifier hs-var">running</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">TVar Bool -&gt; IO Bool
 forall a. TVar a -&gt; IO a
 </span><span class="hs-identifier hs-var">STM.readTVarIO</span></span><span> </span><span class="annot"><span class="annottext">TVar Bool
-</span><a href="#local-6989586621679099382"><span class="hs-identifier hs-var">tvRunning</span></a></span><span>
+</span><a href="#local-6989586621679095664"><span class="hs-identifier hs-var">tvRunning</span></a></span><span>
 </span><span id="line-45"></span><span>
 </span><span id="line-46"></span><span>  </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679099375"><span class="hs-identifier hs-var">running</span></a></span><span>
+</span><a href="#local-6989586621679095657"><span class="hs-identifier hs-var">running</span></a></span><span>
 </span><span id="line-47"></span><span>    </span><span class="hs-keyword">then</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-48"></span><span>      </span><span class="annot"><span class="annottext">[SGR] -&gt; IO ()
 </span><span class="hs-identifier hs-var">ANSI.setSGR</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">ConsoleLayer -&gt; ColorIntensity -&gt; Color -&gt; SGR

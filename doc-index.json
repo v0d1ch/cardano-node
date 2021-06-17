@@ -8204,50 +8204,32 @@
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:ForkPoint\">ForkPoint</a><ul class=\"subs\"><li>= <a href=\"#v:AtVersion\">AtVersion</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li>| <a href=\"#v:AtEpoch\">AtEpoch</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li></ul>",
     "name": "ForkPoint AtVersion AtEpoch",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-node-chairman/Testnet-CardanoShelley.html#t:ForkPoint"
+    "module": "Testnet.Cardano",
+    "link": "cardano-node-chairman/Testnet-Cardano.html#t:ForkPoint"
   },
   {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:forkPoint\">forkPoint</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:ForkPoint\" title=\"Testnet.CardanoShelley\">ForkPoint</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions numBftNodes numPoolNodes activeSlotsCoeff epochLength forkPoint",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-node-chairman/Testnet-CardanoShelley.html#t:TestnetOptions"
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:era\">era</a> &#8759; <a href=\"Testnet-Cardano.html#t:Era\" title=\"Testnet.Cardano\">Era</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:slotLength\">slotLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li></ul>}",
+    "name": "TestnetOptions TestnetOptions era numBftNodes numPoolNodes epochLength slotLength activeSlotsCoeff",
+    "module": "Testnet.Cardano",
+    "link": "cardano-node-chairman/Testnet-Cardano.html#t:TestnetOptions"
   },
   {
-    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:TestnetOptions\" title=\"Testnet.CardanoShelley\">TestnetOptions</a>",
+    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-Cardano.html#t:TestnetOptions\" title=\"Testnet.Cardano\">TestnetOptions</a>",
     "name": "defaultTestnetOptions",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-node-chairman/Testnet-CardanoShelley.html#v:defaultTestnetOptions"
+    "module": "Testnet.Cardano",
+    "link": "cardano-node-chairman/Testnet-Cardano.html#v:defaultTestnetOptions"
   },
   {
-    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:TestnetOptions\" title=\"Testnet.CardanoShelley\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:String\" title=\"Distribution.Compat.Prelude.Internal\">String</a>]",
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:Era\">Era</a><ul class=\"subs\"><li>= <a href=\"#v:Byron\">Byron</a></li><li>| <a href=\"#v:Shelley\">Shelley</a></li><li>| <a href=\"#v:Allegra\">Allegra</a></li><li>| <a href=\"#v:Mary\">Mary</a></li><li>| <a href=\"#v:Alonzo\">Alonzo</a></li></ul>",
+    "name": "Era Mary Allegra Shelley Byron Alonzo",
+    "module": "Testnet.Cardano",
+    "link": "cardano-node-chairman/Testnet-Cardano.html#t:Era"
+  },
+  {
+    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-Cardano.html#t:TestnetOptions\" title=\"Testnet.Cardano\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:String\" title=\"Distribution.Compat.Prelude.Internal\">String</a>]",
     "name": "testnet",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-node-chairman/Testnet-CardanoShelley.html#v:testnet"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:ForkPoint\">ForkPoint</a><ul class=\"subs\"><li>= <a href=\"#v:AtVersion\">AtVersion</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li>| <a href=\"#v:AtEpoch\">AtEpoch</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li></ul>",
-    "name": "ForkPoint AtVersion AtEpoch",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-node-chairman/Testnet-CardanoAlonzo.html#t:ForkPoint"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:forkPoint\">forkPoint</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:ForkPoint\" title=\"Testnet.CardanoAlonzo\">ForkPoint</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions numBftNodes numPoolNodes activeSlotsCoeff epochLength forkPoint",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-node-chairman/Testnet-CardanoAlonzo.html#t:TestnetOptions"
-  },
-  {
-    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:TestnetOptions\" title=\"Testnet.CardanoAlonzo\">TestnetOptions</a>",
-    "name": "defaultTestnetOptions",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-node-chairman/Testnet-CardanoAlonzo.html#v:defaultTestnetOptions"
-  },
-  {
-    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:TestnetOptions\" title=\"Testnet.CardanoAlonzo\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:String\" title=\"Distribution.Compat.Prelude.Internal\">String</a>]",
-    "name": "testnet",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-node-chairman/Testnet-CardanoAlonzo.html#v:testnet"
+    "module": "Testnet.Cardano",
+    "link": "cardano-node-chairman/Testnet-Cardano.html#v:testnet"
   },
   {
     "display_html": "<a href=\"#v:dropNth\">dropNth</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a> &#8594; [a] &#8594; [a]",
@@ -8275,7 +8257,7 @@
   },
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numPraosNodes\">numPraosNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li><li><a href=\"#v:securityParam\">securityParam</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Int\" title=\"Distribution.Compat.Prelude.Internal\">Int</a></li><li><a href=\"#v:slotLength\">slotLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Double\" title=\"Distribution.Compat.Prelude.Internal\">Double</a></li><li><a href=\"#v:maxLovelaceSupply\">maxLovelaceSupply</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/Cabal-3.2.1.0/Distribution-Compat-Prelude-Internal.html#t:Integer\" title=\"Distribution.Compat.Prelude.Internal\">Integer</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions securityParam numPoolNodes activeSlotsCoeff epochLength slotLength maxLovelaceSupply numPraosNodes",
+    "name": "TestnetOptions TestnetOptions securityParam numPoolNodes epochLength slotLength activeSlotsCoeff maxLovelaceSupply numPraosNodes",
     "module": "Testnet.Shelley",
     "link": "cardano-node-chairman/Testnet-Shelley.html#t:TestnetOptions"
   },
@@ -8468,50 +8450,32 @@
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:ForkPoint\">ForkPoint</a><ul class=\"subs\"><li>= <a href=\"#v:AtVersion\">AtVersion</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li>| <a href=\"#v:AtEpoch\">AtEpoch</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li></ul>",
     "name": "ForkPoint AtVersion AtEpoch",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-testnet/Testnet-CardanoShelley.html#t:ForkPoint"
+    "module": "Testnet.Cardano",
+    "link": "cardano-testnet/Testnet-Cardano.html#t:ForkPoint"
   },
   {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:forkPoint\">forkPoint</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:ForkPoint\" title=\"Testnet.CardanoShelley\">ForkPoint</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions numBftNodes numPoolNodes activeSlotsCoeff epochLength forkPoint",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-testnet/Testnet-CardanoShelley.html#t:TestnetOptions"
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:era\">era</a> &#8759; <a href=\"Testnet-Cardano.html#t:Era\" title=\"Testnet.Cardano\">Era</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:slotLength\">slotLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li></ul>}",
+    "name": "TestnetOptions TestnetOptions numBftNodes numPoolNodes era epochLength slotLength activeSlotsCoeff",
+    "module": "Testnet.Cardano",
+    "link": "cardano-testnet/Testnet-Cardano.html#t:TestnetOptions"
   },
   {
-    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:TestnetOptions\" title=\"Testnet.CardanoShelley\">TestnetOptions</a>",
+    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-Cardano.html#t:TestnetOptions\" title=\"Testnet.Cardano\">TestnetOptions</a>",
     "name": "defaultTestnetOptions",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-testnet/Testnet-CardanoShelley.html#v:defaultTestnetOptions"
+    "module": "Testnet.Cardano",
+    "link": "cardano-testnet/Testnet-Cardano.html#v:defaultTestnetOptions"
   },
   {
-    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:TestnetOptions\" title=\"Testnet.CardanoShelley\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-String.html#t:String\" title=\"Data.String\">String</a>]",
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:Era\">Era</a><ul class=\"subs\"><li>= <a href=\"#v:Byron\">Byron</a></li><li>| <a href=\"#v:Shelley\">Shelley</a></li><li>| <a href=\"#v:Allegra\">Allegra</a></li><li>| <a href=\"#v:Mary\">Mary</a></li><li>| <a href=\"#v:Alonzo\">Alonzo</a></li></ul>",
+    "name": "Era Byron Shelley Allegra Mary Alonzo",
+    "module": "Testnet.Cardano",
+    "link": "cardano-testnet/Testnet-Cardano.html#t:Era"
+  },
+  {
+    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-Cardano.html#t:TestnetOptions\" title=\"Testnet.Cardano\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-String.html#t:String\" title=\"Data.String\">String</a>]",
     "name": "testnet",
-    "module": "Testnet.CardanoShelley",
-    "link": "cardano-testnet/Testnet-CardanoShelley.html#v:testnet"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:ForkPoint\">ForkPoint</a><ul class=\"subs\"><li>= <a href=\"#v:AtVersion\">AtVersion</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li>| <a href=\"#v:AtEpoch\">AtEpoch</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li></ul>",
-    "name": "ForkPoint AtVersion AtEpoch",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-CardanoAlonzo.html#t:ForkPoint"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numBftNodes\">numBftNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:forkPoint\">forkPoint</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:ForkPoint\" title=\"Testnet.CardanoAlonzo\">ForkPoint</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions numBftNodes numPoolNodes activeSlotsCoeff epochLength forkPoint",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-CardanoAlonzo.html#t:TestnetOptions"
-  },
-  {
-    "display_html": "<a href=\"#v:defaultTestnetOptions\">defaultTestnetOptions</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:TestnetOptions\" title=\"Testnet.CardanoAlonzo\">TestnetOptions</a>",
-    "name": "defaultTestnetOptions",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-CardanoAlonzo.html#v:defaultTestnetOptions"
-  },
-  {
-    "display_html": "<a href=\"#v:testnet\">testnet</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:TestnetOptions\" title=\"Testnet.CardanoAlonzo\">TestnetOptions</a> &#8594; <a href=\"Testnet-Conf.html#t:Conf\" title=\"Testnet.Conf\">Conf</a> &#8594; <a href=\"file:///home/runner/.cabal/store/ghc-8.10.4/hedgehog-extras-0.1.0.0-335bd418df0ef287731505d6a640cdc81b0364cf946a1498acc07d9a422cc21f/share/doc/html/Hedgehog-Extras-Internal-Test-Integration.html#t:Integration\" title=\"Hedgehog.Extras.Internal.Test.Integration\">Integration</a> [<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-String.html#t:String\" title=\"Data.String\">String</a>]",
-    "name": "testnet",
-    "module": "Testnet.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-CardanoAlonzo.html#v:testnet"
+    "module": "Testnet.Cardano",
+    "link": "cardano-testnet/Testnet-Cardano.html#v:testnet"
   },
   {
     "display_html": "<a href=\"#v:dropNth\">dropNth</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a> &#8594; [a] &#8594; [a]",
@@ -8544,40 +8508,22 @@
     "link": "cardano-testnet/Testnet-Run.html#v:runTestnet"
   },
   {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:CardanoShelleyOptions\">CardanoShelleyOptions</a> = <a href=\"#v:CardanoShelleyOptions\">CardanoShelleyOptions</a> {<ul class=\"subs\"><li><a href=\"#v:maybeTestnetMagic\">maybeTestnetMagic</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Maybe.html#t:Maybe\" title=\"Data.Maybe\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:testnetOptions\">testnetOptions</a> &#8759; <a href=\"Testnet-CardanoShelley.html#t:TestnetOptions\" title=\"Testnet.CardanoShelley\">TestnetOptions</a></li></ul>}",
-    "name": "CardanoShelleyOptions CardanoShelleyOptions testnetOptions maybeTestnetMagic",
-    "module": "Testnet.Commands.CardanoShelley",
-    "link": "cardano-testnet/Testnet-Commands-CardanoShelley.html#t:CardanoShelleyOptions"
+    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:CardanoOptions\">CardanoOptions</a> = <a href=\"#v:CardanoOptions\">CardanoOptions</a> {<ul class=\"subs\"><li><a href=\"#v:maybeTestnetMagic\">maybeTestnetMagic</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Maybe.html#t:Maybe\" title=\"Data.Maybe\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:testnetOptions\">testnetOptions</a> &#8759; <a href=\"Testnet-Cardano.html#t:TestnetOptions\" title=\"Testnet.Cardano\">TestnetOptions</a></li></ul>}",
+    "name": "CardanoOptions CardanoOptions testnetOptions maybeTestnetMagic",
+    "module": "Testnet.Commands.Cardano",
+    "link": "cardano-testnet/Testnet-Commands-Cardano.html#t:CardanoOptions"
   },
   {
-    "display_html": "<a href=\"#v:cmdCardanoShelley\">cmdCardanoShelley</a> &#8759; Mod CommandFields (<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ())",
-    "name": "cmdCardanoShelley",
-    "module": "Testnet.Commands.CardanoShelley",
-    "link": "cardano-testnet/Testnet-Commands-CardanoShelley.html#v:cmdCardanoShelley"
+    "display_html": "<a href=\"#v:cmdCardano\">cmdCardano</a> &#8759; Mod CommandFields (<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ())",
+    "name": "cmdCardano",
+    "module": "Testnet.Commands.Cardano",
+    "link": "cardano-testnet/Testnet-Commands-Cardano.html#v:cmdCardano"
   },
   {
-    "display_html": "<a href=\"#v:runCardanoShelleyOptions\">runCardanoShelleyOptions</a> &#8759; <a href=\"Testnet-Commands-CardanoShelley.html#t:CardanoShelleyOptions\" title=\"Testnet.Commands.CardanoShelley\">CardanoShelleyOptions</a> &#8594; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ()",
-    "name": "runCardanoShelleyOptions",
-    "module": "Testnet.Commands.CardanoShelley",
-    "link": "cardano-testnet/Testnet-Commands-CardanoShelley.html#v:runCardanoShelleyOptions"
-  },
-  {
-    "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:CardanoAlonzoOptions\">CardanoAlonzoOptions</a> = <a href=\"#v:CardanoAlonzoOptions\">CardanoAlonzoOptions</a> {<ul class=\"subs\"><li><a href=\"#v:maybeTestnetMagic\">maybeTestnetMagic</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Maybe.html#t:Maybe\" title=\"Data.Maybe\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:testnetOptions\">testnetOptions</a> &#8759; <a href=\"Testnet-CardanoAlonzo.html#t:TestnetOptions\" title=\"Testnet.CardanoAlonzo\">TestnetOptions</a></li></ul>}",
-    "name": "CardanoAlonzoOptions CardanoAlonzoOptions testnetOptions maybeTestnetMagic",
-    "module": "Testnet.Commands.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-Commands-CardanoAlonzo.html#t:CardanoAlonzoOptions"
-  },
-  {
-    "display_html": "<a href=\"#v:cmdCardanoAlonzo\">cmdCardanoAlonzo</a> &#8759; Mod CommandFields (<a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ())",
-    "name": "cmdCardanoAlonzo",
-    "module": "Testnet.Commands.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-Commands-CardanoAlonzo.html#v:cmdCardanoAlonzo"
-  },
-  {
-    "display_html": "<a href=\"#v:runCardanoAlonzoOptions\">runCardanoAlonzoOptions</a> &#8759; <a href=\"Testnet-Commands-CardanoAlonzo.html#t:CardanoAlonzoOptions\" title=\"Testnet.Commands.CardanoAlonzo\">CardanoAlonzoOptions</a> &#8594; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ()",
-    "name": "runCardanoAlonzoOptions",
-    "module": "Testnet.Commands.CardanoAlonzo",
-    "link": "cardano-testnet/Testnet-Commands-CardanoAlonzo.html#v:runCardanoAlonzoOptions"
+    "display_html": "<a href=\"#v:runCardanoOptions\">runCardanoOptions</a> &#8759; <a href=\"Testnet-Commands-Cardano.html#t:CardanoOptions\" title=\"Testnet.Commands.Cardano\">CardanoOptions</a> &#8594; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/System-IO.html#t:IO\" title=\"System.IO\">IO</a> ()",
+    "name": "runCardanoOptions",
+    "module": "Testnet.Commands.Cardano",
+    "link": "cardano-testnet/Testnet-Commands-Cardano.html#v:runCardanoOptions"
   },
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:ByronOptions\">ByronOptions</a> = <a href=\"#v:ByronOptions\">ByronOptions</a> {<ul class=\"subs\"><li><a href=\"#v:maybeTestnetMagic\">maybeTestnetMagic</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Maybe.html#t:Maybe\" title=\"Data.Maybe\">Maybe</a> <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:testnetOptions\">testnetOptions</a> &#8759; <a href=\"Testnet-Byron.html#t:TestnetOptions\" title=\"Testnet.Byron\">TestnetOptions</a></li></ul>}",
@@ -8599,7 +8545,7 @@
   },
   {
     "display_html": "<span class=\"keyword\">data</span> <a href=\"#t:TestnetOptions\">TestnetOptions</a> = <a href=\"#v:TestnetOptions\">TestnetOptions</a> {<ul class=\"subs\"><li><a href=\"#v:numPraosNodes\">numPraosNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:numPoolNodes\">numPoolNodes</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:activeSlotsCoeff\">activeSlotsCoeff</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li><li><a href=\"#v:securityParam\">securityParam</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:epochLength\">epochLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Data-Int.html#t:Int\" title=\"Data.Int\">Int</a></li><li><a href=\"#v:slotLength\">slotLength</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Double\" title=\"Prelude\">Double</a></li><li><a href=\"#v:maxLovelaceSupply\">maxLovelaceSupply</a> &#8759; <a href=\"file:///opt/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/Prelude.html#t:Integer\" title=\"Prelude\">Integer</a></li></ul>}",
-    "name": "TestnetOptions TestnetOptions numPoolNodes activeSlotsCoeff epochLength securityParam slotLength maxLovelaceSupply numPraosNodes",
+    "name": "TestnetOptions TestnetOptions numPoolNodes epochLength slotLength activeSlotsCoeff securityParam maxLovelaceSupply numPraosNodes",
     "module": "Testnet.Shelley",
     "link": "cardano-testnet/Testnet-Shelley.html#t:TestnetOptions"
   },

@@ -5,13 +5,16 @@ module Test.Cardano.Api.Typed.CBOR
   ( tests
   ) where
 
-import           Cardano.Api
-import           Gen.Cardano.Api.Typed
+import           Cardano.Prelude
+
 import           Gen.Hedgehog.Roundtrip.CBOR (roundtrip_CBOR)
 import           Gen.Tasty.Hedgehog.Group (fromGroup)
 import           Hedgehog (Property, discover)
 import           Test.Cardano.Api.Typed.Orphans ()
 import           Test.Tasty (TestTree)
+
+import           Cardano.Api
+import           Gen.Cardano.Api.Typed
 
 {- HLINT ignore "Use camelCase" -}
 
@@ -165,9 +168,29 @@ prop_roundtrip_script_PlutusScriptV1_CBOR =
   roundtrip_CBOR (AsScript AsPlutusScriptV1)
                  (genScript (PlutusScriptLanguage PlutusScriptV1))
 
-prop_roundtrip_UpdateProposal_CBOR :: Property
-prop_roundtrip_UpdateProposal_CBOR =
-  roundtrip_CBOR AsUpdateProposal genUpdateProposal
+roundtrip_UpdateProposal_CBOR :: CardanoEra era -> Property
+roundtrip_UpdateProposal_CBOR era =
+  roundtrip_CBOR AsUpdateProposal $ genUpdateProposal era
+
+prop_roundtrip_UpdateProposal_CBOR_Byron :: Property
+prop_roundtrip_UpdateProposal_CBOR_Byron =
+  roundtrip_UpdateProposal_CBOR ByronEra
+
+prop_roundtrip_UpdateProposal_CBOR_Shelley :: Property
+prop_roundtrip_UpdateProposal_CBOR_Shelley =
+  roundtrip_UpdateProposal_CBOR ShelleyEra
+
+prop_roundtrip_UpdateProposal_CBOR_Allegra :: Property
+prop_roundtrip_UpdateProposal_CBOR_Allegra =
+  roundtrip_UpdateProposal_CBOR AllegraEra
+
+prop_roundtrip_UpdateProposal_CBOR_Mary :: Property
+prop_roundtrip_UpdateProposal_CBOR_Mary =
+  roundtrip_UpdateProposal_CBOR MaryEra
+
+prop_roundtrip_UpdateProposal_CBOR_Alonzo :: Property
+prop_roundtrip_UpdateProposal_CBOR_Alonzo =
+  roundtrip_UpdateProposal_CBOR AlonzoEra
 
 -- -----------------------------------------------------------------------------
 

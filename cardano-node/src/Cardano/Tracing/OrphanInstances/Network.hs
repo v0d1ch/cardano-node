@@ -30,7 +30,7 @@ import           Network.TypedProtocol.Core (ClientHasAgency,
                      PeerHasAgency (..), ServerHasAgency)
 
 
-import           Network.Mux (MuxTrace (..), WithMuxBearer (..))
+import           Network.Mux (MuxTrace (..), WithMuxBearer (..), MiniProtocolNum (..))
 import qualified Network.Socket as Socket (SockAddr (..))
 
 import           Cardano.Tracing.ConvertTxId (ConvertTxId)
@@ -48,9 +48,10 @@ import qualified Ouroboros.Network.BlockFetch.ClientState as BlockFetch
 import           Ouroboros.Network.BlockFetch.Decision (FetchDecision, FetchDecline (..))
 import           Ouroboros.Network.ConnectionId (ConnectionId (..))
 import           Ouroboros.Network.ConnectionManager.Types (AbstractState (..),
-                     ConnectionManagerCounters (..))
+                     ConnectionManagerCounters (..), OperationResult (..) )
 import           Ouroboros.Network.Codec (AnyMessageAndAgency (..))
 import           Ouroboros.Network.DeltaQ (GSV (..), PeerGSV (..))
+import           Ouroboros.Network.Driver.Limits (ProtocolLimitFailure (..))
 import           Ouroboros.Network.KeepAlive (TraceKeepAliveClient (..))
 import qualified Ouroboros.Network.NodeToClient as NtC
 import           Ouroboros.Network.NodeToNode (ErrorPolicyTrace (..), TraceSendRecv (..),
@@ -61,7 +62,9 @@ import           Ouroboros.Network.PeerSelection.Governor
                      DebugPeerSelection (..))
 import qualified Ouroboros.Network.PeerSelection.KnownPeers as KnownPeers
 import           Ouroboros.Network.PeerSelection.LedgerPeers
+import           Ouroboros.Network.PeerSelection.LocalRootPeers (toMap, toGroupSets, LocalRootPeers)
 import qualified Ouroboros.Network.PeerSelection.EstablishedPeers as EstablishedPeers
+import           Ouroboros.Network.PeerSelection.Types (PeerStatus (..))
 import           Ouroboros.Network.Protocol.BlockFetch.Type (BlockFetch, Message (..))
 import           Ouroboros.Network.Protocol.ChainSync.Type (ChainSync)
 import qualified Ouroboros.Network.Protocol.ChainSync.Type as ChainSync
@@ -78,14 +81,16 @@ import           Ouroboros.Network.Subscription (ConnectResult (..), DnsTrace (.
                      WithIPList (..))
 import           Ouroboros.Network.TxSubmission.Inbound (TraceTxSubmissionInbound (..), ProcessedTxCount(..))
 import           Ouroboros.Network.TxSubmission.Outbound (TraceTxSubmissionOutbound (..))
-import           Ouroboros.Network.Diffusion (TraceLocalRootPeers, TracePublicRootPeers,
+import           Ouroboros.Network.Diffusion (TraceLocalRootPeers (..), TracePublicRootPeers (..),
                    TracePeerSelection (..), PeerSelectionActionsTrace (..),
                    ConnectionManagerTrace (..), ConnectionHandlerTrace (..),
-                   PeerSelectionCounters (..))
-import           Ouroboros.Network.Server2 (ServerTrace)
+                   PeerSelectionCounters (..), InboundGovernorCounters (..))
+import           Ouroboros.Network.Server2 (ServerTrace(..))
 import qualified Ouroboros.Network.Server2 as Server
-import           Ouroboros.Network.InboundGovernor (InboundGovernorTrace)
+import           Ouroboros.Network.InboundGovernor (InboundGovernorTrace(..))
 import qualified Ouroboros.Network.InboundGovernor as InboundGovernor
+import           Ouroboros.Network.Protocol.Handshake (HandshakeException(..),
+                   HandshakeProtocolError (..), RefuseReason (..))
 import           Ouroboros.Network.RethrowPolicy (ErrorCommand (..))
 
 import qualified Ouroboros.Network.Diffusion as ND
@@ -621,7 +626,7 @@ instance (Show addr, Show versionNumber, Show agreedOptions)
                             (ConnectionHandlerTrace versionNumber agreedOptions)) where
   formatText a _ = pack (show a)
 
-instance Show addr
+instance (Show addr, ToObject addr, ToJSON addr)
       => Transformable Text IO (ServerTrace addr) where
   trTransformer = trStructuredText
 instance Show addr
@@ -709,8 +714,6 @@ instance ( ToObject (AnyMessageAndAgency ps)
                      toObject verb
                        (AnyMessageAndAgency (ServerAgency tok) msg')
                  ]
-
-
 
 instance (forall result. Show (query result))
       => ToObject (AnyMessageAndAgency (LocalStateQuery blk pt query)) where
@@ -813,7 +816,7 @@ instance (Show txid, Show tx)
       , "agency" .= String (pack $ show stok)
       , "txs" .= String (pack $ show txs)
       ]
-  toObject _verb (AnyMessageAndAgency stok (MsgRequestTxIds _ _ _)) =
+  toObject _verb (AnyMessageAndAgency stok MsgRequestTxIds {}) =
     mkObject
       [ "kind" .= String "MsgRequestTxIds"
       , "agency" .= String (pack $ show stok)
@@ -842,7 +845,8 @@ instance Aeson.ToJSON ConnectionManagerCounters where
                                    , incomingConns
                                    , outgoingConns
                                    } =
-    Aeson.object [ "prunable"       .= toJSON prunableConns
+    Aeson.object [ "kind"           .= String "ConnectionManagerCounters"
+                 , "prunable"       .= toJSON prunableConns
                  , "duplex"         .= toJSON duplexConns
                  , "unidirectional" .= toJSON uniConns
                  , "incoming"       .= incomingConns
@@ -941,7 +945,9 @@ instance ToObject NtN.HandshakeTr where
 
 instance ToObject LocalAddress where
     toObject _verb addr =
-      mkObject [ "path" .= toJSON addr ]
+      mkObject [ "kind" .= String "LocalAddress"
+               , "path" .= toJSON addr
+               ]
 
 instance ToJSON LocalAddress where
     toJSON (LocalAddress path) = String (pack path)
@@ -1208,19 +1214,235 @@ instance (ToObject peer) => ToObject (WithMuxBearer peer MuxTrace) where
              , "event" .= show ev ]
 
 instance Show exception => ToObject (TraceLocalRootPeers exception) where
-  toObject _verb ev =
-    mkObject [ "kind" .= String "TraceLocalRootPeers"
-             , "event" .= show ev ]
+  toObject _verb (TraceLocalRootDomains groups) =
+    mkObject [ "kind" .= String "LocalRootDomains"
+             , "localRootDomains" .= show groups
+             ]
+  toObject _verb (TraceLocalRootWaiting d dt) =
+    mkObject [ "kind" .= String "LocalRootWaiting"
+             , "domainAddress" .= show d
+             , "diffTime" .= show dt
+             ]
+  toObject _verb (TraceLocalRootResult d res) =
+    mkObject [ "kind" .= String "LocalRootResult"
+             , "domainAddress" .= show d
+             , "result" .= show res
+             ]
+  toObject _verb (TraceLocalRootGroups groups) =
+    mkObject [ "kind" .= String "LocalRootGroups"
+             , "localRootGroups" .= show groups
+             ]
+  toObject _verb (TraceLocalRootFailure d dexception) =
+    mkObject [ "kind" .= String "LocalRootFailure"
+             , "domainAddress" .= show d
+             , "error" .= show dexception
+             ]
 
 instance ToObject TracePublicRootPeers where
-  toObject _verb ev =
-    mkObject [ "kind" .= String "TracePublicRootPeers"
-             , "event" .= show ev ]
+  toObject _verb (TracePublicRootRelayAddresses relays) =
+    mkObject [ "kind" .= String "PublicRootRelayAddresses"
+             , "relayAddresses" .= show relays
+             ]
+  toObject _verb (TracePublicRootDomains domains) =
+    mkObject [ "kind" .= String "PublicRootDomains"
+             , "domainAddresses" .= show domains
+             ]
+  toObject _verb (TracePublicRootResult b res) =
+    mkObject [ "kind" .= String "PublicRootResult"
+             , "domain" .= show b
+             , "result" .= show res
+             ]
+  toObject _verb (TracePublicRootFailure b d) =
+    mkObject [ "kind" .= String "PublicRootFailure"
+             , "domain" .= show b
+             , "error" .= show d
+             ]
+
+instance ToJSON PeerStatus where
+  toJSON PeerCold =
+    Aeson.object [ "kind" .= String "PeerStatus"
+                 , "status" .= String "PeerCold"
+                 ]
+  toJSON PeerWarm =
+    Aeson.object [ "kind" .= String "PeerStatus"
+                 , "status" .= String "PeerWarm"
+                 ]
+  toJSON PeerHot =
+    Aeson.object [ "kind" .= String "PeerStatus"
+                 , "status" .= String "PeerHot"
+                 ]
+
+instance Aeson.ToJSONKey Socket.SockAddr where
+
+instance (Aeson.ToJSONKey peerAddr, Show peerAddr)
+  => ToJSON (LocalRootPeers peerAddr) where
+  toJSON lrp =
+    Aeson.object [ "kind" .= String "LocalRootPeers"
+                 , "state" .= toJSON (toMap lrp)
+                 , "groups" .= show (toGroupSets lrp)
+                 ]
+
+instance ToJSON PeerSelectionTargets where
+  toJSON (PeerSelectionTargets i i2 i3 i4) =
+    Aeson.object [ "kind" .= String "PeerSelectionTargets"
+                 , "nRootPeers" .= i
+                 , "nKnownPeers" .= i2
+                 , "nEstablishedPeers" .= i3
+                 , "nActivePeers" .= i4
+                 ]
 
 instance ToObject (TracePeerSelection Socket.SockAddr) where
-  toObject _verb ev =
-    mkObject [ "kind" .= String "TracePeerSelection"
-             , "event" .= show ev ]
+  toObject _verb (TraceLocalRootPeersChanged lrp lrp') =
+    mkObject [ "kind" .= String "LocalRootPeersChanged"
+             , "previous" .= toJSON lrp
+             , "current" .= toJSON lrp'
+             ]
+  toObject _verb (TraceTargetsChanged pst pst') =
+    mkObject [ "kind" .= String "TargetsChanged"
+             , "previous" .= toJSON pst
+             , "current" .= toJSON pst'
+             ]
+  toObject _verb (TracePublicRootsRequest i i2) =
+    mkObject [ "kind" .= String "PublicRootsRequest"
+             , "value1" .= i
+             , "value2" .= i2
+             ]
+  toObject _verb (TracePublicRootsResults res i dt) =
+    mkObject [ "kind" .= String "PublicRootsResults"
+             , "result" .= res
+             , "group" .= i
+             , "diffTime" .= dt
+             ]
+  toObject _verb (TracePublicRootsFailure err i dt) =
+    mkObject [ "kind" .= String "PublicRootsFailure"
+             , "error" .= show err
+             , "group" .= i
+             , "diffTime" .= dt
+             ]
+  toObject _verb (TraceGossipRequests i i2 aps sps) =
+    mkObject [ "kind" .= String "GossipRequests"
+             , "targetKnown" .= i
+             , "actualKnown" .= i2
+             , "availablePeers" .= show aps
+             , "selectedPeers" .= show sps
+             ]
+  toObject _verb (TraceGossipResults res) =
+    mkObject [ "kind" .= String "GossipResults"
+             , "result" .= show res
+             ]
+  toObject _verb (TraceForgetColdPeers i i2 sp) =
+    mkObject [ "kind" .= String "ForgeColdPeers"
+             , "targetKnown" .= i
+             , "actualKnown" .= i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TracePromoteColdPeers i i2 sp) =
+    mkObject [ "kind" .= String "PromoteColdPeers"
+             , "targetEstablished" .= i
+             , "actualEstablished" .= i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TracePromoteColdLocalPeers i i2 sp) =
+    mkObject [ "kind" .= String "PromoteColdLocalPeers"
+             , "targetLocalEstablished" .= i
+             , "actualLocalEstablished" .= i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TracePromoteColdFailed i i2 p d err) =
+    mkObject [ "kind" .= String "PromoteColdFailed"
+             , "targetEstablished" .= i
+             , "actualEstablished" .= i2
+             , "peer" .= show p
+             , "delay" .= show d
+             , "error" .= show err
+             ]
+  toObject _verb (TracePromoteColdDone i i2 p) =
+    mkObject [ "kind" .= String "PromoteColdDone"
+             , "targetEstablished" .= i
+             , "actualEstablished" .= i2
+             , "peer" .= show p
+             ]
+  toObject _verb (TracePromoteWarmPeers i i2 sp) =
+    mkObject [ "kind" .= String "PromoteWarmPeers"
+             , "targetActive" .= i
+             , "actualActive" .= i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TracePromoteWarmLocalPeers taa sp) =
+    mkObject [ "kind" .= String "PromoteWarmLocalPeers"
+             , "targetActualActive" .= show taa
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TracePromoteWarmFailed i i2 p err) =
+    mkObject [ "kind" .= String "PromoteWarmFailed"
+             , "targetActive" .= show i
+             , "actualActive" .= show i2
+             , "peer" .= show p
+             , "error" .= show err
+             ]
+  toObject _verb (TracePromoteWarmDone i i2 p) =
+    mkObject [ "kind" .= String "PromoteWarmDone"
+             , "targetActive" .= show i
+             , "actualActive" .= show i2
+             , "peer" .= show p
+             ]
+  toObject _verb (TraceDemoteWarmPeers i i2 sp) =
+    mkObject [ "kind" .= String "DemoteWarmPeers"
+             , "targetEstablished" .= show i
+             , "actualEstablished" .= show i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TraceDemoteWarmFailed i i2 p err) =
+    mkObject [ "kind" .= String "DemoteWarmFailed"
+             , "targetEstablished" .= show i
+             , "actualEstablished" .= show i2
+             , "peer" .= show p
+             , "error" .= show err
+             ]
+  toObject _verb (TraceDemoteWarmDone i i2 p) =
+    mkObject [ "kind" .= String "DemoteWarmDone"
+             , "targetEstablished" .= show i
+             , "actualEstablished" .= show i2
+             , "peer" .= show p
+             ]
+  toObject _verb (TraceDemoteHotPeers i i2 sp) =
+    mkObject [ "kind" .= String "DemoteHotPeers"
+             , "targetActive" .= show i
+             , "actualActive" .= show i2
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TraceDemoteLocalHotPeers taa sp) =
+    mkObject [ "kind" .= String "DemoteLocalHotPeers"
+             , "targetActualActive" .= show taa
+             , "selectedPeers" .= show sp
+             ]
+  toObject _verb (TraceDemoteHotFailed i i2 p err) =
+    mkObject [ "kind" .= String "DemoteHotFailed"
+             , "targetActive" .= i
+             , "actualActive" .= i2
+             , "peer" .= show p
+             , "error" .= show err
+             ]
+  toObject _verb (TraceDemoteHotDone i i2 p) =
+    mkObject [ "kind" .= String "DemoteHotDone"
+             , "targetActive" .= i
+             , "actualActive" .= i2
+             , "peer" .= show p
+             ]
+  toObject _verb (TraceDemoteAsynchronous msp) =
+    mkObject [ "kind" .= String "DemoteAsynchronous"
+             , "state" .= toJSON msp
+             ]
+  toObject _verb TraceGovernorWakeup =
+    mkObject [ "kind" .= String "GovernorWakeup"
+             ]
+  toObject _verb (TraceChurnWait dt) =
+    mkObject [ "kind" .= String "ChurnWait"
+             , "diffTime" .= show dt
+             ]
+  toObject _verb (TraceChurnMode c) =
+    mkObject [ "kind" .= String "ChurnMode"
+             , "event" .= show c ]
 
 instance Aeson.ToJSON AbstractState where
     toJSON UnknownConnectionSt =
@@ -1290,14 +1512,123 @@ instance Show peerConn => ToObject (DebugPeerSelection Socket.SockAddr peerConn)
              ]
 
 instance ToObject (PeerSelectionActionsTrace Socket.SockAddr) where
-  toObject _verb ev =
-    mkObject [ "kind" .= String "PeerSelectionAction"
-             , "event" .= show ev ]
+  toObject _verb (PeerStatusChanged ps) =
+    mkObject [ "kind" .= String "PeerStatusChanged"
+             , "peerStatusChangeType" .= show ps
+             ]
+  toObject _verb (PeerStatusChangeFailure ps f) =
+    mkObject [ "kind" .= String "PeerStatusChangeFailure"
+             , "peerStatusChangeType" .= show ps
+             , "error" .= show f
+             ]
+  toObject _verb (PeerMonitoringError cs s) =
+    mkObject [ "kind" .= String "PeerMonitoringError"
+             , "connectionId" .= toObject _verb cs
+             , "error" .= show s
+             ]
+  toObject _verb (PeerMonitoringResult cs wf) =
+    mkObject [ "kind" .= String "PeerMonitoringResult"
+             , "connectionId" .= toObject _verb cs
+             , "withProtocolTemp" .= show wf
+             ]
 
 instance ToObject PeerSelectionCounters where
   toObject _verb ev =
     mkObject [ "kind" .= String "PeerSelectionCounters"
-             , "event" .= show ev ]
+             , "coldPeers" .= coldPeers ev
+             , "warmPeers" .= warmPeers ev
+             , "hotPeers" .= hotPeers ev
+             ]
+
+instance ToJSON ProtocolLimitFailure where
+  toJSON (ExceededSizeLimit (ClientAgency a)) =
+    Aeson.object [ "kind" .= String "ProtocolLimitFailure"
+                 , "exceededSizeLimit" .= String "ClientAgency"
+                 , "agency" .= show a
+                 ]
+  toJSON (ExceededSizeLimit (ServerAgency a)) =
+    Aeson.object [ "kind" .= String "ProtocolLimitFailure"
+                 , "exceededSizeLimit" .= String "ServerAgency"
+                 , "agency" .= show a
+                 ]
+  toJSON (ExceededTimeLimit (ClientAgency a)) =
+    Aeson.object [ "kind" .= String "ProtocolLimitFailure"
+                 , "exceededTimeLimit" .= String "ClientAgency"
+                 , "agency" .= show a
+                 ]
+  toJSON (ExceededTimeLimit (ServerAgency a)) =
+    Aeson.object [ "kind" .= String "ProtocolLimitFailure"
+                 , "exceededTimeLimit" .= String "ServerAgency"
+                 , "agency" .= show a
+                 ]
+
+instance Show vNumber => ToJSON (RefuseReason vNumber) where
+  toJSON (VersionMismatch vNumber tags) =
+    Aeson.object [ "kind" .= String "RefuseReason"
+                 , "versionMismatch" .= show vNumber
+                 , "tags" .= show tags
+                 ]
+  toJSON (HandshakeDecodeError vNumber t) =
+    Aeson.object [ "kind" .= String "RefuseReason"
+                 , "handshakeDecodeError" .= show vNumber
+                 , "text" .= show t
+                 ]
+  toJSON (Refused vNumber t) =
+    Aeson.object [ "kind" .= String "RefuseReason"
+                 , "refused" .= show vNumber
+                 , "text" .= show t
+                 ]
+
+instance Show vNumber => ToJSON (HandshakeProtocolError vNumber) where
+  toJSON (HandshakeError rvNumber) =
+    Aeson.object [ "kind" .= String "HandshakeProtocolError"
+                 , "handshakeError" .= toJSON rvNumber
+                 ]
+  toJSON (NotRecognisedVersion vNumber) =
+    Aeson.object [ "kind" .= String "HandshakeProtocolError"
+                 , "handshakeError" .= show vNumber
+                 ]
+  toJSON (InvalidServerSelection vNumber t) =
+    Aeson.object [ "kind" .= String "HandshakeProtocolError"
+                 , "handshakeError" .= show vNumber
+                 , "text" .= t
+                 ]
+
+instance Show vNumber => ToJSON (HandshakeException vNumber) where
+  toJSON (HandshakeProtocolLimit plf) =
+    Aeson.object [ "kind" .= String "HandshakeException"
+                 , "handshakeProtocolLimit" .= show plf
+                 ]
+  toJSON (HandshakeProtocolError hpe) =
+    Aeson.object [ "kind" .= String "HandshakeException"
+                 , "handshakeProtocolError" .= show hpe
+                 ]
+
+instance (Show versionNumber, Show agreedOptions)
+  => ToObject (ConnectionHandlerTrace versionNumber agreedOptions) where
+  toObject _verb (TrHandshakeSuccess versionNumber agreedOptions) =
+    mkObject
+      [ "kind" .= String "HandshakeSuccess"
+      , "versionNumber" .= show versionNumber
+      , "agreedOptions" .= show agreedOptions
+      ]
+  toObject _verb (TrHandshakeClientError hpe) =
+    mkObject
+      [ "kind" .= String "HandshakeClientError"
+      , "exception" .= toJSON hpe
+      ]
+  toObject _verb (TrHandshakeServerError hpe) =
+    mkObject
+      [ "kind" .= String "HandshakeServerError"
+      , "exception" .= toJSON hpe
+      ]
+  toObject _verb (TrError e s e4) =
+    mkObject
+      [ "kind" .= String "Error"
+      , "contextError" .= show e
+      , "error" .= show s
+      , "commandError" .= show e4
+      ]
 
 instance (Show addr, Show versionNumber, Show agreedOptions, ToObject addr,
           ToJSON addr)
@@ -1354,8 +1685,7 @@ instance (Show addr, Show versionNumber, Show agreedOptions, ToObject addr,
         mkObject
           [ "kind" .= String "ConnectionHandler"
           , "connectionId" .= toObject verb connId
-          -- TODO:  encode 'ConnectionHandlerTrace'
-          , "connectionHandler" .= String (pack . show $ a)
+          , "connectionHandler" .= toObject verb a
           ]
       TrShutdown ->
         mkObject
@@ -1366,7 +1696,7 @@ instance (Show addr, Show versionNumber, Show agreedOptions, ToObject addr,
           [ "kind" .= String "ConnectionExists"
           , "provenance" .= String (pack . show $ prov)
           , "remoteAddress" .= toObject verb remoteAddress
-          , "state" .= String (pack . show $ inState)
+          , "state" .= toJSON inState
           ]
       TrForbiddenConnection connId ->
         mkObject
@@ -1393,7 +1723,7 @@ instance (Show addr, Show versionNumber, Show agreedOptions, ToObject addr,
         mkObject
           [ "kind" .= String "ForbiddenOperation"
           , "remoteAddress" .= toObject verb remoteAddress
-          , "connectionState" .= String (pack . show $ connState)
+          , "connectionState" .= toJSON connState
           ]
       TrPruneConnections peers ->
         mkObject
@@ -1431,17 +1761,116 @@ instance (Show addr, Show versionNumber, Show agreedOptions, ToObject addr,
                                        (Map.toList cmState)
           ]
 
-
-instance Show addr
+instance (Show addr, ToObject addr, ToJSON addr)
       => ToObject (ServerTrace addr) where
-  -- TODO: a better 'ToObject' instance
-  toObject _verb ev =
-    mkObject [ "kind" .= String "ServerTrace"
-             , "event" .= show ev ]
+  toObject _verb (TrAcceptConnection peerAddr)     =
+    mkObject [ "kind" .= String "AcceptConnection"
+             , "addr" .= toObject _verb peerAddr
+             ]
+  toObject _verb (TrAcceptError exception)         =
+    mkObject [ "kind" .= String "AcceptErroor"
+             , "error" .= show exception
+             ]
+  toObject _verb (TrAcceptPolicyTrace policyTrace) =
+    mkObject [ "kind" .= String "AcceptPolicyTrace"
+             , "policy" .= toObject _verb policyTrace
+             ]
+  toObject _verb (TrServerStarted peerAddrs)       =
+    mkObject [ "kind" .= String "AcceptPolicyTrace"
+             , "addrs" .= toJSON (toObject _verb `map` peerAddrs)
+             ]
+  toObject _verb TrServerStopped                   =
+    mkObject [ "kind" .= String "ServerStopped"
+             ]
+  toObject _verb (TrServerError exception)         =
+    mkObject [ "kind" .= String "ServerError"
+             , "error" .= show exception
+             ]
+
+instance ToJSON MiniProtocolNum where
+  toJSON (MiniProtocolNum w) =
+    Aeson.object [ "kind" .= String "MiniProtocolNum"
+                 , "num" .= w
+                 ]
 
 instance Show addr
       => ToObject (InboundGovernorTrace addr) where
-  -- TODO: a better 'ToObject' instance
-  toObject _verb ev =
-    mkObject [ "kind" .= String "InboundGovernorTrace"
-             , "event" .= show ev ]
+  toObject _verb (TrNewConnection p caddr)            =
+    mkObject [ "kind" .= String "NewConnection"
+             , "provenance" .= show p
+             , "connectionId" .= toObject _verb caddr
+             ]
+  toObject _verb (TrResponderRestarted caddr m)       =
+    mkObject [ "kind" .= String "ResponderStarted"
+             , "connectionId" .= toObject _verb caddr
+             , "miniProtocolNum" .= toJSON m
+             ]
+  toObject _verb (TrResponderStartFailure caddr m s)  =
+    mkObject [ "kind" .= String "ResponderStartFailure"
+             , "connectionId" .= toObject _verb caddr
+             , "miniProtocolNum" .= toJSON m
+             , "error" .= show s
+             ]
+  toObject _verb (TrResponderErrored caddr m s)       =
+    mkObject [ "kind" .= String "ResponderErrored"
+             , "connectionId" .= toObject _verb caddr
+             , "miniProtocolNum" .= toJSON m
+             , "error" .= show s
+             ]
+  toObject _verb (TrResponderStarted caddr m)         =
+    mkObject [ "kind" .= String "ResponderStarted"
+             , "connectionId" .= toObject _verb caddr
+             , "miniProtocolNum" .= toJSON m
+             ]
+  toObject _verb (TrResponderTerminated caddr m)      =
+    mkObject [ "kind" .= String "ResponderTerminated"
+             , "connectionId" .= toObject _verb caddr
+             , "miniProtocolNum" .= toJSON m
+             ]
+  toObject _verb (TrPromotedToWarmRemote caddr (UnsupportedState as)) =
+    mkObject [ "kind" .= String "PromotedToWarmRemote"
+             , "connectionId" .= toObject _verb caddr
+             , "operationResult" .=
+                 Aeson.object [ "unsupportedState" .= toJSON as ]
+             ]
+  toObject _verb (TrPromotedToWarmRemote caddr (OperationSuccess as)) =
+    mkObject [ "kind" .= String "PromotedToWarmRemote"
+             , "connectionId" .= toObject _verb caddr
+             , "operationResult" .=
+                 Aeson.object [ "operationSuccess" .= toJSON as ]
+             ]
+  toObject _verb (TrPromotedToHotRemote caddr)        =
+    mkObject [ "kind" .= String "PromotedToHotRemote"
+             , "connectionId" .= toObject _verb caddr
+             ]
+  toObject _verb (TrDemotedToColdRemote caddr od)     =
+    mkObject [ "kind" .= String "DemotedToColdRemote"
+             , "connectionId" .= toObject _verb caddr
+             , "operationResult" .= show od
+             ]
+  toObject _verb (TrWaitIdleRemote caddr (UnsupportedState as)) =
+    mkObject [ "kind" .= String "WaitIdleRemote"
+             , "connectionId" .= toObject _verb caddr
+             , "operationResult" .=
+                 Aeson.object [ "unsupportedState" .= toJSON as ]
+             ]
+  toObject _verb (TrWaitIdleRemote caddr (OperationSuccess as)) =
+    mkObject [ "kind" .= String "WaitIdleRemote"
+             , "connectionId" .= toObject _verb caddr
+             , "operationResult" .=
+                 Aeson.object [ "operationSuccess" .= toJSON as ]
+             ]
+  toObject _verb (TrMuxCleanExit caddr)               =
+    mkObject [ "kind" .= String "MuxCleanExit"
+             , "connectionId" .= toObject _verb caddr
+             ]
+  toObject _verb (TrMuxErrored caddr s)               =
+    mkObject [ "kind" .= String "MuxErrored"
+             , "connectionId" .= toObject _verb caddr
+             , "error" .= show s
+             ]
+  toObject _verb (TrInboundGovernorCounters counters) =
+    mkObject [ "kind" .= String "InboundGovernorCounters"
+             , "warmPeers" .= warmPeersRemote counters
+             , "hotPeers" .= hotPeersRemote counters
+             ]

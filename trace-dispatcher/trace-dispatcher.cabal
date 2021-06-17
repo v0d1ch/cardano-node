@@ -10,6 +10,8 @@ copyright:            2020 IOHK
 extra-source-files:   CHANGELOG.md
                       README.md
                       doc/trace-dispatcher.md
+                      src/Cardano/Logging/Resources/os-support-darwin.h
+                      src/Cardano/Logging/Resources/os-support-win.h
 
 library
   hs-source-dirs:     src
@@ -20,11 +22,14 @@ library
                       Cardano.Logging.DocuGenerator
                       Cardano.Logging.Formatter
                       Cardano.Logging.FrequencyLimiter
+                      Cardano.Logging.Resources
+                      Cardano.Logging.Resources.Types
                       Cardano.Logging.Tracer.EKG
                       Cardano.Logging.Tracer.Standard
                       Cardano.Logging.Tracer.Forward
                       Control.Tracer.Arrow
                       Control.Tracer
+
   default-language:   Haskell2010
   default-extensions: OverloadedStrings
   build-depends:      base >=4.12 && <5
@@ -49,6 +54,12 @@ library
                       , unliftio-core
                       , unordered-containers
                       , yaml
+
+  if os(windows)
+     build-depends:    Win32
+  else
+     build-depends:    unix
+
   ghc-options:         -Wall
                        -Wcompat
                        -Wincomplete-uni-patterns
@@ -58,6 +69,18 @@ library
                        -Wredundant-constraints
                        -Wmissing-export-lists
                        -Wno-incomplete-patterns
+
+  if os(linux)
+    exposed-modules:   Cardano.Logging.Resources.Linux
+  if os(windows)
+    exposed-modules:   Cardano.Logging.Resources.Windows
+    c-sources:         src/Cardano/Logging/Resources/os-support-win.c
+    include-dirs:      src/Cardano/Logging/Resources/
+    cc-options:        -DPSAPI_VERSION=2
+  if os(darwin)
+    exposed-modules:   Cardano.Logging.Resources.Darwin
+    c-sources:         src/Cardano/Logging/Resources/os-support-darwin.c
+    include-dirs:      src/Cardano/Logging/Resources/
 
 executable trace-dispatcher-examples
     main-is:          Main.hs

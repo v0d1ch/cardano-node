@@ -29,7 +29,6 @@ import           GHC.Generics (Generic)
 import qualified Control.Tracer as T
 import           "contra-tracer" Control.Tracer (contramap, stdoutTracer)
 import qualified Data.ByteString.Lazy as LBS
-import           Data.IORef
 import           Data.Text (unpack)
 import           Data.Void (Void)
 import           Data.Word (Word16)
@@ -84,9 +83,9 @@ instance ShowProxy TraceObject
 
 ---------------------------------------------------------------------------
 
-newtype ForwardTracerState = ForwardTracerState {
-    ftQueue   :: TBQueue TraceObject
-  }
+-- newtype ForwardTracerState = ForwardTracerState {
+--     ftQueue   :: TBQueue TraceObject
+--   }
 
 forwardTracer :: forall m. (MonadIO m)
   => TraceConfig
@@ -97,22 +96,21 @@ forwardTracer config = do
     store <- liftIO $ EKG.newStore
     liftIO $ EKG.registerGcMetrics store
     liftIO $ launchForwardersSimple (tcForwarder config) tbQueue store
-    stateRef <- liftIO $ newIORef (ForwardTracerState tbQueue)
-    pure $ Trace $ T.arrow $ T.emit $ uncurry3 (output stateRef)
+--    stateRef <- liftIO $ newIORef (ForwardTracerState tbQueue)
+    pure $ Trace $ T.arrow $ T.emit $ uncurry3 (output tbQueue)
   where
     output ::
-         IORef ForwardTracerState
+         TBQueue TraceObject
       -> LoggingContext
       -> Maybe TraceControl
       -> FormattedMessage
       -> m ()
-    output stateRef LoggingContext {} Nothing (FormattedForwarder lo) = liftIO $ do
-      st  <- readIORef stateRef
-      atomically $ writeTBQueue (ftQueue st) lo
-    output _stateRef LoggingContext {} (Just Reset) _msg = liftIO $ do
+    output tbQueue LoggingContext {} Nothing (FormattedForwarder lo) = liftIO $ do
+      atomically $ writeTBQueue tbQueue lo
+    output _tbQueue LoggingContext {} (Just Reset) _msg = liftIO $ do
       -- TODO JNF discuss reconfiguration
       pure ()
-    output _ lk (Just c@Document {}) (FormattedForwarder lo) = do
+    output _tbQueue lk (Just c@Document {}) (FormattedForwarder lo) = do
       case toHuman lo of
         Just hr -> docIt (Stdout HumanFormatUncoloured)
                          (FormattedHuman False "") (lk, Just c, hr)
@@ -120,7 +118,7 @@ forwardTracer config = do
       case toMachine lo of
         Just mr -> docIt (Stdout MachineFormat) (FormattedMachine "") (lk, Just c, mr)
         Nothing -> pure ()
-    output _stateRef LoggingContext {} _ _a = pure ()
+    output _tbQueue LoggingContext {} _ _a = pure ()
 
 launchForwardersSimple :: RemoteAddr -> TBQueue TraceObject -> EKG.Store -> IO ()
 launchForwardersSimple endpoint tbQueue store =

@@ -287,8 +287,6 @@ data LogDoc = LogDoc {
   , ldPrivacy   :: [Privacy]
   , ldDetails   :: [DetailLevel]
   , ldBackends  :: [(BackendConfig, FormattedMessage)]
---  , ldConfSeverity :: SeverityF
---  , ldConfPrivacy  :: Privacy
 } deriving(Eq, Show)
 
 emptyLogDoc :: Text -> LogDoc

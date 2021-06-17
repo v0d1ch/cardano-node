@@ -692,7 +692,7 @@ genProtocolParametersUpdate era = do
   protocolUpdateMaxTxSize           <- Gen.maybe genNat
   protocolUpdateTxFeeFixed          <- Gen.maybe genNat
   protocolUpdateTxFeePerByte        <- Gen.maybe genNat
-  protocolUpdateMinUTxOValue        <- Gen.maybe genLovelace
+  protocolUpdateMinUTxOValue        <- untilAlonzo era genLovelace
   protocolUpdateStakeAddressDeposit <- Gen.maybe genLovelace
   protocolUpdateStakePoolDeposit    <- Gen.maybe genLovelace
   protocolUpdateMinPoolCost         <- Gen.maybe genLovelace
@@ -701,14 +701,14 @@ genProtocolParametersUpdate era = do
   protocolUpdatePoolPledgeInfluence <- Gen.maybe genRationalInt64
   protocolUpdateMonetaryExpansion   <- Gen.maybe genRational
   protocolUpdateTreasuryCut         <- Gen.maybe genRational
-  protocolUpdateUTxOCostPerWord     <- guardAlonzoBased era genLovelace
+  protocolUpdateUTxOCostPerWord     <- ifAlonzoBased era genLovelace
   protocolUpdateCostModels          <- genCostModels era
-  protocolUpdatePrices              <- guardAlonzoBased era genExecutionUnitPrices
-  protocolUpdateMaxTxExUnits        <- guardAlonzoBased era genExecutionUnits
-  protocolUpdateMaxBlockExUnits     <- guardAlonzoBased era genExecutionUnits
-  protocolUpdateMaxValueSize        <- guardAlonzoBased era genNat
-  protocolUpdateCollateralPercent   <- guardAlonzoBased era genNat
-  protocolUpdateMaxCollateralInputs <- guardAlonzoBased era genNat
+  protocolUpdatePrices              <- ifAlonzoBased era genExecutionUnitPrices
+  protocolUpdateMaxTxExUnits        <- ifAlonzoBased era genExecutionUnits
+  protocolUpdateMaxBlockExUnits     <- ifAlonzoBased era genExecutionUnits
+  protocolUpdateMaxValueSize        <- ifAlonzoBased era genNat
+  protocolUpdateCollateralPercent   <- ifAlonzoBased era genNat
+  protocolUpdateMaxCollateralInputs <- ifAlonzoBased era genNat
   pure ProtocolParametersUpdate{..}
 
 
@@ -745,10 +745,16 @@ genExecutionUnits = ExecutionUnits <$> Gen.integral (Range.constant 0 1000)
                                    <*> Gen.integral (Range.constant 0 1000)
 
 -- | 'Gen.maybe' but with condition if era is Alonzo-based
-guardAlonzoBased :: CardanoEra era -> Gen a -> Gen (Maybe a)
-guardAlonzoBased era gen
+ifAlonzoBased :: CardanoEra era -> Gen a -> Gen (Maybe a)
+ifAlonzoBased era gen
   | isAlonzoBased era = Gen.maybe gen
   | otherwise         = pure Nothing
+
+-- | 'Gen.maybe' but with condition if era is not Alonzo-based
+untilAlonzo :: CardanoEra era -> Gen a -> Gen (Maybe a)
+untilAlonzo era gen
+  | isAlonzoBased era = pure Nothing
+  | otherwise         = Gen.maybe gen
 
 -- TODO find a better place for this
 isAlonzoBased :: CardanoEra era -> Bool

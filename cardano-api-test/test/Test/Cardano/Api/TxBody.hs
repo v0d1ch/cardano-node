@@ -10,7 +10,7 @@ module Test.Cardano.Api.TxBody (tests) where
 import           Cardano.Prelude
 
 import           Hedgehog (Property, forAll, property, tripping)
-import           Test.Tasty (TestTree)
+import           Test.Tasty (TestTree, testGroup)
 import           Test.Tasty.Hedgehog (testProperty)
 import           Test.Tasty.TH (testGroupGenerator)
 
@@ -19,36 +19,23 @@ import           Cardano.Api
 import           Gen.Cardano.Api.Typed (genTxBody, genTxBodyContent)
 
 
-prop_roundtrip_TxBody_make_get_Byron :: Property
-prop_roundtrip_TxBody_make_get_Byron = roundtripTxBodyMakeGet ByronEra
-
-prop_roundtrip_TxBody_make_get_Shelley :: Property
-prop_roundtrip_TxBody_make_get_Shelley = roundtripTxBodyMakeGet ShelleyEra
-
-prop_roundtrip_TxBody_make_get_Allegra :: Property
-prop_roundtrip_TxBody_make_get_Allegra = roundtripTxBodyMakeGet AllegraEra
-
-prop_roundtrip_TxBody_make_get_Mary :: Property
-prop_roundtrip_TxBody_make_get_Mary = roundtripTxBodyMakeGet MaryEra
-
--- TODO Alonzo
--- prop_roundtrip_TxBody_make_get_Alonzo :: Property
--- prop_roundtrip_TxBody_make_get_Alonzo = roundtripTxBodyMakeGet AlonzoEra
-
-
-roundtripTxBodyMakeGet :: IsCardanoEra era => CardanoEra era -> Property
-roundtripTxBodyMakeGet era =
-  property $ do
-    content <- forAll $ genTxBodyContent era
-    tripping
-      (normalizeOriginal $ review content)
-      (\_ -> makeTransactionBody content)
-      (<&> \(TxBody content') -> normalizeRoundtrip content')
+test_roundtrip_TxBody_make_get :: [TestTree]
+test_roundtrip_TxBody_make_get =
+  [ testProperty (show era) $
+    property $ do
+      content <- forAll $ genTxBodyContent era
+      tripping
+        (normalizeOriginal $ review content)
+        (\_ -> makeTransactionBody content)
+        (<&> \(TxBody content') -> normalizeRoundtrip content')
+  | AnyCardanoEra era <- allCardanoEras
+  ]
 
 
 -- * normalize = strip unnecessary details
 --
 -- After roundtrip, @Just mempty@ may become @Nothing@ or vice versa.
+-- Input data also may be generated as either @Just 0@ or @Nothing@.
 
 normalizeOriginal :: TxBodyContent ViewTx era -> TxBodyContent ViewTx era
 normalizeOriginal content =
@@ -56,6 +43,7 @@ normalizeOriginal content =
     { txAuxScripts     = normalizeAuxScripts     $ txAuxScripts     content
     , txCertificates   = normalizeCertificates   $ txCertificates   content
     , txIns            = sortOn fst              $ txIns            content
+    , txInsCollateral  = normalizeInsCollateral  $ txInsCollateral  content
     , txMetadata       = normalizeMetadata       $ txMetadata       content
     , txMintValue      = normalizeMintValue      $ txMintValue      content
     , txUpdateProposal = normalizeUpdateProposal $ txUpdateProposal content
@@ -63,8 +51,20 @@ normalizeOriginal content =
     }
 
 normalizeRoundtrip :: TxBodyContent ViewTx era -> TxBodyContent ViewTx era
-normalizeRoundtrip content@TxBodyContent{txIns} =
-  content{txIns = sortOn fst txIns}
+normalizeRoundtrip content@TxBodyContent{txAuxScripts, txIns, txInsCollateral} =
+  content
+    { txAuxScripts    = normalizeAuxScripts    txAuxScripts
+    , txIns           = sortOn fst             txIns
+    , txInsCollateral = normalizeInsCollateral txInsCollateral
+    }
+
+normalizeInsCollateral :: TxInsCollateral era -> TxInsCollateral era
+normalizeInsCollateral = \case
+  TxInsCollateralNone -> TxInsCollateralNone
+  -- for original
+  TxInsCollateral _ ins | null ins -> TxInsCollateralNone
+  -- for roundtrip
+  TxInsCollateral support ins -> TxInsCollateral support $ sort ins
 
 normalizeMetadata :: TxMetadataInEra era -> TxMetadataInEra era
 normalizeMetadata = \case
@@ -75,7 +75,8 @@ normalizeAuxScripts :: TxAuxScripts era -> TxAuxScripts era
 normalizeAuxScripts = \case
   TxAuxScripts _       []      -> TxAuxScriptsNone
   TxAuxScripts support scripts ->
-    TxAuxScripts support $ map upgradeScriptInEra scripts
+    -- sorting uses script versions, hence sort after upgrade
+    TxAuxScripts support $ sort $ map upgradeScriptInEra scripts
   other -> other
 
 normalizeWithdrawals :: TxWithdrawals ViewTx era -> TxWithdrawals ViewTx era

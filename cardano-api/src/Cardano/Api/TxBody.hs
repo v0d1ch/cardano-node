@@ -1463,18 +1463,17 @@ fromLedgerTxInsCollateral
   -> TxInsCollateral era
 fromLedgerTxInsCollateral era body =
     case collateralSupportedInEra (shelleyBasedToCardanoEra era) of
-      Nothing        -> TxInsCollateralNone
+      Nothing             -> TxInsCollateralNone
+      _ | null collateral -> TxInsCollateralNone
       Just supported -> TxInsCollateral supported
                           [ fromShelleyTxIn input
-                          | input <- Set.toList (collateral era body) ]
+                          | input <- Set.toList collateral ]
   where
-    collateral :: ShelleyBasedEra era
-               -> Ledger.TxBody (ShelleyLedgerEra era)
-               -> Set (Shelley.TxIn StandardCrypto)
-    collateral ShelleyBasedEraShelley = const Set.empty
-    collateral ShelleyBasedEraAllegra = const Set.empty
-    collateral ShelleyBasedEraMary    = const Set.empty
-    collateral ShelleyBasedEraAlonzo  = Alonzo.collateral'
+    collateral = case era of
+      ShelleyBasedEraShelley -> Set.empty
+      ShelleyBasedEraAllegra -> Set.empty
+      ShelleyBasedEraMary    -> Set.empty
+      ShelleyBasedEraAlonzo  -> Alonzo.collateral' body
 
 
 fromLedgerTxOuts
@@ -1623,11 +1622,14 @@ fromLedgerTxExtraKeyWitnesses sbe body =
     ShelleyBasedEraShelley -> TxExtraKeyWitnessesNone
     ShelleyBasedEraAllegra -> TxExtraKeyWitnessesNone
     ShelleyBasedEraMary    -> TxExtraKeyWitnessesNone
-    ShelleyBasedEraAlonzo  -> TxExtraKeyWitnesses
+    ShelleyBasedEraAlonzo
+      | null keyhashes     -> TxExtraKeyWitnessesNone
+      | otherwise          -> TxExtraKeyWitnesses
                                 ExtraKeyWitnessesInAlonzoEra
                                 [ PaymentKeyHash (Shelley.coerceKeyRole keyhash)
-                                | let keyhashes = Alonzo.reqSignerHashes body
-                                , keyhash <- Set.toList keyhashes ]
+                                | keyhash <- Set.toList keyhashes ]
+      where
+        keyhashes = Alonzo.reqSignerHashes body
 
 fromLedgerTxWithdrawals
   :: ShelleyBasedEra era

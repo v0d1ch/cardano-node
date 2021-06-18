@@ -42,7 +42,6 @@ import qualified Control.Tracer as T
 import           Data.Aeson ((.=))
 import qualified Data.Aeson as AE
 import qualified Data.Aeson.Text as AE
-import           Data.Foldable (asum)
 import qualified Data.HashMap.Strict as HM
 import           Data.IORef
 import           Data.Map (Map)
@@ -50,7 +49,6 @@ import qualified Data.Map as Map
 import           Data.Text (Text, pack)
 import           Data.Text.Lazy (toStrict)
 import           Data.Time (UTCTime)
-import           Data.Word (Word16)
 import           GHC.Generics
 import           Network.HostName (HostName)
 
@@ -243,16 +241,12 @@ data ConfigOption =
   | CoLimiter Text Double
   deriving (Eq, Ord, Show)
 
-data RemoteAddr
-  = LocalPipe FilePath
-  | RemoteSocket Text Word16
+newtype RemoteAddr
+  = LocalSocket FilePath
   deriving (Eq, Ord, Show)
 
 instance AE.FromJSON RemoteAddr where
-  parseJSON = AE.withObject "RemoteAddr" $ \o -> asum
-                [ LocalPipe <$> o AE..: "filePath"
-                , RemoteSocket <$> o AE..: "host" <*> o AE..: "port"
-                ]
+  parseJSON = AE.withObject "RemoteAddr" $ \o -> LocalSocket <$> o AE..: "filePath"
 
 data TraceConfig = TraceConfig {
      -- | Options specific to a certain namespace
@@ -265,7 +259,7 @@ data TraceConfig = TraceConfig {
 emptyTraceConfig :: TraceConfig
 emptyTraceConfig = TraceConfig {
     tcOptions = Map.empty
-  , tcForwarder = LocalPipe "forwarder.log"
+  , tcForwarder = LocalSocket "forwarder.log"
   , tcForwarderCacheSize = 1500
   }
 

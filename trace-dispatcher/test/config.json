@@ -40,7 +40,6 @@
     }
   ],
   "TraceOptionForwarder": {
-    "host": "loopback",
-    "port": 46
+    "filePath": "/tmp/forwarder.sock"
   }
 }

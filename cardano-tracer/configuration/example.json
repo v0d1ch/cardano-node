@@ -1,7 +1,7 @@
 {
   "acceptAt": {
     "tag": "LocalSocket",
-    "contents": "/tmp/cardano-tracer-example.sock"
+    "contents": "/tmp/forwarder.sock"
   },
   "loRequestNum": 1,
   "ekgRequestFreq": 1,

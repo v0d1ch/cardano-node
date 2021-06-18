@@ -29,10 +29,8 @@ import           GHC.Generics (Generic)
 import qualified Control.Tracer as T
 import           "contra-tracer" Control.Tracer (contramap, stdoutTracer)
 import qualified Data.ByteString.Lazy as LBS
-import           Data.Text (unpack)
 import           Data.Void (Void)
 import           Data.Word (Word16)
-import qualified Network.Socket as Socket
 
 import           Ouroboros.Network.Driver.Limits (ProtocolTimeLimits)
 import           Ouroboros.Network.IOManager (withIOManager)
@@ -42,8 +40,7 @@ import           Ouroboros.Network.Mux (MiniProtocol (..),
                      RunMiniProtocol (..), miniProtocolLimits, miniProtocolNum,
                      miniProtocolRun)
 import           Ouroboros.Network.Protocol.Handshake.Codec
-                     (cborTermVersionDataCodec, noTimeLimitsHandshake,
-                     timeLimitsHandshake)
+                     (cborTermVersionDataCodec, noTimeLimitsHandshake)
 import           Ouroboros.Network.Protocol.Handshake.Type (Handshake)
 import           Ouroboros.Network.Protocol.Handshake.Unversioned
                      (UnversionedProtocol (..), UnversionedProtocolData (..),
@@ -51,7 +48,7 @@ import           Ouroboros.Network.Protocol.Handshake.Unversioned
 import           Ouroboros.Network.Protocol.Handshake.Version
                      (acceptableVersion, simpleSingletonVersions)
 import           Ouroboros.Network.Snocket (Snocket, localAddressFromPath,
-                     localSnocket, socketSnocket)
+                     localSnocket)
 import           Ouroboros.Network.Socket (connectToNode,
                      nullNetworkConnectTracers)
 import           Ouroboros.Network.Util.ShowProxy (ShowProxy (..))
@@ -151,11 +148,8 @@ launchForwardersSimple endpoint tbQueue store =
       , TF.actionOnRequest  = const (return ())
       }
 
-  forTF (LocalPipe p)      = TF.LocalPipe p
-  forTF (RemoteSocket h p) = TF.RemoteSocket h p
-
-  forEKGF (LocalPipe p)      = EKGF.LocalPipe p
-  forEKGF (RemoteSocket h p) = EKGF.RemoteSocket h p
+  forTF (LocalSocket p)   = TF.LocalPipe p
+  forEKGF (LocalSocket p) = EKGF.LocalPipe p
 
 launchForwarders'
   :: RemoteAddr
@@ -163,17 +157,10 @@ launchForwarders'
   -> TBQueue TraceObject
   -> EKG.Store
   -> IO ()
-launchForwarders' endpoint configs tbQueue store = withIOManager $ \iocp -> do
-  case endpoint of
-    LocalPipe localPipe -> do
-      let snocket = localSnocket iocp localPipe
-          address = localAddressFromPath localPipe
-      doConnectToAcceptor snocket address noTimeLimitsHandshake configs tbQueue store
-    RemoteSocket host port -> do
-      acceptorAddr:_ <- Socket.getAddrInfo Nothing (Just (unpack host)) (Just (show port))
-      let snocket = socketSnocket iocp
-          address = Socket.addrAddress acceptorAddr
-      doConnectToAcceptor snocket address timeLimitsHandshake configs tbQueue store
+launchForwarders' (LocalSocket localSock) configs tbQueue store = withIOManager $ \iocp -> do
+  let snocket = localSnocket iocp localSock
+      address = localAddressFromPath localSock
+  doConnectToAcceptor snocket address noTimeLimitsHandshake configs tbQueue store
 
 doConnectToAcceptor
   :: Snocket IO fd addr

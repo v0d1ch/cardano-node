@@ -44,7 +44,7 @@ config1 = TraceConfig {
           (["tracer1"], [CoSeverity ErrorF]),
           (["tracer2"], [CoSeverity CriticalF]),
           (["tracer2","bubble"], [CoSeverity InfoF])]
-    , tcForwarder = LocalPipe "forwarder.log"
+    , tcForwarder = LocalSocket "forwarder.log"
     , tcForwarderCacheSize = 100
     }
 
@@ -53,7 +53,7 @@ config2 = TraceConfig {
       tcOptions = Map.fromList [([], [CoSeverity InfoF]),
           (["tracer2"], [CoSeverity WarningF]),
           (["tracer2","bubble"], [CoSeverity WarningF])]
-    , tcForwarder = LocalPipe "forwarder.log"
+    , tcForwarder = LocalSocket "forwarder.log"
     , tcForwarderCacheSize = 100
     }
 

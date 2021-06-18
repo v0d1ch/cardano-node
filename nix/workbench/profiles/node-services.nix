@@ -79,7 +79,7 @@ let
                  {ns = "Node.ChainSyncNode"; limiterName = "ChainSync limiter"; limiterFrequency = 1;}
                ];
 
-               TraceOptionForwarder = {host = "127.0.0.1"; port = 3010;};
+               TraceOptionForwarder = {filePath = "/tmp/forwarder.sock";};
 
                TraceOptionForwardCache = 700;
 

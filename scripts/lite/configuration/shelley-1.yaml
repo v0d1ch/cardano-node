@@ -286,6 +286,5 @@ TraceOptionLimiter:
     limiterName: ResourceLimiter
     limiterFrequency: 1.0
 TraceOptionForwarder:
-  host: "127.0.0.1"
-  port: 3000
+  filePath: "/tmp/forwarder.sock"
 TraceOptionForwardCache: 780

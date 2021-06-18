@@ -1,10 +1,7 @@
 {
   "acceptAt": {
-    "tag": "RemoteSocket",
-    "contents": [
-      "127.0.0.1",
-      3000
-    ]
+    "tag": "LocalSocket",
+    "contents": "/tmp/cardano-tracer-example.sock"
   },
   "loRequestNum": 1,
   "ekgRequestFreq": 1,

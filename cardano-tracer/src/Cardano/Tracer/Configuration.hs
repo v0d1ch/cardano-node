@@ -6,7 +6,7 @@
 module Cardano.Tracer.Configuration
   ( Host
   , Port
-  , RemoteAddr (..)
+  , Address (..)
   , Endpoint (..)
   , RotationParams (..)
   , LogMode (..)
@@ -25,9 +25,7 @@ import qualified System.Exit as Ex
 type Host = String
 type Port = Int
 
-data RemoteAddr
-  = LocalSocket !FilePath
-  | RemoteSocket !Host !Port
+newtype Address = LocalSocket FilePath
   deriving (Eq, Generic, FromJSON, Show, ToJSON)
 
 data Endpoint = Endpoint !Host !Port
@@ -56,7 +54,7 @@ data LoggingParams = LoggingParams
   } deriving (Eq, Generic, FromJSON, Show, ToJSON)
 
 data TracerConfig = TracerConfig
-  { acceptAt       :: !RemoteAddr
+  { acceptAt       :: !Address
   , loRequestNum   :: !Word16 -- ^ How many 'TraceObject's in one request.
   , ekgRequestFreq :: !Pico   -- ^ How often to request EKG-metrics.
   , hasEKG         :: !(Maybe Endpoint)

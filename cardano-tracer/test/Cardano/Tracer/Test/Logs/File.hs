@@ -23,25 +23,27 @@ import           Cardano.Tracer.Test.Forwarder (launchForwardersSimple)
 
 tests :: TestTree
 tests = localOption (QuickCheckTests 1) $ testGroup "Test.Logs.File"
-  [ testProperty ".log"  $ propFile ForHuman   "text" "127.0.0.1" 3000
-  , testProperty ".json" $ propFile ForMachine "json" "127.0.0.1" 3010
+  [ testProperty ".log"  $ propFile ForHuman   "text" "cardano-tracer-log.sock"
+  , testProperty ".json" $ propFile ForMachine "json" "cardano-tracer-json.sock"
   ]
 
 propFile
   :: LogFormat
   -> FilePath
   -> String
-  -> Word16
   -> Property
-propFile format suffix host port = ioProperty $ do
+propFile format suffix localSockName = ioProperty $ do
   tmpDir <- getTemporaryDirectory
   let rootDir = tmpDir </> ("test-logs-" <> suffix)
+      localSock = tmpDir </> localSockName
   -- Remove rootDir if needed.
   removePathForcibly rootDir
+  -- Remove localSock if needed.
+  removePathForcibly localSock
   -- Run cardano-tracer and demo-forwarder-mux.
-  tracerThr <- forkIO $ runCardanoTracerWithConfig (config rootDir)
+  tracerThr <- forkIO $ runCardanoTracerWithConfig (config rootDir localSock)
   threadDelay 500000
-  forwarderThr <- forkIO $ launchForwardersSimple (host, port)
+  forwarderThr <- forkIO $ launchForwardersSimple localSock
   -- Wait for some 'TraceObject's...
   threadDelay 5000000
   -- Stop both sides.
@@ -78,8 +80,8 @@ propFile format suffix host port = ioProperty $ do
         _ -> false "root dir contains more than one subdir"
     False -> false "root dir doesn't exist"
  where
-  config rootDir' = TracerConfig
-    { acceptAt       = RemoteSocket host (fromIntegral port)
+  config rootDir' localSock' = TracerConfig
+    { acceptAt       = LocalSocket localSock'
     , loRequestNum   = 1
     , ekgRequestFreq = 1.0
     , hasEKG         = Nothing

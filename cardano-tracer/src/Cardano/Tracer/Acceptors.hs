@@ -21,10 +21,8 @@ import "contra-tracer" Control.Tracer (nullTracer)
 import qualified Data.ByteString.Lazy as LBS
 import           Data.IORef (IORef, newIORef, readIORef)
 import           Data.HashMap.Strict ((!))
-import           Data.Text (pack)
 import           Data.Time.Clock (secondsToNominalDiffTime)
 import           Data.Void (Void)
-import qualified Network.Socket as Socket
 import           Ouroboros.Network.Mux (MiniProtocol (..), MiniProtocolLimits (..),
                                         MiniProtocolNum (..), MuxMode (..),
                                         OuroborosApplication (..),
@@ -33,15 +31,13 @@ import           Ouroboros.Network.Mux (MiniProtocol (..), MiniProtocolLimits (.
 import           Ouroboros.Network.Driver.Limits (ProtocolTimeLimits)
 import           Ouroboros.Network.ErrorPolicy (nullErrorPolicies)
 import           Ouroboros.Network.IOManager (withIOManager)
-import           Ouroboros.Network.Snocket (Snocket, localAddressFromPath,
-                                            localSnocket, socketSnocket)
+import           Ouroboros.Network.Snocket (Snocket, localAddressFromPath, localSnocket)
 import           Ouroboros.Network.Socket (AcceptedConnectionsLimit (..), ConnectionId (..),
                                            SomeResponderApplication (..),
                                            cleanNetworkMutableState, newNetworkMutableState,
                                            nullNetworkServerTracers, withServerNode)
 import           Ouroboros.Network.Protocol.Handshake.Codec (cborTermVersionDataCodec,
-                                                             noTimeLimitsHandshake,
-                                                             timeLimitsHandshake)
+                                                             noTimeLimitsHandshake)
 import           Ouroboros.Network.Protocol.Handshake.Unversioned (UnversionedProtocol (..),
                                                                    UnversionedProtocolData (..),
                                                                    unversionedHandshakeCodec,
@@ -120,29 +116,19 @@ mkAcceptorsConfigs TracerConfig{..} stopEKG stopTF = (ekgConfig, tfConfig)
       , TF.actionOnDone      = putStrLn "TF: we are done!"
       }
 
-  forTF (LocalSocket p)      = TF.LocalPipe p
-  forTF (RemoteSocket h p)   = TF.RemoteSocket (pack h) (fromIntegral p)
-
-  forEKGF (LocalSocket p)    = EKGF.LocalPipe p
-  forEKGF (RemoteSocket h p) = EKGF.RemoteSocket (pack h) (fromIntegral p)
+  forTF (LocalSocket p)   = TF.LocalPipe p
+  forEKGF (LocalSocket p) = EKGF.LocalPipe p
 
 runAcceptors'
-  :: RemoteAddr
+  :: Address
   -> (EKGF.AcceptorConfiguration, TF.AcceptorConfiguration TraceObject)
   -> TVar ThreadId
   -> AcceptedItems
   -> IO ()
-runAcceptors' endpoint configs tidVar acceptedItems = withIOManager $ \iocp -> do
-  case endpoint of
-    LocalSocket localSock -> do
-      let snock = localSnocket iocp localSock
-          addr  = localAddressFromPath localSock
-      doListenToForwarder snock addr noTimeLimitsHandshake configs tidVar acceptedItems
-    RemoteSocket host port -> do
-      listenAddress:_ <- Socket.getAddrInfo Nothing (Just host) (Just $ show port)
-      let snock = socketSnocket iocp
-          addr  = Socket.addrAddress listenAddress
-      doListenToForwarder snock addr timeLimitsHandshake configs tidVar acceptedItems
+runAcceptors' (LocalSocket localSock) configs tidVar acceptedItems = withIOManager $ \iocp -> do
+  let snock = localSnocket iocp localSock
+      addr  = localAddressFromPath localSock
+  doListenToForwarder snock addr noTimeLimitsHandshake configs tidVar acceptedItems  
 
 doListenToForwarder
   :: (Ord addr, Show addr)

@@ -22,22 +22,22 @@ import           Cardano.Tracer.Test.Forwarder (launchForwardersSimple)
 
 tests :: TestTree
 tests = localOption (QuickCheckTests 1) $ testGroup "Test.Logs.Rotator"
-  [ testProperty "basic" $ propRotator "127.0.0.1" 3020
+  [ testProperty "basic" $ propRotator "cardano-tracer-totator.sock"
   ]
 
-propRotator
-  :: String
-  -> Word16
-  -> Property
-propRotator host port = ioProperty $ do
+propRotator :: String -> Property
+propRotator localSockName = ioProperty $ do
   tmpDir <- getTemporaryDirectory
   let rootDir = tmpDir </> "test-logs-rotator"
+      localSock = tmpDir </> localSockName
   -- Remove rootDir if needed.
   removePathForcibly rootDir
+  -- Remove localSock if needed.
+  removePathForcibly localSock
   -- Run cardano-tracer and demo-forwarder-mux.
-  tracerThr <- forkIO $ runCardanoTracerWithConfig (config rootDir)
+  tracerThr <- forkIO $ runCardanoTracerWithConfig (config rootDir localSock)
   threadDelay 500000
-  forwarderThr <- forkIO $ launchForwardersSimple (host, port)
+  forwarderThr <- forkIO $ launchForwardersSimple localSock
   -- Wait while rotation will occure...
   threadDelay 25000000
   -- Stop both sides.
@@ -65,8 +65,8 @@ propRotator host port = ioProperty $ do
         _ -> false "root dir contains more than one subdir"
     False -> false "root dir doesn't exist"
  where
-  config rootDir' = TracerConfig
-    { acceptAt       = RemoteSocket host (fromIntegral port)
+  config rootDir' localSock' = TracerConfig
+    { acceptAt       = LocalSocket localSock'
     , loRequestNum   = 1
     , ekgRequestFreq = 1.0
     , hasEKG         = Nothing

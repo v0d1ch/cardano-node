@@ -19,11 +19,9 @@ import           Control.Monad.STM (atomically)
 import "contra-tracer" Control.Tracer (nullTracer)
 import qualified Data.ByteString.Lazy as LBS
 import           Data.Fixed (Pico)
-import           Data.Text (pack)
 import           Data.Time.Clock (NominalDiffTime, getCurrentTime, secondsToNominalDiffTime)
 import           Data.Void (Void)
 import           Data.Word (Word16)
-import qualified Network.Socket as Socket
 import           Ouroboros.Network.Driver.Limits (ProtocolTimeLimits)
 import           Ouroboros.Network.IOManager (withIOManager)
 import           Ouroboros.Network.Mux (MiniProtocol (..), MiniProtocolLimits (..),
@@ -38,7 +36,7 @@ import           Ouroboros.Network.Protocol.Handshake.Unversioned (UnversionedPr
                                                                    unversionedProtocolDataCodec)
 import           Ouroboros.Network.Protocol.Handshake.Type (Handshake)
 import           Ouroboros.Network.Protocol.Handshake.Version (acceptableVersion, simpleSingletonVersions)
-import           Ouroboros.Network.Snocket (Snocket, socketSnocket)
+import           Ouroboros.Network.Snocket (Snocket, localAddressFromPath, localSnocket)
 import           Ouroboros.Network.Socket (connectToNode, nullNetworkConnectTracers)
 import qualified System.Metrics as EKG
 
@@ -50,22 +48,18 @@ import           Trace.Forward.Network.Forwarder (forwardTraceObjects)
 import qualified System.Metrics.Configuration as EKGF
 import           System.Metrics.Network.Forwarder (forwardEKGMetrics)
 
-type Host = String
-type Port = Word16
-type Endpoint = (Host, Port)
-
-launchForwardersSimple :: Endpoint -> IO ()
-launchForwardersSimple (h, p) =
-  try (launchForwarders' (h, p) Nothing (ekgConfig, tfConfig)) >>= \case
+launchForwardersSimple :: String -> IO ()
+launchForwardersSimple localSock =
+  try (launchForwarders' localSock Nothing (ekgConfig, tfConfig)) >>= \case
     Left (_e :: SomeException) ->
-      launchForwardersSimple (h, p)
+      launchForwardersSimple localSock
     Right _ -> return ()
  where
   ekgConfig :: EKGF.ForwarderConfiguration
   ekgConfig =
     EKGF.ForwarderConfiguration
       { EKGF.forwarderTracer    = nullTracer
-      , EKGF.acceptorEndpoint   = EKGF.RemoteSocket (pack h) p
+      , EKGF.acceptorEndpoint   = EKGF.LocalPipe localSock
       , EKGF.reConnectFrequency = 1.0
       , EKGF.actionOnRequest    = const (return ())
       }
@@ -74,20 +68,19 @@ launchForwardersSimple (h, p) =
   tfConfig =
     TF.ForwarderConfiguration
       { TF.forwarderTracer  = nullTracer
-      , TF.acceptorEndpoint = TF.RemoteSocket (pack h) p
+      , TF.acceptorEndpoint = TF.LocalPipe localSock
       , TF.nodeBasicInfo    = return [("NodeName", "node-1")]
       , TF.actionOnRequest  = const (return ())
       }
 
 launchForwarders'
-  :: Endpoint
+  :: String
   -> Maybe Pico
   -> (EKGF.ForwarderConfiguration, TF.ForwarderConfiguration TraceObject)
   -> IO ()
-launchForwarders' (host, port) benchFillFreq configs = withIOManager $ \iocp -> do
-  acceptorAddr:_ <- Socket.getAddrInfo Nothing (Just host) (Just $ show port)
-  let snocket = socketSnocket iocp
-      address = Socket.addrAddress acceptorAddr
+launchForwarders' localSock benchFillFreq configs = withIOManager $ \iocp -> do
+  let snocket = localSnocket iocp localSock
+      address = localAddressFromPath localSock
   doConnectToAcceptor snocket address timeLimitsHandshake benchFillFreq configs
 
 doConnectToAcceptor

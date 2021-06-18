@@ -9,7 +9,7 @@ module Test.Cardano.Api.TxBody (tests) where
 
 import           Cardano.Prelude
 
-import           Hedgehog (Property, forAll, property, tripping)
+import           Hedgehog (forAll, property, tripping)
 import           Test.Tasty (TestTree, testGroup)
 import           Test.Tasty.Hedgehog (testProperty)
 import           Test.Tasty.TH (testGroupGenerator)
@@ -164,7 +164,7 @@ upgradeSimpleScript = \case
   RequireMOf n scripts  -> RequireMOf n $ map upgradeSimpleScript scripts
 
 
-review :: TxBodyContent build era -> TxBodyContent ViewTx era
+review :: TxBodyContent BuildTx era -> TxBodyContent ViewTx era
 review TxBodyContent{..} =
   TxBodyContent
     { txCertificates    = reviewCertificates txCertificates
@@ -177,11 +177,11 @@ review TxBodyContent{..} =
     }
 
 reviewTxIn ::
-  (TxIn, BuildTxWith build  (Witness WitCtxTxIn era)) ->
-  (TxIn, BuildTxWith ViewTx (Witness WitCtxTxIn era))
+  (TxIn, BuildTxWith BuildTx (Witness WitCtxTxIn era)) ->
+  (TxIn, BuildTxWith ViewTx  (Witness WitCtxTxIn era))
 reviewTxIn = second $ const ViewTx
 
-reviewWithdrawals :: TxWithdrawals build era -> TxWithdrawals ViewTx era
+reviewWithdrawals :: TxWithdrawals BuildTx era -> TxWithdrawals ViewTx era
 reviewWithdrawals = \case
   TxWithdrawalsNone                 -> TxWithdrawalsNone
   TxWithdrawals support withdrawals ->
@@ -189,65 +189,49 @@ reviewWithdrawals = \case
       support
       [(address, amount, ViewTx) | (address, amount, _) <- withdrawals]
 
-reviewCertificates :: TxCertificates build era -> TxCertificates ViewTx era
+reviewCertificates :: TxCertificates BuildTx era -> TxCertificates ViewTx era
 reviewCertificates = \case
   TxCertificatesNone                    -> TxCertificatesNone
   TxCertificates support certificates _ ->
     TxCertificates support certificates ViewTx
 
-reviewMintValue :: TxMintValue build era -> TxMintValue ViewTx era
+reviewMintValue :: TxMintValue BuildTx era -> TxMintValue ViewTx era
 reviewMintValue = \case
   TxMintNone                  -> TxMintNone
   TxMintValue support value _ -> TxMintValue support value ViewTx
 
 
-prop_roundtrip_TxBody_get_make_Byron :: Property
-prop_roundtrip_TxBody_get_make_Byron = roundtripTxBodyGetMake ByronEra
-
-prop_roundtrip_TxBody_get_make_Shelley :: Property
-prop_roundtrip_TxBody_get_make_Shelley = roundtripTxBodyGetMake ShelleyEra
-
-prop_roundtrip_TxBody_get_make_Allegra :: Property
-prop_roundtrip_TxBody_get_make_Allegra = roundtripTxBodyGetMake AllegraEra
-
-prop_roundtrip_TxBody_get_make_Mary :: Property
-prop_roundtrip_TxBody_get_make_Mary = roundtripTxBodyGetMake MaryEra
-
--- TODO Alonzo
--- prop_roundtrip_TxBody_get_make_Alonzo :: Property
--- prop_roundtrip_TxBody_get_make_Alonzo = roundtripTxBodyGetMake AlonzoEra
+test_roundtrip_TxBody_get_make :: [TestTree]
+test_roundtrip_TxBody_get_make =
+  [ testProperty (show era) $
+    property $ do
+      txbody <- forAll $ genTxBody era
+      tripping
+        txbody
+        (\(TxBody content) -> content)
+        (makeTransactionBody . rebuildBodyContent)
+  | AnyCardanoEra era <- allCardanoEras
+  ]
 
 
-roundtripTxBodyGetMake :: IsCardanoEra era => CardanoEra era -> Property
-roundtripTxBodyGetMake era =
-  property $ do
-    txbody <- forAll $ genTxBody era
-    tripping
-      txbody
-      (\(TxBody content) -> content)
-      (makeTransactionBody . rebuildBodyContent)
-
-
-rebuildBodyContent :: TxBodyContent build era -> TxBodyContent BuildTx era
+rebuildBodyContent :: TxBodyContent ViewTx era -> TxBodyContent BuildTx era
 rebuildBodyContent TxBodyContent{..} =
   TxBodyContent
     { txCertificates    = rebuildCertificates txCertificates
-    , txExtraScriptData = panic "TODO"
+    , txExtraScriptData = BuildTxWith TxExtraScriptDataNone
     , txIns             = map rebuildTxIn     txIns
     , txMintValue       = rebuildMintValue    txMintValue
-    , txProtocolParams  =
-        panic
-          "rebuildBodyContent: txProtocolParams is not used yet (TODO alonzo)"
+    , txProtocolParams  = BuildTxWith Nothing
     , txWithdrawals     = rebuildWithdrawals  txWithdrawals
     , ..
     }
 
 rebuildTxIn ::
-  (TxIn, BuildTxWith build   (Witness WitCtxTxIn era)) ->
+  (TxIn, BuildTxWith ViewTx  (Witness WitCtxTxIn era)) ->
   (TxIn, BuildTxWith BuildTx (Witness WitCtxTxIn era))
 rebuildTxIn = second $ const $ BuildTxWith $ KeyWitness KeyWitnessForSpending
 
-rebuildWithdrawals :: TxWithdrawals build era -> TxWithdrawals BuildTx era
+rebuildWithdrawals :: TxWithdrawals ViewTx era -> TxWithdrawals BuildTx era
 rebuildWithdrawals = \case
   TxWithdrawalsNone                 -> TxWithdrawalsNone
   TxWithdrawals support withdrawals ->
@@ -260,7 +244,7 @@ rebuildWithdrawals = \case
       | (address, amount, _) <- withdrawals
       ]
 
-rebuildCertificates :: TxCertificates build era -> TxCertificates BuildTx era
+rebuildCertificates :: TxCertificates ViewTx era -> TxCertificates BuildTx era
 rebuildCertificates = \case
   TxCertificatesNone                    -> TxCertificatesNone
   TxCertificates support certificates _ ->
@@ -269,7 +253,7 @@ rebuildCertificates = \case
       certificates
       (panic "rebuildCertificates: build field should not be checked")
 
-rebuildMintValue :: TxMintValue build era -> TxMintValue BuildTx era
+rebuildMintValue :: TxMintValue ViewTx era -> TxMintValue BuildTx era
 rebuildMintValue = \case
   TxMintNone                  -> TxMintNone
   TxMintValue support value _ -> TxMintValue support value $ BuildTxWith mempty

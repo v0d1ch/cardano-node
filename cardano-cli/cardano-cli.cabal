@@ -114,6 +114,7 @@ library
                       , cardano-ledger-core
                       , cardano-ledger-shelley-ma
                       , cardano-prelude
+                      , cardano-slotting
                       , contra-tracer
                       , cborg >= 0.2.4 && < 0.3
                       , containers
@@ -137,6 +138,7 @@ library
                       , strict-containers
                       , text
                       , time
+                      , transformers
                       , transformers-except
                       , utf8-string
                       , unordered-containers

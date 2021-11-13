@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE AllowAmbiguousTypes #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE CPP #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE DataKinds #-}</span><span>
+</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE ScopedTypeVariables #-}</span><span>
+</span><span id="line-5"></span><span>
+</span><span id="line-6"></span><span class="hs-pragma">{-# OPTIONS_GHC -Wno-unticked-promoted-constructors #-}</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Node.Gen</span><span>
+</span><span id="line-9"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNetworkTopology"><span class="hs-identifier">genNetworkTopology</span></a></span><span>
+</span><span id="line-10"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier">genNodeHostIPv4Address</span></a></span><span>
+</span><span id="line-11"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier">genNodeHostIPv6Address</span></a></span><span>
+</span><span id="line-12"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPAddress"><span class="hs-identifier">genNodeHostIPAddress</span></a></span><span>
+</span><span id="line-13"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPAddress"><span class="hs-identifier">genNodeIPAddress</span></a></span><span>
+</span><span id="line-14"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPv4Address"><span class="hs-identifier">genNodeIPv4Address</span></a></span><span>
+</span><span id="line-15"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPv6Address"><span class="hs-identifier">genNodeIPv6Address</span></a></span><span>
+</span><span id="line-16"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeSetup"><span class="hs-identifier">genNodeSetup</span></a></span><span>
+</span><span id="line-17"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-18"></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">Cardano.Node.Configuration.Topology</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NetworkTopology</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeSetup</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-22"></span><span>                     </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">RemoteAddress</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">Cardano.Node.Types</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeAddress'</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeHostIPAddress</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-24"></span><span>                   </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeHostIPv4Address</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeHostIPv6Address</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-25"></span><span>                   </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeIPAddress</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeIPv4Address</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier">NodeIPv6Address</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.IP</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">IP</span></span><span>
+</span><span id="line-28"></span><span>
+</span><span id="line-29"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Gen</span></span><span class="hs-special">)</span><span>
+</span><span id="line-30"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Corpus</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">cooking</span></span><span class="hs-special">)</span><span>
+</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Gen</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Gen</span></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Internal.Gen</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Range</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Range</span></span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNetworkTopology"><span class="hs-identifier hs-type">genNetworkTopology</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NetworkTopology</span></a></span><span>
+</span><span id="line-36"></span><span id="genNetworkTopology"><span class="annot"><span class="annottext">genNetworkTopology :: Gen NetworkTopology
+</span><a href="Test.Cardano.Node.Gen.html#genNetworkTopology"><span class="hs-identifier hs-var hs-var">genNetworkTopology</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-37"></span><span>  </span><span class="annot"><span class="annottext">[Gen NetworkTopology] -&gt; Gen NetworkTopology
+forall (m :: * -&gt; *) a. MonadGen m =&gt; [m a] -&gt; m a
+</span><span class="hs-identifier hs-var">Gen.choice</span></span><span>
+</span><span id="line-38"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">[NodeSetup] -&gt; NetworkTopology
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">MockNodeTopology</span></a></span><span> </span><span class="annot"><span class="annottext">([NodeSetup] -&gt; NetworkTopology)
+-&gt; GenT Identity [NodeSetup] -&gt; Gen NetworkTopology
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; GenT Identity NodeSetup -&gt; GenT Identity [NodeSetup]
+forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
+</span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">GenT Identity NodeSetup
+</span><a href="Test.Cardano.Node.Gen.html#genNodeSetup"><span class="hs-identifier hs-var">genNodeSetup</span></a></span><span>
+</span><span id="line-39"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">[RemoteAddress] -&gt; NetworkTopology
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">RealNodeTopology</span></a></span><span> </span><span class="annot"><span class="annottext">([RemoteAddress] -&gt; NetworkTopology)
+-&gt; GenT Identity [RemoteAddress] -&gt; Gen NetworkTopology
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Range Int
+-&gt; GenT Identity RemoteAddress -&gt; GenT Identity [RemoteAddress]
+forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
+</span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">GenT Identity RemoteAddress
+</span><a href="Test.Cardano.Node.Gen.html#genRemoteAddress"><span class="hs-identifier hs-var">genRemoteAddress</span></a></span><span>
+</span><span id="line-40"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-41"></span><span>
+</span><span id="line-42"></span><span id="local-6989586621679119580"><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-type">genNodeAddress'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="#local-6989586621679119580"><span class="hs-identifier hs-type">addr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeAddress'</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679119580"><span class="hs-identifier hs-type">addr</span></a></span><span class="hs-special">)</span></span><span>
+</span><span id="line-43"></span><span id="genNodeAddress%27"><span class="annot"><span class="annottext">genNodeAddress' :: Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var hs-var">genNodeAddress'</span></a></span></span><span> </span><span id="local-6989586621679119552"><span class="annot"><span class="annottext">Gen addr
+</span><a href="#local-6989586621679119552"><span class="hs-identifier hs-var">genAddr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-44"></span><span>  </span><span class="annot"><span class="annottext">addr -&gt; PortNumber -&gt; NodeAddress' addr
+forall addr. addr -&gt; PortNumber -&gt; NodeAddress' addr
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">NodeAddress</span></a></span><span>
+</span><span id="line-45"></span><span>    </span><span class="annot"><span class="annottext">(addr -&gt; PortNumber -&gt; NodeAddress' addr)
+-&gt; Gen addr -&gt; GenT Identity (PortNumber -&gt; NodeAddress' addr)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Gen addr
+</span><a href="#local-6989586621679119552"><span class="hs-identifier hs-var">genAddr</span></a></span><span>
+</span><span id="line-46"></span><span>    </span><span class="annot"><span class="annottext">GenT Identity (PortNumber -&gt; NodeAddress' addr)
+-&gt; GenT Identity PortNumber -&gt; Gen (NodeAddress' addr)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">(Word16 -&gt; PortNumber)
+-&gt; GenT Identity Word16 -&gt; GenT Identity PortNumber
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">fmap</span></a></span><span> </span><span class="annot"><span class="annottext">Word16 -&gt; PortNumber
+forall a b. (Integral a, Num b) =&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">fromIntegral</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Range Word16 -&gt; GenT Identity Word16
+forall (m :: * -&gt; *). MonadGen m =&gt; Range Word16 -&gt; m Word16
+</span><span class="hs-identifier hs-var">Gen.word16</span></span><span> </span><span class="annot"><span class="annottext">(Range Word16 -&gt; GenT Identity Word16)
+-&gt; Range Word16 -&gt; GenT Identity Word16
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Word16 -&gt; Word16 -&gt; Range Word16
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Word16
+</span><span class="hs-number">100</span></span><span> </span><span class="annot"><span class="annottext">Word16
+</span><span class="hs-number">20000</span></span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span>
+</span><span id="line-48"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier hs-type">genNodeHostIPv4Address</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeHostIPv4Address</span></a></span><span>
+</span><span id="line-49"></span><span id="genNodeHostIPv4Address"><span class="annot"><span class="annottext">genNodeHostIPv4Address :: Gen NodeHostIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier hs-var hs-var">genNodeHostIPv4Address</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-50"></span><span>    </span><span class="annot"><span class="annottext">IPv4 -&gt; NodeHostIPv4Address
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">NodeHostIPv4Address</span></a></span><span> </span><span class="annot"><span class="annottext">(IPv4 -&gt; NodeHostIPv4Address)
+-&gt; (Word32 -&gt; IPv4) -&gt; Word32 -&gt; NodeHostIPv4Address
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Word32 -&gt; IPv4
+</span><span class="hs-identifier hs-var">IP.toIPv4w</span></span><span> </span><span class="annot"><span class="annottext">(Word32 -&gt; NodeHostIPv4Address)
+-&gt; GenT Identity Word32 -&gt; Gen NodeHostIPv4Address
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity Word32
+forall (m :: * -&gt; *) a. (MonadGen m, Enum a, Bounded a) =&gt; m a
+</span><span class="hs-identifier hs-var">Gen.enumBounded</span></span><span>
+</span><span id="line-51"></span><span>
+</span><span id="line-52"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier hs-type">genNodeHostIPv6Address</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeHostIPv6Address</span></a></span><span>
+</span><span id="line-53"></span><span id="genNodeHostIPv6Address"><span class="annot"><span class="annottext">genNodeHostIPv6Address :: Gen NodeHostIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier hs-var hs-var">genNodeHostIPv6Address</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-54"></span><span>    </span><span class="annot"><span class="annottext">IPv6 -&gt; NodeHostIPv6Address
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">NodeHostIPv6Address</span></a></span><span> </span><span class="annot"><span class="annottext">(IPv6 -&gt; NodeHostIPv6Address)
+-&gt; ((Word32, Word32, Word32, Word32) -&gt; IPv6)
+-&gt; (Word32, Word32, Word32, Word32)
+-&gt; NodeHostIPv6Address
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">(Word32, Word32, Word32, Word32) -&gt; IPv6
+</span><span class="hs-identifier hs-var">IP.toIPv6w</span></span><span> </span><span class="annot"><span class="annottext">((Word32, Word32, Word32, Word32) -&gt; NodeHostIPv6Address)
+-&gt; GenT Identity (Word32, Word32, Word32, Word32)
+-&gt; Gen NodeHostIPv6Address
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity (Word32, Word32, Word32, Word32)
+</span><a href="#local-6989586621679119543"><span class="hs-identifier hs-var">genFourWord32</span></a></span><span>
+</span><span id="line-55"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-56"></span><span>    </span><span class="annot"><a href="#local-6989586621679119543"><span class="hs-identifier hs-type">genFourWord32</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Word32</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Word32</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Word32</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Word32</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span>    </span><span id="local-6989586621679119543"><span class="annot"><span class="annottext">genFourWord32 :: GenT Identity (Word32, Word32, Word32, Word32)
+</span><a href="#local-6989586621679119543"><span class="hs-identifier hs-var hs-var">genFourWord32</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-58"></span><span>       </span><span class="hs-special">(</span><span class="hs-special">,</span><span class="hs-special">,</span><span class="hs-special">,</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Word32
+ -&gt; Word32 -&gt; Word32 -&gt; Word32 -&gt; (Word32, Word32, Word32, Word32))
+-&gt; GenT Identity Word32
+-&gt; GenT
+     Identity
+     (Word32 -&gt; Word32 -&gt; Word32 -&gt; (Word32, Word32, Word32, Word32))
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity Word32
+forall (m :: * -&gt; *) a. (MonadGen m, Enum a, Bounded a) =&gt; m a
+</span><span class="hs-identifier hs-var">Gen.enumBounded</span></span><span>
+</span><span id="line-59"></span><span>             </span><span class="annot"><span class="annottext">GenT
+  Identity
+  (Word32 -&gt; Word32 -&gt; Word32 -&gt; (Word32, Word32, Word32, Word32))
+-&gt; GenT Identity Word32
+-&gt; GenT
+     Identity (Word32 -&gt; Word32 -&gt; (Word32, Word32, Word32, Word32))
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity Word32
+forall (m :: * -&gt; *) a. (MonadGen m, Enum a, Bounded a) =&gt; m a
+</span><span class="hs-identifier hs-var">Gen.enumBounded</span></span><span>
+</span><span id="line-60"></span><span>             </span><span class="annot"><span class="annottext">GenT
+  Identity (Word32 -&gt; Word32 -&gt; (Word32, Word32, Word32, Word32))
+-&gt; GenT Identity Word32
+-&gt; GenT Identity (Word32 -&gt; (Word32, Word32, Word32, Word32))
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity Word32
+forall (m :: * -&gt; *) a. (MonadGen m, Enum a, Bounded a) =&gt; m a
+</span><span class="hs-identifier hs-var">Gen.enumBounded</span></span><span>
+</span><span id="line-61"></span><span>             </span><span class="annot"><span class="annottext">GenT Identity (Word32 -&gt; (Word32, Word32, Word32, Word32))
+-&gt; GenT Identity Word32
+-&gt; GenT Identity (Word32, Word32, Word32, Word32)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">GenT Identity Word32
+forall (m :: * -&gt; *) a. (MonadGen m, Enum a, Bounded a) =&gt; m a
+</span><span class="hs-identifier hs-var">Gen.enumBounded</span></span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeHostIPAddress"><span class="hs-identifier hs-type">genNodeHostIPAddress</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeHostIPAddress</span></a></span><span>
+</span><span id="line-64"></span><span id="genNodeHostIPAddress"><span class="annot"><span class="annottext">genNodeHostIPAddress :: Gen NodeHostIPAddress
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPAddress"><span class="hs-identifier hs-var hs-var">genNodeHostIPAddress</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-65"></span><span>  </span><span class="annot"><span class="annottext">IP -&gt; NodeHostIPAddress
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">NodeHostIPAddress</span></a></span><span>
+</span><span id="line-66"></span><span>    </span><span class="annot"><span class="annottext">(IP -&gt; NodeHostIPAddress)
+-&gt; GenT Identity IP -&gt; Gen NodeHostIPAddress
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">[GenT Identity IP] -&gt; GenT Identity IP
+forall (m :: * -&gt; *) a. MonadGen m =&gt; [m a] -&gt; m a
+</span><span class="hs-identifier hs-var">Gen.choice</span></span><span>
+</span><span id="line-67"></span><span>          </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">IPv4 -&gt; IP
+</span><span class="hs-identifier hs-var">IP.IPv4</span></span><span> </span><span class="annot"><span class="annottext">(IPv4 -&gt; IP)
+-&gt; (NodeHostIPv4Address -&gt; IPv4) -&gt; NodeHostIPv4Address -&gt; IP
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">NodeHostIPv4Address -&gt; IPv4
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var hs-var">unNodeHostIPv4Address</span></a></span><span> </span><span class="annot"><span class="annottext">(NodeHostIPv4Address -&gt; IP)
+-&gt; Gen NodeHostIPv4Address -&gt; GenT Identity IP
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier hs-var">genNodeHostIPv4Address</span></a></span><span>
+</span><span id="line-68"></span><span>          </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IPv6 -&gt; IP
+</span><span class="hs-identifier hs-var">IP.IPv6</span></span><span> </span><span class="annot"><span class="annottext">(IPv6 -&gt; IP)
+-&gt; (NodeHostIPv6Address -&gt; IPv6) -&gt; NodeHostIPv6Address -&gt; IP
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">NodeHostIPv6Address -&gt; IPv6
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var hs-var">unNodeHostIPv6Address</span></a></span><span> </span><span class="annot"><span class="annottext">(NodeHostIPv6Address -&gt; IP)
+-&gt; Gen NodeHostIPv6Address -&gt; GenT Identity IP
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier hs-var">genNodeHostIPv6Address</span></a></span><span>
+</span><span id="line-69"></span><span>          </span><span class="hs-special">]</span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPAddress"><span class="hs-identifier hs-type">genNodeIPAddress</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeIPAddress</span></a></span><span>
+</span><span id="line-72"></span><span id="genNodeIPAddress"><span class="annot"><span class="annottext">genNodeIPAddress :: Gen NodeIPAddress
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPAddress"><span class="hs-identifier hs-var hs-var">genNodeIPAddress</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPAddress -&gt; Gen NodeIPAddress
+forall addr. Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var">genNodeAddress'</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPAddress
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPAddress"><span class="hs-identifier hs-var">genNodeHostIPAddress</span></a></span><span>
+</span><span id="line-73"></span><span>
+</span><span id="line-74"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPv4Address"><span class="hs-identifier hs-type">genNodeIPv4Address</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeIPv4Address</span></a></span><span>
+</span><span id="line-75"></span><span id="genNodeIPv4Address"><span class="annot"><span class="annottext">genNodeIPv4Address :: Gen NodeIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPv4Address"><span class="hs-identifier hs-var hs-var">genNodeIPv4Address</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv4Address -&gt; Gen NodeIPv4Address
+forall addr. Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var">genNodeAddress'</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier hs-var">genNodeHostIPv4Address</span></a></span><span>
+</span><span id="line-76"></span><span>
+</span><span id="line-77"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeIPv6Address"><span class="hs-identifier hs-type">genNodeIPv6Address</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeIPv6Address</span></a></span><span>
+</span><span id="line-78"></span><span id="genNodeIPv6Address"><span class="annot"><span class="annottext">genNodeIPv6Address :: Gen NodeIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPv6Address"><span class="hs-identifier hs-var hs-var">genNodeIPv6Address</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv6Address -&gt; Gen NodeIPv6Address
+forall addr. Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var">genNodeAddress'</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier hs-var">genNodeHostIPv6Address</span></a></span><span>
+</span><span id="line-79"></span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genNodeSetup"><span class="hs-identifier hs-type">genNodeSetup</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">NodeSetup</span></a></span><span>
+</span><span id="line-81"></span><span id="genNodeSetup"><span class="annot"><span class="annottext">genNodeSetup :: GenT Identity NodeSetup
+</span><a href="Test.Cardano.Node.Gen.html#genNodeSetup"><span class="hs-identifier hs-var hs-var">genNodeSetup</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-82"></span><span>  </span><span class="annot"><span class="annottext">Word64
+-&gt; Maybe NodeIPv4Address
+-&gt; Maybe NodeIPv6Address
+-&gt; [RemoteAddress]
+-&gt; NodeSetup
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">NodeSetup</span></a></span><span>
+</span><span id="line-83"></span><span>    </span><span class="annot"><span class="annottext">(Word64
+ -&gt; Maybe NodeIPv4Address
+ -&gt; Maybe NodeIPv6Address
+ -&gt; [RemoteAddress]
+ -&gt; NodeSetup)
+-&gt; GenT Identity Word64
+-&gt; GenT
+     Identity
+     (Maybe NodeIPv4Address
+      -&gt; Maybe NodeIPv6Address -&gt; [RemoteAddress] -&gt; NodeSetup)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Range Word64 -&gt; GenT Identity Word64
+forall (m :: * -&gt; *). MonadGen m =&gt; Range Word64 -&gt; m Word64
+</span><span class="hs-identifier hs-var">Gen.word64</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; Word64 -&gt; Range Word64
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Word64
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Word64
+</span><span class="hs-number">10000</span></span><span class="hs-special">)</span><span>
+</span><span id="line-84"></span><span>    </span><span class="annot"><span class="annottext">GenT
+  Identity
+  (Maybe NodeIPv4Address
+   -&gt; Maybe NodeIPv6Address -&gt; [RemoteAddress] -&gt; NodeSetup)
+-&gt; GenT Identity (Maybe NodeIPv4Address)
+-&gt; GenT
+     Identity (Maybe NodeIPv6Address -&gt; [RemoteAddress] -&gt; NodeSetup)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv4Address -&gt; GenT Identity (Maybe NodeIPv4Address)
+forall (m :: * -&gt; *) a. MonadGen m =&gt; m a -&gt; m (Maybe a)
+</span><span class="hs-identifier hs-var">Gen.maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Gen NodeHostIPv4Address -&gt; Gen NodeIPv4Address
+forall addr. Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var">genNodeAddress'</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv4Address"><span class="hs-identifier hs-var">genNodeHostIPv4Address</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-85"></span><span>    </span><span class="annot"><span class="annottext">GenT
+  Identity (Maybe NodeIPv6Address -&gt; [RemoteAddress] -&gt; NodeSetup)
+-&gt; GenT Identity (Maybe NodeIPv6Address)
+-&gt; GenT Identity ([RemoteAddress] -&gt; NodeSetup)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv6Address -&gt; GenT Identity (Maybe NodeIPv6Address)
+forall (m :: * -&gt; *) a. MonadGen m =&gt; m a -&gt; m (Maybe a)
+</span><span class="hs-identifier hs-var">Gen.maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Gen NodeHostIPv6Address -&gt; Gen NodeIPv6Address
+forall addr. Gen addr -&gt; Gen (NodeAddress' addr)
+</span><a href="Test.Cardano.Node.Gen.html#genNodeAddress%27"><span class="hs-identifier hs-var">genNodeAddress'</span></a></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPv6Address"><span class="hs-identifier hs-var">genNodeHostIPv6Address</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-86"></span><span>    </span><span class="annot"><span class="annottext">GenT Identity ([RemoteAddress] -&gt; NodeSetup)
+-&gt; GenT Identity [RemoteAddress] -&gt; GenT Identity NodeSetup
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Range Int
+-&gt; GenT Identity RemoteAddress -&gt; GenT Identity [RemoteAddress]
+forall (m :: * -&gt; *) a. MonadGen m =&gt; Range Int -&gt; m a -&gt; m [a]
+</span><span class="hs-identifier hs-var">Gen.list</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">6</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">GenT Identity RemoteAddress
+</span><a href="Test.Cardano.Node.Gen.html#genRemoteAddress"><span class="hs-identifier hs-var">genRemoteAddress</span></a></span><span>
+</span><span id="line-87"></span><span>
+</span><span id="line-88"></span><span class="annot"><a href="Test.Cardano.Node.Gen.html#genRemoteAddress"><span class="hs-identifier hs-type">genRemoteAddress</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Gen</span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-type">RemoteAddress</span></a></span><span>
+</span><span id="line-89"></span><span id="genRemoteAddress"><span class="annot"><span class="annottext">genRemoteAddress :: GenT Identity RemoteAddress
+</span><a href="Test.Cardano.Node.Gen.html#genRemoteAddress"><span class="hs-identifier hs-var hs-var">genRemoteAddress</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-90"></span><span>  </span><span class="annot"><span class="annottext">Text -&gt; PortNumber -&gt; Int -&gt; RemoteAddress
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-node-1.30.0/noopt/doc/html/cardano-node/src"><span class="hs-identifier hs-var">RemoteAddress</span></a></span><span>
+</span><span id="line-91"></span><span>    </span><span class="annot"><span class="annottext">(Text -&gt; PortNumber -&gt; Int -&gt; RemoteAddress)
+-&gt; GenT Identity Text
+-&gt; GenT Identity (PortNumber -&gt; Int -&gt; RemoteAddress)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">[Text] -&gt; GenT Identity Text
+forall (m :: * -&gt; *) a. MonadGen m =&gt; [a] -&gt; m a
+</span><span class="hs-identifier hs-var">Gen.element</span></span><span> </span><span class="annot"><span class="annottext">[Text]
+forall a. IsString a =&gt; [a]
+</span><span class="hs-identifier hs-var">cooking</span></span><span>
+</span><span id="line-92"></span><span>    </span><span class="annot"><span class="annottext">GenT Identity (PortNumber -&gt; Int -&gt; RemoteAddress)
+-&gt; GenT Identity PortNumber -&gt; GenT Identity (Int -&gt; RemoteAddress)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">(Word16 -&gt; PortNumber)
+-&gt; GenT Identity Word16 -&gt; GenT Identity PortNumber
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">fmap</span></a></span><span> </span><span class="annot"><span class="annottext">Word16 -&gt; PortNumber
+forall a b. (Integral a, Num b) =&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">fromIntegral</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Range Word16 -&gt; GenT Identity Word16
+forall (m :: * -&gt; *). MonadGen m =&gt; Range Word16 -&gt; m Word16
+</span><span class="hs-identifier hs-var">Gen.word16</span></span><span> </span><span class="annot"><span class="annottext">(Range Word16 -&gt; GenT Identity Word16)
+-&gt; Range Word16 -&gt; GenT Identity Word16
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Word16 -&gt; Word16 -&gt; Range Word16
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Word16
+</span><span class="hs-number">100</span></span><span> </span><span class="annot"><span class="annottext">Word16
+</span><span class="hs-number">20000</span></span><span class="hs-special">)</span><span>
+</span><span id="line-93"></span><span>    </span><span class="annot"><span class="annottext">GenT Identity (Int -&gt; RemoteAddress)
+-&gt; GenT Identity Int -&gt; GenT Identity RemoteAddress
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Range Int -&gt; GenT Identity Int
+forall (m :: * -&gt; *). MonadGen m =&gt; Range Int -&gt; m Int
+</span><span class="hs-identifier hs-var">Gen.int</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Range Int
+forall a. Integral a =&gt; a -&gt; a -&gt; Range a
+</span><span class="hs-identifier hs-var">Range.linear</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">100</span></span><span class="hs-special">)</span><span>
+</span><span id="line-94"></span><span>
+</span><span id="line-95"></span></pre></body></html>

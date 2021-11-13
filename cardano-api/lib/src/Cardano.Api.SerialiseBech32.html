@@ -1,0 +1,445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE ScopedTypeVariables #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-comment">-- | Bech32 Serialisation</span><span>
+</span><span id="line-4"></span><span class="hs-comment">--</span><span>
+</span><span id="line-5"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.Api.SerialiseBech32</span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier">SerialiseAsBech32</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#serialiseToBech32"><span class="hs-identifier">serialiseToBech32</span></a></span><span>
+</span><span id="line-8"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodeError"><span class="hs-identifier">Bech32DecodeError</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-9"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#deserialiseFromBech32"><span class="hs-identifier">deserialiseFromBech32</span></a></span><span>
+</span><span id="line-10"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#deserialiseAnyOfFromBech32"><span class="hs-identifier">deserialiseAnyOfFromBech32</span></a></span><span>
+</span><span id="line-11"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Prelude</span></a></span><span>
+</span><span id="line-14"></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/bytestring-0.10.12.0/src"><span class="hs-identifier">Data.ByteString</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/bytestring-0.10.12.0/src"><span class="hs-identifier">ByteString</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier">Data.Text</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier">Text</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.List</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">List</span></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier">Data.Set</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier">Data.Set</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier">Set</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Monad</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">guard</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Codec.Binary.Bech32</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Bech32</span></span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Api.Error.html"><span class="hs-identifier">Cardano.Api.Error</span></a></span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html"><span class="hs-identifier">Cardano.Api.HasTypeProxy</span></a></span><span>
+</span><span id="line-28"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Api.SerialiseRaw.html"><span class="hs-identifier">Cardano.Api.SerialiseRaw</span></a></span><span>
+</span><span id="line-29"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Api.Utils.html"><span class="hs-identifier">Cardano.Api.Utils</span></a></span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">class</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#HasTypeProxy"><span class="hs-identifier hs-type">HasTypeProxy</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453307"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseRaw.html#SerialiseAsRawBytes"><span class="hs-identifier hs-type">SerialiseAsRawBytes</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453307"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span id="SerialiseAsBech32"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier hs-var">SerialiseAsBech32</span></a></span></span><span> </span><span id="local-6989586621679453307"><span class="annot"><a href="#local-6989586621679453307"><span class="hs-identifier hs-type">a</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-33"></span><span>
+</span><span id="line-34"></span><span>    </span><span class="hs-comment">-- | The human readable prefix to use when encoding this value to Bech32.</span><span>
+</span><span id="line-35"></span><span>    </span><span class="hs-comment">--</span><span>
+</span><span id="line-36"></span><span>    </span><span id="bech32PrefixFor"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixFor"><span class="hs-identifier hs-type">bech32PrefixFor</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679453307"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-37"></span><span>
+</span><span id="line-38"></span><span>    </span><span class="hs-comment">-- | The set of human readable prefixes that can be used for this type.</span><span>
+</span><span id="line-39"></span><span>    </span><span class="hs-comment">--</span><span>
+</span><span id="line-40"></span><span>    </span><span id="bech32PrefixesPermitted"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixesPermitted"><span class="hs-identifier hs-type">bech32PrefixesPermitted</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453307"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-41"></span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span id="local-6989586621679453257"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#serialiseToBech32"><span class="hs-identifier hs-type">serialiseToBech32</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier hs-type">SerialiseAsBech32</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453257"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679453257"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span></span><span>
+</span><span id="line-44"></span><span id="serialiseToBech32"><span class="annot"><span class="annottext">serialiseToBech32 :: a -&gt; Text
+</span><a href="Cardano.Api.SerialiseBech32.html#serialiseToBech32"><span class="hs-identifier hs-var hs-var">serialiseToBech32</span></a></span></span><span> </span><span id="local-6989586621679453256"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453256"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-45"></span><span>    </span><span class="annot"><span class="annottext">HumanReadablePart -&gt; DataPart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.encodeLenient</span></span><span>
+</span><span id="line-46"></span><span>      </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453254"><span class="hs-identifier hs-var">humanReadablePart</span></a></span><span>
+</span><span id="line-47"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ByteString -&gt; DataPart
+</span><span class="hs-identifier hs-var">Bech32.dataPartFromBytes</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; ByteString
+forall a. SerialiseAsRawBytes a =&gt; a -&gt; ByteString
+</span><a href="Cardano.Api.SerialiseRaw.html#serialiseToRawBytes"><span class="hs-identifier hs-var">serialiseToRawBytes</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453256"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-49"></span><span>    </span><span id="local-6989586621679453254"><span class="annot"><span class="annottext">humanReadablePart :: HumanReadablePart
+</span><a href="#local-6989586621679453254"><span class="hs-identifier hs-var hs-var">humanReadablePart</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-50"></span><span>      </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Either HumanReadablePartError HumanReadablePart
+</span><span class="hs-identifier hs-var">Bech32.humanReadablePartFromText</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; Text
+forall a. SerialiseAsBech32 a =&gt; a -&gt; Text
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixFor"><span class="hs-identifier hs-var">bech32PrefixFor</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453256"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-51"></span><span>        </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Right</span></a></span><span> </span><span id="local-6989586621679453250"><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453250"><span class="hs-identifier hs-var">p</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453250"><span class="hs-identifier hs-var">p</span></a></span><span>
+</span><span id="line-52"></span><span>        </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679453249"><span class="annot"><span class="annottext">HumanReadablePartError
+</span><a href="#local-6989586621679453249"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; HumanReadablePart
+forall a. HasCallStack =&gt; [Char] -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">error</span></a></span><span> </span><span class="annot"><span class="annottext">([Char] -&gt; HumanReadablePart) -&gt; [Char] -&gt; HumanReadablePart
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;serialiseToBech32: invalid prefix &quot;</span></span><span>
+</span><span id="line-53"></span><span>                         </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; Text
+forall a. SerialiseAsBech32 a =&gt; a -&gt; Text
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixFor"><span class="hs-identifier hs-var">bech32PrefixFor</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453256"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-54"></span><span>                         </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;, &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">HumanReadablePartError -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">HumanReadablePartError
+</span><a href="#local-6989586621679453249"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-55"></span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span id="local-6989586621679453246"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#deserialiseFromBech32"><span class="hs-identifier hs-type">deserialiseFromBech32</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier hs-type">SerialiseAsBech32</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453246"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-58"></span><span>                      </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#AsType"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453246"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Either</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodeError"><span class="hs-identifier hs-type">Bech32DecodeError</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453246"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-59"></span><span id="deserialiseFromBech32"><span class="annot"><span class="annottext">deserialiseFromBech32 :: AsType a -&gt; Text -&gt; Either Bech32DecodeError a
+</span><a href="Cardano.Api.SerialiseBech32.html#deserialiseFromBech32"><span class="hs-identifier hs-var hs-var">deserialiseFromBech32</span></a></span></span><span> </span><span id="local-6989586621679453245"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453245"><span class="hs-identifier hs-var">asType</span></a></span></span><span> </span><span id="local-6989586621679453244"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453244"><span class="hs-identifier hs-var">bech32Str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-60"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679453243"><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453243"><span class="hs-identifier hs-var">prefix</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679453242"><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453242"><span class="hs-identifier hs-var">dataPart</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Either DecodingError (HumanReadablePart, DataPart)
+</span><span class="hs-identifier hs-var">Bech32.decodeLenient</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453244"><span class="hs-identifier hs-var">bech32Str</span></a></span><span>
+</span><span id="line-61"></span><span>                            </span><span class="annot"><span class="annottext">Either DecodingError (HumanReadablePart, DataPart)
+-&gt; (DecodingError -&gt; Bech32DecodeError)
+-&gt; Either Bech32DecodeError (HumanReadablePart, DataPart)
+forall e a e'. Either e a -&gt; (e -&gt; e') -&gt; Either e' a
+</span><a href="Cardano.Api.Utils.html#%3F%21."><span class="hs-operator hs-var">?!.</span></a></span><span> </span><span class="annot"><span class="annottext">DecodingError -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodingError"><span class="hs-identifier hs-var">Bech32DecodingError</span></a></span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679453238"><span class="annot"><span class="annottext">actualPrefix :: Text
+</span><a href="#local-6989586621679453238"><span class="hs-identifier hs-var hs-var">actualPrefix</span></a></span></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HumanReadablePart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.humanReadablePartToText</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453243"><span class="hs-identifier hs-var">prefix</span></a></span><span>
+</span><span id="line-64"></span><span>        </span><span id="local-6989586621679453236"><span class="annot"><span class="annottext">permittedPrefixes :: [Text]
+</span><a href="#local-6989586621679453236"><span class="hs-identifier hs-var hs-var">permittedPrefixes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">AsType a -&gt; [Text]
+forall a. SerialiseAsBech32 a =&gt; AsType a -&gt; [Text]
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixesPermitted"><span class="hs-identifier hs-var">bech32PrefixesPermitted</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453245"><span class="hs-identifier hs-var">asType</span></a></span><span>
+</span><span id="line-65"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; Maybe ()
+forall (f :: * -&gt; *). Alternative f =&gt; Bool -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">guard</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453238"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Text] -&gt; Bool
+forall (t :: * -&gt; *) a. (Foldable t, Eq a) =&gt; a -&gt; t a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`elem`</span></a></span><span> </span><span class="annot"><span class="annottext">[Text]
+</span><a href="#local-6989586621679453236"><span class="hs-identifier hs-var">permittedPrefixes</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-66"></span><span>      </span><span class="annot"><span class="annottext">Maybe () -&gt; Bech32DecodeError -&gt; Either Bech32DecodeError ()
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Set Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32UnexpectedPrefix"><span class="hs-identifier hs-var">Bech32UnexpectedPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453238"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Text] -&gt; Set Text
+forall a. Ord a =&gt; [a] -&gt; Set a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Set.fromList</span></a></span><span> </span><span class="annot"><span class="annottext">[Text]
+</span><a href="#local-6989586621679453236"><span class="hs-identifier hs-var">permittedPrefixes</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-67"></span><span>
+</span><span id="line-68"></span><span>    </span><span id="local-6989586621679453231"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453231"><span class="hs-identifier hs-var">payload</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">DataPart -&gt; Maybe ByteString
+</span><span class="hs-identifier hs-var">Bech32.dataPartToBytes</span></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453242"><span class="hs-identifier hs-var">dataPart</span></a></span><span>
+</span><span id="line-69"></span><span>                 </span><span class="annot"><span class="annottext">Maybe ByteString
+-&gt; Bech32DecodeError -&gt; Either Bech32DecodeError ByteString
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DataPartToBytesError"><span class="hs-identifier hs-var">Bech32DataPartToBytesError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataPart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.dataPartToText</span></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453242"><span class="hs-identifier hs-var">dataPart</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span>    </span><span id="local-6989586621679453227"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453227"><span class="hs-identifier hs-var">value</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">AsType a -&gt; ByteString -&gt; Maybe a
+forall a.
+SerialiseAsRawBytes a =&gt;
+AsType a -&gt; ByteString -&gt; Maybe a
+</span><a href="Cardano.Api.SerialiseRaw.html#deserialiseFromRawBytes"><span class="hs-identifier hs-var">deserialiseFromRawBytes</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453245"><span class="hs-identifier hs-var">asType</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453231"><span class="hs-identifier hs-var">payload</span></a></span><span>
+</span><span id="line-72"></span><span>               </span><span class="annot"><span class="annottext">Maybe a -&gt; Bech32DecodeError -&gt; Either Bech32DecodeError a
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DeserialiseFromBytesError"><span class="hs-identifier hs-var">Bech32DeserialiseFromBytesError</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453231"><span class="hs-identifier hs-var">payload</span></a></span><span>
+</span><span id="line-73"></span><span>
+</span><span id="line-74"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679453224"><span class="annot"><span class="annottext">expectedPrefix :: Text
+</span><a href="#local-6989586621679453224"><span class="hs-identifier hs-var hs-var">expectedPrefix</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Text
+forall a. SerialiseAsBech32 a =&gt; a -&gt; Text
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixFor"><span class="hs-identifier hs-var">bech32PrefixFor</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453227"><span class="hs-identifier hs-var">value</span></a></span><span>
+</span><span id="line-75"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; Maybe ()
+forall (f :: * -&gt; *). Alternative f =&gt; Bool -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">guard</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453238"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">==</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453224"><span class="hs-identifier hs-var">expectedPrefix</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-76"></span><span>      </span><span class="annot"><span class="annottext">Maybe () -&gt; Bech32DecodeError -&gt; Either Bech32DecodeError ()
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32WrongPrefix"><span class="hs-identifier hs-var">Bech32WrongPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453238"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453224"><span class="hs-identifier hs-var">expectedPrefix</span></a></span><span>
+</span><span id="line-77"></span><span>
+</span><span id="line-78"></span><span>    </span><span class="annot"><span class="annottext">a -&gt; Either Bech32DecodeError a
+forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">return</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453227"><span class="hs-identifier hs-var">value</span></a></span><span>
+</span><span id="line-79"></span><span>
+</span><span id="line-80"></span><span>
+</span><span id="line-81"></span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#deserialiseAnyOfFromBech32"><span class="hs-identifier hs-type">deserialiseAnyOfFromBech32</span></a></span><span>
+</span><span id="line-82"></span><span>  </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679453222"><span class="annot"><a href="#local-6989586621679453222"><span class="hs-identifier hs-type">b</span></a></span></span><span class="hs-operator">.</span><span>
+</span><span id="line-83"></span><span>     </span><span class="hs-special">[</span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#FromSomeType"><span class="hs-identifier hs-type">FromSomeType</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier hs-type">SerialiseAsBech32</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453222"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-84"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-85"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Either</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodeError"><span class="hs-identifier hs-type">Bech32DecodeError</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453222"><span class="hs-identifier hs-type">b</span></a></span><span>
+</span><span id="line-86"></span><span id="deserialiseAnyOfFromBech32"><span class="annot"><span class="annottext">deserialiseAnyOfFromBech32 :: [FromSomeType SerialiseAsBech32 b]
+-&gt; Text -&gt; Either Bech32DecodeError b
+</span><a href="Cardano.Api.SerialiseBech32.html#deserialiseAnyOfFromBech32"><span class="hs-identifier hs-var hs-var">deserialiseAnyOfFromBech32</span></a></span></span><span> </span><span id="local-6989586621679453221"><span class="annot"><span class="annottext">[FromSomeType SerialiseAsBech32 b]
+</span><a href="#local-6989586621679453221"><span class="hs-identifier hs-var">types</span></a></span></span><span> </span><span id="local-6989586621679453220"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453220"><span class="hs-identifier hs-var">bech32Str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-87"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679453219"><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453219"><span class="hs-identifier hs-var">prefix</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679453218"><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453218"><span class="hs-identifier hs-var">dataPart</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Either DecodingError (HumanReadablePart, DataPart)
+</span><span class="hs-identifier hs-var">Bech32.decodeLenient</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453220"><span class="hs-identifier hs-var">bech32Str</span></a></span><span>
+</span><span id="line-88"></span><span>                            </span><span class="annot"><span class="annottext">Either DecodingError (HumanReadablePart, DataPart)
+-&gt; (DecodingError -&gt; Bech32DecodeError)
+-&gt; Either Bech32DecodeError (HumanReadablePart, DataPart)
+forall e a e'. Either e a -&gt; (e -&gt; e') -&gt; Either e' a
+</span><a href="Cardano.Api.Utils.html#%3F%21."><span class="hs-operator hs-var">?!.</span></a></span><span> </span><span class="annot"><span class="annottext">DecodingError -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodingError"><span class="hs-identifier hs-var">Bech32DecodingError</span></a></span><span>
+</span><span id="line-89"></span><span>
+</span><span id="line-90"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679453217"><span class="annot"><span class="annottext">actualPrefix :: Text
+</span><a href="#local-6989586621679453217"><span class="hs-identifier hs-var hs-var">actualPrefix</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HumanReadablePart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.humanReadablePartToText</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679453219"><span class="hs-identifier hs-var">prefix</span></a></span><span>
+</span><span id="line-91"></span><span>
+</span><span id="line-92"></span><span>    </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#FromSomeType"><span class="hs-identifier hs-type">FromSomeType</span></a></span><span> </span><span id="local-6989586621679453215"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453215"><span class="hs-identifier hs-var">actualType</span></a></span></span><span> </span><span id="local-6989586621679453214"><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679453214"><span class="hs-identifier hs-var">fromType</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span>
+</span><span id="line-93"></span><span>      </span><span class="annot"><span class="annottext">Text -&gt; Maybe (FromSomeType SerialiseAsBech32 b)
+</span><a href="#local-6989586621679453213"><span class="hs-identifier hs-var">findForPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453217"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span>
+</span><span id="line-94"></span><span>        </span><span class="annot"><span class="annottext">Maybe (FromSomeType SerialiseAsBech32 b)
+-&gt; Bech32DecodeError
+-&gt; Either Bech32DecodeError (FromSomeType SerialiseAsBech32 b)
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Set Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32UnexpectedPrefix"><span class="hs-identifier hs-var">Bech32UnexpectedPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453217"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Set Text
+</span><a href="#local-6989586621679453212"><span class="hs-identifier hs-var">permittedPrefixes</span></a></span><span>
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span>    </span><span id="local-6989586621679453211"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453211"><span class="hs-identifier hs-var">payload</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">DataPart -&gt; Maybe ByteString
+</span><span class="hs-identifier hs-var">Bech32.dataPartToBytes</span></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453218"><span class="hs-identifier hs-var">dataPart</span></a></span><span>
+</span><span id="line-97"></span><span>                 </span><span class="annot"><span class="annottext">Maybe ByteString
+-&gt; Bech32DecodeError -&gt; Either Bech32DecodeError ByteString
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DataPartToBytesError"><span class="hs-identifier hs-var">Bech32DataPartToBytesError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataPart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.dataPartToText</span></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679453218"><span class="hs-identifier hs-var">dataPart</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-98"></span><span>
+</span><span id="line-99"></span><span>    </span><span id="local-6989586621679453210"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453210"><span class="hs-identifier hs-var">value</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">AsType a -&gt; ByteString -&gt; Maybe a
+forall a.
+SerialiseAsRawBytes a =&gt;
+AsType a -&gt; ByteString -&gt; Maybe a
+</span><a href="Cardano.Api.SerialiseRaw.html#deserialiseFromRawBytes"><span class="hs-identifier hs-var">deserialiseFromRawBytes</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453215"><span class="hs-identifier hs-var">actualType</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453211"><span class="hs-identifier hs-var">payload</span></a></span><span>
+</span><span id="line-100"></span><span>               </span><span class="annot"><span class="annottext">Maybe a -&gt; Bech32DecodeError -&gt; Either Bech32DecodeError a
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32DeserialiseFromBytesError"><span class="hs-identifier hs-var">Bech32DeserialiseFromBytesError</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453211"><span class="hs-identifier hs-var">payload</span></a></span><span>
+</span><span id="line-101"></span><span>
+</span><span id="line-102"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679453209"><span class="annot"><span class="annottext">expectedPrefix :: Text
+</span><a href="#local-6989586621679453209"><span class="hs-identifier hs-var hs-var">expectedPrefix</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a -&gt; Text
+forall a. SerialiseAsBech32 a =&gt; a -&gt; Text
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixFor"><span class="hs-identifier hs-var">bech32PrefixFor</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453210"><span class="hs-identifier hs-var">value</span></a></span><span>
+</span><span id="line-103"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; Maybe ()
+forall (f :: * -&gt; *). Alternative f =&gt; Bool -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">guard</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453217"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">==</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453209"><span class="hs-identifier hs-var">expectedPrefix</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-104"></span><span>      </span><span class="annot"><span class="annottext">Maybe () -&gt; Bech32DecodeError -&gt; Either Bech32DecodeError ()
+forall a e. Maybe a -&gt; e -&gt; Either e a
+</span><a href="Cardano.Api.Utils.html#%3F%21"><span class="hs-operator hs-var">?!</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Bech32DecodeError
+</span><a href="Cardano.Api.SerialiseBech32.html#Bech32WrongPrefix"><span class="hs-identifier hs-var">Bech32WrongPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453217"><span class="hs-identifier hs-var">actualPrefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453209"><span class="hs-identifier hs-var">expectedPrefix</span></a></span><span>
+</span><span id="line-105"></span><span>
+</span><span id="line-106"></span><span>    </span><span class="annot"><span class="annottext">b -&gt; Either Bech32DecodeError b
+forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">return</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679453214"><span class="hs-identifier hs-var">fromType</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679453210"><span class="hs-identifier hs-var">value</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-107"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-108"></span><span>    </span><span class="annot"><a href="#local-6989586621679453213"><span class="hs-identifier hs-type">findForPrefix</span></a></span><span>
+</span><span id="line-109"></span><span>      </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-110"></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Maybe</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#FromSomeType"><span class="hs-identifier hs-type">FromSomeType</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#SerialiseAsBech32"><span class="hs-identifier hs-type">SerialiseAsBech32</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679453222"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-111"></span><span>    </span><span id="local-6989586621679453213"><span class="annot"><span class="annottext">findForPrefix :: Text -&gt; Maybe (FromSomeType SerialiseAsBech32 b)
+</span><a href="#local-6989586621679453213"><span class="hs-identifier hs-var hs-var">findForPrefix</span></a></span></span><span> </span><span id="local-6989586621679453208"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453208"><span class="hs-identifier hs-var">prefix</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-112"></span><span>      </span><span class="annot"><span class="annottext">(FromSomeType SerialiseAsBech32 b -&gt; Bool)
+-&gt; [FromSomeType SerialiseAsBech32 b]
+-&gt; Maybe (FromSomeType SerialiseAsBech32 b)
+forall (t :: * -&gt; *) a. Foldable t =&gt; (a -&gt; Bool) -&gt; t a -&gt; Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">List.find</span></a></span><span>
+</span><span id="line-113"></span><span>        </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#FromSomeType"><span class="hs-identifier hs-type">FromSomeType</span></a></span><span> </span><span id="local-6989586621679453206"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453206"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; b
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453208"><span class="hs-identifier hs-var">prefix</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Text] -&gt; Bool
+forall (t :: * -&gt; *) a. (Foldable t, Eq a) =&gt; a -&gt; t a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`elem`</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a -&gt; [Text]
+forall a. SerialiseAsBech32 a =&gt; AsType a -&gt; [Text]
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixesPermitted"><span class="hs-identifier hs-var">bech32PrefixesPermitted</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453206"><span class="hs-identifier hs-var">t</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-114"></span><span>        </span><span class="annot"><span class="annottext">[FromSomeType SerialiseAsBech32 b]
+</span><a href="#local-6989586621679453221"><span class="hs-identifier hs-var">types</span></a></span><span>
+</span><span id="line-115"></span><span>
+</span><span id="line-116"></span><span>    </span><span class="annot"><a href="#local-6989586621679453212"><span class="hs-identifier hs-type">permittedPrefixes</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-type">Set</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-117"></span><span>    </span><span id="local-6989586621679453212"><span class="annot"><span class="annottext">permittedPrefixes :: Set Text
+</span><a href="#local-6989586621679453212"><span class="hs-identifier hs-var hs-var">permittedPrefixes</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-118"></span><span>      </span><span class="annot"><span class="annottext">[Text] -&gt; Set Text
+forall a. Ord a =&gt; [a] -&gt; Set a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Set.fromList</span></a></span><span> </span><span class="annot"><span class="annottext">([Text] -&gt; Set Text) -&gt; [Text] -&gt; Set Text
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[[Text]] -&gt; [Text]
+forall (t :: * -&gt; *) a. Foldable t =&gt; t [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">concat</span></a></span><span>
+</span><span id="line-119"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">AsType a -&gt; [Text]
+forall a. SerialiseAsBech32 a =&gt; AsType a -&gt; [Text]
+</span><a href="Cardano.Api.SerialiseBech32.html#bech32PrefixesPermitted"><span class="hs-identifier hs-var">bech32PrefixesPermitted</span></a></span><span> </span><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453204"><span class="hs-identifier hs-var">ttoken</span></a></span><span>
+</span><span id="line-120"></span><span>        </span><span class="hs-glyph">|</span><span> </span><span class="annot"><a href="Cardano.Api.HasTypeProxy.html#FromSomeType"><span class="hs-identifier hs-type">FromSomeType</span></a></span><span> </span><span id="local-6989586621679453204"><span class="annot"><span class="annottext">AsType a
+</span><a href="#local-6989586621679453204"><span class="hs-identifier hs-var">ttoken</span></a></span></span><span> </span><span id="local-6989586621679453203"><span class="annot"><span class="annottext">a -&gt; b
+</span><a href="#local-6989586621679453203"><span class="hs-identifier hs-var">_f</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[FromSomeType SerialiseAsBech32 b]
+</span><a href="#local-6989586621679453221"><span class="hs-identifier hs-var">types</span></a></span><span>
+</span><span id="line-121"></span><span>        </span><span class="hs-special">]</span><span>
+</span><span id="line-122"></span><span>
+</span><span id="line-123"></span><span>
+</span><span id="line-124"></span><span class="hs-comment">-- | Bech32 decoding error.</span><span>
+</span><span id="line-125"></span><span class="hs-comment">--</span><span>
+</span><span id="line-126"></span><span class="hs-keyword">data</span><span> </span><span id="Bech32DecodeError"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodeError"><span class="hs-identifier hs-var">Bech32DecodeError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-127"></span><span>
+</span><span id="line-128"></span><span>       </span><span class="hs-comment">-- | There was an error decoding the string as Bech32.</span><span>
+</span><span id="line-129"></span><span>       </span><span id="Bech32DecodingError"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodingError"><span class="hs-identifier hs-var">Bech32DecodingError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><span class="hs-identifier hs-type">Bech32.DecodingError</span></span><span>
+</span><span id="line-130"></span><span>
+</span><span id="line-131"></span><span>       </span><span class="hs-comment">-- | The human-readable prefix in the Bech32-encoded string is not one</span><span>
+</span><span id="line-132"></span><span>       </span><span class="hs-comment">-- of the ones expected.</span><span>
+</span><span id="line-133"></span><span>     </span><span class="hs-glyph">|</span><span> </span><span id="Bech32UnexpectedPrefix"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32UnexpectedPrefix"><span class="hs-identifier hs-var">Bech32UnexpectedPrefix</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span> </span><span class="hs-glyph">!</span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-type">Set</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-134"></span><span>
+</span><span id="line-135"></span><span>       </span><span class="hs-comment">-- | There was an error in extracting a 'ByteString' from the data part of</span><span>
+</span><span id="line-136"></span><span>       </span><span class="hs-comment">-- the Bech32-encoded string.</span><span>
+</span><span id="line-137"></span><span>     </span><span class="hs-glyph">|</span><span> </span><span id="Bech32DataPartToBytesError"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DataPartToBytesError"><span class="hs-identifier hs-var">Bech32DataPartToBytesError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-138"></span><span>
+</span><span id="line-139"></span><span>       </span><span class="hs-comment">-- | There was an error in deserialising the bytes into a value of the</span><span>
+</span><span id="line-140"></span><span>       </span><span class="hs-comment">-- expected type.</span><span>
+</span><span id="line-141"></span><span>     </span><span class="hs-glyph">|</span><span> </span><span id="Bech32DeserialiseFromBytesError"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DeserialiseFromBytesError"><span class="hs-identifier hs-var">Bech32DeserialiseFromBytesError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/bytestring-0.10.12.0/src"><span class="hs-identifier hs-type">ByteString</span></a></span><span>
+</span><span id="line-142"></span><span>
+</span><span id="line-143"></span><span>       </span><span class="hs-comment">-- | The human-readable prefix in the Bech32-encoded string does not</span><span>
+</span><span id="line-144"></span><span>       </span><span class="hs-comment">-- correspond to the prefix that should be used for the payload value.</span><span>
+</span><span id="line-145"></span><span>     </span><span class="hs-glyph">|</span><span> </span><span id="Bech32WrongPrefix"><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32WrongPrefix"><span class="hs-identifier hs-var">Bech32WrongPrefix</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-146"></span><span>
+</span><span id="line-147"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679453199"><span id="local-6989586621679453201"><span class="annot"><span class="annottext">Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool
+(Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool)
+-&gt; (Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool)
+-&gt; Eq Bech32DecodeError
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+/= :: Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool
+$c/= :: Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool
+== :: Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool
+$c== :: Bech32DecodeError -&gt; Bech32DecodeError -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679453192"><span id="local-6989586621679453194"><span id="local-6989586621679453196"><span class="annot"><span class="annottext">Int -&gt; Bech32DecodeError -&gt; [Char] -&gt; [Char]
+[Bech32DecodeError] -&gt; [Char] -&gt; [Char]
+Bech32DecodeError -&gt; [Char]
+(Int -&gt; Bech32DecodeError -&gt; [Char] -&gt; [Char])
+-&gt; (Bech32DecodeError -&gt; [Char])
+-&gt; ([Bech32DecodeError] -&gt; [Char] -&gt; [Char])
+-&gt; Show Bech32DecodeError
+forall a.
+(Int -&gt; a -&gt; [Char] -&gt; [Char])
+-&gt; (a -&gt; [Char]) -&gt; ([a] -&gt; [Char] -&gt; [Char]) -&gt; Show a
+showList :: [Bech32DecodeError] -&gt; [Char] -&gt; [Char]
+$cshowList :: [Bech32DecodeError] -&gt; [Char] -&gt; [Char]
+show :: Bech32DecodeError -&gt; [Char]
+$cshow :: Bech32DecodeError -&gt; [Char]
+showsPrec :: Int -&gt; Bech32DecodeError -&gt; [Char] -&gt; [Char]
+$cshowsPrec :: Int -&gt; Bech32DecodeError -&gt; [Char] -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-148"></span><span>
+</span><span id="line-149"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodeError"><span class="hs-identifier hs-type">Bech32DecodeError</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-150"></span><span>  </span><span id="local-6989586621679453187"><span class="annot"><span class="annottext">displayError :: Bech32DecodeError -&gt; [Char]
+</span><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayError</span></a></span></span><span> </span><span id="local-6989586621679453185"><span class="annot"><span class="annottext">Bech32DecodeError
+</span><a href="#local-6989586621679453185"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Bech32DecodeError
+</span><a href="#local-6989586621679453185"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-151"></span><span>    </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DecodingError"><span class="hs-identifier hs-type">Bech32DecodingError</span></a></span><span> </span><span id="local-6989586621679453184"><span class="annot"><span class="annottext">DecodingError
+</span><a href="#local-6989586621679453184"><span class="hs-identifier hs-var">decErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DecodingError -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">DecodingError
+</span><a href="#local-6989586621679453184"><span class="hs-identifier hs-var">decErr</span></a></span><span> </span><span class="hs-comment">-- TODO</span><span>
+</span><span id="line-152"></span><span>
+</span><span id="line-153"></span><span>    </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32UnexpectedPrefix"><span class="hs-identifier hs-type">Bech32UnexpectedPrefix</span></a></span><span> </span><span id="local-6989586621679453183"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453183"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span id="local-6989586621679453182"><span class="annot"><span class="annottext">Set Text
+</span><a href="#local-6989586621679453182"><span class="hs-identifier hs-var">permitted</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-154"></span><span>        </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;Unexpected Bech32 prefix: the actual prefix is &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453183"><span class="hs-identifier hs-var">actual</span></a></span><span>
+</span><span id="line-155"></span><span>     </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;, but it was expected to be &quot;</span></span><span>
+</span><span id="line-156"></span><span>     </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [[Char]] -&gt; [Char]
+forall a. [a] -&gt; [[a]] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">List.intercalate</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot; or &quot;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Text -&gt; [Char]) -&gt; [Text] -&gt; [[Char]]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">map</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Set Text -&gt; [Text]
+forall a. Set a -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Set.toList</span></a></span><span> </span><span class="annot"><span class="annottext">Set Text
+</span><a href="#local-6989586621679453182"><span class="hs-identifier hs-var">permitted</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-157"></span><span>
+</span><span id="line-158"></span><span>    </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DataPartToBytesError"><span class="hs-identifier hs-type">Bech32DataPartToBytesError</span></a></span><span> </span><span id="local-6989586621679453179"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453179"><span class="hs-identifier hs-var">_dataPart</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-159"></span><span>        </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;There was an error in extracting the bytes from the data part of the \
+        \Bech32-encoded string.&quot;</span></span><span>
+</span><span id="line-161"></span><span>
+</span><span id="line-162"></span><span>    </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32DeserialiseFromBytesError"><span class="hs-identifier hs-type">Bech32DeserialiseFromBytesError</span></a></span><span> </span><span id="local-6989586621679453178"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679453178"><span class="hs-identifier hs-var">_bytes</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-163"></span><span>        </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;There was an error in deserialising the data part of the \
+        \Bech32-encoded string into a value of the expected type.&quot;</span></span><span>
+</span><span id="line-165"></span><span>
+</span><span id="line-166"></span><span>    </span><span class="annot"><a href="Cardano.Api.SerialiseBech32.html#Bech32WrongPrefix"><span class="hs-identifier hs-type">Bech32WrongPrefix</span></a></span><span> </span><span id="local-6989586621679453177"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453177"><span class="hs-identifier hs-var">actual</span></a></span></span><span> </span><span id="local-6989586621679453176"><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453176"><span class="hs-identifier hs-var">expected</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-167"></span><span>        </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;Mismatch in the Bech32 prefix: the actual prefix is &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453177"><span class="hs-identifier hs-var">actual</span></a></span><span>
+</span><span id="line-168"></span><span>     </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;, but the prefix for this payload value should be &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; [Char]
+forall a. Show a =&gt; a -&gt; [Char]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679453176"><span class="hs-identifier hs-var">expected</span></a></span><span>
+</span><span id="line-169"></span><span>
+</span><span id="line-170"></span></pre></body></html>

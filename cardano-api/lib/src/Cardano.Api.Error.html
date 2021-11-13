@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE ExistentialQuantification #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE GADTSyntax #-}</span><span>
+</span><span id="line-3"></span><span>
+</span><span id="line-4"></span><span class="hs-comment">-- | Class of errors used in the Api.</span><span>
+</span><span id="line-5"></span><span class="hs-comment">--</span><span>
+</span><span id="line-6"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.Api.Error</span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier">Error</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-8"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#throwErrorAsException"><span class="hs-identifier">throwErrorAsException</span></a></span><span>
+</span><span id="line-9"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier">ErrorAsException</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier">FileError</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Prelude</span></a></span><span>
+</span><span id="line-14"></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Exception</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Exception</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">IOException</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">throwIO</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Handle</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">class</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Show</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449819"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span id="Error"><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-var">Error</span></a></span></span><span> </span><span id="local-6989586621679449819"><span class="annot"><a href="#local-6989586621679449819"><span class="hs-identifier hs-type">e</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span>    </span><span id="displayError"><span class="annot"><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-type">displayError</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679449819"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">String</span></a></span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-24"></span><span>    </span><span id="local-6989586621679449793"><span class="annot"><span class="annottext">displayError :: () -&gt; String
+</span><a href="#local-6989586621679449793"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span class="hs-comment">-- | The preferred approach is to use 'Except' or 'ExceptT', but you can if</span><span>
+</span><span id="line-28"></span><span class="hs-comment">-- necessary use IO exceptions.</span><span>
+</span><span id="line-29"></span><span class="hs-comment">--</span><span>
+</span><span id="line-30"></span><span id="local-6989586621679449791"><span id="local-6989586621679449792"><span class="annot"><a href="Cardano.Api.Error.html#throwErrorAsException"><span class="hs-identifier hs-type">throwErrorAsException</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449792"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679449792"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449791"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-31"></span><span id="throwErrorAsException"><span class="annot"><span class="annottext">throwErrorAsException :: e -&gt; IO a
+</span><a href="Cardano.Api.Error.html#throwErrorAsException"><span class="hs-identifier hs-var hs-var">throwErrorAsException</span></a></span></span><span> </span><span id="local-6989586621679449790"><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449790"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ErrorAsException -&gt; IO a
+forall e a. Exception e =&gt; e -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">throwIO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">e -&gt; ErrorAsException
+forall e. Error e =&gt; e -&gt; ErrorAsException
+</span><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-var">ErrorAsException</span></a></span><span> </span><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449790"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span><span class="hs-keyword">data</span><span> </span><span id="ErrorAsException"><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-var">ErrorAsException</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-34"></span><span>     </span><span id="local-6989586621679449788"><span id="ErrorAsException"><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-var">ErrorAsException</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449788"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679449788"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-type">ErrorAsException</span></a></span></span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679449783"><span id="local-6989586621679449786"><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Show</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-type">ErrorAsException</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-37"></span><span>    </span><span id="local-6989586621679449781"><span class="annot"><span class="annottext">show :: ErrorAsException -&gt; String
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var">show</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-type">ErrorAsException</span></a></span><span> </span><span id="local-6989586621679449779"><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449779"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">e -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449779"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-38"></span><span>
+</span><span id="line-39"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679449773"><span id="local-6989586621679449775"><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Exception</span></a></span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-type">ErrorAsException</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-40"></span><span>    </span><span id="local-6989586621679449770"><span class="annot"><span class="annottext">displayException :: ErrorAsException -&gt; String
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayException</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#ErrorAsException"><span class="hs-identifier hs-type">ErrorAsException</span></a></span><span> </span><span id="local-6989586621679449768"><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449768"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">e -&gt; String
+forall e. Error e =&gt; e -&gt; String
+</span><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449768"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-41"></span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span class="hs-keyword">data</span><span> </span><span id="FileError"><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-var">FileError</span></a></span></span><span> </span><span id="local-6989586621679449767"><span class="annot"><a href="#local-6989586621679449767"><span class="hs-identifier hs-type">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="FileError"><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-var">FileError</span></a></span></span><span>   </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">FilePath</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449767"><span class="hs-identifier hs-type">e</span></a></span><span>
+</span><span id="line-44"></span><span>                 </span><span class="hs-glyph">|</span><span> </span><span id="FileErrorTempFile"><span class="annot"><a href="Cardano.Api.Error.html#FileErrorTempFile"><span class="hs-identifier hs-var">FileErrorTempFile</span></a></span></span><span>
+</span><span id="line-45"></span><span>                     </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">FilePath</span></a></span><span>
+</span><span id="line-46"></span><span>                     </span><span class="hs-comment">-- ^ Target path</span><span>
+</span><span id="line-47"></span><span>                     </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">FilePath</span></a></span><span>
+</span><span id="line-48"></span><span>                     </span><span class="hs-comment">-- ^ Temporary path</span><span>
+</span><span id="line-49"></span><span>                     </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Handle</span></a></span><span>
+</span><span id="line-50"></span><span>                 </span><span class="hs-glyph">|</span><span> </span><span id="FileIOError"><span class="annot"><a href="Cardano.Api.Error.html#FileIOError"><span class="hs-identifier hs-var">FileIOError</span></a></span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">FilePath</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">IOException</span></a></span><span>
+</span><span id="line-51"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679449757"><span id="local-6989586621679449759"><span id="local-6989586621679449761"><span class="annot"><span class="annottext">Int -&gt; FileError e -&gt; ShowS
+[FileError e] -&gt; ShowS
+FileError e -&gt; String
+(Int -&gt; FileError e -&gt; ShowS)
+-&gt; (FileError e -&gt; String)
+-&gt; ([FileError e] -&gt; ShowS)
+-&gt; Show (FileError e)
+forall e. Show e =&gt; Int -&gt; FileError e -&gt; ShowS
+forall e. Show e =&gt; [FileError e] -&gt; ShowS
+forall e. Show e =&gt; FileError e -&gt; String
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [FileError e] -&gt; ShowS
+$cshowList :: forall e. Show e =&gt; [FileError e] -&gt; ShowS
+show :: FileError e -&gt; String
+$cshow :: forall e. Show e =&gt; FileError e -&gt; String
+showsPrec :: Int -&gt; FileError e -&gt; ShowS
+$cshowsPrec :: forall e. Show e =&gt; Int -&gt; FileError e -&gt; ShowS
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
+</span><span id="line-52"></span><span>
+</span><span id="line-53"></span><span id="local-6989586621679449756"><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449756"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Cardano.Api.Error.html#Error"><span class="hs-identifier hs-type">Error</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679449756"><span class="hs-identifier hs-type">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-54"></span><span>  </span><span id="local-6989586621679449753"><span class="annot"><span class="annottext">displayError :: FileError e -&gt; String
+</span><a href="#local-6989586621679449753"><span class="hs-identifier hs-var hs-var hs-var hs-var">displayError</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileErrorTempFile"><span class="hs-identifier hs-type">FileErrorTempFile</span></a></span><span> </span><span id="local-6989586621679449752"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449752"><span class="hs-identifier hs-var">targetPath</span></a></span></span><span> </span><span id="local-6989586621679449751"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449751"><span class="hs-identifier hs-var">tempPath</span></a></span></span><span> </span><span id="local-6989586621679449750"><span class="annot"><span class="annottext">Handle
+</span><a href="#local-6989586621679449750"><span class="hs-identifier hs-var">h</span></a></span></span><span class="hs-special">)</span><span class="hs-glyph">=</span><span>
+</span><span id="line-55"></span><span>    </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Error creating temporary file at: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449751"><span class="hs-identifier hs-var">tempPath</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span>
+</span><span id="line-56"></span><span>    </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;/n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Target path: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449752"><span class="hs-identifier hs-var">targetPath</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span>
+</span><span id="line-57"></span><span>    </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;/n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Handle: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">Handle -&gt; String
+forall a. Show a =&gt; a -&gt; String
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">show</span></a></span><span> </span><span class="annot"><span class="annottext">Handle
+</span><a href="#local-6989586621679449750"><span class="hs-identifier hs-var">h</span></a></span><span>
+</span><span id="line-58"></span><span>  </span><span class="annot"><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileIOError"><span class="hs-identifier hs-type">FileIOError</span></a></span><span> </span><span id="local-6989586621679449749"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449749"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span id="local-6989586621679449748"><span class="annot"><span class="annottext">IOException
+</span><a href="#local-6989586621679449748"><span class="hs-identifier hs-var">ioe</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-59"></span><span>    </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449749"><span class="hs-identifier hs-var">path</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">IOException -&gt; String
+forall e. Exception e =&gt; e -&gt; String
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">displayException</span></a></span><span> </span><span class="annot"><span class="annottext">IOException
+</span><a href="#local-6989586621679449748"><span class="hs-identifier hs-var">ioe</span></a></span><span>
+</span><span id="line-60"></span><span>  </span><span class="annot"><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Api.Error.html#FileError"><span class="hs-identifier hs-type">FileError</span></a></span><span> </span><span id="local-6989586621679449747"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449747"><span class="hs-identifier hs-var">path</span></a></span></span><span> </span><span id="local-6989586621679449746"><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449746"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-61"></span><span>    </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679449747"><span class="hs-identifier hs-var">path</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">e -&gt; String
+forall e. Error e =&gt; e -&gt; String
+</span><a href="Cardano.Api.Error.html#displayError"><span class="hs-identifier hs-var">displayError</span></a></span><span> </span><span class="annot"><span class="annottext">e
+</span><a href="#local-6989586621679449746"><span class="hs-identifier hs-var">e</span></a></span></span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span>
+</span><span id="line-64"></span></pre></body></html>

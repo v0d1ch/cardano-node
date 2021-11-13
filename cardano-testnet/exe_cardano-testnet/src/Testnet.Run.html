@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Testnet.Run</span><span>
+</span><span id="line-2"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier">runTestnet</span></a></span><span>
+</span><span id="line-3"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Monad</span></a></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Monad.IO.Class</span></a></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.Trans.Resource</span></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Bool</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Function</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Int</span></a></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Maybe</span></a></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">System.Console.ANSI</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Color</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">ColorIntensity</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">ConsoleLayer</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">SGR</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier">IO</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Concurrent</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">IO</span></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/stm-2.5.0.0/src"><span class="hs-identifier">Control.Concurrent.STM</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">STM</span></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">System.Console.ANSI</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">ANSI</span></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.Exit</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">IO</span></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">IO</span></span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-23"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Testnet.Conf</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="annot"><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-type">testnetProperty</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Maybe</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Int</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">H.Conf</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Property</span></span><span>
+</span><span id="line-26"></span><span id="testnetProperty"><span class="annot"><span class="annottext">testnetProperty :: Maybe Int -&gt; (Conf -&gt; Integration ()) -&gt; Property
+</span><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-var hs-var">testnetProperty</span></a></span></span><span> </span><span id="local-6989586621679078817"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679078817"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679078816"><span class="annot"><span class="annottext">Conf -&gt; Integration ()
+</span><a href="#local-6989586621679078816"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HasCallStack =&gt; Integration () -&gt; Property
+Integration () -&gt; Property
+</span><span class="hs-identifier hs-var">H.integration</span></span><span> </span><span class="annot"><span class="annottext">(Integration () -&gt; Property)
+-&gt; ((FilePath -&gt; Integration ()) -&gt; Integration ())
+-&gt; (FilePath -&gt; Integration ())
+-&gt; Property
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Integration () -&gt; Integration ()
+forall a. Integration a -&gt; Integration a
+</span><span class="hs-identifier hs-var">H.runFinallies</span></span><span> </span><span class="annot"><span class="annottext">(Integration () -&gt; Integration ())
+-&gt; ((FilePath -&gt; Integration ()) -&gt; Integration ())
+-&gt; (FilePath -&gt; Integration ())
+-&gt; Integration ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; (FilePath -&gt; Integration ()) -&gt; Integration ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.workspace</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;chairman&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; Integration ()) -&gt; Property)
+-&gt; (FilePath -&gt; Integration ()) -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679078811"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679078811"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-27"></span><span>  </span><span id="local-6989586621679078810"><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679078810"><span class="hs-identifier hs-var">conf</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Maybe Int -&gt; Integration Conf
+</span><span class="hs-identifier hs-var">H.mkConf</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679078811"><span class="hs-identifier hs-var">tempAbsPath'</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679078817"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span>
+</span><span id="line-28"></span><span>
+</span><span id="line-29"></span><span>  </span><span class="hs-comment">-- Fork a thread to keep alive indefinitely any resources allocated by testnet.</span><span>
+</span><span id="line-30"></span><span>  </span><span class="annot"><span class="annottext">PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId
+-&gt; Integration ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId
+ -&gt; Integration ())
+-&gt; (IO ()
+    -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId)
+-&gt; IO ()
+-&gt; Integration ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ResourceT IO ThreadId
+-&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId
+forall (m :: * -&gt; *) a. MonadResource m =&gt; ResourceT IO a -&gt; m a
+</span><span class="hs-identifier hs-var">liftResourceT</span></span><span> </span><span class="annot"><span class="annottext">(ResourceT IO ThreadId
+ -&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId)
+-&gt; (IO () -&gt; ResourceT IO ThreadId)
+-&gt; IO ()
+-&gt; PropertyT (ReaderT IntegrationState (ResourceT IO)) ThreadId
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ResourceT IO () -&gt; ResourceT IO ThreadId
+forall (m :: * -&gt; *).
+MonadUnliftIO m =&gt;
+ResourceT m () -&gt; ResourceT m ThreadId
+</span><span class="hs-identifier hs-var">resourceForkIO</span></span><span> </span><span class="annot"><span class="annottext">(ResourceT IO () -&gt; ResourceT IO ThreadId)
+-&gt; (IO () -&gt; ResourceT IO ()) -&gt; IO () -&gt; ResourceT IO ThreadId
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ResourceT IO () -&gt; ResourceT IO ()
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">forever</span></a></span><span> </span><span class="annot"><span class="annottext">(ResourceT IO () -&gt; ResourceT IO ())
+-&gt; (IO () -&gt; ResourceT IO ()) -&gt; IO () -&gt; ResourceT IO ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">IO () -&gt; ResourceT IO ()
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; Integration ()) -&gt; IO () -&gt; Integration ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.threadDelay</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">10000000</span></span><span>
+</span><span id="line-31"></span><span>
+</span><span id="line-32"></span><span>  </span><span class="annot"><span class="annottext">Integration () -&gt; Integration ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(Integration () -&gt; Integration ())
+-&gt; Integration () -&gt; Integration ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Conf -&gt; Integration ()
+</span><a href="#local-6989586621679078816"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679078810"><span class="hs-identifier hs-var">conf</span></a></span><span>
+</span><span id="line-33"></span><span>
+</span><span id="line-34"></span><span>  </span><span class="annot"><span class="annottext">Integration ()
+forall (m :: * -&gt; *) a. (MonadTest m, HasCallStack) =&gt; m a
+</span><span class="hs-identifier hs-var">H.failure</span></span><span> </span><span class="hs-comment">-- Intentional failure to force failure report</span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span id="local-6989586621679078801"><span class="annot"><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-type">runTestnet</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Maybe</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Int</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">H.Conf</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">H.Integration</span></span><span> </span><span class="annot"><a href="#local-6989586621679078801"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
+</span><span id="line-37"></span><span id="runTestnet"><span class="annot"><span class="annottext">runTestnet :: Maybe Int -&gt; (Conf -&gt; Integration a) -&gt; IO ()
+</span><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-var hs-var">runTestnet</span></a></span></span><span> </span><span id="local-6989586621679078800"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679078800"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span id="local-6989586621679078799"><span class="annot"><span class="annottext">Conf -&gt; Integration a
+</span><a href="#local-6989586621679078799"><span class="hs-identifier hs-var">tn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679078798"><span class="annot"><span class="annottext">TVar Bool
+</span><a href="#local-6989586621679078798"><span class="hs-identifier hs-var">tvRunning</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; IO (TVar Bool)
+forall a. a -&gt; IO (TVar a)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">STM.newTVarIO</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span>
+</span><span id="line-39"></span><span>
+</span><span id="line-40"></span><span>  </span><span class="annot"><span class="annottext">IO Bool -&gt; IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(IO Bool -&gt; IO ()) -&gt; (Property -&gt; IO Bool) -&gt; Property -&gt; IO ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Property -&gt; IO Bool
+forall (m :: * -&gt; *). MonadIO m =&gt; Property -&gt; m Bool
+</span><span class="hs-identifier hs-var">H.check</span></span><span> </span><span class="annot"><span class="annottext">(Property -&gt; IO ()) -&gt; Property -&gt; IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; (Conf -&gt; Integration ()) -&gt; Property
+</span><a href="Testnet.Run.html#testnetProperty"><span class="hs-identifier hs-var">testnetProperty</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679078800"><span class="hs-identifier hs-var">maybeTestnetMagic</span></a></span><span> </span><span class="annot"><span class="annottext">((Conf -&gt; Integration ()) -&gt; Property)
+-&gt; (Conf -&gt; Integration ()) -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679078795"><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679078795"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><span class="annottext">Integration a -&gt; Integration ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(Integration a -&gt; Integration ())
+-&gt; Integration a -&gt; Integration ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Conf -&gt; Integration a
+</span><a href="#local-6989586621679078799"><span class="hs-identifier hs-var">tn</span></a></span><span> </span><span class="annot"><span class="annottext">Conf
+</span><a href="#local-6989586621679078795"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><span id="line-42"></span><span>    </span><span class="annot"><span class="annottext">IO () -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+IO a -&gt; m a
+</span><span class="hs-identifier hs-var">H.evalIO</span></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; Integration ())
+-&gt; (STM () -&gt; IO ()) -&gt; STM () -&gt; Integration ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">STM () -&gt; IO ()
+forall a. STM a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">STM.atomically</span></a></span><span> </span><span class="annot"><span class="annottext">(STM () -&gt; Integration ()) -&gt; STM () -&gt; Integration ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">TVar Bool -&gt; Bool -&gt; STM ()
+forall a. TVar a -&gt; a -&gt; STM ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">STM.writeTVar</span></a></span><span> </span><span class="annot"><span class="annottext">TVar Bool
+</span><a href="#local-6989586621679078798"><span class="hs-identifier hs-var">tvRunning</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
+</span><span id="line-43"></span><span>
+</span><span id="line-44"></span><span>  </span><span id="local-6989586621679078791"><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679078791"><span class="hs-identifier hs-var">running</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">TVar Bool -&gt; IO Bool
+forall a. TVar a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">STM.readTVarIO</span></a></span><span> </span><span class="annot"><span class="annottext">TVar Bool
+</span><a href="#local-6989586621679078798"><span class="hs-identifier hs-var">tvRunning</span></a></span><span>
+</span><span id="line-45"></span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679078791"><span class="hs-identifier hs-var">running</span></a></span><span>
+</span><span id="line-47"></span><span>    </span><span class="hs-keyword">then</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-48"></span><span>      </span><span class="annot"><span class="annottext">[SGR] -&gt; IO ()
+</span><span class="hs-identifier hs-var">ANSI.setSGR</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">ConsoleLayer -&gt; ColorIntensity -&gt; Color -&gt; SGR
+</span><span class="hs-identifier hs-var">SetColor</span></span><span> </span><span class="annot"><span class="annottext">ConsoleLayer
+</span><span class="hs-identifier hs-var">Foreground</span></span><span> </span><span class="annot"><span class="annottext">ColorIntensity
+</span><span class="hs-identifier hs-var">Vivid</span></span><span> </span><span class="annot"><span class="annottext">Color
+</span><span class="hs-identifier hs-var">Green</span></span><span class="hs-special">]</span><span>
+</span><span id="line-49"></span><span>      </span><span class="annot"><span class="annottext">FilePath -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.putStr</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;Testnet is running.  Type CTRL-C to exit.&quot;</span></span><span>
+</span><span id="line-50"></span><span>      </span><span class="annot"><span class="annottext">[SGR] -&gt; IO ()
+</span><span class="hs-identifier hs-var">ANSI.setSGR</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">SGR
+</span><span class="hs-identifier hs-var">Reset</span></span><span class="hs-special">]</span><span>
+</span><span id="line-51"></span><span>      </span><span class="annot"><span class="annottext">FilePath -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.putStrLn</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-52"></span><span>      </span><span class="annot"><span class="annottext">IO Any -&gt; IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(IO Any -&gt; IO ()) -&gt; (IO () -&gt; IO Any) -&gt; IO () -&gt; IO ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">IO () -&gt; IO Any
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">forever</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; IO ()) -&gt; IO () -&gt; IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.threadDelay</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">10000000</span></span><span>
+</span><span id="line-53"></span><span>    </span><span class="hs-keyword">else</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-54"></span><span>      </span><span class="annot"><span class="annottext">[SGR] -&gt; IO ()
+</span><span class="hs-identifier hs-var">ANSI.setSGR</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">ConsoleLayer -&gt; ColorIntensity -&gt; Color -&gt; SGR
+</span><span class="hs-identifier hs-var">SetColor</span></span><span> </span><span class="annot"><span class="annottext">ConsoleLayer
+</span><span class="hs-identifier hs-var">Foreground</span></span><span> </span><span class="annot"><span class="annottext">ColorIntensity
+</span><span class="hs-identifier hs-var">Vivid</span></span><span> </span><span class="annot"><span class="annottext">Color
+</span><span class="hs-identifier hs-var">Red</span></span><span class="hs-special">]</span><span>
+</span><span id="line-55"></span><span>      </span><span class="annot"><span class="annottext">FilePath -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.putStr</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;Failed to start testnet.&quot;</span></span><span>
+</span><span id="line-56"></span><span>      </span><span class="annot"><span class="annottext">[SGR] -&gt; IO ()
+</span><span class="hs-identifier hs-var">ANSI.setSGR</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">SGR
+</span><span class="hs-identifier hs-var">Reset</span></span><span class="hs-special">]</span><span>
+</span><span id="line-57"></span><span>      </span><span class="annot"><span class="annottext">FilePath -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.putStrLn</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-58"></span><span>      </span><span class="annot"><span class="annottext">IO ()
+forall a. IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">IO.exitFailure</span></a></span><span>
+</span><span id="line-59"></span></pre></body></html>

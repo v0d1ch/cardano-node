@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Golden.Byron.UpdateProposal</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Golden.Byron.UpdateProposal.html#updateProposalTest"><span class="hs-identifier">updateProposalTest</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier">Data.Text</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Text</span></span><span>
+</span><span id="line-9"></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier">Cardano.CLI.Byron.UpdateProposal</span></a></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(===)</span></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Internal.Property</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">failWith</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.OptParse.html"><span class="hs-identifier">Test.OptParse</span></a></span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-18"></span><span>
+</span><span id="line-19"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="annot"><a href="Test.Golden.Byron.UpdateProposal.html#golden_byron_update_proposal"><span class="hs-identifier hs-type">golden_byron_update_proposal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-22"></span><span id="golden_byron_update_proposal"><span class="annot"><span class="annottext">golden_byron_update_proposal :: Property
+</span><a href="Test.Golden.Byron.UpdateProposal.html#golden_byron_update_proposal"><span class="hs-identifier hs-var hs-var">golden_byron_update_proposal</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; (FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679209609"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209609"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-23"></span><span>  </span><span id="local-6989586621679209608"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209608"><span class="hs-identifier hs-var">goldenUpdateProposal</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteInputFile"><span class="hs-identifier hs-var">noteInputFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/data/golden/byron/update-proposal&quot;</span></span><span>
+</span><span id="line-24"></span><span>  </span><span id="local-6989586621679209606"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209606"><span class="hs-identifier hs-var">signingKey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteInputFile"><span class="hs-identifier hs-var">noteInputFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/data/golden/byron/keys/byron.skey&quot;</span></span><span>
+</span><span id="line-25"></span><span>  </span><span id="local-6989586621679209605"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209605"><span class="hs-identifier hs-var">createdUpdateProposal</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209609"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;byron-update-proposal&quot;</span></span><span>
+</span><span id="line-26"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO FilePath -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO FilePath -&gt; PropertyT IO ())
+-&gt; PropertyT IO FilePath -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m FilePath
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-27"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;byron&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;governance&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;create-update-proposal&quot;</span></span><span>
+</span><span id="line-28"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--mainnet&quot;</span></span><span>
+</span><span id="line-29"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--signing-key&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209606"><span class="hs-identifier hs-var">signingKey</span></a></span><span>
+</span><span id="line-30"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--protocol-version-major&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;1&quot;</span></span><span>
+</span><span id="line-31"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--protocol-version-minor&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;0&quot;</span></span><span>
+</span><span id="line-32"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--protocol-version-alt&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;0&quot;</span></span><span>
+</span><span id="line-33"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--application-name&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;cardano-sl&quot;</span></span><span>
+</span><span id="line-34"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--software-version-num&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;1&quot;</span></span><span>
+</span><span id="line-35"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--system-tag&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;linux&quot;</span></span><span>
+</span><span id="line-36"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--installer-hash&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;0&quot;</span></span><span>
+</span><span id="line-37"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--filepath&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209605"><span class="hs-identifier hs-var">createdUpdateProposal</span></a></span><span>
+</span><span id="line-38"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-39"></span><span>
+</span><span id="line-40"></span><span>  </span><span id="local-6989586621679209601"><span class="annot"><span class="annottext">Either ByronUpdateProposalError ByronUpdateProposal
+</span><a href="#local-6989586621679209601"><span class="hs-identifier hs-var">eGolden</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO (Either ByronUpdateProposalError ByronUpdateProposal)
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO (Either ByronUpdateProposalError ByronUpdateProposal)
+ -&gt; PropertyT
+      IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; (ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+    -&gt; IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall e (m :: * -&gt; *) a. ExceptT e m a -&gt; m (Either e a)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier hs-var">runExceptT</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+ -&gt; PropertyT
+      IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">readByronUpdateProposal</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209608"><span class="hs-identifier hs-var">goldenUpdateProposal</span></a></span><span>
+</span><span id="line-41"></span><span>  </span><span id="local-6989586621679209596"><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209596"><span class="hs-identifier hs-var">golden</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either ByronUpdateProposalError ByronUpdateProposal
+</span><a href="#local-6989586621679209601"><span class="hs-identifier hs-var">eGolden</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-42"></span><span>              </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679209595"><span class="annot"><span class="annottext">ByronUpdateProposalError
+</span><a href="#local-6989586621679209595"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe Diff -&gt; FilePath -&gt; PropertyT IO ByronUpdateProposal
+forall (m :: * -&gt; *) a.
+(MonadTest m, HasCallStack) =&gt;
+Maybe Diff -&gt; FilePath -&gt; m a
+</span><span class="hs-identifier hs-var">failWith</span></span><span> </span><span class="annot"><span class="annottext">Maybe Diff
+forall a. Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Nothing</span></a></span><span> </span><span class="annot"><span class="annottext">(FilePath -&gt; PropertyT IO ByronUpdateProposal)
+-&gt; (Text -&gt; FilePath) -&gt; Text -&gt; PropertyT IO ByronUpdateProposal
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; FilePath
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">Text.unpack</span></a></span><span> </span><span class="annot"><span class="annottext">(Text -&gt; PropertyT IO ByronUpdateProposal)
+-&gt; Text -&gt; PropertyT IO ByronUpdateProposal
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposalError -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">renderByronUpdateProposalError</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposalError
+</span><a href="#local-6989586621679209595"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-43"></span><span>              </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Right</span></a></span><span> </span><span id="local-6989586621679209592"><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209592"><span class="hs-identifier hs-var">prop</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; PropertyT IO ByronUpdateProposal
+forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">return</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209592"><span class="hs-identifier hs-var">prop</span></a></span><span>
+</span><span id="line-44"></span><span>
+</span><span id="line-45"></span><span>  </span><span id="local-6989586621679209591"><span class="annot"><span class="annottext">Either ByronUpdateProposalError ByronUpdateProposal
+</span><a href="#local-6989586621679209591"><span class="hs-identifier hs-var">eCreated</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IO (Either ByronUpdateProposalError ByronUpdateProposal)
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO (Either ByronUpdateProposalError ByronUpdateProposal)
+ -&gt; PropertyT
+      IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; (ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+    -&gt; IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall e (m :: * -&gt; *) a. ExceptT e m a -&gt; m (Either e a)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier hs-var">runExceptT</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+ -&gt; PropertyT
+      IO (Either ByronUpdateProposalError ByronUpdateProposal))
+-&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+-&gt; PropertyT
+     IO (Either ByronUpdateProposalError ByronUpdateProposal)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; ExceptT ByronUpdateProposalError IO ByronUpdateProposal
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">readByronUpdateProposal</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679209605"><span class="hs-identifier hs-var">createdUpdateProposal</span></a></span><span>
+</span><span id="line-46"></span><span>  </span><span id="local-6989586621679209590"><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209590"><span class="hs-identifier hs-var">created</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either ByronUpdateProposalError ByronUpdateProposal
+</span><a href="#local-6989586621679209591"><span class="hs-identifier hs-var">eCreated</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-47"></span><span>               </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679209589"><span class="annot"><span class="annottext">ByronUpdateProposalError
+</span><a href="#local-6989586621679209589"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe Diff -&gt; FilePath -&gt; PropertyT IO ByronUpdateProposal
+forall (m :: * -&gt; *) a.
+(MonadTest m, HasCallStack) =&gt;
+Maybe Diff -&gt; FilePath -&gt; m a
+</span><span class="hs-identifier hs-var">failWith</span></span><span> </span><span class="annot"><span class="annottext">Maybe Diff
+forall a. Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Nothing</span></a></span><span> </span><span class="annot"><span class="annottext">(FilePath -&gt; PropertyT IO ByronUpdateProposal)
+-&gt; (Text -&gt; FilePath) -&gt; Text -&gt; PropertyT IO ByronUpdateProposal
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; FilePath
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">Text.unpack</span></a></span><span> </span><span class="annot"><span class="annottext">(Text -&gt; PropertyT IO ByronUpdateProposal)
+-&gt; Text -&gt; PropertyT IO ByronUpdateProposal
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposalError -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">renderByronUpdateProposalError</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposalError
+</span><a href="#local-6989586621679209589"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-48"></span><span>               </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Right</span></a></span><span> </span><span id="local-6989586621679209588"><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209588"><span class="hs-identifier hs-var">prop</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; PropertyT IO ByronUpdateProposal
+forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">return</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209588"><span class="hs-identifier hs-var">prop</span></a></span><span>
+</span><span id="line-49"></span><span>
+</span><span id="line-50"></span><span>  </span><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209596"><span class="hs-identifier hs-var">golden</span></a></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal -&gt; ByronUpdateProposal -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">ByronUpdateProposal
+</span><a href="#local-6989586621679209590"><span class="hs-identifier hs-var">created</span></a></span><span>
+</span><span id="line-51"></span><span>
+</span><span id="line-52"></span><span class="annot"><a href="Test.Golden.Byron.UpdateProposal.html#updateProposalTest"><span class="hs-identifier hs-type">updateProposalTest</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Bool</span></a></span><span>
+</span><span id="line-53"></span><span id="updateProposalTest"><span class="annot"><span class="annottext">updateProposalTest :: IO Bool
+</span><a href="Test.Golden.Byron.UpdateProposal.html#updateProposalTest"><span class="hs-identifier hs-var hs-var">updateProposalTest</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-54"></span><span>  </span><span class="annot"><span class="annottext">Group -&gt; IO Bool
+forall (m :: * -&gt; *). MonadIO m =&gt; Group -&gt; m Bool
+</span><span class="hs-identifier hs-var">H.checkSequential</span></span><span>
+</span><span id="line-55"></span><span>    </span><span class="annot"><span class="annottext">(Group -&gt; IO Bool) -&gt; Group -&gt; IO Bool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">GroupName -&gt; [(PropertyName, Property)] -&gt; Group
+</span><span class="hs-identifier hs-var">H.Group</span></span><span> </span><span class="annot"><span class="annottext">GroupName
+</span><span class="hs-string">&quot;Byron Update Proposal Golden&quot;</span></span><span>
+</span><span id="line-56"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;golden_byron_update_proposal&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Golden.Byron.UpdateProposal.html#golden_byron_update_proposal"><span class="hs-identifier hs-var">golden_byron_update_proposal</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span>        </span><span class="hs-special">]</span><span>
+</span><span id="line-58"></span></pre></body></html>

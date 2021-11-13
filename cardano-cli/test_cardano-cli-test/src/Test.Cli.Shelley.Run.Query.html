@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cli.Shelley.Run.Query</span><span>
+</span><span id="line-2"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cli.Shelley.Run.Query.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-3"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Slotting.Time</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">RelativeTime</span></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Control.Monad</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">return</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Bool</span></a></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Function</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(===)</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">IO</span></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Query</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Q</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span> </span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Test.Cli.Shelley.Run.Query.html#unit_percentage"><span class="hs-identifier hs-type">unit_percentage</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-17"></span><span id="unit_percentage"><span class="annot"><span class="annottext">unit_percentage :: Property
+</span><a href="Test.Cli.Shelley.Run.Query.html#unit_percentage"><span class="hs-identifier hs-var hs-var">unit_percentage</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HasCallStack =&gt; Integration () -&gt; Property
+Integration () -&gt; Property
+</span><span class="hs-identifier hs-var">H.propertyOnce</span></span><span> </span><span class="annot"><span class="annottext">(Integration () -&gt; Property) -&gt; Integration () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-18"></span><span>  </span><span class="annot"><span class="annottext">RelativeTime -&gt; RelativeTime -&gt; RelativeTime -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">Q.percentage</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;100.00&quot;</span></span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="annottext">RelativeTime -&gt; RelativeTime -&gt; RelativeTime -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">Q.percentage</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">990</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;100.00&quot;</span></span><span>
+</span><span id="line-20"></span><span>  </span><span class="annot"><span class="annottext">RelativeTime -&gt; RelativeTime -&gt; RelativeTime -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">Q.percentage</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">980</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;99.00&quot;</span></span><span>
+</span><span id="line-21"></span><span>  </span><span class="annot"><span class="annottext">RelativeTime -&gt; RelativeTime -&gt; RelativeTime -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">Q.percentage</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">500</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;51.05&quot;</span></span><span>
+</span><span id="line-22"></span><span>  </span><span class="annot"><span class="annottext">RelativeTime -&gt; RelativeTime -&gt; RelativeTime -&gt; Text
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">Q.percentage</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NominalDiffTime -&gt; RelativeTime
+</span><span class="hs-identifier hs-var">RelativeTime</span></span><span> </span><span class="annot"><span class="annottext">NominalDiffTime
+</span><span class="hs-number">1000</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Integration ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;1.10&quot;</span></span><span>
+</span><span id="line-23"></span><span>  </span><span class="annot"><span class="annottext">() -&gt; Integration ()
+forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">return</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="annot"><a href="Test.Cli.Shelley.Run.Query.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Bool</span></a></span><span>
+</span><span id="line-26"></span><span id="tests"><span class="annot"><span class="annottext">tests :: IO Bool
+</span><a href="Test.Cli.Shelley.Run.Query.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-27"></span><span>  </span><span class="annot"><span class="annottext">Group -&gt; IO Bool
+forall (m :: * -&gt; *). MonadIO m =&gt; Group -&gt; m Bool
+</span><span class="hs-identifier hs-var">H.checkSequential</span></span><span>
+</span><span id="line-28"></span><span>    </span><span class="annot"><span class="annottext">(Group -&gt; IO Bool) -&gt; Group -&gt; IO Bool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">GroupName -&gt; [(PropertyName, Property)] -&gt; Group
+</span><span class="hs-identifier hs-var">H.Group</span></span><span> </span><span class="annot"><span class="annottext">GroupName
+</span><span class="hs-string">&quot;Pioneers Example 6&quot;</span></span><span>
+</span><span id="line-29"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;prop_createZeroLovelaceTxOutTransaction&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Cli.Shelley.Run.Query.html#unit_percentage"><span class="hs-identifier hs-var">unit_percentage</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-30"></span><span>        </span><span class="hs-special">]</span><span>
+</span><span id="line-31"></span></pre></body></html>

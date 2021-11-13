@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Api.Typed.Value</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Prelude</span></a></span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Aeson</span></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.List</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">groupBy</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">sort</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier">Data.Map.Strict</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">forAll</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">tripping</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(===)</span></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testProperty</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.TH</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testGroupGenerator</span></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Cardano.Api.Shelley</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Gen.Cardano.Api.Typed</span></a></span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_JSON"><span class="hs-identifier hs-type">prop_roundtrip_Value_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-21"></span><span id="prop_roundtrip_Value_JSON"><span class="annot"><span class="annottext">prop_roundtrip_Value_JSON :: Property
+</span><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_Value_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-22"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span> </span><span id="local-6989586621679271078"><span class="annot"><span class="annottext">Value
+</span><a href="#local-6989586621679271078"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen Value -&gt; PropertyT IO Value
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen Value
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genValueDefault</span></a></span><span>
+</span><span id="line-23"></span><span>                </span><span class="annot"><span class="annottext">Value
+-&gt; (Value -&gt; ByteString)
+-&gt; (ByteString -&gt; Either String Value)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">tripping</span></span><span> </span><span class="annot"><span class="annottext">Value
+</span><a href="#local-6989586621679271078"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Value -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Either String Value
+forall a. FromJSON a =&gt; ByteString -&gt; Either String a
+</span><span class="hs-identifier hs-var">eitherDecode</span></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_flatten_unflatten"><span class="hs-identifier hs-type">prop_roundtrip_Value_flatten_unflatten</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-27"></span><span id="prop_roundtrip_Value_flatten_unflatten"><span class="annot"><span class="annottext">prop_roundtrip_Value_flatten_unflatten :: Property
+</span><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_flatten_unflatten"><span class="hs-identifier hs-var hs-var">prop_roundtrip_Value_flatten_unflatten</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-28"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span> </span><span id="local-6989586621679271073"><span class="annot"><span class="annottext">Value
+</span><a href="#local-6989586621679271073"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen Value -&gt; PropertyT IO Value
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen Value
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genValueDefault</span></a></span><span>
+</span><span id="line-29"></span><span>                </span><span class="annot"><span class="annottext">ValueNestedRep -&gt; Value
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">valueFromNestedRep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Value -&gt; ValueNestedRep
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">valueToNestedRep</span></a></span><span> </span><span class="annot"><span class="annottext">Value
+</span><a href="#local-6989586621679271073"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Value -&gt; Value -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Value
+</span><a href="#local-6989586621679271073"><span class="hs-identifier hs-var">v</span></a></span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_unflatten_flatten"><span class="hs-identifier hs-type">prop_roundtrip_Value_unflatten_flatten</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-32"></span><span id="prop_roundtrip_Value_unflatten_flatten"><span class="annot"><span class="annottext">prop_roundtrip_Value_unflatten_flatten :: Property
+</span><a href="Test.Cardano.Api.Typed.Value.html#prop_roundtrip_Value_unflatten_flatten"><span class="hs-identifier hs-var hs-var">prop_roundtrip_Value_unflatten_flatten</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-33"></span><span>    </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-34"></span><span>      </span><span id="local-6989586621679271069"><span class="annot"><span class="annottext">ValueNestedRep
+</span><a href="#local-6989586621679271069"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen ValueNestedRep -&gt; PropertyT IO ValueNestedRep
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen ValueNestedRep
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genValueNestedRep</span></a></span><span>
+</span><span id="line-35"></span><span>      </span><span class="annot"><span class="annottext">ValueNestedRep -&gt; ValueNestedRep
+</span><a href="Test.Cardano.Api.Typed.Value.html#canonicalise"><span class="hs-identifier hs-var">canonicalise</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedRep
+</span><a href="#local-6989586621679271069"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedRep -&gt; ValueNestedRep -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; ValueNestedRep
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">valueToNestedRep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ValueNestedRep -&gt; Value
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">valueFromNestedRep</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedRep
+</span><a href="#local-6989586621679271069"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#canonicalise"><span class="hs-identifier hs-type">canonicalise</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedRep</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedRep</span></a></span><span>
+</span><span id="line-38"></span><span id="canonicalise"><span class="annot"><span class="annottext">canonicalise :: ValueNestedRep -&gt; ValueNestedRep
+</span><a href="Test.Cardano.Api.Typed.Value.html#canonicalise"><span class="hs-identifier hs-var hs-var">canonicalise</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-39"></span><span>    </span><span class="annot"><span class="annottext">[ValueNestedBundle] -&gt; ValueNestedRep
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ValueNestedRep</span></a></span><span>
+</span><span id="line-40"></span><span>  </span><span class="annot"><span class="annottext">([ValueNestedBundle] -&gt; ValueNestedRep)
+-&gt; (ValueNestedRep -&gt; [ValueNestedBundle])
+-&gt; ValueNestedRep
+-&gt; ValueNestedRep
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">(ValueNestedBundle -&gt; Bool)
+-&gt; [ValueNestedBundle] -&gt; [ValueNestedBundle]
+forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">filter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">not</span></a></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; Bool)
+-&gt; (ValueNestedBundle -&gt; Bool) -&gt; ValueNestedBundle -&gt; Bool
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle -&gt; Bool
+</span><a href="#local-6989586621679271063"><span class="hs-identifier hs-var">isZeroOrEmpty</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>  </span><span class="annot"><span class="annottext">([ValueNestedBundle] -&gt; [ValueNestedBundle])
+-&gt; (ValueNestedRep -&gt; [ValueNestedBundle])
+-&gt; ValueNestedRep
+-&gt; [ValueNestedBundle]
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">([ValueNestedBundle] -&gt; ValueNestedBundle)
+-&gt; [[ValueNestedBundle]] -&gt; [ValueNestedBundle]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">map</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ValueNestedBundle -&gt; ValueNestedBundle
+</span><a href="#local-6989586621679271062"><span class="hs-identifier hs-var">filterZeros</span></a></span><span> </span><span class="annot"><span class="annottext">(ValueNestedBundle -&gt; ValueNestedBundle)
+-&gt; ([ValueNestedBundle] -&gt; ValueNestedBundle)
+-&gt; [ValueNestedBundle]
+-&gt; ValueNestedBundle
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">(ValueNestedBundle -&gt; ValueNestedBundle -&gt; ValueNestedBundle)
+-&gt; [ValueNestedBundle] -&gt; ValueNestedBundle
+forall (t :: * -&gt; *) a. Foldable t =&gt; (a -&gt; a -&gt; a) -&gt; t a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">foldl1</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle -&gt; ValueNestedBundle -&gt; ValueNestedBundle
+</span><a href="#local-6989586621679271060"><span class="hs-identifier hs-var">mergeBundle</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-42"></span><span>  </span><span class="annot"><span class="annottext">([[ValueNestedBundle]] -&gt; [ValueNestedBundle])
+-&gt; (ValueNestedRep -&gt; [[ValueNestedBundle]])
+-&gt; ValueNestedRep
+-&gt; [ValueNestedBundle]
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">(ValueNestedBundle -&gt; ValueNestedBundle -&gt; Bool)
+-&gt; [ValueNestedBundle] -&gt; [[ValueNestedBundle]]
+forall a. (a -&gt; a -&gt; Bool) -&gt; [a] -&gt; [[a]]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">groupBy</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle -&gt; ValueNestedBundle -&gt; Bool
+</span><a href="#local-6989586621679271059"><span class="hs-identifier hs-var">samePolicyId</span></a></span><span>
+</span><span id="line-43"></span><span>  </span><span class="annot"><span class="annottext">([ValueNestedBundle] -&gt; [[ValueNestedBundle]])
+-&gt; (ValueNestedRep -&gt; [ValueNestedBundle])
+-&gt; ValueNestedRep
+-&gt; [[ValueNestedBundle]]
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">[ValueNestedBundle] -&gt; [ValueNestedBundle]
+forall a. Ord a =&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">sort</span></a></span><span>
+</span><span id="line-44"></span><span>  </span><span class="annot"><span class="annottext">([ValueNestedBundle] -&gt; [ValueNestedBundle])
+-&gt; (ValueNestedRep -&gt; [ValueNestedBundle])
+-&gt; ValueNestedRep
+-&gt; [ValueNestedBundle]
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedRep</span></a></span><span> </span><span id="local-6989586621679271058"><span class="annot"><span class="annottext">[ValueNestedBundle]
+</span><a href="#local-6989586621679271058"><span class="hs-identifier hs-var">bundles</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[ValueNestedBundle]
+</span><a href="#local-6989586621679271058"><span class="hs-identifier hs-var">bundles</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-45"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-46"></span><span>    </span><span id="local-6989586621679271059"><span class="annot"><span class="annottext">samePolicyId :: ValueNestedBundle -&gt; ValueNestedBundle -&gt; Bool
+</span><a href="#local-6989586621679271059"><span class="hs-identifier hs-var hs-var">samePolicyId</span></a></span></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span>
+</span><span id="line-47"></span><span>                 </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
+</span><span id="line-48"></span><span>    </span><span class="annot"><a href="#local-6989586621679271059"><span class="hs-identifier hs-var">samePolicyId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span id="local-6989586621679271055"><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271055"><span class="hs-identifier hs-var">pid</span></a></span></span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span>
+</span><span id="line-49"></span><span>                 </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span id="local-6989586621679271054"><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271054"><span class="hs-identifier hs-var">pid'</span></a></span></span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271055"><span class="hs-identifier hs-var">pid</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId -&gt; PolicyId -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">==</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271054"><span class="hs-identifier hs-var">pid'</span></a></span><span>
+</span><span id="line-50"></span><span>    </span><span class="annot"><a href="#local-6989586621679271059"><span class="hs-identifier hs-var">samePolicyId</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span>
+</span><span id="line-51"></span><span>
+</span><span id="line-52"></span><span>    </span><span class="hs-comment">-- Merge together bundles that have already been grouped by same PolicyId:</span><span>
+</span><span id="line-53"></span><span>    </span><span id="local-6989586621679271060"><span class="annot"><span class="annottext">mergeBundle :: ValueNestedBundle -&gt; ValueNestedBundle -&gt; ValueNestedBundle
+</span><a href="#local-6989586621679271060"><span class="hs-identifier hs-var hs-var">mergeBundle</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span> </span><span id="local-6989586621679271053"><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271053"><span class="hs-identifier hs-var">q</span></a></span></span><span class="hs-special">)</span><span>
+</span><span id="line-54"></span><span>                </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span> </span><span id="local-6989586621679271052"><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271052"><span class="hs-identifier hs-var">q'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-55"></span><span>      </span><span class="annot"><span class="annottext">Quantity -&gt; ValueNestedBundle
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ValueNestedBundleAda</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271053"><span class="hs-identifier hs-var">q</span></a></span><span> </span><span class="annot"><span class="annottext">Quantity -&gt; Quantity -&gt; Quantity
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271052"><span class="hs-identifier hs-var">q'</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span>    </span><span class="annot"><a href="#local-6989586621679271060"><span class="hs-identifier hs-var">mergeBundle</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span id="local-6989586621679271051"><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271051"><span class="hs-identifier hs-var">pid</span></a></span></span><span>  </span><span id="local-6989586621679271050"><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271050"><span class="hs-keyword hs-var">as</span></a></span></span><span class="hs-special">)</span><span>
+</span><span id="line-58"></span><span>                </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span id="local-6989586621679271049"><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271049"><span class="hs-identifier hs-var">pid'</span></a></span></span><span> </span><span id="local-6989586621679271048"><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271048"><span class="hs-identifier hs-var">as'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271051"><span class="hs-identifier hs-var">pid</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId -&gt; PolicyId -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">==</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271049"><span class="hs-identifier hs-var">pid'</span></a></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-59"></span><span>      </span><span class="annot"><span class="annottext">PolicyId -&gt; Map AssetName Quantity -&gt; ValueNestedBundle
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ValueNestedBundle</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271051"><span class="hs-identifier hs-var">pid</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Quantity -&gt; Quantity -&gt; Quantity)
+-&gt; Map AssetName Quantity
+-&gt; Map AssetName Quantity
+-&gt; Map AssetName Quantity
+forall k a. Ord k =&gt; (a -&gt; a -&gt; a) -&gt; Map k a -&gt; Map k a -&gt; Map k a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Map.unionWith</span></a></span><span> </span><span class="annot"><span class="annottext">Quantity -&gt; Quantity -&gt; Quantity
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">(&lt;&gt;)</span></a></span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271050"><span class="hs-keyword hs-var">as</span></a></span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271048"><span class="hs-identifier hs-var">as'</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-60"></span><span>
+</span><span id="line-61"></span><span>    </span><span class="annot"><a href="#local-6989586621679271060"><span class="hs-identifier hs-var">mergeBundle</span></a></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; ValueNestedBundle
+forall a. HasCallStack =&gt; String -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">error</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;canonicalise.mergeBundle: impossible&quot;</span></span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span>    </span><span id="local-6989586621679271062"><span class="annot"><span class="annottext">filterZeros :: ValueNestedBundle -&gt; ValueNestedBundle
+</span><a href="#local-6989586621679271062"><span class="hs-identifier hs-var hs-var">filterZeros</span></a></span></span><span> </span><span id="local-6989586621679271045"><span class="annot"><span class="annottext">b :: ValueNestedBundle
+</span><a href="#local-6989586621679271045"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span class="hs-special">{</span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ValueNestedBundle
+</span><a href="#local-6989586621679271045"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-64"></span><span>    </span><span class="annot"><a href="#local-6989586621679271062"><span class="hs-identifier hs-var">filterZeros</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span id="local-6989586621679271044"><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271044"><span class="hs-identifier hs-var">pid</span></a></span></span><span> </span><span id="local-6989586621679271043"><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271043"><span class="hs-keyword hs-var">as</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-65"></span><span>      </span><span class="annot"><span class="annottext">PolicyId -&gt; Map AssetName Quantity -&gt; ValueNestedBundle
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ValueNestedBundle</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><a href="#local-6989586621679271044"><span class="hs-identifier hs-var">pid</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Quantity -&gt; Bool)
+-&gt; Map AssetName Quantity -&gt; Map AssetName Quantity
+forall a k. (a -&gt; Bool) -&gt; Map k a -&gt; Map k a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Map.filter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Quantity -&gt; Quantity -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">/=</span></a></span><span class="annot"><span class="annottext">Quantity
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271043"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-66"></span><span>
+</span><span id="line-67"></span><span>    </span><span id="local-6989586621679271063"><span class="annot"><span class="annottext">isZeroOrEmpty :: ValueNestedBundle -&gt; Bool
+</span><a href="#local-6989586621679271063"><span class="hs-identifier hs-var hs-var">isZeroOrEmpty</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundleAda</span></a></span><span> </span><span id="local-6989586621679271040"><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271040"><span class="hs-identifier hs-var">q</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Quantity
+</span><a href="#local-6989586621679271040"><span class="hs-identifier hs-var">q</span></a></span><span> </span><span class="annot"><span class="annottext">Quantity -&gt; Quantity -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">==</span></a></span><span> </span><span class="annot"><span class="annottext">Quantity
+</span><span class="hs-number">0</span></span><span>
+</span><span id="line-68"></span><span>    </span><span class="annot"><a href="#local-6989586621679271063"><span class="hs-identifier hs-var">isZeroOrEmpty</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">ValueNestedBundle</span></a></span><span> </span><span class="annot"><span class="annottext">PolicyId
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679271039"><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271039"><span class="hs-keyword hs-var">as</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity -&gt; Bool
+forall k a. Map k a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/containers-0.6.2.1/src"><span class="hs-identifier hs-var">Map.null</span></a></span><span> </span><span class="annot"><span class="annottext">Map AssetName Quantity
+</span><a href="#local-6989586621679271039"><span class="hs-keyword hs-var">as</span></a></span><span>
+</span><span id="line-69"></span><span>
+</span><span id="line-70"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-71"></span><span>
+</span><span id="line-72"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-73"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Test.Cardano.Api.Typed.Value.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+[TestTree]
+Property
+String -&gt; [TestTree] -&gt; TestTree
+String -&gt; Property -&gt; TestTree
+testGroup :: String -&gt; [TestTree] -&gt; TestTree
+prop_roundtrip_Value_unflatten_flatten :: Property
+prop_roundtrip_Value_flatten_unflatten :: Property
+prop_roundtrip_Value_JSON :: Property
+testProperty :: String -&gt; Property -&gt; TestTree
+</span><span class="hs-var hs-var hs-var hs-var hs-var">$testGroupGenerator</span></span><span>
+</span><span id="line-74"></span></pre></body></html>

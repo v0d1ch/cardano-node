@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE CPP #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.Config.Git.Rev</span><span> </span><span class="hs-special">(</span><span>
+</span><span id="line-6"></span><span>      </span><span class="annot"><a href="Cardano.Config.Git.Rev.html#gitRev"><span class="hs-identifier">gitRev</span></a></span><span>
+</span><span id="line-7"></span><span>    </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.FileEmbed</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">dummySpaceWith</span></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier">Data.Text</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">T</span></span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.Config.Git.RevFromGit.html"><span class="hs-identifier">Cardano.Config.Git.RevFromGit</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Config.Git.RevFromGit.html#gitRevFromGit"><span class="hs-identifier">gitRevFromGit</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Cardano.Config.Git.Rev.html#gitRev"><span class="hs-identifier hs-type">gitRev</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-17"></span><span id="gitRev"><span class="annot"><span class="annottext">gitRev :: Text
+</span><a href="Cardano.Config.Git.Rev.html#gitRev"><span class="hs-identifier hs-var hs-var">gitRev</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679048474"><span class="hs-identifier hs-var">gitRevEmbed</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">/=</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Cardano.Config.Git.Rev.html#zeroRev"><span class="hs-identifier hs-var">zeroRev</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679048474"><span class="hs-identifier hs-var">gitRevEmbed</span></a></span><span>
+</span><span id="line-18"></span><span>       </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">T.null</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679048470"><span class="hs-identifier hs-var">fromGit</span></a></span><span>         </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Cardano.Config.Git.Rev.html#zeroRev"><span class="hs-identifier hs-var">zeroRev</span></a></span><span>
+</span><span id="line-19"></span><span>       </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">otherwise</span></a></span><span>              </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679048470"><span class="hs-identifier hs-var">fromGit</span></a></span><span>
+</span><span id="line-20"></span><span>    </span><span class="hs-keyword">where</span><span>
+</span><span id="line-21"></span><span>        </span><span class="hs-comment">-- Git revision embedded after compilation using</span><span>
+</span><span id="line-22"></span><span>        </span><span class="hs-comment">-- Data.FileEmbed.injectWith. If nothing has been injected,</span><span>
+</span><span id="line-23"></span><span>        </span><span class="hs-comment">-- this will be filled with 0 characters.</span><span>
+</span><span id="line-24"></span><span>        </span><span class="annot"><a href="#local-6989586621679048474"><span class="hs-identifier hs-type">gitRevEmbed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-25"></span><span>        </span><span id="local-6989586621679048474"><span class="annot"><span class="annottext">gitRevEmbed :: Text
+</span><a href="#local-6989586621679048474"><span class="hs-identifier hs-var hs-var">gitRevEmbed</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Text
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">decodeUtf8</span></a></span><span> </span><span class="hs-special">$(</span><span class="hs-identifier">dummySpaceWith</span><span> </span><span class="hs-string">&quot;gitrev&quot;</span><span> </span><span class="hs-number">40</span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span>        </span><span class="hs-comment">-- Git revision found during compilation by running git. If</span><span>
+</span><span id="line-28"></span><span>        </span><span class="hs-comment">-- git could not be run, then this will be empty.</span><span class="hs-cpp">
+#if defined(arm_HOST_ARCH)
+</span><span>        </span><span class="hs-comment">-- cross compiling to arm fails; due to a linker bug</span><span>
+</span><span id="line-31"></span><span>        </span><span class="hs-identifier">fromGit</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-string">&quot;&quot;</span><span class="hs-cpp">
+#else
+</span><span>        </span><span id="local-6989586621679048470"><span class="annot"><span class="annottext">fromGit :: Text
+</span><a href="#local-6989586621679048470"><span class="hs-identifier hs-var hs-var">fromGit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">T.strip</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Text
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">T.pack</span></a></span><span> </span><span class="hs-special">$(</span><span class="annot"><span class="annottext">String
+</span><span class="hs-identifier">gitRevFromGit</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-cpp">
+#endif
+</span><span>
+</span><span id="line-36"></span><span class="annot"><a href="Cardano.Config.Git.Rev.html#zeroRev"><span class="hs-identifier hs-type">zeroRev</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-37"></span><span id="zeroRev"><span class="annot"><span class="annottext">zeroRev :: Text
+</span><a href="Cardano.Config.Git.Rev.html#zeroRev"><span class="hs-identifier hs-var hs-var">zeroRev</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;0000000000000000000000000000000000000000&quot;</span></span><span>
+</span><span id="line-38"></span></pre></body></html>

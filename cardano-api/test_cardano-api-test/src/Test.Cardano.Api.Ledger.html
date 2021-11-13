@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE StandaloneDeriving #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE TypeApplications #-}</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Api.Ledger</span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Ledger.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Aeson</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testProperty</span></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.TH</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testGroupGenerator</span></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Ledger.Address</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">deserialiseAddr</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">serialiseAddr</span></span><span class="hs-special">)</span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Shelley.Eras</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">StandardCrypto</span></span><span class="hs-special">)</span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.Cardano.Api.Genesis.html"><span class="hs-identifier">Test.Cardano.Api.Genesis</span></a></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Cardano.Ledger.Shelley.Serialisation.Generators.Genesis</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">genAddress</span></span><span class="hs-special">)</span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="annot"><a href="Test.Cardano.Api.Ledger.html#prop_golden_ShelleyGenesis"><span class="hs-identifier hs-type">prop_golden_ShelleyGenesis</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-24"></span><span id="prop_golden_ShelleyGenesis"><span class="annot"><span class="annottext">prop_golden_ShelleyGenesis :: Property
+</span><a href="Test.Cardano.Api.Ledger.html#prop_golden_ShelleyGenesis"><span class="hs-identifier hs-var hs-var">prop_golden_ShelleyGenesis</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ShelleyGenesis StandardShelley -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">H.goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">ShelleyGenesis StandardShelley
+</span><a href="Test.Cardano.Api.Genesis.html#exampleShelleyGenesis"><span class="hs-identifier hs-var">exampleShelleyGenesis</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/ShelleyGenesis&quot;</span></span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span class="hs-comment">-- Keep this here to make sure serialiseAddr/deserialiseAddr are working.</span><span>
+</span><span id="line-27"></span><span class="hs-comment">-- They are defined in the Shelley executable spec and have been wrong at</span><span>
+</span><span id="line-28"></span><span class="hs-comment">-- least once.</span><span>
+</span><span id="line-29"></span><span class="annot"><a href="Test.Cardano.Api.Ledger.html#prop_roundtrip_Address_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_Address_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-30"></span><span id="prop_roundtrip_Address_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_Address_CBOR :: Property
+</span><a href="Test.Cardano.Api.Ledger.html#prop_roundtrip_Address_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_Address_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-31"></span><span>  </span><span class="hs-comment">-- If this fails, FundPair and ShelleyGenesis can also fail.</span><span>
+</span><span id="line-32"></span><span>  </span><span id="local-6989586621679270211"><span class="annot"><span class="annottext">Addr StandardCrypto
+</span><a href="#local-6989586621679270211"><span class="hs-identifier hs-var">addr</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen (Addr StandardCrypto) -&gt; PropertyT IO (Addr StandardCrypto)
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Crypto StandardCrypto =&gt; Gen (Addr StandardCrypto)
+forall crypto. Crypto crypto =&gt; Gen (Addr crypto)
+</span><span class="hs-identifier hs-var">genAddress</span></span><span> </span><span class="hs-glyph">@</span><span class="annot"><span class="hs-identifier hs-type">StandardCrypto</span></span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span>  </span><span class="annot"><span class="annottext">Addr StandardCrypto
+-&gt; (Addr StandardCrypto -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe (Addr StandardCrypto))
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.tripping</span></span><span> </span><span class="annot"><span class="annottext">Addr StandardCrypto
+</span><a href="#local-6989586621679270211"><span class="hs-identifier hs-var">addr</span></a></span><span> </span><span class="annot"><span class="annottext">Addr StandardCrypto -&gt; ByteString
+forall crypto. Addr crypto -&gt; ByteString
+</span><span class="hs-identifier hs-var">serialiseAddr</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe (Addr StandardCrypto)
+forall crypto. Crypto crypto =&gt; ByteString -&gt; Maybe (Addr crypto)
+</span><span class="hs-identifier hs-var">deserialiseAddr</span></span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span><span class="annot"><a href="Test.Cardano.Api.Ledger.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-38"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Test.Cardano.Api.Ledger.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FilePath
+[TestTree]
+Property
+FilePath -&gt; [TestTree] -&gt; TestTree
+FilePath -&gt; Property -&gt; TestTree
+testGroup :: FilePath -&gt; [TestTree] -&gt; TestTree
+prop_roundtrip_Address_CBOR :: Property
+prop_golden_ShelleyGenesis :: Property
+testProperty :: FilePath -&gt; Property -&gt; TestTree
+</span><span class="hs-var hs-var hs-var hs-var">$testGroupGenerator</span></span><span>
+</span><span id="line-39"></span></pre></body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Testnet.Commands</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Function</span></a></span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Monoid</span></a></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Options.Applicative</span></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier">IO</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Testnet.Commands.Byron.html"><span class="hs-identifier">Testnet.Commands.Byron</span></a></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Testnet.Commands.Cardano.html"><span class="hs-identifier">Testnet.Commands.Cardano</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Testnet.Commands.Shelley.html"><span class="hs-identifier">Testnet.Commands.Shelley</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Testnet.Commands.Version.html"><span class="hs-identifier">Testnet.Commands.Version</span></a></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-comment">{- HLINT ignore &quot;Monoid law, left identity&quot; -}</span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="annot"><a href="Testnet.Commands.html#commands"><span class="hs-identifier hs-type">commands</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span id="commands"><span class="annot"><span class="annottext">commands :: Parser (IO ())
+</span><a href="Testnet.Commands.html#commands"><span class="hs-identifier hs-var hs-var">commands</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Parser (IO ())
+</span><a href="Testnet.Commands.html#commandsTestnet"><span class="hs-identifier hs-var">commandsTestnet</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (IO ()) -&gt; Parser (IO ()) -&gt; Parser (IO ())
+forall (f :: * -&gt; *) a. Alternative f =&gt; f a -&gt; f a -&gt; f a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;|&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (IO ())
+</span><a href="Testnet.Commands.html#commandsGeneral"><span class="hs-identifier hs-var">commandsGeneral</span></a></span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="annot"><a href="Testnet.Commands.html#commandsTestnet"><span class="hs-identifier hs-type">commandsTestnet</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-18"></span><span id="commandsTestnet"><span class="annot"><span class="annottext">commandsTestnet :: Parser (IO ())
+</span><a href="Testnet.Commands.html#commandsTestnet"><span class="hs-identifier hs-var hs-var">commandsTestnet</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Mod CommandFields (IO ()) -&gt; Parser (IO ())
+forall a. Mod CommandFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">hsubparser</span></span><span> </span><span class="annot"><span class="annottext">(Mod CommandFields (IO ()) -&gt; Parser (IO ()))
+-&gt; Mod CommandFields (IO ()) -&gt; Parser (IO ())
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+forall a. Monoid a =&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">mempty</span></a></span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod CommandFields (IO ())
+forall a. String -&gt; Mod CommandFields a
+</span><span class="hs-identifier hs-var">commandGroup</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Testnets:&quot;</span></span><span>
+</span><span id="line-20"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+</span><a href="Testnet.Commands.Byron.html#cmdByron"><span class="hs-identifier hs-var">cmdByron</span></a></span><span>
+</span><span id="line-21"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+</span><a href="Testnet.Commands.Cardano.html#cmdCardano"><span class="hs-identifier hs-var">cmdCardano</span></a></span><span>
+</span><span id="line-22"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+</span><a href="Testnet.Commands.Shelley.html#cmdShelley"><span class="hs-identifier hs-var">cmdShelley</span></a></span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="annot"><a href="Testnet.Commands.html#commandsGeneral"><span class="hs-identifier hs-type">commandsGeneral</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-25"></span><span id="commandsGeneral"><span class="annot"><span class="annottext">commandsGeneral :: Parser (IO ())
+</span><a href="Testnet.Commands.html#commandsGeneral"><span class="hs-identifier hs-var hs-var">commandsGeneral</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Mod CommandFields (IO ()) -&gt; Parser (IO ())
+forall a. Mod CommandFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">hsubparser</span></span><span> </span><span class="annot"><span class="annottext">(Mod CommandFields (IO ()) -&gt; Parser (IO ()))
+-&gt; Mod CommandFields (IO ()) -&gt; Parser (IO ())
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+forall a. Monoid a =&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">mempty</span></a></span><span>
+</span><span id="line-26"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod CommandFields (IO ())
+forall a. String -&gt; Mod CommandFields a
+</span><span class="hs-identifier hs-var">commandGroup</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;General:&quot;</span></span><span>
+</span><span id="line-27"></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+-&gt; Mod CommandFields (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod CommandFields (IO ())
+</span><a href="Testnet.Commands.Version.html#cmdVersion"><span class="hs-identifier hs-var">cmdVersion</span></a></span><span>
+</span><span id="line-28"></span></pre></body></html>

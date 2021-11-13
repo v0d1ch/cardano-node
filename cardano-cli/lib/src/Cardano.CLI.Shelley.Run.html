@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.CLI.Shelley.Run</span><span>
+</span><span id="line-2"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyClientCmdError"><span class="hs-identifier">ShelleyClientCmdError</span></a></span><span>
+</span><span id="line-3"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#renderShelleyClientCmdError"><span class="hs-identifier">renderShelleyClientCmdError</span></a></span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier">runShelleyClientCommand</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.Trans.Except.Extra</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">firstExceptT</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Parsers.html"><span class="hs-identifier">Cardano.CLI.Shelley.Parsers</span></a></span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Address.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Address</span></a></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Governance.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Governance</span></a></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Key.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Key</span></a></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Node.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Node</span></a></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Pool</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Query.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Query</span></a></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.StakeAddress.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.StakeAddress</span></a></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Transaction.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Transaction</span></a></span><span>
+</span><span id="line-21"></span><span>                                         </span><span class="hs-comment">-- Block, System, DevOps</span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Genesis.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Genesis</span></a></span><span>
+</span><span id="line-23"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html"><span class="hs-identifier">Cardano.CLI.Shelley.Run.TextView</span></a></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">data</span><span> </span><span id="ShelleyClientCmdError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyClientCmdError"><span class="hs-identifier hs-var">ShelleyClientCmdError</span></a></span></span><span>
+</span><span id="line-26"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="ShelleyCmdAddressError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdAddressError"><span class="hs-identifier hs-var">ShelleyCmdAddressError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Address.html#ShelleyAddressCmdError"><span class="hs-identifier hs-type">ShelleyAddressCmdError</span></a></span><span>
+</span><span id="line-27"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdGenesisError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGenesisError"><span class="hs-identifier hs-var">ShelleyCmdGenesisError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Genesis.html#ShelleyGenesisCmdError"><span class="hs-identifier hs-type">ShelleyGenesisCmdError</span></a></span><span>
+</span><span id="line-28"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdGovernanceError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGovernanceError"><span class="hs-identifier hs-var">ShelleyCmdGovernanceError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Governance.html#ShelleyGovernanceCmdError"><span class="hs-identifier hs-type">ShelleyGovernanceCmdError</span></a></span><span>
+</span><span id="line-29"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdNodeError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdNodeError"><span class="hs-identifier hs-var">ShelleyCmdNodeError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Node.html#ShelleyNodeCmdError"><span class="hs-identifier hs-type">ShelleyNodeCmdError</span></a></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdPoolError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdPoolError"><span class="hs-identifier hs-var">ShelleyCmdPoolError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Pool.html#ShelleyPoolCmdError"><span class="hs-identifier hs-type">ShelleyPoolCmdError</span></a></span><span>
+</span><span id="line-31"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdStakeAddressError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdStakeAddressError"><span class="hs-identifier hs-var">ShelleyCmdStakeAddressError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.StakeAddress.html#ShelleyStakeAddressCmdError"><span class="hs-identifier hs-type">ShelleyStakeAddressCmdError</span></a></span><span>
+</span><span id="line-32"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdTextViewError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTextViewError"><span class="hs-identifier hs-var">ShelleyCmdTextViewError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.TextView.html#ShelleyTextViewFileError"><span class="hs-identifier hs-type">ShelleyTextViewFileError</span></a></span><span>
+</span><span id="line-33"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdTransactionError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTransactionError"><span class="hs-identifier hs-var">ShelleyCmdTransactionError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Transaction.html#ShelleyTxCmdError"><span class="hs-identifier hs-type">ShelleyTxCmdError</span></a></span><span>
+</span><span id="line-34"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdQueryError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdQueryError"><span class="hs-identifier hs-var">ShelleyCmdQueryError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Query.html#ShelleyQueryCmdError"><span class="hs-identifier hs-type">ShelleyQueryCmdError</span></a></span><span>
+</span><span id="line-35"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ShelleyCmdKeyError"><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdKeyError"><span class="hs-identifier hs-var">ShelleyCmdKeyError</span></a></span></span><span> </span><span class="hs-glyph">!</span><span class="annot"><a href="Cardano.CLI.Shelley.Run.Key.html#ShelleyKeyCmdError"><span class="hs-identifier hs-type">ShelleyKeyCmdError</span></a></span><span>
+</span><span id="line-36"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679341788"><span id="local-6989586621679341790"><span id="local-6989586621679341792"><span class="annot"><span class="annottext">Int -&gt; ShelleyClientCmdError -&gt; ShowS
+[ShelleyClientCmdError] -&gt; ShowS
+ShelleyClientCmdError -&gt; String
+(Int -&gt; ShelleyClientCmdError -&gt; ShowS)
+-&gt; (ShelleyClientCmdError -&gt; String)
+-&gt; ([ShelleyClientCmdError] -&gt; ShowS)
+-&gt; Show ShelleyClientCmdError
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [ShelleyClientCmdError] -&gt; ShowS
+$cshowList :: [ShelleyClientCmdError] -&gt; ShowS
+show :: ShelleyClientCmdError -&gt; String
+$cshow :: ShelleyClientCmdError -&gt; String
+showsPrec :: Int -&gt; ShelleyClientCmdError -&gt; ShowS
+$cshowsPrec :: Int -&gt; ShelleyClientCmdError -&gt; ShowS
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span>
+</span><span id="line-37"></span><span>
+</span><span id="line-38"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#renderShelleyClientCmdError"><span class="hs-identifier hs-type">renderShelleyClientCmdError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyClientCmdError"><span class="hs-identifier hs-type">ShelleyClientCmdError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-39"></span><span id="renderShelleyClientCmdError"><span class="annot"><span class="annottext">renderShelleyClientCmdError :: ShelleyCommand -&gt; ShelleyClientCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.html#renderShelleyClientCmdError"><span class="hs-identifier hs-var hs-var">renderShelleyClientCmdError</span></a></span></span><span> </span><span id="local-6989586621679341786"><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span></span><span> </span><span id="local-6989586621679341785"><span class="annot"><span class="annottext">ShelleyClientCmdError
+</span><a href="#local-6989586621679341785"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-40"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ShelleyClientCmdError
+</span><a href="#local-6989586621679341785"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdAddressError"><span class="hs-identifier hs-type">ShelleyCmdAddressError</span></a></span><span> </span><span id="local-6989586621679341784"><span class="annot"><span class="annottext">ShelleyAddressCmdError
+</span><a href="#local-6989586621679341784"><span class="hs-identifier hs-var">addrCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-42"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyAddressCmdError -&gt; Text)
+-&gt; ShelleyAddressCmdError
+-&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyAddressCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Address.html#renderShelleyAddressCmdError"><span class="hs-identifier hs-var">renderShelleyAddressCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyAddressCmdError
+</span><a href="#local-6989586621679341784"><span class="hs-identifier hs-var">addrCmdErr</span></a></span><span>
+</span><span id="line-43"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGenesisError"><span class="hs-identifier hs-type">ShelleyCmdGenesisError</span></a></span><span> </span><span id="local-6989586621679341781"><span class="annot"><span class="annottext">ShelleyGenesisCmdError
+</span><a href="#local-6989586621679341781"><span class="hs-identifier hs-var">genesisCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-44"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyGenesisCmdError -&gt; Text)
+-&gt; ShelleyGenesisCmdError
+-&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyGenesisCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Genesis.html#renderShelleyGenesisCmdError"><span class="hs-identifier hs-var">renderShelleyGenesisCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyGenesisCmdError
+</span><a href="#local-6989586621679341781"><span class="hs-identifier hs-var">genesisCmdErr</span></a></span><span>
+</span><span id="line-45"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGovernanceError"><span class="hs-identifier hs-type">ShelleyCmdGovernanceError</span></a></span><span> </span><span id="local-6989586621679341779"><span class="annot"><span class="annottext">ShelleyGovernanceCmdError
+</span><a href="#local-6989586621679341779"><span class="hs-identifier hs-var">govCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-46"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyGovernanceCmdError -&gt; Text)
+-&gt; ShelleyGovernanceCmdError
+-&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyGovernanceCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Governance.html#renderShelleyGovernanceError"><span class="hs-identifier hs-var">renderShelleyGovernanceError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyGovernanceCmdError
+</span><a href="#local-6989586621679341779"><span class="hs-identifier hs-var">govCmdErr</span></a></span><span>
+</span><span id="line-47"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdNodeError"><span class="hs-identifier hs-type">ShelleyCmdNodeError</span></a></span><span> </span><span id="local-6989586621679341777"><span class="annot"><span class="annottext">ShelleyNodeCmdError
+</span><a href="#local-6989586621679341777"><span class="hs-identifier hs-var">nodeCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-48"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyNodeCmdError -&gt; Text) -&gt; ShelleyNodeCmdError -&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyNodeCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Node.html#renderShelleyNodeCmdError"><span class="hs-identifier hs-var">renderShelleyNodeCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyNodeCmdError
+</span><a href="#local-6989586621679341777"><span class="hs-identifier hs-var">nodeCmdErr</span></a></span><span>
+</span><span id="line-49"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdPoolError"><span class="hs-identifier hs-type">ShelleyCmdPoolError</span></a></span><span> </span><span id="local-6989586621679341775"><span class="annot"><span class="annottext">ShelleyPoolCmdError
+</span><a href="#local-6989586621679341775"><span class="hs-identifier hs-var">poolCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-50"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyPoolCmdError -&gt; Text) -&gt; ShelleyPoolCmdError -&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyPoolCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#renderShelleyPoolCmdError"><span class="hs-identifier hs-var">renderShelleyPoolCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyPoolCmdError
+</span><a href="#local-6989586621679341775"><span class="hs-identifier hs-var">poolCmdErr</span></a></span><span>
+</span><span id="line-51"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdStakeAddressError"><span class="hs-identifier hs-type">ShelleyCmdStakeAddressError</span></a></span><span> </span><span id="local-6989586621679341773"><span class="annot"><span class="annottext">ShelleyStakeAddressCmdError
+</span><a href="#local-6989586621679341773"><span class="hs-identifier hs-var">stakeAddrCmdErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-52"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyStakeAddressCmdError -&gt; Text)
+-&gt; ShelleyStakeAddressCmdError
+-&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyStakeAddressCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.StakeAddress.html#renderShelleyStakeAddressCmdError"><span class="hs-identifier hs-var">renderShelleyStakeAddressCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyStakeAddressCmdError
+</span><a href="#local-6989586621679341773"><span class="hs-identifier hs-var">stakeAddrCmdErr</span></a></span><span>
+</span><span id="line-53"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTextViewError"><span class="hs-identifier hs-type">ShelleyCmdTextViewError</span></a></span><span> </span><span id="local-6989586621679341771"><span class="annot"><span class="annottext">ShelleyTextViewFileError
+</span><a href="#local-6989586621679341771"><span class="hs-identifier hs-var">txtViewErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-54"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyTextViewFileError -&gt; Text)
+-&gt; ShelleyTextViewFileError
+-&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyTextViewFileError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.TextView.html#renderShelleyTextViewFileError"><span class="hs-identifier hs-var">renderShelleyTextViewFileError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyTextViewFileError
+</span><a href="#local-6989586621679341771"><span class="hs-identifier hs-var">txtViewErr</span></a></span><span>
+</span><span id="line-55"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTransactionError"><span class="hs-identifier hs-type">ShelleyCmdTransactionError</span></a></span><span> </span><span id="local-6989586621679341769"><span class="annot"><span class="annottext">ShelleyTxCmdError
+</span><a href="#local-6989586621679341769"><span class="hs-identifier hs-var">txErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-56"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyTxCmdError -&gt; Text) -&gt; ShelleyTxCmdError -&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyTxCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Transaction.html#renderShelleyTxCmdError"><span class="hs-identifier hs-var">renderShelleyTxCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyTxCmdError
+</span><a href="#local-6989586621679341769"><span class="hs-identifier hs-var">txErr</span></a></span><span>
+</span><span id="line-57"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdQueryError"><span class="hs-identifier hs-type">ShelleyCmdQueryError</span></a></span><span> </span><span id="local-6989586621679341767"><span class="annot"><span class="annottext">ShelleyQueryCmdError
+</span><a href="#local-6989586621679341767"><span class="hs-identifier hs-var">queryErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-58"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyQueryCmdError -&gt; Text) -&gt; ShelleyQueryCmdError -&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyQueryCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Query.html#renderShelleyQueryCmdError"><span class="hs-identifier hs-var">renderShelleyQueryCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyQueryCmdError
+</span><a href="#local-6989586621679341767"><span class="hs-identifier hs-var">queryErr</span></a></span><span>
+</span><span id="line-59"></span><span>    </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdKeyError"><span class="hs-identifier hs-type">ShelleyCmdKeyError</span></a></span><span> </span><span id="local-6989586621679341765"><span class="annot"><span class="annottext">ShelleyKeyCmdError
+</span><a href="#local-6989586621679341765"><span class="hs-identifier hs-var">keyErr</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-60"></span><span>       </span><span class="annot"><span class="annottext">ShelleyCommand
+-&gt; (ShelleyKeyCmdError -&gt; Text) -&gt; ShelleyKeyCmdError -&gt; Text
+forall a. ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var">renderError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341786"><span class="hs-identifier hs-var">cmd</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyKeyCmdError -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Run.Key.html#renderShelleyKeyCmdError"><span class="hs-identifier hs-var">renderShelleyKeyCmdError</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyKeyCmdError
+</span><a href="#local-6989586621679341765"><span class="hs-identifier hs-var">keyErr</span></a></span><span>
+</span><span id="line-61"></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-62"></span><span>   </span><span id="local-6989586621679341836"><span class="annot"><a href="#local-6989586621679341783"><span class="hs-identifier hs-type">renderError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679341836"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679341836"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span></span><span>
+</span><span id="line-63"></span><span>   </span><span id="local-6989586621679341783"><span class="annot"><span class="annottext">renderError :: ShelleyCommand -&gt; (a -&gt; Text) -&gt; a -&gt; Text
+</span><a href="#local-6989586621679341783"><span class="hs-identifier hs-var hs-var">renderError</span></a></span></span><span> </span><span id="local-6989586621679341763"><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341763"><span class="hs-identifier hs-var">shelleyCmd</span></a></span></span><span> </span><span id="local-6989586621679341762"><span class="annot"><span class="annottext">a -&gt; Text
+</span><a href="#local-6989586621679341762"><span class="hs-identifier hs-var">renderer</span></a></span></span><span> </span><span id="local-6989586621679341761"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679341761"><span class="hs-identifier hs-var">shelCliCmdErr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-64"></span><span>      </span><span class="annot"><span class="annottext">[Text] -&gt; Text
+forall a. Monoid a =&gt; [a] -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">mconcat</span></a></span><span> </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;Command failed: &quot;</span></span><span>
+</span><span id="line-65"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ShelleyCommand -&gt; Text
+</span><a href="Cardano.CLI.Shelley.Commands.html#renderShelleyCommand"><span class="hs-identifier hs-var">renderShelleyCommand</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyCommand
+</span><a href="#local-6989586621679341763"><span class="hs-identifier hs-var">shelleyCmd</span></a></span><span>
+</span><span id="line-66"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;  Error: &quot;</span></span><span>
+</span><span id="line-67"></span><span>              </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a -&gt; Text
+</span><a href="#local-6989586621679341762"><span class="hs-identifier hs-var">renderer</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679341761"><span class="hs-identifier hs-var">shelCliCmdErr</span></a></span><span>
+</span><span id="line-68"></span><span>              </span><span class="hs-special">]</span><span>
+</span><span id="line-69"></span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span class="hs-comment">--</span><span>
+</span><span id="line-72"></span><span class="hs-comment">-- CLI shelley command dispatch</span><span>
+</span><span id="line-73"></span><span class="hs-comment">--</span><span>
+</span><span id="line-74"></span><span>
+</span><span id="line-75"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-type">runShelleyClientCommand</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#ShelleyCommand"><span class="hs-identifier hs-type">ShelleyCommand</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier hs-type">ExceptT</span></a></span><span> </span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#ShelleyClientCmdError"><span class="hs-identifier hs-type">ShelleyClientCmdError</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-76"></span><span id="runShelleyClientCommand"><span class="annot"><span class="annottext">runShelleyClientCommand :: ShelleyCommand -&gt; ExceptT ShelleyClientCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var hs-var">runShelleyClientCommand</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#AddressCmd"><span class="hs-identifier hs-type">AddressCmd</span></a></span><span>      </span><span id="local-6989586621679341758"><span class="annot"><span class="annottext">AddressCmd
+</span><a href="#local-6989586621679341758"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyAddressCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyAddressCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyAddressCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdAddressError"><span class="hs-identifier hs-var">ShelleyCmdAddressError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyAddressCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyAddressCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">AddressCmd -&gt; ExceptT ShelleyAddressCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Address.html#runAddressCmd"><span class="hs-identifier hs-var">runAddressCmd</span></a></span><span> </span><span class="annot"><span class="annottext">AddressCmd
+</span><a href="#local-6989586621679341758"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-77"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#StakeAddressCmd"><span class="hs-identifier hs-type">StakeAddressCmd</span></a></span><span> </span><span id="local-6989586621679341755"><span class="annot"><span class="annottext">StakeAddressCmd
+</span><a href="#local-6989586621679341755"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyStakeAddressCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyStakeAddressCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyStakeAddressCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdStakeAddressError"><span class="hs-identifier hs-var">ShelleyCmdStakeAddressError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyStakeAddressCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyStakeAddressCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">StakeAddressCmd -&gt; ExceptT ShelleyStakeAddressCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.StakeAddress.html#runStakeAddressCmd"><span class="hs-identifier hs-var">runStakeAddressCmd</span></a></span><span> </span><span class="annot"><span class="annottext">StakeAddressCmd
+</span><a href="#local-6989586621679341755"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-78"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#KeyCmd"><span class="hs-identifier hs-type">KeyCmd</span></a></span><span>          </span><span id="local-6989586621679341752"><span class="annot"><span class="annottext">KeyCmd
+</span><a href="#local-6989586621679341752"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyKeyCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyKeyCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyKeyCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdKeyError"><span class="hs-identifier hs-var">ShelleyCmdKeyError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyKeyCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyKeyCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">KeyCmd -&gt; ExceptT ShelleyKeyCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Key.html#runKeyCmd"><span class="hs-identifier hs-var">runKeyCmd</span></a></span><span> </span><span class="annot"><span class="annottext">KeyCmd
+</span><a href="#local-6989586621679341752"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-79"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#TransactionCmd"><span class="hs-identifier hs-type">TransactionCmd</span></a></span><span>  </span><span id="local-6989586621679341749"><span class="annot"><span class="annottext">TransactionCmd
+</span><a href="#local-6989586621679341749"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyTxCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyTxCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyTxCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTransactionError"><span class="hs-identifier hs-var">ShelleyCmdTransactionError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyTxCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyTxCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">TransactionCmd -&gt; ExceptT ShelleyTxCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Transaction.html#runTransactionCmd"><span class="hs-identifier hs-var">runTransactionCmd</span></a></span><span>  </span><span class="annot"><span class="annottext">TransactionCmd
+</span><a href="#local-6989586621679341749"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#NodeCmd"><span class="hs-identifier hs-type">NodeCmd</span></a></span><span>         </span><span id="local-6989586621679341746"><span class="annot"><span class="annottext">NodeCmd
+</span><a href="#local-6989586621679341746"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyNodeCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyNodeCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyNodeCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdNodeError"><span class="hs-identifier hs-var">ShelleyCmdNodeError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyNodeCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyNodeCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">NodeCmd -&gt; ExceptT ShelleyNodeCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Node.html#runNodeCmd"><span class="hs-identifier hs-var">runNodeCmd</span></a></span><span> </span><span class="annot"><span class="annottext">NodeCmd
+</span><a href="#local-6989586621679341746"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-81"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#PoolCmd"><span class="hs-identifier hs-type">PoolCmd</span></a></span><span>         </span><span id="local-6989586621679341743"><span class="annot"><span class="annottext">PoolCmd
+</span><a href="#local-6989586621679341743"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyPoolCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyPoolCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyPoolCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdPoolError"><span class="hs-identifier hs-var">ShelleyCmdPoolError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyPoolCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyPoolCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">PoolCmd -&gt; ExceptT ShelleyPoolCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Pool.html#runPoolCmd"><span class="hs-identifier hs-var">runPoolCmd</span></a></span><span> </span><span class="annot"><span class="annottext">PoolCmd
+</span><a href="#local-6989586621679341743"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-82"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#QueryCmd"><span class="hs-identifier hs-type">QueryCmd</span></a></span><span>        </span><span id="local-6989586621679341740"><span class="annot"><span class="annottext">QueryCmd
+</span><a href="#local-6989586621679341740"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyQueryCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyQueryCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyQueryCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdQueryError"><span class="hs-identifier hs-var">ShelleyCmdQueryError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyQueryCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyQueryCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">QueryCmd -&gt; ExceptT ShelleyQueryCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Query.html#runQueryCmd"><span class="hs-identifier hs-var">runQueryCmd</span></a></span><span> </span><span class="annot"><span class="annottext">QueryCmd
+</span><a href="#local-6989586621679341740"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-83"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#GovernanceCmd"><span class="hs-identifier hs-type">GovernanceCmd</span></a></span><span>   </span><span id="local-6989586621679341737"><span class="annot"><span class="annottext">GovernanceCmd
+</span><a href="#local-6989586621679341737"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyGovernanceCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyGovernanceCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyGovernanceCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGovernanceError"><span class="hs-identifier hs-var">ShelleyCmdGovernanceError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyGovernanceCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyGovernanceCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">GovernanceCmd -&gt; ExceptT ShelleyGovernanceCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Governance.html#runGovernanceCmd"><span class="hs-identifier hs-var">runGovernanceCmd</span></a></span><span> </span><span class="annot"><span class="annottext">GovernanceCmd
+</span><a href="#local-6989586621679341737"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-84"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#GenesisCmd"><span class="hs-identifier hs-type">GenesisCmd</span></a></span><span>      </span><span id="local-6989586621679341734"><span class="annot"><span class="annottext">GenesisCmd
+</span><a href="#local-6989586621679341734"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyGenesisCmdError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyGenesisCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyGenesisCmdError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdGenesisError"><span class="hs-identifier hs-var">ShelleyCmdGenesisError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyGenesisCmdError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyGenesisCmdError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">GenesisCmd -&gt; ExceptT ShelleyGenesisCmdError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.Genesis.html#runGenesisCmd"><span class="hs-identifier hs-var">runGenesisCmd</span></a></span><span> </span><span class="annot"><span class="annottext">GenesisCmd
+</span><a href="#local-6989586621679341734"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-85"></span><span class="annot"><a href="Cardano.CLI.Shelley.Run.html#runShelleyClientCommand"><span class="hs-identifier hs-var">runShelleyClientCommand</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.CLI.Shelley.Commands.html#TextViewCmd"><span class="hs-identifier hs-type">TextViewCmd</span></a></span><span>     </span><span id="local-6989586621679341731"><span class="annot"><span class="annottext">TextViewCmd
+</span><a href="#local-6989586621679341731"><span class="hs-identifier hs-var">cmd</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ShelleyTextViewFileError -&gt; ShelleyClientCmdError)
+-&gt; ExceptT ShelleyTextViewFileError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall (m :: * -&gt; *) x y a.
+Functor m =&gt;
+(x -&gt; y) -&gt; ExceptT x m a -&gt; ExceptT y m a
+</span><span class="hs-identifier hs-var">firstExceptT</span></span><span> </span><span class="annot"><span class="annottext">ShelleyTextViewFileError -&gt; ShelleyClientCmdError
+</span><a href="Cardano.CLI.Shelley.Run.html#ShelleyCmdTextViewError"><span class="hs-identifier hs-var">ShelleyCmdTextViewError</span></a></span><span> </span><span class="annot"><span class="annottext">(ExceptT ShelleyTextViewFileError IO ()
+ -&gt; ExceptT ShelleyClientCmdError IO ())
+-&gt; ExceptT ShelleyTextViewFileError IO ()
+-&gt; ExceptT ShelleyClientCmdError IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">TextViewCmd -&gt; ExceptT ShelleyTextViewFileError IO ()
+</span><a href="Cardano.CLI.Shelley.Run.TextView.html#runTextViewCmd"><span class="hs-identifier hs-var">runTextViewCmd</span></a></span><span> </span><span class="annot"><span class="annottext">TextViewCmd
+</span><a href="#local-6989586621679341731"><span class="hs-identifier hs-var">cmd</span></a></span><span>
+</span><span id="line-86"></span></pre></body></html>

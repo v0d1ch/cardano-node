@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Testnet.Commands.Shelley</span><span>
+</span><span id="line-2"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier">ShelleyOptions</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-3"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Testnet.Commands.Shelley.html#cmdShelley"><span class="hs-identifier">cmdShelley</span></a></span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Testnet.Commands.Shelley.html#runShelleyOptions"><span class="hs-identifier">runShelleyOptions</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Eq</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Function</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Int</span></a></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Maybe</span></a></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.Semigroup</span></a></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Options.Applicative</span></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier">IO</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Testnet.Run.html"><span class="hs-identifier">Testnet.Run</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier">runTestnet</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Testnet.Shelley</span></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Text.Show</span></a></span><span>
+</span><span id="line-18"></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Options.Applicative</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">OA</span></span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">data</span><span> </span><span id="ShelleyOptions"><span class="annot"><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier hs-var">ShelleyOptions</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="ShelleyOptions"><span class="annot"><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier hs-var">ShelleyOptions</span></a></span></span><span>
+</span><span id="line-22"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="maybeTestnetMagic"><span class="annot"><span class="annottext">ShelleyOptions -&gt; Maybe Int
+</span><a href="Testnet.Commands.Shelley.html#maybeTestnetMagic"><span class="hs-identifier hs-var hs-var">maybeTestnetMagic</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Maybe</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Int</span></a></span><span>
+</span><span id="line-23"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="testnetOptions"><span class="annot"><span class="annottext">ShelleyOptions -&gt; TestnetOptions
+</span><a href="Testnet.Commands.Shelley.html#testnetOptions"><span class="hs-identifier hs-var hs-var">testnetOptions</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestnetOptions</span></span><span>
+</span><span id="line-24"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679078903"><span id="local-6989586621679078905"><span class="annot"><span class="annottext">ShelleyOptions -&gt; ShelleyOptions -&gt; Bool
+(ShelleyOptions -&gt; ShelleyOptions -&gt; Bool)
+-&gt; (ShelleyOptions -&gt; ShelleyOptions -&gt; Bool) -&gt; Eq ShelleyOptions
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+/= :: ShelleyOptions -&gt; ShelleyOptions -&gt; Bool
+$c/= :: ShelleyOptions -&gt; ShelleyOptions -&gt; Bool
+== :: ShelleyOptions -&gt; ShelleyOptions -&gt; Bool
+$c== :: ShelleyOptions -&gt; ShelleyOptions -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679078896"><span id="local-6989586621679078898"><span id="local-6989586621679078900"><span class="annot"><span class="annottext">Int -&gt; ShelleyOptions -&gt; ShowS
+[ShelleyOptions] -&gt; ShowS
+ShelleyOptions -&gt; String
+(Int -&gt; ShelleyOptions -&gt; ShowS)
+-&gt; (ShelleyOptions -&gt; String)
+-&gt; ([ShelleyOptions] -&gt; ShowS)
+-&gt; Show ShelleyOptions
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+showList :: [ShelleyOptions] -&gt; ShowS
+$cshowList :: [ShelleyOptions] -&gt; ShowS
+show :: ShelleyOptions -&gt; String
+$cshow :: ShelleyOptions -&gt; String
+showsPrec :: Int -&gt; ShelleyOptions -&gt; ShowS
+$cshowsPrec :: Int -&gt; ShelleyOptions -&gt; ShowS
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-25"></span><span>
+</span><span id="line-26"></span><span class="annot"><a href="Testnet.Commands.Shelley.html#optsTestnet"><span class="hs-identifier hs-type">optsTestnet</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestnetOptions</span></span><span>
+</span><span id="line-27"></span><span id="optsTestnet"><span class="annot"><span class="annottext">optsTestnet :: Parser TestnetOptions
+</span><a href="Testnet.Commands.Shelley.html#optsTestnet"><span class="hs-identifier hs-var hs-var">optsTestnet</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+-&gt; Int
+-&gt; Double
+-&gt; Int
+-&gt; Int
+-&gt; Double
+-&gt; Integer
+-&gt; TestnetOptions
+</span><span class="hs-identifier hs-var">TestnetOptions</span></span><span>
+</span><span id="line-28"></span><span>  </span><span class="annot"><span class="annottext">(Int
+ -&gt; Int
+ -&gt; Double
+ -&gt; Int
+ -&gt; Int
+ -&gt; Double
+ -&gt; Integer
+ -&gt; TestnetOptions)
+-&gt; Parser Int
+-&gt; Parser
+     (Int
+      -&gt; Double -&gt; Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Int -&gt; Mod OptionFields Int -&gt; Parser Int
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Int
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-29"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;num-praos-nodes&quot;</span></span><span>
+</span><span id="line-30"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Number of PRAOS nodes&quot;</span></span><span>
+</span><span id="line-31"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;COUNT&quot;</span></span><span>
+</span><span id="line-32"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Int
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-33"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Int
+</span><span class="hs-identifier hs-var hs-var">numPraosNodes</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-34"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-35"></span><span>  </span><span class="annot"><span class="annottext">Parser
+  (Int
+   -&gt; Double -&gt; Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+-&gt; Parser Int
+-&gt; Parser
+     (Double -&gt; Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Int -&gt; Mod OptionFields Int -&gt; Parser Int
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Int
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-36"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;num-pool-nodes&quot;</span></span><span>
+</span><span id="line-37"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Number of pool nodes&quot;</span></span><span>
+</span><span id="line-38"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;COUNT&quot;</span></span><span>
+</span><span id="line-39"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Int
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-40"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Int
+</span><span class="hs-identifier hs-var hs-var">numPoolNodes</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-42"></span><span>  </span><span class="annot"><span class="annottext">Parser
+  (Double -&gt; Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+-&gt; Parser Double
+-&gt; Parser (Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Double -&gt; Mod OptionFields Double -&gt; Parser Double
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Double
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-43"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;active-slots-coeff&quot;</span></span><span>
+</span><span id="line-44"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Active slots co-efficient&quot;</span></span><span>
+</span><span id="line-45"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;DOUBLE&quot;</span></span><span>
+</span><span id="line-46"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Double
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-47"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Double -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Double
+</span><span class="hs-identifier hs-var hs-var">activeSlotsCoeff</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-49"></span><span>  </span><span class="annot"><span class="annottext">Parser (Int -&gt; Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+-&gt; Parser Int
+-&gt; Parser (Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Int -&gt; Mod OptionFields Int -&gt; Parser Int
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Int
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-50"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;security-param&quot;</span></span><span>
+</span><span id="line-51"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Security param&quot;</span></span><span>
+</span><span id="line-52"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;INT&quot;</span></span><span>
+</span><span id="line-53"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Int
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-54"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Int
+</span><span class="hs-identifier hs-var hs-var">securityParam</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-55"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-56"></span><span>  </span><span class="annot"><span class="annottext">Parser (Int -&gt; Double -&gt; Integer -&gt; TestnetOptions)
+-&gt; Parser Int -&gt; Parser (Double -&gt; Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Int -&gt; Mod OptionFields Int -&gt; Parser Int
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Int
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-57"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;epoch-length&quot;</span></span><span>
+</span><span id="line-58"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Epoch length&quot;</span></span><span>
+</span><span id="line-59"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;MILLISECONDS&quot;</span></span><span>
+</span><span id="line-60"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Int
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-61"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Int
+</span><span class="hs-identifier hs-var hs-var">epochLength</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-62"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-63"></span><span>  </span><span class="annot"><span class="annottext">Parser (Double -&gt; Integer -&gt; TestnetOptions)
+-&gt; Parser Double -&gt; Parser (Integer -&gt; TestnetOptions)
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Double -&gt; Mod OptionFields Double -&gt; Parser Double
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Double
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-64"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;slot-length&quot;</span></span><span>
+</span><span id="line-65"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Slot length&quot;</span></span><span>
+</span><span id="line-66"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;MILLISECONDS&quot;</span></span><span>
+</span><span id="line-67"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Double
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-68"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Double
+-&gt; Mod OptionFields Double -&gt; Mod OptionFields Double
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Double -&gt; Mod OptionFields Double
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Double
+</span><span class="hs-identifier hs-var hs-var">slotLength</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-69"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-70"></span><span>  </span><span class="annot"><span class="annottext">Parser (Integer -&gt; TestnetOptions)
+-&gt; Parser Integer -&gt; Parser TestnetOptions
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">ReadM Integer -&gt; Mod OptionFields Integer -&gt; Parser Integer
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Integer
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-71"></span><span>      </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Integer
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;max-lovelace-supply&quot;</span></span><span>
+</span><span id="line-72"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Integer
+-&gt; Mod OptionFields Integer -&gt; Mod OptionFields Integer
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Integer
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Max lovelace supply&quot;</span></span><span>
+</span><span id="line-73"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Integer
+-&gt; Mod OptionFields Integer -&gt; Mod OptionFields Integer
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Integer
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;INTEGER&quot;</span></span><span>
+</span><span id="line-74"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Integer
+-&gt; Mod OptionFields Integer -&gt; Mod OptionFields Integer
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Mod OptionFields Integer
+forall a (f :: * -&gt; *). Show a =&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.showDefault</span></span><span>
+</span><span id="line-75"></span><span>      </span><span class="annot"><span class="annottext">Mod OptionFields Integer
+-&gt; Mod OptionFields Integer -&gt; Mod OptionFields Integer
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">Integer -&gt; Mod OptionFields Integer
+forall (f :: * -&gt; *) a. HasValue f =&gt; a -&gt; Mod f a
+</span><span class="hs-identifier hs-var">OA.value</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">TestnetOptions -&gt; Integer
+</span><span class="hs-identifier hs-var hs-var">maxLovelaceSupply</span></span><span> </span><span class="annot"><span class="annottext">TestnetOptions
+</span><span class="hs-identifier hs-var">defaultTestnetOptions</span></span><span class="hs-special">)</span><span>
+</span><span id="line-76"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-77"></span><span>
+</span><span id="line-78"></span><span class="annot"><a href="Testnet.Commands.Shelley.html#optsShelley"><span class="hs-identifier hs-type">optsShelley</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Parser</span></span><span> </span><span class="annot"><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier hs-type">ShelleyOptions</span></a></span><span>
+</span><span id="line-79"></span><span id="optsShelley"><span class="annot"><span class="annottext">optsShelley :: Parser ShelleyOptions
+</span><a href="Testnet.Commands.Shelley.html#optsShelley"><span class="hs-identifier hs-var hs-var">optsShelley</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; TestnetOptions -&gt; ShelleyOptions
+</span><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier hs-var">ShelleyOptions</span></a></span><span>
+</span><span id="line-80"></span><span>  </span><span class="annot"><span class="annottext">(Maybe Int -&gt; TestnetOptions -&gt; ShelleyOptions)
+-&gt; Parser (Maybe Int) -&gt; Parser (TestnetOptions -&gt; ShelleyOptions)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Parser Int -&gt; Parser (Maybe Int)
+forall (f :: * -&gt; *) a. Alternative f =&gt; f a -&gt; f (Maybe a)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">optional</span></a></span><span>
+</span><span id="line-81"></span><span>      </span><span class="hs-special">(</span><span> </span><span class="annot"><span class="annottext">ReadM Int -&gt; Mod OptionFields Int -&gt; Parser Int
+forall a. ReadM a -&gt; Mod OptionFields a -&gt; Parser a
+</span><span class="hs-identifier hs-var">OA.option</span></span><span> </span><span class="annot"><span class="annottext">ReadM Int
+forall a. Read a =&gt; ReadM a
+</span><span class="hs-identifier hs-var">auto</span></span><span>
+</span><span id="line-82"></span><span>        </span><span class="hs-special">(</span><span>   </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasName f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">long</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;testnet-magic&quot;</span></span><span>
+</span><span id="line-83"></span><span>        </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">help</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Testnet magic&quot;</span></span><span>
+</span><span id="line-84"></span><span>        </span><span class="annot"><span class="annottext">Mod OptionFields Int
+-&gt; Mod OptionFields Int -&gt; Mod OptionFields Int
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span>  </span><span class="annot"><span class="annottext">String -&gt; Mod OptionFields Int
+forall (f :: * -&gt; *) a. HasMetavar f =&gt; String -&gt; Mod f a
+</span><span class="hs-identifier hs-var">metavar</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;INT&quot;</span></span><span>
+</span><span id="line-85"></span><span>        </span><span class="hs-special">)</span><span>
+</span><span id="line-86"></span><span>      </span><span class="hs-special">)</span><span>
+</span><span id="line-87"></span><span>  </span><span class="annot"><span class="annottext">Parser (TestnetOptions -&gt; ShelleyOptions)
+-&gt; Parser TestnetOptions -&gt; Parser ShelleyOptions
+forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;*&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Parser TestnetOptions
+</span><a href="Testnet.Commands.Shelley.html#optsTestnet"><span class="hs-identifier hs-var">optsTestnet</span></a></span><span>
+</span><span id="line-88"></span><span>
+</span><span id="line-89"></span><span class="annot"><a href="Testnet.Commands.Shelley.html#runShelleyOptions"><span class="hs-identifier hs-type">runShelleyOptions</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Testnet.Commands.Shelley.html#ShelleyOptions"><span class="hs-identifier hs-type">ShelleyOptions</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-90"></span><span id="runShelleyOptions"><span class="annot"><span class="annottext">runShelleyOptions :: ShelleyOptions -&gt; IO ()
+</span><a href="Testnet.Commands.Shelley.html#runShelleyOptions"><span class="hs-identifier hs-var hs-var">runShelleyOptions</span></a></span></span><span> </span><span id="local-6989586621679078874"><span class="annot"><span class="annottext">ShelleyOptions
+</span><a href="#local-6989586621679078874"><span class="hs-identifier hs-var">options</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe Int -&gt; (Conf -&gt; Integration [String]) -&gt; IO ()
+forall a. Maybe Int -&gt; (Conf -&gt; Integration a) -&gt; IO ()
+</span><a href="Testnet.Run.html#runTestnet"><span class="hs-identifier hs-var">runTestnet</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyOptions -&gt; Maybe Int
+</span><a href="Testnet.Commands.Shelley.html#maybeTestnetMagic"><span class="hs-identifier hs-var hs-var">maybeTestnetMagic</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyOptions
+</span><a href="#local-6989586621679078874"><span class="hs-identifier hs-var">options</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((Conf -&gt; Integration [String]) -&gt; IO ())
+-&gt; (Conf -&gt; Integration [String]) -&gt; IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span>
+</span><span id="line-91"></span><span>  </span><span class="annot"><span class="annottext">TestnetOptions -&gt; Conf -&gt; Integration [String]
+</span><span class="hs-identifier hs-var">Testnet.Shelley.testnet</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ShelleyOptions -&gt; TestnetOptions
+</span><a href="Testnet.Commands.Shelley.html#testnetOptions"><span class="hs-identifier hs-var hs-var">testnetOptions</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyOptions
+</span><a href="#local-6989586621679078874"><span class="hs-identifier hs-var">options</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-92"></span><span>
+</span><span id="line-93"></span><span class="annot"><a href="Testnet.Commands.Shelley.html#cmdShelley"><span class="hs-identifier hs-type">cmdShelley</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Mod</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CommandFields</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-94"></span><span id="cmdShelley"><span class="annot"><span class="annottext">cmdShelley :: Mod CommandFields (IO ())
+</span><a href="Testnet.Commands.Shelley.html#cmdShelley"><span class="hs-identifier hs-var hs-var">cmdShelley</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; ParserInfo (IO ()) -&gt; Mod CommandFields (IO ())
+forall a. String -&gt; ParserInfo a -&gt; Mod CommandFields a
+</span><span class="hs-identifier hs-var">command</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;shelley&quot;</span></span><span>  </span><span class="annot"><span class="annottext">(ParserInfo (IO ()) -&gt; Mod CommandFields (IO ()))
+-&gt; ParserInfo (IO ()) -&gt; Mod CommandFields (IO ())
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">(Parser (IO ()) -&gt; InfoMod (IO ()) -&gt; ParserInfo (IO ()))
+-&gt; InfoMod (IO ()) -&gt; Parser (IO ()) -&gt; ParserInfo (IO ())
+forall a b c. (a -&gt; b -&gt; c) -&gt; b -&gt; a -&gt; c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">flip</span></a></span><span> </span><span class="annot"><span class="annottext">Parser (IO ()) -&gt; InfoMod (IO ()) -&gt; ParserInfo (IO ())
+forall a. Parser a -&gt; InfoMod a -&gt; ParserInfo a
+</span><span class="hs-identifier hs-var">info</span></span><span> </span><span class="annot"><span class="annottext">InfoMod (IO ())
+forall m. Monoid m =&gt; m
+</span><span class="hs-identifier hs-var">idm</span></span><span> </span><span class="annot"><span class="annottext">(Parser (IO ()) -&gt; ParserInfo (IO ()))
+-&gt; Parser (IO ()) -&gt; ParserInfo (IO ())
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">ShelleyOptions -&gt; IO ()
+</span><a href="Testnet.Commands.Shelley.html#runShelleyOptions"><span class="hs-identifier hs-var">runShelleyOptions</span></a></span><span> </span><span class="annot"><span class="annottext">(ShelleyOptions -&gt; IO ())
+-&gt; Parser ShelleyOptions -&gt; Parser (IO ())
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Parser ShelleyOptions
+</span><a href="Testnet.Commands.Shelley.html#optsShelley"><span class="hs-identifier hs-var">optsShelley</span></a></span><span>
+</span><span id="line-95"></span></pre></body></html>

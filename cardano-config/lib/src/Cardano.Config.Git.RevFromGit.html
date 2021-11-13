@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.Config.Git.RevFromGit</span><span> </span><span class="hs-special">(</span><span>
+</span><span id="line-2"></span><span>      </span><span class="annot"><a href="Cardano.Config.Git.RevFromGit.html#gitRevFromGit"><span class="hs-identifier">gitRevFromGit</span></a></span><span>
+</span><span id="line-3"></span><span>    </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Prelude</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">String</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier">Language.Haskell.TH</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">TH</span></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">System.IO.Error</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">ioeGetErrorType</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">isDoesNotExistErrorType</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/process-1.6.9.0/src"><span class="hs-identifier">System.Process</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/process-1.6.9.0/src"><span class="hs-identifier">readProcessWithExitCode</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-comment">-- | Git revision found by running git rev-parse. If git could not be</span><span>
+</span><span id="line-13"></span><span class="hs-comment">-- executed, then this will be an empty string.</span><span>
+</span><span id="line-14"></span><span class="annot"><a href="Cardano.Config.Git.RevFromGit.html#gitRevFromGit"><span class="hs-identifier hs-type">gitRevFromGit</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier hs-type">TH.Q</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier hs-type">TH.Exp</span></a></span><span>
+</span><span id="line-15"></span><span id="gitRevFromGit"><span class="annot"><span class="annottext">gitRevFromGit :: Q Exp
+</span><a href="Cardano.Config.Git.RevFromGit.html#gitRevFromGit"><span class="hs-identifier hs-var hs-var">gitRevFromGit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Lit -&gt; Exp
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier hs-var">TH.LitE</span></a></span><span> </span><span class="annot"><span class="annottext">(Lit -&gt; Exp) -&gt; (String -&gt; Lit) -&gt; String -&gt; Exp
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; Lit
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier hs-var">TH.StringL</span></a></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Exp) -&gt; Q String -&gt; Q Exp
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">IO String -&gt; Q String
+forall a. IO a -&gt; Q a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/template-haskell-2.16.0.0/src"><span class="hs-identifier hs-var">TH.runIO</span></a></span><span> </span><span class="annot"><span class="annottext">IO String
+</span><a href="#local-6989586621679048426"><span class="hs-identifier hs-var">runGitRevParse</span></a></span><span>
+</span><span id="line-16"></span><span>    </span><span class="hs-keyword">where</span><span>
+</span><span id="line-17"></span><span>        </span><span class="annot"><a href="#local-6989586621679048426"><span class="hs-identifier hs-type">runGitRevParse</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">String</span></a></span><span>
+</span><span id="line-18"></span><span>        </span><span id="local-6989586621679048426"><span class="annot"><span class="annottext">runGitRevParse :: IO String
+</span><a href="#local-6989586621679048426"><span class="hs-identifier hs-var hs-var">runGitRevParse</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(IOError -&gt; Maybe ())
+-&gt; (() -&gt; IO String) -&gt; IO String -&gt; IO String
+forall e b a.
+Exception e =&gt;
+(e -&gt; Maybe b) -&gt; (b -&gt; IO a) -&gt; IO a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">handleJust</span></a></span><span> </span><span class="annot"><span class="annottext">IOError -&gt; Maybe ()
+</span><a href="#local-6989586621679048424"><span class="hs-identifier hs-var">missingGit</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IO String -&gt; () -&gt; IO String
+forall a b. a -&gt; b -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">const</span></a></span><span> </span><span class="annot"><span class="annottext">(IO String -&gt; () -&gt; IO String) -&gt; IO String -&gt; () -&gt; IO String
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IO String -&gt; IO String) -&gt; IO String -&gt; IO String
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-19"></span><span>            </span><span class="hs-special">(</span><span id="local-6989586621679048422"><span class="annot"><span class="annottext">ExitCode
+</span><a href="#local-6989586621679048422"><span class="hs-identifier hs-var">exitCode</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679048421"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679048421"><span class="hs-identifier hs-var">output</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span>
+</span><span id="line-20"></span><span>                </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; String -&gt; IO (ExitCode, String, String)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/process-1.6.9.0/src"><span class="hs-identifier hs-var">readProcessWithExitCode</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;git&quot;</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;rev-parse&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--verify&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;HEAD&quot;</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-21"></span><span>            </span><span class="annot"><span class="annottext">String -&gt; IO String
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO String) -&gt; String -&gt; IO String
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ExitCode
+</span><a href="#local-6989586621679048422"><span class="hs-identifier hs-var">exitCode</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-22"></span><span>                </span><span class="annot"><span class="annottext">ExitCode
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">ExitSuccess</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679048421"><span class="hs-identifier hs-var">output</span></a></span><span>
+</span><span id="line-23"></span><span>                </span><span class="annot"><span class="annottext">ExitCode
+</span><span class="hs-identifier">_</span></span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span>        </span><span id="local-6989586621679048424"><span class="annot"><span class="annottext">missingGit :: IOError -&gt; Maybe ()
+</span><a href="#local-6989586621679048424"><span class="hs-identifier hs-var hs-var">missingGit</span></a></span></span><span> </span><span id="local-6989586621679048419"><span class="annot"><span class="annottext">IOError
+</span><a href="#local-6989586621679048419"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">IOErrorType -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">isDoesNotExistErrorType</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IOError -&gt; IOErrorType
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">ioeGetErrorType</span></a></span><span> </span><span class="annot"><span class="annottext">IOError
+</span><a href="#local-6989586621679048419"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">() -&gt; Maybe ()
+forall a. a -&gt; Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Just</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">Maybe ()
+forall a. Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Nothing</span></a></span><span>
+</span><span id="line-26"></span></pre></body></html>

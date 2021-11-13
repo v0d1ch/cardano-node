@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Golden.Shelley.Transaction.Build</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild"><span class="hs-identifier">golden_shelleyTransactionBuild</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_TxInScriptWitnessed"><span class="hs-identifier">golden_shelleyTransactionBuild_TxInScriptWitnessed</span></a></span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_Minting"><span class="hs-identifier">golden_shelleyTransactionBuild_Minting</span></a></span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_CertificateScriptWitnessed"><span class="hs-identifier">golden_shelleyTransactionBuild_CertificateScriptWitnessed</span></a></span><span>
+</span><span id="line-8"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_WithdrawalScriptWitnessed"><span class="hs-identifier">golden_shelleyTransactionBuild_WithdrawalScriptWitnessed</span></a></span><span>
+</span><span id="line-9"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Prelude</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">String</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.OptParse.html"><span class="hs-identifier">Test.OptParse</span></a></span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.File</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-type">txOut</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">String</span></a></span><span>
+</span><span id="line-23"></span><span id="txOut"><span class="annot"><span class="annottext">txOut :: String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var hs-var">txOut</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;addr1q94cxl99qvtwunsqqv6g9mgj3zrawtpt4edsgwxkjtwpy5dsezcht90tmwfur7t5hc9fk8hjd3r5vjwec2h8vmk3xh8s7er7t3+100&quot;</span></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-type">txIn</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">String</span></a></span><span>
+</span><span id="line-26"></span><span id="txIn"><span class="annot"><span class="annottext">txIn :: String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var hs-var">txIn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;2392d2b1200b5139fe555c81261697b29a8ccf561c5c783d46e78a479d977053#0&quot;</span></span><span>
+</span><span id="line-27"></span><span>
+</span><span id="line-28"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild"><span class="hs-identifier hs-type">golden_shelleyTransactionBuild</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-29"></span><span id="golden_shelleyTransactionBuild"><span class="annot"><span class="annottext">golden_shelleyTransactionBuild :: Property
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild"><span class="hs-identifier hs-var hs-var">golden_shelleyTransactionBuild</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-30"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; (String -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((String -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679207571"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207571"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-31"></span><span>    </span><span id="local-6989586621679207570"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207570"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+String -&gt; String -&gt; m String
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207571"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tx-body-out&quot;</span></span><span>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span><span>    </span><span class="annot"><span class="annottext">PropertyT IO String -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO String -&gt; PropertyT IO ())
+-&gt; PropertyT IO String -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-34"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;build-raw&quot;</span></span><span>
+</span><span id="line-35"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-in&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var">txIn</span></a></span><span>
+</span><span id="line-36"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-out&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var">txOut</span></a></span><span>
+</span><span id="line-37"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--fee&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;12&quot;</span></span><span>
+</span><span id="line-38"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-body-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207570"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-39"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-40"></span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+Int -&gt; String -&gt; String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFileOccurences</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;TxBodyMary&quot;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207570"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertEndsWithSingleNewline</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207570"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-44"></span><span>
+</span><span id="line-45"></span><span>
+</span><span id="line-46"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_CertificateScriptWitnessed"><span class="hs-identifier hs-type">golden_shelleyTransactionBuild_CertificateScriptWitnessed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-47"></span><span id="golden_shelleyTransactionBuild_CertificateScriptWitnessed"><span class="annot"><span class="annottext">golden_shelleyTransactionBuild_CertificateScriptWitnessed :: Property
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_CertificateScriptWitnessed"><span class="hs-identifier hs-var hs-var">golden_shelleyTransactionBuild_CertificateScriptWitnessed</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-48"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; (String -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((String -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679207564"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207564"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-49"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679207563"><span class="annot"><span class="annottext">deregcert :: String
+</span><a href="#local-6989586621679207563"><span class="hs-identifier hs-var hs-var">deregcert</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/certificates/stake_address_deregistration_certificate&quot;</span></span><span>
+</span><span id="line-50"></span><span>        </span><span id="local-6989586621679207562"><span class="annot"><span class="annottext">scriptWit :: String
+</span><a href="#local-6989586621679207562"><span class="hs-identifier hs-var hs-var">scriptWit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/multisig/scripts/any&quot;</span></span><span>
+</span><span id="line-51"></span><span>
+</span><span id="line-52"></span><span>    </span><span id="local-6989586621679207561"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207561"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+String -&gt; String -&gt; m String
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207564"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tx-body-out&quot;</span></span><span>
+</span><span id="line-53"></span><span>
+</span><span id="line-54"></span><span>    </span><span class="annot"><span class="annottext">PropertyT IO String -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO String -&gt; PropertyT IO ())
+-&gt; PropertyT IO String -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-55"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;build-raw&quot;</span></span><span>
+</span><span id="line-56"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-in&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var">txIn</span></a></span><span>
+</span><span id="line-57"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-out&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var">txOut</span></a></span><span>
+</span><span id="line-58"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--certificate-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207563"><span class="hs-identifier hs-var">deregcert</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--certificate-script-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207562"><span class="hs-identifier hs-var">scriptWit</span></a></span><span>
+</span><span id="line-59"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--fee&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;12&quot;</span></span><span>
+</span><span id="line-60"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-body-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207561"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-61"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+Int -&gt; String -&gt; String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFileOccurences</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;TxBodyMary&quot;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207561"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-64"></span><span>
+</span><span id="line-65"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertEndsWithSingleNewline</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207561"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-66"></span><span>
+</span><span id="line-67"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_Minting"><span class="hs-identifier hs-type">golden_shelleyTransactionBuild_Minting</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-68"></span><span id="golden_shelleyTransactionBuild_Minting"><span class="annot"><span class="annottext">golden_shelleyTransactionBuild_Minting :: Property
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_Minting"><span class="hs-identifier hs-var hs-var">golden_shelleyTransactionBuild_Minting</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-69"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; (String -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((String -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679207560"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207560"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-70"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679207559"><span class="annot"><span class="annottext">scriptWit :: String
+</span><a href="#local-6989586621679207559"><span class="hs-identifier hs-var hs-var">scriptWit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/multisig/scripts/any&quot;</span></span><span>
+</span><span id="line-71"></span><span>
+</span><span id="line-72"></span><span>    </span><span id="local-6989586621679207558"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207558"><span class="hs-identifier hs-var">polid</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-73"></span><span>               </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span>
+</span><span id="line-74"></span><span>               </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;policyid&quot;</span></span><span>
+</span><span id="line-75"></span><span>               </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--script-file&quot;</span></span><span>
+</span><span id="line-76"></span><span>               </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207559"><span class="hs-identifier hs-var">scriptWit</span></a></span><span>
+</span><span id="line-77"></span><span>               </span><span class="hs-special">]</span><span>
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679207557"><span class="annot"><span class="annottext">dummyMA :: String
+</span><a href="#local-6989586621679207557"><span class="hs-identifier hs-var hs-var">dummyMA</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Char -&gt; Bool) -&gt; String -&gt; String
+forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">filter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Char -&gt; Char -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">/=</span></a></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'\n'</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; String -&gt; String
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;50 &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207558"><span class="hs-identifier hs-var">polid</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;.ethereum&quot;</span></span><span>
+</span><span id="line-80"></span><span>
+</span><span id="line-81"></span><span>    </span><span id="local-6989586621679207555"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207555"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+String -&gt; String -&gt; m String
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207560"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tx-body-out&quot;</span></span><span>
+</span><span id="line-82"></span><span>
+</span><span id="line-83"></span><span>    </span><span class="annot"><span class="annottext">PropertyT IO String -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO String -&gt; PropertyT IO ())
+-&gt; PropertyT IO String -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-84"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;build-raw&quot;</span></span><span>
+</span><span id="line-85"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-in&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var">txIn</span></a></span><span>
+</span><span id="line-86"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-out&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var">txOut</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;+&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">++</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207557"><span class="hs-identifier hs-var">dummyMA</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--minting-script-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207559"><span class="hs-identifier hs-var">scriptWit</span></a></span><span>
+</span><span id="line-87"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--mint&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207557"><span class="hs-identifier hs-var">dummyMA</span></a></span><span>
+</span><span id="line-88"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--fee&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;12&quot;</span></span><span>
+</span><span id="line-89"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-body-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207555"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-90"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-91"></span><span>
+</span><span id="line-92"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+Int -&gt; String -&gt; String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFileOccurences</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;TxBodyMary&quot;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207555"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-93"></span><span>
+</span><span id="line-94"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertEndsWithSingleNewline</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207555"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_WithdrawalScriptWitnessed"><span class="hs-identifier hs-type">golden_shelleyTransactionBuild_WithdrawalScriptWitnessed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-97"></span><span id="golden_shelleyTransactionBuild_WithdrawalScriptWitnessed"><span class="annot"><span class="annottext">golden_shelleyTransactionBuild_WithdrawalScriptWitnessed :: Property
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_WithdrawalScriptWitnessed"><span class="hs-identifier hs-var hs-var">golden_shelleyTransactionBuild_WithdrawalScriptWitnessed</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-98"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; (String -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((String -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679207554"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207554"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-99"></span><span>    </span><span id="local-6989586621679207553"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207553"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+String -&gt; String -&gt; m String
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207554"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tx-body-out&quot;</span></span><span>
+</span><span id="line-100"></span><span>
+</span><span id="line-101"></span><span>    </span><span id="local-6989586621679207552"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207552"><span class="hs-identifier hs-var">stakeAddress</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m String
+</span><span class="hs-identifier hs-var">H.readFile</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/keys/stake_keys/reward_address&quot;</span></span><span>
+</span><span id="line-102"></span><span>
+</span><span id="line-103"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679207550"><span class="annot"><span class="annottext">withdrawal :: String
+</span><a href="#local-6989586621679207550"><span class="hs-identifier hs-var hs-var">withdrawal</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Char -&gt; Bool) -&gt; String -&gt; String
+forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">filter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Char -&gt; Char -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-operator hs-var">/=</span></a></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'\n'</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; String -&gt; String
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207552"><span class="hs-identifier hs-var">stakeAddress</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;+100&quot;</span></span><span>
+</span><span id="line-104"></span><span>        </span><span id="local-6989586621679207549"><span class="annot"><span class="annottext">scriptWit :: String
+</span><a href="#local-6989586621679207549"><span class="hs-identifier hs-var hs-var">scriptWit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/multisig/scripts/any&quot;</span></span><span>
+</span><span id="line-105"></span><span>
+</span><span id="line-106"></span><span>    </span><span class="annot"><span class="annottext">PropertyT IO String -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO String -&gt; PropertyT IO ())
+-&gt; PropertyT IO String -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-107"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;build-raw&quot;</span></span><span>
+</span><span id="line-108"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-in&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var">txIn</span></a></span><span>
+</span><span id="line-109"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-out&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var">txOut</span></a></span><span>
+</span><span id="line-110"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--withdrawal&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207550"><span class="hs-identifier hs-var">withdrawal</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--withdrawal-script-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207549"><span class="hs-identifier hs-var">scriptWit</span></a></span><span>
+</span><span id="line-111"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--fee&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;12&quot;</span></span><span>
+</span><span id="line-112"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-body-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207553"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-113"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-114"></span><span>
+</span><span id="line-115"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+Int -&gt; String -&gt; String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFileOccurences</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;TxBodyMary&quot;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207553"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-116"></span><span>
+</span><span id="line-117"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertEndsWithSingleNewline</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207553"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-118"></span><span>
+</span><span id="line-119"></span><span class="annot"><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_TxInScriptWitnessed"><span class="hs-identifier hs-type">golden_shelleyTransactionBuild_TxInScriptWitnessed</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-120"></span><span id="golden_shelleyTransactionBuild_TxInScriptWitnessed"><span class="annot"><span class="annottext">golden_shelleyTransactionBuild_TxInScriptWitnessed :: Property
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#golden_shelleyTransactionBuild_TxInScriptWitnessed"><span class="hs-identifier hs-var hs-var">golden_shelleyTransactionBuild_TxInScriptWitnessed</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-121"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; (String -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((String -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (String -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679207548"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207548"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-122"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679207547"><span class="annot"><span class="annottext">scriptWit :: String
+</span><a href="#local-6989586621679207547"><span class="hs-identifier hs-var hs-var">scriptWit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;test/data/golden/shelley/multisig/scripts/any&quot;</span></span><span>
+</span><span id="line-123"></span><span>
+</span><span id="line-124"></span><span>    </span><span id="local-6989586621679207546"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207546"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+String -&gt; String -&gt; m String
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207548"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;tx-body-out&quot;</span></span><span>
+</span><span id="line-125"></span><span>
+</span><span id="line-126"></span><span>    </span><span class="annot"><span class="annottext">PropertyT IO String -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO String -&gt; PropertyT IO ())
+-&gt; PropertyT IO String -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-127"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;transaction&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;build-raw&quot;</span></span><span>
+</span><span id="line-128"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-in&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txIn"><span class="hs-identifier hs-var">txIn</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--txin-script-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207547"><span class="hs-identifier hs-var">scriptWit</span></a></span><span>
+</span><span id="line-129"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-out&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Test.Golden.Shelley.Transaction.Build.html#txOut"><span class="hs-identifier hs-var">txOut</span></a></span><span>
+</span><span id="line-130"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--fee&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;12&quot;</span></span><span>
+</span><span id="line-131"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--tx-body-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207546"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-132"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-133"></span><span>
+</span><span id="line-134"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+Int -&gt; String -&gt; String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFileOccurences</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;TxBodyMary&quot;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207546"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-135"></span><span>
+</span><span id="line-136"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+String -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertEndsWithSingleNewline</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679207546"><span class="hs-identifier hs-var">txBodyOutFile</span></a></span><span>
+</span><span id="line-137"></span><span>
+</span><span id="line-138"></span><span>
+</span><span id="line-139"></span></pre></body></html>

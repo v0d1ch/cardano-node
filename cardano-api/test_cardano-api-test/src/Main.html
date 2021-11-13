@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span>
+</span><span id="line-2"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Crypto.Libsodium</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">sodiumInit</span></span><span class="hs-special">)</span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">defaultMain</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">testGroup</span></span><span class="hs-special">)</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Crypto.html"><span class="hs-identifier">Test.Cardano.Api.Crypto</span></a></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Json.html"><span class="hs-identifier">Test.Cardano.Api.Json</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.KeysByron.html"><span class="hs-identifier">Test.Cardano.Api.KeysByron</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Ledger.html"><span class="hs-identifier">Test.Cardano.Api.Ledger</span></a></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Metadata.html"><span class="hs-identifier">Test.Cardano.Api.Metadata</span></a></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Address.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Address</span></a></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Bech32.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Bech32</span></a></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html"><span class="hs-identifier">Test.Cardano.Api.Typed.CBOR</span></a></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Envelope</span></a></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.JSON.html"><span class="hs-identifier">Test.Cardano.Api.Typed.JSON</span></a></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Ord.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Ord</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.RawBytes.html"><span class="hs-identifier">Test.Cardano.Api.Typed.RawBytes</span></a></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Script</span></a></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Value.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Value</span></a></span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span class="annot"><a href="Main.html#main"><span class="hs-identifier hs-type">main</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span id="main"><span class="annot"><span class="annottext">main :: IO ()
+</span><a href="Main.html#main"><span class="hs-identifier hs-var hs-var">main</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-24"></span><span>  </span><span class="hs-comment">-- TODO: Remove sodiumInit: https://github.com/input-output-hk/cardano-base/issues/175</span><span>
+</span><span id="line-25"></span><span>  </span><span class="annot"><span class="annottext">IO ()
+</span><span class="hs-identifier hs-var">sodiumInit</span></span><span>
+</span><span id="line-26"></span><span>  </span><span class="annot"><span class="annottext">TestTree -&gt; IO ()
+</span><span class="hs-identifier hs-var">defaultMain</span></span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Main.html#tests"><span class="hs-identifier hs-var">tests</span></a></span><span>
+</span><span id="line-27"></span><span>
+</span><span id="line-28"></span><span class="annot"><a href="Main.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-29"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Main.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-30"></span><span>  </span><span class="annot"><span class="annottext">TestName -&gt; [TestTree] -&gt; TestTree
+</span><span class="hs-identifier hs-var">testGroup</span></span><span> </span><span class="annot"><span class="annottext">TestName
+</span><span class="hs-string">&quot;Cardano.Api&quot;</span></span><span>
+</span><span id="line-31"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Crypto.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Crypto.tests</span></a></span><span>
+</span><span id="line-32"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Json.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Json.tests</span></a></span><span>
+</span><span id="line-33"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.KeysByron.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.KeysByron.tests</span></a></span><span>
+</span><span id="line-34"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Ledger.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Ledger.tests</span></a></span><span>
+</span><span id="line-35"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Metadata.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Metadata.tests</span></a></span><span>
+</span><span id="line-36"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Address.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Address.tests</span></a></span><span>
+</span><span id="line-37"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Bech32.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Bech32.tests</span></a></span><span>
+</span><span id="line-38"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.CBOR.tests</span></a></span><span>
+</span><span id="line-39"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Envelope.tests</span></a></span><span>
+</span><span id="line-40"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.JSON.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.JSON.tests</span></a></span><span>
+</span><span id="line-41"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Ord.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Ord.tests</span></a></span><span>
+</span><span id="line-42"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.RawBytes.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.RawBytes.tests</span></a></span><span>
+</span><span id="line-43"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Script.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Script.tests</span></a></span><span>
+</span><span id="line-44"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TestTree
+</span><a href="Test.Cardano.Api.Typed.Value.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Api.Typed.Value.tests</span></a></span><span>
+</span><span id="line-45"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-46"></span></pre></body></html>

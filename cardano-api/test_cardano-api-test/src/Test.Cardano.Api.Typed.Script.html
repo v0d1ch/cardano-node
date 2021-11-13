@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Api.Typed.Script</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Aeson</span></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(===)</span></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Aeson</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testProperty</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.TH</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testGroupGenerator</span></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Cardano.Api</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Cardano.Api.Shelley</span></a></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Gen.Cardano.Api.Typed</span></a></span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_All"><span class="hs-identifier hs-type">exampleSimpleScriptV1_All</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV1</span></a></span><span>
+</span><span id="line-25"></span><span id="exampleSimpleScriptV1_All"><span class="annot"><span class="annottext">exampleSimpleScriptV1_All :: SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_All"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV1_All</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-26"></span><span>  </span><span class="annot"><span class="annottext">[SimpleScript SimpleScriptV1] -&gt; SimpleScript SimpleScriptV1
+forall lang. [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireAllOf</span></a></span><span>
+</span><span id="line-27"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;e09d36c79dec9bd1b3d9e152247701cd0bb860b5ebfd1de8abb6735a&quot;</span></span><span>
+</span><span id="line-28"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;a687dcc24e00dd3caafbeb5e68f97ca8ef269cb6fe971345eb951756&quot;</span></span><span>
+</span><span id="line-29"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;0bd1d702b2e6188fe0857a6dc7ffb0675229bab58c86638ffa87ed6d&quot;</span></span><span>
+</span><span id="line-30"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;dd0044a26cf7d4491ecea720fda11afb59d5725b53afa605fdf695e6&quot;</span></span><span>
+</span><span id="line-31"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;cf223afe150cc8e89f11edaacbbd55b011ba44fbedef66fbd37d8c9d&quot;</span></span><span>
+</span><span id="line-32"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;372643e7ef4b41fd2649ada30a89d35cb90b7c14cb5de252e6ce6cb7&quot;</span></span><span>
+</span><span id="line-33"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;aa453dc184c5037d60e3fbbadb023f4a41bac112f249b76be9bb37ad&quot;</span></span><span>
+</span><span id="line-34"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;6b732c60c267bab894854d6dd57a04a94e603fcc4c36274c9ed75952&quot;</span></span><span>
+</span><span id="line-35"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_Any"><span class="hs-identifier hs-type">exampleSimpleScriptV1_Any</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV1</span></a></span><span>
+</span><span id="line-38"></span><span id="exampleSimpleScriptV1_Any"><span class="annot"><span class="annottext">exampleSimpleScriptV1_Any :: SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_Any"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV1_Any</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-39"></span><span>  </span><span class="annot"><span class="annottext">[SimpleScript SimpleScriptV1] -&gt; SimpleScript SimpleScriptV1
+forall lang. [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireAnyOf</span></a></span><span>
+</span><span id="line-40"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;d92b712d1882c3b0f75b6f677e0b2cbef4fbc8b8121bb9dde324ff09&quot;</span></span><span>
+</span><span id="line-41"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;4d780ed1bfc88cbd4da3f48de91fe728c3530d662564bf5a284b5321&quot;</span></span><span>
+</span><span id="line-42"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;3a94d6d4e786a3f5d439939cafc0536f6abc324fb8404084d6034bf8&quot;</span></span><span>
+</span><span id="line-43"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;b12e094d1db7c0fba5121f22db193d0060efed8be43654f861bb68ae&quot;</span></span><span>
+</span><span id="line-44"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;9be49d56442b4b8b16cab4e43e238bbdefc6c803d554c82fcd5facc3&quot;</span></span><span>
+</span><span id="line-45"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;622be5fab3b5c3f371a50a535e4d3349c942a98cecee93b24e2fd11d&quot;</span></span><span>
+</span><span id="line-46"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-47"></span><span>
+</span><span id="line-48"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_MofN"><span class="hs-identifier hs-type">exampleSimpleScriptV1_MofN</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV1</span></a></span><span>
+</span><span id="line-49"></span><span id="exampleSimpleScriptV1_MofN"><span class="annot"><span class="annottext">exampleSimpleScriptV1_MofN :: SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_MofN"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV1_MofN</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-50"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; [SimpleScript SimpleScriptV1] -&gt; SimpleScript SimpleScriptV1
+forall lang. Int -&gt; [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireMOf</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">2</span></span><span>
+</span><span id="line-51"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;2f3d4cf10d0471a1db9f2d2907de867968c27bca6272f062cd1c2413&quot;</span></span><span>
+</span><span id="line-52"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;f856c0c5839bab22673747d53f1ae9eed84afafb085f086e8e988614&quot;</span></span><span>
+</span><span id="line-53"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;b275b08c999097247f7c17e77007c7010cd19f20cc086ad99d398538&quot;</span></span><span>
+</span><span id="line-54"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV1
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;686024aecb5884d73a11b9ae4e63931112ba737e878d74638b78513a&quot;</span></span><span>
+</span><span id="line-55"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span>
+</span><span id="line-58"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_All"><span class="hs-identifier hs-type">exampleSimpleScriptV2_All</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV2</span></a></span><span>
+</span><span id="line-59"></span><span id="exampleSimpleScriptV2_All"><span class="annot"><span class="annottext">exampleSimpleScriptV2_All :: SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_All"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV2_All</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-60"></span><span>  </span><span class="annot"><span class="annottext">[SimpleScript SimpleScriptV2] -&gt; SimpleScript SimpleScriptV2
+forall lang. [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireAllOf</span></a></span><span>
+</span><span id="line-61"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV2
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;e09d36c79dec9bd1b3d9e152247701cd0bb860b5ebfd1de8abb6735a&quot;</span></span><span>
+</span><span id="line-62"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+-&gt; SlotNo -&gt; SimpleScript SimpleScriptV2
+forall lang. TimeLocksSupported lang -&gt; SlotNo -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireTimeBefore</span></a></span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">TimeLocksInSimpleScriptV2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; SlotNo
+</span><span class="hs-identifier hs-var">SlotNo</span></span><span> </span><span class="annot"><span class="annottext">Word64
+</span><span class="hs-number">42</span></span><span class="hs-special">)</span><span>
+</span><span id="line-63"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-64"></span><span>
+</span><span id="line-65"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_Any"><span class="hs-identifier hs-type">exampleSimpleScriptV2_Any</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV2</span></a></span><span>
+</span><span id="line-66"></span><span id="exampleSimpleScriptV2_Any"><span class="annot"><span class="annottext">exampleSimpleScriptV2_Any :: SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_Any"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV2_Any</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-67"></span><span>  </span><span class="annot"><span class="annottext">[SimpleScript SimpleScriptV2] -&gt; SimpleScript SimpleScriptV2
+forall lang. [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireAnyOf</span></a></span><span>
+</span><span id="line-68"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV2
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;d92b712d1882c3b0f75b6f677e0b2cbef4fbc8b8121bb9dde324ff09&quot;</span></span><span>
+</span><span id="line-69"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+-&gt; SlotNo -&gt; SimpleScript SimpleScriptV2
+forall lang. TimeLocksSupported lang -&gt; SlotNo -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireTimeAfter</span></a></span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">TimeLocksInSimpleScriptV2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; SlotNo
+</span><span class="hs-identifier hs-var">SlotNo</span></span><span> </span><span class="annot"><span class="annottext">Word64
+</span><span class="hs-number">42</span></span><span class="hs-special">)</span><span>
+</span><span id="line-70"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-71"></span><span>
+</span><span id="line-72"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_MofN"><span class="hs-identifier hs-type">exampleSimpleScriptV2_MofN</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScript</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SimpleScriptV2</span></a></span><span>
+</span><span id="line-73"></span><span id="exampleSimpleScriptV2_MofN"><span class="annot"><span class="annottext">exampleSimpleScriptV2_MofN :: SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_MofN"><span class="hs-identifier hs-var hs-var">exampleSimpleScriptV2_MofN</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-74"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; [SimpleScript SimpleScriptV2] -&gt; SimpleScript SimpleScriptV2
+forall lang. Int -&gt; [SimpleScript lang] -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireMOf</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span>
+</span><span id="line-75"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV2
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;2f3d4cf10d0471a1db9f2d2907de867968c27bca6272f062cd1c2413&quot;</span></span><span>
+</span><span id="line-76"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey -&gt; SimpleScript SimpleScriptV2
+forall lang. Hash PaymentKey -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireSignature</span></a></span><span> </span><span class="annot"><span class="annottext">Hash PaymentKey
+</span><span class="hs-string">&quot;f856c0c5839bab22673747d53f1ae9eed84afafb085f086e8e988614&quot;</span></span><span>
+</span><span id="line-77"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+-&gt; SlotNo -&gt; SimpleScript SimpleScriptV2
+forall lang. TimeLocksSupported lang -&gt; SlotNo -&gt; SimpleScript lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">RequireTimeBefore</span></a></span><span> </span><span class="annot"><span class="annottext">TimeLocksSupported SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">TimeLocksInSimpleScriptV2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Word64 -&gt; SlotNo
+</span><span class="hs-identifier hs-var">SlotNo</span></span><span> </span><span class="annot"><span class="annottext">Word64
+</span><span class="hs-number">42</span></span><span class="hs-special">)</span><span>
+</span><span id="line-78"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-79"></span><span>
+</span><span id="line-80"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-81"></span><span>
+</span><span id="line-82"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_All"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV1_All</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-83"></span><span id="prop_golden_SimpleScriptV1_All"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV1_All :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_All"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV1_All</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-84"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_All"><span class="hs-identifier hs-var">exampleSimpleScriptV1_All</span></a></span><span>
+</span><span id="line-85"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV1/all&quot;</span></span><span>
+</span><span id="line-86"></span><span>
+</span><span id="line-87"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_Any"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV1_Any</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-88"></span><span id="prop_golden_SimpleScriptV1_Any"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV1_Any :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_Any"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV1_Any</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-89"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_Any"><span class="hs-identifier hs-var">exampleSimpleScriptV1_Any</span></a></span><span>
+</span><span id="line-90"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV1/any&quot;</span></span><span>
+</span><span id="line-91"></span><span>
+</span><span id="line-92"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_MofN"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV1_MofN</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-93"></span><span id="prop_golden_SimpleScriptV1_MofN"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV1_MofN :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV1_MofN"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV1_MofN</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-94"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV1_MofN"><span class="hs-identifier hs-var">exampleSimpleScriptV1_MofN</span></a></span><span>
+</span><span id="line-95"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV1/atleast&quot;</span></span><span>
+</span><span id="line-96"></span><span>
+</span><span id="line-97"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_All"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV2_All</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-98"></span><span id="prop_golden_SimpleScriptV2_All"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV2_All :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_All"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV2_All</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-99"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_All"><span class="hs-identifier hs-var">exampleSimpleScriptV2_All</span></a></span><span>
+</span><span id="line-100"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV2/all&quot;</span></span><span>
+</span><span id="line-101"></span><span>
+</span><span id="line-102"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_Any"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV2_Any</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-103"></span><span id="prop_golden_SimpleScriptV2_Any"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV2_Any :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_Any"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV2_Any</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-104"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_Any"><span class="hs-identifier hs-var">exampleSimpleScriptV2_Any</span></a></span><span>
+</span><span id="line-105"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV2/any&quot;</span></span><span>
+</span><span id="line-106"></span><span>
+</span><span id="line-107"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_MofN"><span class="hs-identifier hs-type">prop_golden_SimpleScriptV2_MofN</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-108"></span><span id="prop_golden_SimpleScriptV2_MofN"><span class="annot"><span class="annottext">prop_golden_SimpleScriptV2_MofN :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_golden_SimpleScriptV2_MofN"><span class="hs-identifier hs-var hs-var">prop_golden_SimpleScriptV2_MofN</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-109"></span><span>  </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2 -&gt; FilePath -&gt; Property
+forall a.
+(Eq a, FromJSON a, HasCallStack, Show a, ToJSON a) =&gt;
+a -&gt; FilePath -&gt; Property
+</span><span class="hs-identifier hs-var">goldenTestJsonValuePretty</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+</span><a href="Test.Cardano.Api.Typed.Script.html#exampleSimpleScriptV2_MofN"><span class="hs-identifier hs-var">exampleSimpleScriptV2_MofN</span></a></span><span>
+</span><span id="line-110"></span><span>                            </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;test/Golden/Script/SimpleV2/atleast&quot;</span></span><span>
+</span><span id="line-111"></span><span>
+</span><span id="line-112"></span><span>
+</span><span id="line-113"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_SimpleScriptV1_JSON"><span class="hs-identifier hs-type">prop_roundtrip_SimpleScriptV1_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-114"></span><span id="prop_roundtrip_SimpleScriptV1_JSON"><span class="annot"><span class="annottext">prop_roundtrip_SimpleScriptV1_JSON :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_SimpleScriptV1_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_SimpleScriptV1_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-115"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-116"></span><span>    </span><span id="local-6989586621679270971"><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+</span><a href="#local-6989586621679270971"><span class="hs-identifier hs-var">mss</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen (SimpleScript SimpleScriptV1)
+-&gt; PropertyT IO (SimpleScript SimpleScriptV1)
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="annot"><span class="annottext">(Gen (SimpleScript SimpleScriptV1)
+ -&gt; PropertyT IO (SimpleScript SimpleScriptV1))
+-&gt; Gen (SimpleScript SimpleScriptV1)
+-&gt; PropertyT IO (SimpleScript SimpleScriptV1)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV1
+-&gt; Gen (SimpleScript SimpleScriptV1)
+forall lang. SimpleScriptVersion lang -&gt; Gen (SimpleScript lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSimpleScript</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV1
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptV1</span></a></span><span>
+</span><span id="line-117"></span><span>    </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+-&gt; (SimpleScript SimpleScriptV1 -&gt; ByteString)
+-&gt; (ByteString -&gt; Either FilePath (SimpleScript SimpleScriptV1))
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.tripping</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1
+</span><a href="#local-6989586621679270971"><span class="hs-identifier hs-var">mss</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV1 -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Either FilePath (SimpleScript SimpleScriptV1)
+forall a. FromJSON a =&gt; ByteString -&gt; Either FilePath a
+</span><span class="hs-identifier hs-var">eitherDecode</span></span><span>
+</span><span id="line-118"></span><span>
+</span><span id="line-119"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_SimpleScriptV2_JSON"><span class="hs-identifier hs-type">prop_roundtrip_SimpleScriptV2_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-120"></span><span id="prop_roundtrip_SimpleScriptV2_JSON"><span class="annot"><span class="annottext">prop_roundtrip_SimpleScriptV2_JSON :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_SimpleScriptV2_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_SimpleScriptV2_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-121"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-122"></span><span>    </span><span id="local-6989586621679270963"><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+</span><a href="#local-6989586621679270963"><span class="hs-identifier hs-var">mss</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen (SimpleScript SimpleScriptV2)
+-&gt; PropertyT IO (SimpleScript SimpleScriptV2)
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="annot"><span class="annottext">(Gen (SimpleScript SimpleScriptV2)
+ -&gt; PropertyT IO (SimpleScript SimpleScriptV2))
+-&gt; Gen (SimpleScript SimpleScriptV2)
+-&gt; PropertyT IO (SimpleScript SimpleScriptV2)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV2
+-&gt; Gen (SimpleScript SimpleScriptV2)
+forall lang. SimpleScriptVersion lang -&gt; Gen (SimpleScript lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSimpleScript</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptV2</span></a></span><span>
+</span><span id="line-123"></span><span>    </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+-&gt; (SimpleScript SimpleScriptV2 -&gt; ByteString)
+-&gt; (ByteString -&gt; Either FilePath (SimpleScript SimpleScriptV2))
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.tripping</span></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2
+</span><a href="#local-6989586621679270963"><span class="hs-identifier hs-var">mss</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScript SimpleScriptV2 -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Either FilePath (SimpleScript SimpleScriptV2)
+forall a. FromJSON a =&gt; ByteString -&gt; Either FilePath a
+</span><span class="hs-identifier hs-var">eitherDecode</span></span><span>
+</span><span id="line-124"></span><span>
+</span><span id="line-125"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_ScriptData"><span class="hs-identifier hs-type">prop_roundtrip_ScriptData</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-126"></span><span id="prop_roundtrip_ScriptData"><span class="annot"><span class="annottext">prop_roundtrip_ScriptData :: Property
+</span><a href="Test.Cardano.Api.Typed.Script.html#prop_roundtrip_ScriptData"><span class="hs-identifier hs-var hs-var">prop_roundtrip_ScriptData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-127"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-128"></span><span>    </span><span id="local-6989586621679270960"><span class="annot"><span class="annottext">ScriptData
+</span><a href="#local-6989586621679270960"><span class="hs-identifier hs-var">sData</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen ScriptData -&gt; PropertyT IO ScriptData
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen ScriptData
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genScriptData</span></a></span><span>
+</span><span id="line-129"></span><span>    </span><span class="annot"><span class="annottext">ScriptData
+</span><a href="#local-6989586621679270960"><span class="hs-identifier hs-var">sData</span></a></span><span> </span><span class="annot"><span class="annottext">ScriptData -&gt; ScriptData -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">Data Any -&gt; ScriptData
+forall ledgerera. Data ledgerera -&gt; ScriptData
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">fromAlonzoData</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ScriptData -&gt; Data Any
+forall ledgerera. ScriptData -&gt; Data ledgerera
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">toAlonzoData</span></a></span><span> </span><span class="annot"><span class="annottext">ScriptData
+</span><a href="#local-6989586621679270960"><span class="hs-identifier hs-var">sData</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-130"></span><span>
+</span><span id="line-131"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-132"></span><span>
+</span><span id="line-133"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Script.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-134"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Test.Cardano.Api.Typed.Script.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FilePath
+[TestTree]
+Property
+FilePath -&gt; [TestTree] -&gt; TestTree
+FilePath -&gt; Property -&gt; TestTree
+testGroup :: FilePath -&gt; [TestTree] -&gt; TestTree
+prop_roundtrip_ScriptData :: Property
+prop_roundtrip_SimpleScriptV2_JSON :: Property
+prop_roundtrip_SimpleScriptV1_JSON :: Property
+prop_golden_SimpleScriptV2_MofN :: Property
+prop_golden_SimpleScriptV2_Any :: Property
+prop_golden_SimpleScriptV2_All :: Property
+prop_golden_SimpleScriptV1_MofN :: Property
+prop_golden_SimpleScriptV1_Any :: Property
+prop_golden_SimpleScriptV1_All :: Property
+testProperty :: FilePath -&gt; Property -&gt; TestTree
+</span><span class="hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">$testGroupGenerator</span></span><span>
+</span><span id="line-135"></span></pre></body></html>

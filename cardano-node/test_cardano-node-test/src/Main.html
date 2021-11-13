@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE CPP #-}</span><span class="hs-cpp">
+
+#if !defined(mingw32_HOST_OS)
+</span><span class="hs-cpp">#define UNIX
+</span><span class="hs-cpp">#endif
+</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Main</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">defaultMain</span></span><span class="hs-special">)</span><span class="hs-cpp">
+
+#ifdef UNIX
+</span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Node.FilePermissions.html"><span class="hs-identifier">Test.Cardano.Node.FilePermissions</span></a></span><span class="hs-cpp">
+#endif
+</span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Json.html"><span class="hs-identifier">Test.Cardano.Node.Json</span></a></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cardano.Node.POM.html"><span class="hs-identifier">Test.Cardano.Node.POM</span></a></span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Main.html#main"><span class="hs-identifier hs-type">main</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span id="main"><span class="annot"><span class="annottext">main :: IO ()
+</span><a href="Main.html#main"><span class="hs-identifier hs-var hs-var">main</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[IO Bool] -&gt; IO ()
+</span><span class="hs-identifier hs-var">defaultMain</span></span><span class="hs-cpp">
+#ifdef UNIX
+</span><span>  </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cardano.Node.Json.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Node.Json.tests</span></a></span><span>
+</span><span id="line-20"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cardano.Node.POM.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Node.POM.tests</span></a></span><span>
+</span><span id="line-21"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cardano.Node.FilePermissions.html#tests"><span class="hs-identifier hs-var">Test.Cardano.Node.FilePermissions.tests</span></a></span><span>
+</span><span id="line-22"></span><span>  </span><span class="hs-special">]</span><span class="hs-cpp">
+#else
+</span><span>  </span><span class="hs-special">[</span><span> </span><span class="hs-identifier">Test.Cardano.Node.Json.tests</span><span>
+</span><span id="line-25"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="hs-identifier">Test.Cardano.Node.POM.tests</span><span>
+</span><span id="line-26"></span><span>  </span><span class="hs-special">]</span><span class="hs-cpp">
+#endif
+</span><span>
+</span><span id="line-29"></span></pre></body></html>

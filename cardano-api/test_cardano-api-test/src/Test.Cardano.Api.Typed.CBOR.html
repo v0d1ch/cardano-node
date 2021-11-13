@@ -1,0 +1,707 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE FlexibleContexts #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-3"></span><span>
+</span><span id="line-4"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Api.Typed.CBOR</span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Cardano.Api</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Gen.Cardano.Api.Typed</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Gen.Hedgehog.Roundtrip.CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">roundtrip_CBOR</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.Cardano.Api.Typed.Orphans.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Orphans</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testProperty</span></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.TH</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testGroupGenerator</span></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span class="hs-comment">-- TODO: Need to add PaymentExtendedKey roundtrip tests however</span><span>
+</span><span id="line-21"></span><span class="hs-comment">-- we can't derive an Eq instance for Crypto.HD.XPrv</span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_byron_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_txbody_byron_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-24"></span><span id="prop_roundtrip_txbody_byron_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_txbody_byron_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_byron_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_txbody_byron_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-25"></span><span>  </span><span class="annot"><span class="annottext">AsType (TxBody ByronEra) -&gt; Gen (TxBody ByronEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronEra -&gt; AsType (TxBody ByronEra)
+forall era. AsType era -&gt; AsType (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra ByronEra -&gt; Gen (TxBody ByronEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra ByronEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ByronEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_shelley_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_txbody_shelley_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-28"></span><span id="prop_roundtrip_txbody_shelley_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_txbody_shelley_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_shelley_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_txbody_shelley_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-29"></span><span>  </span><span class="annot"><span class="annottext">AsType (TxBody ShelleyEra) -&gt; Gen (TxBody ShelleyEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ShelleyEra -&gt; AsType (TxBody ShelleyEra)
+forall era. AsType era -&gt; AsType (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsShelleyEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra ShelleyEra -&gt; Gen (TxBody ShelleyEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ShelleyEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_allegra_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_txbody_allegra_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-32"></span><span id="prop_roundtrip_txbody_allegra_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_txbody_allegra_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_allegra_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_txbody_allegra_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-33"></span><span>  </span><span class="annot"><span class="annottext">AsType (TxBody AllegraEra) -&gt; Gen (TxBody AllegraEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AllegraEra -&gt; AsType (TxBody AllegraEra)
+forall era. AsType era -&gt; AsType (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAllegraEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AllegraEra -&gt; Gen (TxBody AllegraEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AllegraEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_mary_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_txbody_mary_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-36"></span><span id="prop_roundtrip_txbody_mary_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_txbody_mary_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_mary_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_txbody_mary_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-37"></span><span>  </span><span class="annot"><span class="annottext">AsType (TxBody MaryEra) -&gt; Gen (TxBody MaryEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType MaryEra -&gt; AsType (TxBody MaryEra)
+forall era. AsType era -&gt; AsType (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">AsType MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsMaryEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra MaryEra -&gt; Gen (TxBody MaryEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">MaryEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-38"></span><span>
+</span><span id="line-39"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_alonzo_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_txbody_alonzo_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-40"></span><span id="prop_roundtrip_txbody_alonzo_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_txbody_alonzo_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_txbody_alonzo_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_txbody_alonzo_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-41"></span><span>  </span><span class="annot"><span class="annottext">AsType (TxBody AlonzoEra) -&gt; Gen (TxBody AlonzoEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AlonzoEra -&gt; AsType (TxBody AlonzoEra)
+forall era. AsType era -&gt; AsType (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAlonzoEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AlonzoEra -&gt; Gen (TxBody AlonzoEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (TxBody era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTxBody</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AlonzoEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_byron_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_tx_byron_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-44"></span><span id="prop_roundtrip_tx_byron_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_tx_byron_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_byron_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_tx_byron_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-45"></span><span>  </span><span class="annot"><span class="annottext">AsType (Tx ByronEra) -&gt; Gen (Tx ByronEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronEra -&gt; AsType (Tx ByronEra)
+forall era. AsType era -&gt; AsType (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTx</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra ByronEra -&gt; Gen (Tx ByronEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTx</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra ByronEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ByronEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-46"></span><span>
+</span><span id="line-47"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_shelley_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_tx_shelley_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-48"></span><span id="prop_roundtrip_tx_shelley_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_tx_shelley_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_shelley_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_tx_shelley_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-49"></span><span>  </span><span class="annot"><span class="annottext">AsType (Tx ShelleyEra) -&gt; Gen (Tx ShelleyEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ShelleyEra -&gt; AsType (Tx ShelleyEra)
+forall era. AsType era -&gt; AsType (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTx</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsShelleyEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra ShelleyEra -&gt; Gen (Tx ShelleyEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTx</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ShelleyEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-50"></span><span>
+</span><span id="line-51"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_allegra_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_tx_allegra_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-52"></span><span id="prop_roundtrip_tx_allegra_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_tx_allegra_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_allegra_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_tx_allegra_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-53"></span><span>  </span><span class="annot"><span class="annottext">AsType (Tx AllegraEra) -&gt; Gen (Tx AllegraEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AllegraEra -&gt; AsType (Tx AllegraEra)
+forall era. AsType era -&gt; AsType (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTx</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAllegraEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AllegraEra -&gt; Gen (Tx AllegraEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTx</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AllegraEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-54"></span><span>
+</span><span id="line-55"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_mary_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_tx_mary_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-56"></span><span id="prop_roundtrip_tx_mary_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_tx_mary_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_mary_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_tx_mary_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-57"></span><span>  </span><span class="annot"><span class="annottext">AsType (Tx MaryEra) -&gt; Gen (Tx MaryEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType MaryEra -&gt; AsType (Tx MaryEra)
+forall era. AsType era -&gt; AsType (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTx</span></a></span><span> </span><span class="annot"><span class="annottext">AsType MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsMaryEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra MaryEra -&gt; Gen (Tx MaryEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTx</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">MaryEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-58"></span><span>
+</span><span id="line-59"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_alonzo_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_tx_alonzo_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-60"></span><span id="prop_roundtrip_tx_alonzo_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_tx_alonzo_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_tx_alonzo_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_tx_alonzo_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-61"></span><span>  </span><span class="annot"><span class="annottext">AsType (Tx AlonzoEra) -&gt; Gen (Tx AlonzoEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AlonzoEra -&gt; AsType (Tx AlonzoEra)
+forall era. AsType era -&gt; AsType (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsTx</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAlonzoEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AlonzoEra -&gt; Gen (Tx AlonzoEra)
+forall era. IsCardanoEra era =&gt; CardanoEra era -&gt; Gen (Tx era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genTx</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AlonzoEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-62"></span><span>
+</span><span id="line-63"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_byron_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_witness_byron_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-64"></span><span id="prop_roundtrip_witness_byron_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_witness_byron_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_byron_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_witness_byron_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-65"></span><span>  </span><span class="annot"><span class="annottext">AsType (KeyWitness ByronEra)
+-&gt; Gen (KeyWitness ByronEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronEra -&gt; AsType (KeyWitness ByronEra)
+forall era. AsType era -&gt; AsType (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKeyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronEra</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Gen (KeyWitness ByronEra)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genByronKeyWitness</span></a></span><span>
+</span><span id="line-66"></span><span>
+</span><span id="line-67"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_shelley_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_witness_shelley_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-68"></span><span id="prop_roundtrip_witness_shelley_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_witness_shelley_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_shelley_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_witness_shelley_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-69"></span><span>  </span><span class="annot"><span class="annottext">AsType (KeyWitness ShelleyEra)
+-&gt; Gen (KeyWitness ShelleyEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ShelleyEra -&gt; AsType (KeyWitness ShelleyEra)
+forall era. AsType era -&gt; AsType (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKeyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsShelleyEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra ShelleyEra -&gt; Gen (KeyWitness ShelleyEra)
+forall era.
+IsShelleyBasedEra era =&gt;
+CardanoEra era -&gt; Gen (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genShelleyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra ShelleyEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">ShelleyEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_allegra_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_witness_allegra_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-72"></span><span id="prop_roundtrip_witness_allegra_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_witness_allegra_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_allegra_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_witness_allegra_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-73"></span><span>  </span><span class="annot"><span class="annottext">AsType (KeyWitness AllegraEra)
+-&gt; Gen (KeyWitness AllegraEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AllegraEra -&gt; AsType (KeyWitness AllegraEra)
+forall era. AsType era -&gt; AsType (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKeyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAllegraEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AllegraEra -&gt; Gen (KeyWitness AllegraEra)
+forall era.
+IsShelleyBasedEra era =&gt;
+CardanoEra era -&gt; Gen (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genShelleyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AllegraEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AllegraEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-74"></span><span>
+</span><span id="line-75"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_mary_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_witness_mary_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-76"></span><span id="prop_roundtrip_witness_mary_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_witness_mary_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_mary_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_witness_mary_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-77"></span><span>  </span><span class="annot"><span class="annottext">AsType (KeyWitness MaryEra) -&gt; Gen (KeyWitness MaryEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType MaryEra -&gt; AsType (KeyWitness MaryEra)
+forall era. AsType era -&gt; AsType (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKeyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">AsType MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsMaryEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra MaryEra -&gt; Gen (KeyWitness MaryEra)
+forall era.
+IsShelleyBasedEra era =&gt;
+CardanoEra era -&gt; Gen (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genShelleyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra MaryEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">MaryEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_alonzo_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_witness_alonzo_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-80"></span><span id="prop_roundtrip_witness_alonzo_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_witness_alonzo_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_witness_alonzo_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_witness_alonzo_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-81"></span><span>  </span><span class="annot"><span class="annottext">AsType (KeyWitness AlonzoEra)
+-&gt; Gen (KeyWitness AlonzoEra) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType AlonzoEra -&gt; AsType (KeyWitness AlonzoEra)
+forall era. AsType era -&gt; AsType (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKeyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">AsType AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsAlonzoEra</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CardanoEra AlonzoEra -&gt; Gen (KeyWitness AlonzoEra)
+forall era.
+IsShelleyBasedEra era =&gt;
+CardanoEra era -&gt; Gen (KeyWitness era)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genShelleyWitness</span></a></span><span> </span><span class="annot"><span class="annottext">CardanoEra AlonzoEra
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AlonzoEra</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-82"></span><span>
+</span><span id="line-83"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_operational_certificate_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_operational_certificate_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-84"></span><span id="prop_roundtrip_operational_certificate_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_operational_certificate_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_operational_certificate_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_operational_certificate_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-85"></span><span>  </span><span class="annot"><span class="annottext">AsType OperationalCertificate
+-&gt; Gen OperationalCertificate -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="annot"><span class="annottext">AsType OperationalCertificate
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsOperationalCertificate</span></a></span><span> </span><span class="annot"><span class="annottext">Gen OperationalCertificate
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genOperationalCertificate</span></a></span><span>
+</span><span id="line-86"></span><span>
+</span><span id="line-87"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_operational_certificate_issue_counter_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_operational_certificate_issue_counter_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-88"></span><span id="prop_roundtrip_operational_certificate_issue_counter_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_operational_certificate_issue_counter_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_operational_certificate_issue_counter_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_operational_certificate_issue_counter_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-89"></span><span>  </span><span class="annot"><span class="annottext">AsType OperationalCertificateIssueCounter
+-&gt; Gen OperationalCertificateIssueCounter -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="annot"><span class="annottext">AsType OperationalCertificateIssueCounter
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsOperationalCertificateIssueCounter</span></a></span><span> </span><span class="annot"><span class="annottext">Gen OperationalCertificateIssueCounter
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genOperationalCertificateIssueCounter</span></a></span><span>
+</span><span id="line-90"></span><span>
+</span><span id="line-91"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_byron_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_byron_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-92"></span><span id="prop_roundtrip_verification_key_byron_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_byron_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_byron_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_byron_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-93"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey ByronKey)
+-&gt; Gen (VerificationKey ByronKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronKey -&gt; AsType (VerificationKey ByronKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronKey -&gt; Gen (VerificationKey ByronKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-94"></span><span>
+</span><span id="line-95"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_byron_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_byron_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-96"></span><span id="prop_roundtrip_signing_key_byron_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_byron_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_byron_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_byron_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-97"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey ByronKey)
+-&gt; Gen (SigningKey ByronKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronKey -&gt; AsType (SigningKey ByronKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType ByronKey -&gt; Gen (SigningKey ByronKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-98"></span><span>
+</span><span id="line-99"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_payment_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_payment_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-100"></span><span id="prop_roundtrip_verification_key_payment_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_payment_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_payment_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_payment_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-101"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey PaymentKey)
+-&gt; Gen (VerificationKey PaymentKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; AsType (VerificationKey PaymentKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; Gen (VerificationKey PaymentKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-102"></span><span>
+</span><span id="line-103"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_payment_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_payment_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-104"></span><span id="prop_roundtrip_signing_key_payment_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_payment_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_payment_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_payment_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-105"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey PaymentKey)
+-&gt; Gen (SigningKey PaymentKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; AsType (SigningKey PaymentKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; Gen (SigningKey PaymentKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-106"></span><span>
+</span><span id="line-107"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_stake_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_stake_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-108"></span><span id="prop_roundtrip_verification_key_stake_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_stake_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_stake_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_stake_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-109"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey StakeKey)
+-&gt; Gen (VerificationKey StakeKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakeKey -&gt; AsType (VerificationKey StakeKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakeKey -&gt; Gen (VerificationKey StakeKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-110"></span><span>
+</span><span id="line-111"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_stake_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_stake_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-112"></span><span id="prop_roundtrip_signing_key_stake_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_stake_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_stake_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_stake_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-113"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey StakeKey)
+-&gt; Gen (SigningKey StakeKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakeKey -&gt; AsType (SigningKey StakeKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakeKey -&gt; Gen (SigningKey StakeKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-114"></span><span>
+</span><span id="line-115"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_genesis_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_genesis_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-116"></span><span id="prop_roundtrip_verification_key_genesis_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_genesis_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_genesis_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_genesis_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-117"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey GenesisKey)
+-&gt; Gen (VerificationKey GenesisKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; AsType (VerificationKey GenesisKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; Gen (VerificationKey GenesisKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-118"></span><span>
+</span><span id="line-119"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_genesis_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_genesis_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-120"></span><span id="prop_roundtrip_signing_key_genesis_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_genesis_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_genesis_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_genesis_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-121"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey GenesisKey)
+-&gt; Gen (SigningKey GenesisKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; AsType (SigningKey GenesisKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; Gen (SigningKey GenesisKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-122"></span><span>
+</span><span id="line-123"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_genesis_delegate_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_genesis_delegate_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-124"></span><span id="prop_roundtrip_verification_key_genesis_delegate_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_genesis_delegate_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_genesis_delegate_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_genesis_delegate_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-125"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey GenesisDelegateKey)
+-&gt; Gen (VerificationKey GenesisDelegateKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+-&gt; AsType (VerificationKey GenesisDelegateKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+-&gt; Gen (VerificationKey GenesisDelegateKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-126"></span><span>
+</span><span id="line-127"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_genesis_delegate_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_genesis_delegate_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-128"></span><span id="prop_roundtrip_signing_key_genesis_delegate_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_genesis_delegate_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_genesis_delegate_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_genesis_delegate_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-129"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey GenesisDelegateKey)
+-&gt; Gen (SigningKey GenesisDelegateKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisDelegateKey -&gt; AsType (SigningKey GenesisDelegateKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType GenesisDelegateKey -&gt; Gen (SigningKey GenesisDelegateKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-130"></span><span>
+</span><span id="line-131"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_stake_pool_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_stake_pool_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-132"></span><span id="prop_roundtrip_verification_key_stake_pool_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_stake_pool_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_stake_pool_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_stake_pool_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-133"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey StakePoolKey)
+-&gt; Gen (VerificationKey StakePoolKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; AsType (VerificationKey StakePoolKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; Gen (VerificationKey StakePoolKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-134"></span><span>
+</span><span id="line-135"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_stake_pool_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_stake_pool_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-136"></span><span id="prop_roundtrip_signing_key_stake_pool_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_stake_pool_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_stake_pool_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_stake_pool_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-137"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey StakePoolKey)
+-&gt; Gen (SigningKey StakePoolKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; AsType (SigningKey StakePoolKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; Gen (SigningKey StakePoolKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-138"></span><span>
+</span><span id="line-139"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_vrf_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_vrf_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-140"></span><span id="prop_roundtrip_verification_key_vrf_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_vrf_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_vrf_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_vrf_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-141"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey VrfKey)
+-&gt; Gen (VerificationKey VrfKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType VrfKey -&gt; AsType (VerificationKey VrfKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType VrfKey -&gt; Gen (VerificationKey VrfKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-142"></span><span>
+</span><span id="line-143"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_vrf_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_vrf_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-144"></span><span id="prop_roundtrip_signing_key_vrf_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_vrf_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_vrf_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_vrf_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-145"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey VrfKey) -&gt; Gen (SigningKey VrfKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType VrfKey -&gt; AsType (SigningKey VrfKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType VrfKey -&gt; Gen (SigningKey VrfKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-146"></span><span>
+</span><span id="line-147"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_kes_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_verification_key_kes_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-148"></span><span id="prop_roundtrip_verification_key_kes_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_verification_key_kes_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_verification_key_kes_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_verification_key_kes_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-149"></span><span>  </span><span class="annot"><span class="annottext">AsType (VerificationKey KesKey)
+-&gt; Gen (VerificationKey KesKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType KesKey -&gt; AsType (VerificationKey KesKey)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType KesKey -&gt; Gen (VerificationKey KesKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-150"></span><span>
+</span><span id="line-151"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_kes_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_signing_key_kes_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-152"></span><span id="prop_roundtrip_signing_key_kes_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_signing_key_kes_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_signing_key_kes_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_signing_key_kes_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-153"></span><span>  </span><span class="annot"><span class="annottext">AsType (SigningKey KesKey) -&gt; Gen (SigningKey KesKey) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType KesKey -&gt; AsType (SigningKey KesKey)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType KesKey -&gt; Gen (SigningKey KesKey)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-154"></span><span>
+</span><span id="line-155"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_SimpleScriptV1_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_script_SimpleScriptV1_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-156"></span><span id="prop_roundtrip_script_SimpleScriptV1_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_script_SimpleScriptV1_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_SimpleScriptV1_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_script_SimpleScriptV1_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-157"></span><span>  </span><span class="annot"><span class="annottext">AsType (Script SimpleScriptV1)
+-&gt; Gen (Script SimpleScriptV1) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType SimpleScriptV1 -&gt; AsType (Script SimpleScriptV1)
+forall lang. AsType lang -&gt; AsType (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsScript</span></a></span><span> </span><span class="annot"><span class="annottext">AsType SimpleScriptV1
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSimpleScriptV1</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-158"></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ScriptLanguage SimpleScriptV1 -&gt; Gen (Script SimpleScriptV1)
+forall lang. ScriptLanguage lang -&gt; Gen (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genScript</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV1 -&gt; ScriptLanguage SimpleScriptV1
+forall lang. SimpleScriptVersion lang -&gt; ScriptLanguage lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptLanguage</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV1
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptV1</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-159"></span><span>
+</span><span id="line-160"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_SimpleScriptV2_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_script_SimpleScriptV2_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-161"></span><span id="prop_roundtrip_script_SimpleScriptV2_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_script_SimpleScriptV2_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_SimpleScriptV2_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_script_SimpleScriptV2_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-162"></span><span>  </span><span class="annot"><span class="annottext">AsType (Script SimpleScriptV2)
+-&gt; Gen (Script SimpleScriptV2) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType SimpleScriptV2 -&gt; AsType (Script SimpleScriptV2)
+forall lang. AsType lang -&gt; AsType (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsScript</span></a></span><span> </span><span class="annot"><span class="annottext">AsType SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSimpleScriptV2</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-163"></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ScriptLanguage SimpleScriptV2 -&gt; Gen (Script SimpleScriptV2)
+forall lang. ScriptLanguage lang -&gt; Gen (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genScript</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV2 -&gt; ScriptLanguage SimpleScriptV2
+forall lang. SimpleScriptVersion lang -&gt; ScriptLanguage lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptLanguage</span></a></span><span> </span><span class="annot"><span class="annottext">SimpleScriptVersion SimpleScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">SimpleScriptV2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-164"></span><span>
+</span><span id="line-165"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_PlutusScriptV1_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_script_PlutusScriptV1_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-166"></span><span id="prop_roundtrip_script_PlutusScriptV1_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_script_PlutusScriptV1_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_PlutusScriptV1_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_script_PlutusScriptV1_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-167"></span><span>  </span><span class="annot"><span class="annottext">AsType (Script PlutusScriptV1)
+-&gt; Gen (Script PlutusScriptV1) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PlutusScriptV1 -&gt; AsType (Script PlutusScriptV1)
+forall lang. AsType lang -&gt; AsType (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsScript</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PlutusScriptV1
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPlutusScriptV1</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-168"></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ScriptLanguage PlutusScriptV1 -&gt; Gen (Script PlutusScriptV1)
+forall lang. ScriptLanguage lang -&gt; Gen (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genScript</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PlutusScriptVersion PlutusScriptV1 -&gt; ScriptLanguage PlutusScriptV1
+forall lang. PlutusScriptVersion lang -&gt; ScriptLanguage lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">PlutusScriptLanguage</span></a></span><span> </span><span class="annot"><span class="annottext">PlutusScriptVersion PlutusScriptV1
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">PlutusScriptV1</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-169"></span><span>
+</span><span id="line-170"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_PlutusScriptV2_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_script_PlutusScriptV2_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-171"></span><span id="prop_roundtrip_script_PlutusScriptV2_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_script_PlutusScriptV2_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_script_PlutusScriptV2_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_script_PlutusScriptV2_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-172"></span><span>  </span><span class="annot"><span class="annottext">AsType (Script PlutusScriptV2)
+-&gt; Gen (Script PlutusScriptV2) -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType PlutusScriptV2 -&gt; AsType (Script PlutusScriptV2)
+forall lang. AsType lang -&gt; AsType (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsScript</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PlutusScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPlutusScriptV2</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-173"></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ScriptLanguage PlutusScriptV2 -&gt; Gen (Script PlutusScriptV2)
+forall lang. ScriptLanguage lang -&gt; Gen (Script lang)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genScript</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PlutusScriptVersion PlutusScriptV2 -&gt; ScriptLanguage PlutusScriptV2
+forall lang. PlutusScriptVersion lang -&gt; ScriptLanguage lang
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">PlutusScriptLanguage</span></a></span><span> </span><span class="annot"><span class="annottext">PlutusScriptVersion PlutusScriptV2
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">PlutusScriptV2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-174"></span><span>
+</span><span id="line-175"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_UpdateProposal_CBOR"><span class="hs-identifier hs-type">prop_roundtrip_UpdateProposal_CBOR</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-176"></span><span id="prop_roundtrip_UpdateProposal_CBOR"><span class="annot"><span class="annottext">prop_roundtrip_UpdateProposal_CBOR :: Property
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#prop_roundtrip_UpdateProposal_CBOR"><span class="hs-identifier hs-var hs-var">prop_roundtrip_UpdateProposal_CBOR</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-177"></span><span>  </span><span class="annot"><span class="annottext">AsType UpdateProposal -&gt; Gen UpdateProposal -&gt; Property
+forall a.
+(SerialiseAsCBOR a, Eq a, Show a) =&gt;
+AsType a -&gt; Gen a -&gt; Property
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">roundtrip_CBOR</span></a></span><span> </span><span class="annot"><span class="annottext">AsType UpdateProposal
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsUpdateProposal</span></a></span><span> </span><span class="annot"><span class="annottext">Gen UpdateProposal
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genUpdateProposal</span></a></span><span>
+</span><span id="line-178"></span><span>
+</span><span id="line-179"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-180"></span><span>
+</span><span id="line-181"></span><span class="annot"><a href="Test.Cardano.Api.Typed.CBOR.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-182"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Test.Cardano.Api.Typed.CBOR.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TestName
+[TestTree]
+Property
+TestName -&gt; [TestTree] -&gt; TestTree
+TestName -&gt; Property -&gt; TestTree
+testGroup :: TestName -&gt; [TestTree] -&gt; TestTree
+prop_roundtrip_UpdateProposal_CBOR :: Property
+prop_roundtrip_script_PlutusScriptV2_CBOR :: Property
+prop_roundtrip_script_PlutusScriptV1_CBOR :: Property
+prop_roundtrip_script_SimpleScriptV2_CBOR :: Property
+prop_roundtrip_script_SimpleScriptV1_CBOR :: Property
+prop_roundtrip_signing_key_kes_CBOR :: Property
+prop_roundtrip_verification_key_kes_CBOR :: Property
+prop_roundtrip_signing_key_vrf_CBOR :: Property
+prop_roundtrip_verification_key_vrf_CBOR :: Property
+prop_roundtrip_signing_key_stake_pool_CBOR :: Property
+prop_roundtrip_verification_key_stake_pool_CBOR :: Property
+prop_roundtrip_signing_key_genesis_delegate_CBOR :: Property
+prop_roundtrip_verification_key_genesis_delegate_CBOR :: Property
+prop_roundtrip_signing_key_genesis_CBOR :: Property
+prop_roundtrip_verification_key_genesis_CBOR :: Property
+prop_roundtrip_signing_key_stake_CBOR :: Property
+prop_roundtrip_verification_key_stake_CBOR :: Property
+prop_roundtrip_signing_key_payment_CBOR :: Property
+prop_roundtrip_verification_key_payment_CBOR :: Property
+prop_roundtrip_signing_key_byron_CBOR :: Property
+prop_roundtrip_verification_key_byron_CBOR :: Property
+prop_roundtrip_operational_certificate_issue_counter_CBOR :: Property
+prop_roundtrip_operational_certificate_CBOR :: Property
+prop_roundtrip_witness_alonzo_CBOR :: Property
+prop_roundtrip_witness_mary_CBOR :: Property
+prop_roundtrip_witness_allegra_CBOR :: Property
+prop_roundtrip_witness_shelley_CBOR :: Property
+prop_roundtrip_witness_byron_CBOR :: Property
+prop_roundtrip_tx_alonzo_CBOR :: Property
+prop_roundtrip_tx_mary_CBOR :: Property
+prop_roundtrip_tx_allegra_CBOR :: Property
+prop_roundtrip_tx_shelley_CBOR :: Property
+prop_roundtrip_tx_byron_CBOR :: Property
+prop_roundtrip_txbody_alonzo_CBOR :: Property
+prop_roundtrip_txbody_mary_CBOR :: Property
+prop_roundtrip_txbody_allegra_CBOR :: Property
+prop_roundtrip_txbody_shelley_CBOR :: Property
+prop_roundtrip_txbody_byron_CBOR :: Property
+testProperty :: TestName -&gt; Property -&gt; TestTree
+</span><span class="hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">$testGroupGenerator</span></span><span>
+</span><span id="line-183"></span></pre></body></html>

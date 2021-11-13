@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE FlexibleContexts #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE StandaloneDeriving #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Api.Typed.Envelope</span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">TestTree</span></span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testProperty</span></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Test.Tasty.TH</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">testGroupGenerator</span></span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Cardano.Api</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier">Gen.Cardano.Api.Typed</span></a></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.Cardano.Api.Typed.Orphans.html"><span class="hs-identifier">Test.Cardano.Api.Typed.Orphans</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_ByronVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_ByronVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-24"></span><span id="prop_roundtrip_ByronVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_ByronVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_ByronVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_ByronVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-25"></span><span>  </span><span class="annot"><span class="annottext">AsType ByronKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_ByronSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_ByronSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-28"></span><span id="prop_roundtrip_ByronSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_ByronSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_ByronSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_ByronSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-29"></span><span>  </span><span class="annot"><span class="annottext">AsType ByronKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType ByronKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsByronKey</span></a></span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_PaymentVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_PaymentVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-32"></span><span id="prop_roundtrip_PaymentVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_PaymentVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_PaymentVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_PaymentVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-33"></span><span>  </span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_PaymentSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_PaymentSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-36"></span><span id="prop_roundtrip_PaymentSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_PaymentSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_PaymentSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_PaymentSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-37"></span><span>  </span><span class="annot"><span class="annottext">AsType PaymentKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType PaymentKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsPaymentKey</span></a></span><span>
+</span><span id="line-38"></span><span>
+</span><span id="line-39"></span><span>
+</span><span id="line-40"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakeVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_StakeVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-41"></span><span id="prop_roundtrip_StakeVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_StakeVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakeVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_StakeVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-42"></span><span>  </span><span class="annot"><span class="annottext">AsType StakeKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span>
+</span><span id="line-43"></span><span>
+</span><span id="line-44"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakeSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_StakeSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-45"></span><span id="prop_roundtrip_StakeSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_StakeSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakeSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_StakeSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-46"></span><span>  </span><span class="annot"><span class="annottext">AsType StakeKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakeKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakeKey</span></a></span><span>
+</span><span id="line-47"></span><span>
+</span><span id="line-48"></span><span>
+</span><span id="line-49"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakePoolVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_StakePoolVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-50"></span><span id="prop_roundtrip_StakePoolVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_StakePoolVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakePoolVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_StakePoolVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-51"></span><span>  </span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span>
+</span><span id="line-52"></span><span>
+</span><span id="line-53"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakePoolSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_StakePoolSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-54"></span><span id="prop_roundtrip_StakePoolSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_StakePoolSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_StakePoolSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_StakePoolSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-55"></span><span>  </span><span class="annot"><span class="annottext">AsType StakePoolKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType StakePoolKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsStakePoolKey</span></a></span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span>
+</span><span id="line-58"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_GenesisVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-59"></span><span id="prop_roundtrip_GenesisVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_GenesisVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_GenesisVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-60"></span><span>  </span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span>
+</span><span id="line-61"></span><span>
+</span><span id="line-62"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_GenesisSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-63"></span><span id="prop_roundtrip_GenesisSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_GenesisSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_GenesisSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-64"></span><span>  </span><span class="annot"><span class="annottext">AsType GenesisKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisKey</span></a></span><span>
+</span><span id="line-65"></span><span>
+</span><span id="line-66"></span><span>
+</span><span id="line-67"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisDelegateVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_GenesisDelegateVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-68"></span><span id="prop_roundtrip_GenesisDelegateVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_GenesisDelegateVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisDelegateVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_GenesisDelegateVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-69"></span><span>  </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisDelegateSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_GenesisDelegateSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-72"></span><span id="prop_roundtrip_GenesisDelegateSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_GenesisDelegateSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_GenesisDelegateSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_GenesisDelegateSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-73"></span><span>  </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType GenesisDelegateKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsGenesisDelegateKey</span></a></span><span>
+</span><span id="line-74"></span><span>
+</span><span id="line-75"></span><span>
+</span><span id="line-76"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_KesVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_KesVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-77"></span><span id="prop_roundtrip_KesVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_KesVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_KesVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_KesVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-78"></span><span>  </span><span class="annot"><span class="annottext">AsType KesKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span>
+</span><span id="line-79"></span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_KesSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_KesSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-81"></span><span id="prop_roundtrip_KesSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_KesSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_KesSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_KesSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-82"></span><span>  </span><span class="annot"><span class="annottext">AsType KesKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType KesKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsKesKey</span></a></span><span>
+</span><span id="line-83"></span><span>
+</span><span id="line-84"></span><span>
+</span><span id="line-85"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_VrfVerificationKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_VrfVerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-86"></span><span id="prop_roundtrip_VrfVerificationKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_VrfVerificationKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_VrfVerificationKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_VrfVerificationKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-87"></span><span>  </span><span class="annot"><span class="annottext">AsType VrfKey -&gt; Property
+forall keyrole. Key keyrole =&gt; AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span>
+</span><span id="line-88"></span><span>
+</span><span id="line-89"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_VrfSigningKey_envelope"><span class="hs-identifier hs-type">prop_roundtrip_VrfSigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-90"></span><span id="prop_roundtrip_VrfSigningKey_envelope"><span class="annot"><span class="annottext">prop_roundtrip_VrfSigningKey_envelope :: Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#prop_roundtrip_VrfSigningKey_envelope"><span class="hs-identifier hs-var hs-var">prop_roundtrip_VrfSigningKey_envelope</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-91"></span><span>  </span><span class="annot"><span class="annottext">AsType VrfKey -&gt; Property
+forall keyrole.
+(Key keyrole, Eq (SigningKey keyrole),
+ Show (SigningKey keyrole)) =&gt;
+AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="annot"><span class="annottext">AsType VrfKey
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVrfKey</span></a></span><span>
+</span><span id="line-92"></span><span>
+</span><span id="line-93"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-94"></span><span>
+</span><span id="line-95"></span><span id="local-6989586621679270639"><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-type">roundtrip_VerificationKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">Key</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270639"><span class="hs-identifier hs-type">keyrole</span></a></span><span>
+</span><span id="line-96"></span><span>                                   </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270639"><span class="hs-identifier hs-type">keyrole</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span></span><span>
+</span><span id="line-97"></span><span id="roundtrip_VerificationKey_envelope"><span class="annot"><span class="annottext">roundtrip_VerificationKey_envelope :: AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_VerificationKey_envelope"><span class="hs-identifier hs-var hs-var">roundtrip_VerificationKey_envelope</span></a></span></span><span> </span><span id="local-6989586621679270570"><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270570"><span class="hs-identifier hs-var">roletoken</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-98"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-99"></span><span>    </span><span id="local-6989586621679270568"><span class="annot"><span class="annottext">VerificationKey keyrole
+</span><a href="#local-6989586621679270568"><span class="hs-identifier hs-var">vkey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen (VerificationKey keyrole)
+-&gt; PropertyT IO (VerificationKey keyrole)
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType keyrole -&gt; Gen (VerificationKey keyrole)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (VerificationKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270570"><span class="hs-identifier hs-var">roletoken</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-100"></span><span>    </span><span class="annot"><span class="annottext">VerificationKey keyrole
+-&gt; (VerificationKey keyrole -&gt; TextEnvelope)
+-&gt; (TextEnvelope
+    -&gt; Either TextEnvelopeError (VerificationKey keyrole))
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.tripping</span></span><span> </span><span class="annot"><span class="annottext">VerificationKey keyrole
+</span><a href="#local-6989586621679270568"><span class="hs-identifier hs-var">vkey</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe TextEnvelopeDescr -&gt; VerificationKey keyrole -&gt; TextEnvelope
+forall a.
+HasTextEnvelope a =&gt;
+Maybe TextEnvelopeDescr -&gt; a -&gt; TextEnvelope
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">serialiseToTextEnvelope</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe TextEnvelopeDescr
+forall a. Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-101"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType (VerificationKey keyrole)
+-&gt; TextEnvelope
+-&gt; Either TextEnvelopeError (VerificationKey keyrole)
+forall a.
+HasTextEnvelope a =&gt;
+AsType a -&gt; TextEnvelope -&gt; Either TextEnvelopeError a
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">deserialiseFromTextEnvelope</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType keyrole -&gt; AsType (VerificationKey keyrole)
+forall a. AsType a -&gt; AsType (VerificationKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270570"><span class="hs-identifier hs-var">roletoken</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-102"></span><span>
+</span><span id="line-103"></span><span id="local-6989586621679270637"><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-type">roundtrip_SigningKey_envelope</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">Key</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270637"><span class="hs-identifier hs-type">keyrole</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-104"></span><span>                                  </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Eq</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SigningKey</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270637"><span class="hs-identifier hs-type">keyrole</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-105"></span><span>                                  </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Show</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">SigningKey</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270637"><span class="hs-identifier hs-type">keyrole</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-106"></span><span>                              </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-type">AsType</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270637"><span class="hs-identifier hs-type">keyrole</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span></span><span>
+</span><span id="line-107"></span><span id="roundtrip_SigningKey_envelope"><span class="annot"><span class="annottext">roundtrip_SigningKey_envelope :: AsType keyrole -&gt; Property
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#roundtrip_SigningKey_envelope"><span class="hs-identifier hs-var hs-var">roundtrip_SigningKey_envelope</span></a></span></span><span> </span><span id="local-6989586621679270561"><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270561"><span class="hs-identifier hs-var">roletoken</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-108"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">H.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-109"></span><span>    </span><span id="local-6989586621679270560"><span class="annot"><span class="annottext">SigningKey keyrole
+</span><a href="#local-6989586621679270560"><span class="hs-identifier hs-var">vkey</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen (SigningKey keyrole) -&gt; PropertyT IO (SigningKey keyrole)
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">H.forAll</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType keyrole -&gt; Gen (SigningKey keyrole)
+forall keyrole.
+Key keyrole =&gt;
+AsType keyrole -&gt; Gen (SigningKey keyrole)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/l/gen/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">genSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270561"><span class="hs-identifier hs-var">roletoken</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-110"></span><span>    </span><span class="annot"><span class="annottext">SigningKey keyrole
+-&gt; (SigningKey keyrole -&gt; TextEnvelope)
+-&gt; (TextEnvelope -&gt; Either TextEnvelopeError (SigningKey keyrole))
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.tripping</span></span><span> </span><span class="annot"><span class="annottext">SigningKey keyrole
+</span><a href="#local-6989586621679270560"><span class="hs-identifier hs-var">vkey</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe TextEnvelopeDescr -&gt; SigningKey keyrole -&gt; TextEnvelope
+forall a.
+HasTextEnvelope a =&gt;
+Maybe TextEnvelopeDescr -&gt; a -&gt; TextEnvelope
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">serialiseToTextEnvelope</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe TextEnvelopeDescr
+forall a. Maybe a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">Nothing</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-111"></span><span>                    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType (SigningKey keyrole)
+-&gt; TextEnvelope -&gt; Either TextEnvelopeError (SigningKey keyrole)
+forall a.
+HasTextEnvelope a =&gt;
+AsType a -&gt; TextEnvelope -&gt; Either TextEnvelopeError a
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">deserialiseFromTextEnvelope</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AsType keyrole -&gt; AsType (SigningKey keyrole)
+forall a. AsType a -&gt; AsType (SigningKey a)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-api-1.30.0/noopt/doc/html/cardano-api/src"><span class="hs-identifier hs-var">AsSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">AsType keyrole
+</span><a href="#local-6989586621679270561"><span class="hs-identifier hs-var">roletoken</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-112"></span><span>
+</span><span id="line-113"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-114"></span><span>
+</span><span id="line-115"></span><span class="annot"><a href="Test.Cardano.Api.Typed.Envelope.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">TestTree</span></span><span>
+</span><span id="line-116"></span><span id="tests"><span class="annot"><span class="annottext">tests :: TestTree
+</span><a href="Test.Cardano.Api.Typed.Envelope.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">TestName
+[TestTree]
+Property
+TestName -&gt; [TestTree] -&gt; TestTree
+TestName -&gt; Property -&gt; TestTree
+testGroup :: TestName -&gt; [TestTree] -&gt; TestTree
+prop_roundtrip_VrfSigningKey_envelope :: Property
+prop_roundtrip_VrfVerificationKey_envelope :: Property
+prop_roundtrip_KesSigningKey_envelope :: Property
+prop_roundtrip_KesVerificationKey_envelope :: Property
+prop_roundtrip_GenesisDelegateSigningKey_envelope :: Property
+prop_roundtrip_GenesisDelegateVerificationKey_envelope :: Property
+prop_roundtrip_GenesisSigningKey_envelope :: Property
+prop_roundtrip_GenesisVerificationKey_envelope :: Property
+prop_roundtrip_StakePoolSigningKey_envelope :: Property
+prop_roundtrip_StakePoolVerificationKey_envelope :: Property
+prop_roundtrip_StakeSigningKey_envelope :: Property
+prop_roundtrip_StakeVerificationKey_envelope :: Property
+prop_roundtrip_PaymentSigningKey_envelope :: Property
+prop_roundtrip_PaymentVerificationKey_envelope :: Property
+prop_roundtrip_ByronSigningKey_envelope :: Property
+prop_roundtrip_ByronVerificationKey_envelope :: Property
+testProperty :: TestName -&gt; Property -&gt; TestTree
+</span><span class="hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">$testGroupGenerator</span></span><span>
+</span><span id="line-117"></span></pre></body></html>

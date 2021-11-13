@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Main</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">defaultMain</span></span><span class="hs-special">)</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.Byron.SigningKeys.html"><span class="hs-identifier">Test.Golden.Byron.SigningKeys</span></a></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.Byron.Tx.html"><span class="hs-identifier">Test.Golden.Byron.Tx</span></a></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.Byron.UpdateProposal.html"><span class="hs-identifier">Test.Golden.Byron.UpdateProposal</span></a></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.Byron.Vote.html"><span class="hs-identifier">Test.Golden.Byron.Vote</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.html"><span class="hs-identifier">Test.Golden.Shelley</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Golden.TxView.html"><span class="hs-identifier">Test.Golden.TxView</span></a></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="annot"><a href="Main.html#main"><span class="hs-identifier hs-type">main</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span id="main"><span class="annot"><span class="annottext">main :: IO ()
+</span><a href="Main.html#main"><span class="hs-identifier hs-var hs-var">main</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-14"></span><span>  </span><span class="annot"><span class="annottext">[IO Bool] -&gt; IO ()
+</span><span class="hs-identifier hs-var">defaultMain</span></span><span>
+</span><span id="line-15"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Byron.SigningKeys.html#tests"><span class="hs-identifier hs-var">Test.Golden.Byron.SigningKeys.tests</span></a></span><span>
+</span><span id="line-16"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Byron.Tx.html#txTests"><span class="hs-identifier hs-var">Test.Golden.Byron.Tx.txTests</span></a></span><span>
+</span><span id="line-17"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Byron.UpdateProposal.html#updateProposalTest"><span class="hs-identifier hs-var">Test.Golden.Byron.UpdateProposal.updateProposalTest</span></a></span><span>
+</span><span id="line-18"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Byron.Vote.html#voteTests"><span class="hs-identifier hs-var">Test.Golden.Byron.Vote.voteTests</span></a></span><span>
+</span><span id="line-19"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#keyTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.keyTests</span></a></span><span>
+</span><span id="line-20"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#certificateTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.certificateTests</span></a></span><span>
+</span><span id="line-21"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#keyConversionTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.keyConversionTests</span></a></span><span>
+</span><span id="line-22"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#metadataTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.metadataTests</span></a></span><span>
+</span><span id="line-23"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#multiSigTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.multiSigTests</span></a></span><span>
+</span><span id="line-24"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.Shelley.html#txTests"><span class="hs-identifier hs-var">Test.Golden.Shelley.txTests</span></a></span><span>
+</span><span id="line-25"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Golden.TxView.html#txViewTests"><span class="hs-identifier hs-var">Test.Golden.TxView.txViewTests</span></a></span><span>
+</span><span id="line-26"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-27"></span></pre></body></html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell #-}</span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cardano.Node.Json</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cardano.Node.Json.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Aeson</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">decode</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">encode</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">fromJSON</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">toJSON</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">discover</span></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.Cardano.Node.Gen.html"><span class="hs-identifier">Test.Cardano.Node.Gen</span></a></span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPv4Address_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NodeIPv4Address_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-17"></span><span id="prop_roundtrip_NodeIPv4Address_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NodeIPv4Address_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPv4Address_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NodeIPv4Address_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-18"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-19"></span><span>    </span><span id="local-6989586621679119654"><span class="annot"><span class="annottext">NodeIPv4Address
+</span><a href="#local-6989586621679119654"><span class="hs-identifier hs-var">na</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv4Address -&gt; PropertyT IO NodeIPv4Address
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv4Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPv4Address"><span class="hs-identifier hs-var">genNodeIPv4Address</span></a></span><span>
+</span><span id="line-20"></span><span>    </span><span class="annot"><span class="annottext">NodeIPv4Address
+-&gt; (NodeIPv4Address -&gt; Value)
+-&gt; (Value -&gt; Result NodeIPv4Address)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPv4Address
+</span><a href="#local-6989586621679119654"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPv4Address -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NodeIPv4Address
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-21"></span><span>    </span><span class="annot"><span class="annottext">NodeIPv4Address
+-&gt; (NodeIPv4Address -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NodeIPv4Address)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPv4Address
+</span><a href="#local-6989586621679119654"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPv4Address -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NodeIPv4Address
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPv6Address_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NodeIPv6Address_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-24"></span><span id="prop_roundtrip_NodeIPv6Address_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NodeIPv6Address_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPv6Address_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NodeIPv6Address_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-25"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-26"></span><span>    </span><span id="local-6989586621679119649"><span class="annot"><span class="annottext">NodeIPv6Address
+</span><a href="#local-6989586621679119649"><span class="hs-identifier hs-var">na</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv6Address -&gt; PropertyT IO NodeIPv6Address
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NodeIPv6Address
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPv6Address"><span class="hs-identifier hs-var">genNodeIPv6Address</span></a></span><span>
+</span><span id="line-27"></span><span>    </span><span class="annot"><span class="annottext">NodeIPv6Address
+-&gt; (NodeIPv6Address -&gt; Value)
+-&gt; (Value -&gt; Result NodeIPv6Address)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPv6Address
+</span><a href="#local-6989586621679119649"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPv6Address -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NodeIPv6Address
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-28"></span><span>    </span><span class="annot"><span class="annottext">NodeIPv6Address
+-&gt; (NodeIPv6Address -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NodeIPv6Address)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPv6Address
+</span><a href="#local-6989586621679119649"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPv6Address -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NodeIPv6Address
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-29"></span><span>
+</span><span id="line-30"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPAddress_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NodeIPAddress_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-31"></span><span id="prop_roundtrip_NodeIPAddress_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NodeIPAddress_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeIPAddress_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NodeIPAddress_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-32"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-33"></span><span>    </span><span id="local-6989586621679119646"><span class="annot"><span class="annottext">NodeIPAddress
+</span><a href="#local-6989586621679119646"><span class="hs-identifier hs-var">na</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NodeIPAddress -&gt; PropertyT IO NodeIPAddress
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NodeIPAddress
+</span><a href="Test.Cardano.Node.Gen.html#genNodeIPAddress"><span class="hs-identifier hs-var">genNodeIPAddress</span></a></span><span>
+</span><span id="line-34"></span><span>    </span><span class="annot"><span class="annottext">NodeIPAddress
+-&gt; (NodeIPAddress -&gt; Value)
+-&gt; (Value -&gt; Result NodeIPAddress)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPAddress
+</span><a href="#local-6989586621679119646"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPAddress -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NodeIPAddress
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-35"></span><span>    </span><span class="annot"><span class="annottext">NodeIPAddress
+-&gt; (NodeIPAddress -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NodeIPAddress)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeIPAddress
+</span><a href="#local-6989586621679119646"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">NodeIPAddress -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NodeIPAddress
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeHostAddress_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NodeHostAddress_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-38"></span><span id="prop_roundtrip_NodeHostAddress_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NodeHostAddress_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeHostAddress_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NodeHostAddress_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-39"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-40"></span><span>    </span><span id="local-6989586621679119643"><span class="annot"><span class="annottext">NodeHostIPAddress
+</span><a href="#local-6989586621679119643"><span class="hs-identifier hs-var">nha</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPAddress -&gt; PropertyT IO NodeHostIPAddress
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NodeHostIPAddress
+</span><a href="Test.Cardano.Node.Gen.html#genNodeHostIPAddress"><span class="hs-identifier hs-var">genNodeHostIPAddress</span></a></span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><span class="annottext">NodeHostIPAddress
+-&gt; (NodeHostIPAddress -&gt; Value)
+-&gt; (Value -&gt; Result NodeHostIPAddress)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeHostIPAddress
+</span><a href="#local-6989586621679119643"><span class="hs-identifier hs-var">nha</span></a></span><span> </span><span class="annot"><span class="annottext">NodeHostIPAddress -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NodeHostIPAddress
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-42"></span><span>    </span><span class="annot"><span class="annottext">NodeHostIPAddress
+-&gt; (NodeHostIPAddress -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NodeHostIPAddress)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeHostIPAddress
+</span><a href="#local-6989586621679119643"><span class="hs-identifier hs-var">nha</span></a></span><span> </span><span class="annot"><span class="annottext">NodeHostIPAddress -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NodeHostIPAddress
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-43"></span><span>
+</span><span id="line-44"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeSetup_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NodeSetup_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-45"></span><span id="prop_roundtrip_NodeSetup_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NodeSetup_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NodeSetup_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NodeSetup_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-46"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-47"></span><span>    </span><span id="local-6989586621679119640"><span class="annot"><span class="annottext">NodeSetup
+</span><a href="#local-6989586621679119640"><span class="hs-identifier hs-var">ns</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NodeSetup -&gt; PropertyT IO NodeSetup
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NodeSetup
+</span><a href="Test.Cardano.Node.Gen.html#genNodeSetup"><span class="hs-identifier hs-var">genNodeSetup</span></a></span><span>
+</span><span id="line-48"></span><span>    </span><span class="annot"><span class="annottext">NodeSetup
+-&gt; (NodeSetup -&gt; Value)
+-&gt; (Value -&gt; Result NodeSetup)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeSetup
+</span><a href="#local-6989586621679119640"><span class="hs-identifier hs-var">ns</span></a></span><span> </span><span class="annot"><span class="annottext">NodeSetup -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NodeSetup
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-49"></span><span>    </span><span class="annot"><span class="annottext">NodeSetup
+-&gt; (NodeSetup -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NodeSetup)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NodeSetup
+</span><a href="#local-6989586621679119640"><span class="hs-identifier hs-var">ns</span></a></span><span> </span><span class="annot"><span class="annottext">NodeSetup -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NodeSetup
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-50"></span><span>
+</span><span id="line-51"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NetworkTopology_JSON"><span class="hs-identifier hs-type">prop_roundtrip_NetworkTopology_JSON</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-52"></span><span id="prop_roundtrip_NetworkTopology_JSON"><span class="annot"><span class="annottext">prop_roundtrip_NetworkTopology_JSON :: Property
+</span><a href="Test.Cardano.Node.Json.html#prop_roundtrip_NetworkTopology_JSON"><span class="hs-identifier hs-var hs-var">prop_roundtrip_NetworkTopology_JSON</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-53"></span><span>  </span><span class="annot"><span class="annottext">HasCallStack =&gt; PropertyT IO () -&gt; Property
+PropertyT IO () -&gt; Property
+</span><span class="hs-identifier hs-var">Hedgehog.property</span></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-54"></span><span>    </span><span id="local-6989586621679119637"><span class="annot"><span class="annottext">NetworkTopology
+</span><a href="#local-6989586621679119637"><span class="hs-identifier hs-var">ntop</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Gen NetworkTopology -&gt; PropertyT IO NetworkTopology
+forall (m :: * -&gt; *) a.
+(Monad m, Show a, HasCallStack) =&gt;
+Gen a -&gt; PropertyT m a
+</span><span class="hs-identifier hs-var">Hedgehog.forAll</span></span><span> </span><span class="annot"><span class="annottext">Gen NetworkTopology
+</span><a href="Test.Cardano.Node.Gen.html#genNetworkTopology"><span class="hs-identifier hs-var">genNetworkTopology</span></a></span><span>
+</span><span id="line-55"></span><span>    </span><span class="annot"><span class="annottext">NetworkTopology
+-&gt; (NetworkTopology -&gt; Value)
+-&gt; (Value -&gt; Result NetworkTopology)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NetworkTopology
+</span><a href="#local-6989586621679119637"><span class="hs-identifier hs-var">ntop</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkTopology -&gt; Value
+forall a. ToJSON a =&gt; a -&gt; Value
+</span><span class="hs-identifier hs-var">toJSON</span></span><span> </span><span class="annot"><span class="annottext">Value -&gt; Result NetworkTopology
+forall a. FromJSON a =&gt; Value -&gt; Result a
+</span><span class="hs-identifier hs-var">fromJSON</span></span><span>
+</span><span id="line-56"></span><span>    </span><span class="annot"><span class="annottext">NetworkTopology
+-&gt; (NetworkTopology -&gt; ByteString)
+-&gt; (ByteString -&gt; Maybe NetworkTopology)
+-&gt; PropertyT IO ()
+forall (m :: * -&gt; *) (f :: * -&gt; *) b a.
+(MonadTest m, Applicative f, Show b, Show (f a), Eq (f a),
+ HasCallStack) =&gt;
+a -&gt; (a -&gt; b) -&gt; (b -&gt; f a) -&gt; m ()
+</span><span class="hs-identifier hs-var">Hedgehog.tripping</span></span><span> </span><span class="annot"><span class="annottext">NetworkTopology
+</span><a href="#local-6989586621679119637"><span class="hs-identifier hs-var">ntop</span></a></span><span> </span><span class="annot"><span class="annottext">NetworkTopology -&gt; ByteString
+forall a. ToJSON a =&gt; a -&gt; ByteString
+</span><span class="hs-identifier hs-var">encode</span></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; Maybe NetworkTopology
+forall a. FromJSON a =&gt; ByteString -&gt; Maybe a
+</span><span class="hs-identifier hs-var">decode</span></span><span>
+</span><span id="line-57"></span><span>
+</span><span id="line-58"></span><span>
+</span><span id="line-59"></span><span class="hs-comment">-- -----------------------------------------------------------------------------</span><span>
+</span><span id="line-60"></span><span>
+</span><span id="line-61"></span><span class="annot"><a href="Test.Cardano.Node.Json.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Bool</span></a></span><span>
+</span><span id="line-62"></span><span id="tests"><span class="annot"><span class="annottext">tests :: IO Bool
+</span><a href="Test.Cardano.Node.Json.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-63"></span><span>  </span><span class="annot"><span class="annottext">Group -&gt; IO Bool
+forall (m :: * -&gt; *). MonadIO m =&gt; Group -&gt; m Bool
+</span><span class="hs-identifier hs-var">Hedgehog.checkParallel</span></span><span> </span><span class="annot"><span class="annottext">String
+[(PropertyName, Property)]
+Property
+String -&gt; GroupName
+String -&gt; PropertyName
+GroupName -&gt; [(PropertyName, Property)] -&gt; Group
+prop_roundtrip_NetworkTopology_JSON :: Property
+prop_roundtrip_NodeSetup_JSON :: Property
+prop_roundtrip_NodeHostAddress_JSON :: Property
+prop_roundtrip_NodeIPAddress_JSON :: Property
+prop_roundtrip_NodeIPv6Address_JSON :: Property
+prop_roundtrip_NodeIPv4Address_JSON :: Property
+</span><span class="hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">$$discover</span></span><span>
+</span><span id="line-64"></span></pre></body></html>

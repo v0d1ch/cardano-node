@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE FlexibleContexts #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE NamedFieldPuns #-}</span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Cardano.Tracing.Kernel</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier">NodeKernelData</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#mkNodeKernelData"><span class="hs-identifier">mkNodeKernelData</span></a></span><span>
+</span><span id="line-6"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#setNodeKernel"><span class="hs-identifier">setNodeKernel</span></a></span><span>
+</span><span id="line-7"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#mapNodeKernelDataIO"><span class="hs-identifier">mapNodeKernelDataIO</span></a></span><span>
+</span><span id="line-8"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#nkQueryLedger"><span class="hs-identifier">nkQueryLedger</span></a></span><span>
+</span><span id="line-9"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#nkQueryChain"><span class="hs-identifier">nkQueryChain</span></a></span><span>
+</span><span id="line-10"></span><span>  </span><span class="annot"><span class="hs-comment">-- * Re-exports</span></span><span>
+</span><span id="line-11"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">NodeKernel</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">LocalConnectionId</span></span><span>
+</span><span id="line-13"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">RemoteConnectionId</span></span><span>
+</span><span id="line-14"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">StrictMaybe</span></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">fromSMaybe</span></span><span>
+</span><span id="line-16"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Ledger.BaseTypes</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">StrictMaybe</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">fromSMaybe</span></span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.IORef</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">IORef</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">newIORef</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">readIORef</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">writeIORef</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Block</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Header</span></span><span class="hs-special">)</span><span>
+</span><span id="line-25"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Ledger.Abstract</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">IsLedger</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">LedgerState</span></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Ledger.Extended</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">ExtLedgerState</span></span><span class="hs-special">)</span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Node</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">NodeKernel</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-28"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Storage.ChainDB</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">ChainDB</span></span><span>
+</span><span id="line-29"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Consensus.Util.Orphans</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Ouroboros.Network.AnchoredFragment</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">AF</span></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Network.NodeToClient</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">LocalConnectionId</span></span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Ouroboros.Network.NodeToNode</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">RemoteConnectionId</span></span><span class="hs-special">)</span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span class="hs-keyword">newtype</span><span> </span><span id="NodeKernelData"><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-var">NodeKernelData</span></a></span></span><span> </span><span id="local-6989586621679421128"><span class="annot"><a href="#local-6989586621679421128"><span class="hs-identifier hs-type">blk</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-37"></span><span>  </span><span id="NodeKernelData"><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-var">NodeKernelData</span></a></span></span><span>
+</span><span id="line-38"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="unNodeKernelData"><span class="annot"><span class="annottext">NodeKernelData blk
+-&gt; IORef
+     (StrictMaybe
+        (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+</span><a href="Cardano.Tracing.Kernel.html#unNodeKernelData"><span class="hs-identifier hs-var hs-var">unNodeKernelData</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">IORef</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">StrictMaybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679421128"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-39"></span><span>  </span><span class="hs-special">}</span><span>
+</span><span id="line-40"></span><span>
+</span><span id="line-41"></span><span id="local-6989586621679421075"><span class="annot"><a href="Cardano.Tracing.Kernel.html#mkNodeKernelData"><span class="hs-identifier hs-type">mkNodeKernelData</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421075"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span></span><span>
+</span><span id="line-42"></span><span id="mkNodeKernelData"><span class="annot"><span class="annottext">mkNodeKernelData :: IO (NodeKernelData blk)
+</span><a href="Cardano.Tracing.Kernel.html#mkNodeKernelData"><span class="hs-identifier hs-var hs-var">mkNodeKernelData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+-&gt; NodeKernelData blk
+forall blk.
+IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+-&gt; NodeKernelData blk
+</span><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-var">NodeKernelData</span></a></span><span> </span><span class="annot"><span class="annottext">(IORef
+   (StrictMaybe
+      (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+ -&gt; NodeKernelData blk)
+-&gt; IO
+     (IORef
+        (StrictMaybe
+           (NodeKernel IO RemoteConnectionId LocalConnectionId blk)))
+-&gt; IO (NodeKernelData blk)
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">StrictMaybe
+  (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+-&gt; IO
+     (IORef
+        (StrictMaybe
+           (NodeKernel IO RemoteConnectionId LocalConnectionId blk)))
+forall a. a -&gt; IO (IORef a)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">newIORef</span></a></span><span> </span><span class="annot"><span class="annottext">StrictMaybe
+  (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+forall a. StrictMaybe a
+</span><span class="hs-identifier hs-var">SNothing</span></span><span>
+</span><span id="line-43"></span><span>
+</span><span id="line-44"></span><span id="local-6989586621679421072"><span class="annot"><a href="Cardano.Tracing.Kernel.html#setNodeKernel"><span class="hs-identifier hs-type">setNodeKernel</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421072"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-45"></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679421072"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-46"></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span></span><span>
+</span><span id="line-47"></span><span id="setNodeKernel"><span class="annot"><span class="annottext">setNodeKernel :: NodeKernelData blk
+-&gt; NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO ()
+</span><a href="Cardano.Tracing.Kernel.html#setNodeKernel"><span class="hs-identifier hs-var hs-var">setNodeKernel</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span id="local-6989586621679421071"><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+</span><a href="#local-6989586621679421071"><span class="hs-identifier hs-var">ref</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679421070"><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
+</span><a href="#local-6989586621679421070"><span class="hs-identifier hs-var">nodeKern</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-48"></span><span>  </span><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+-&gt; StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+-&gt; IO ()
+forall a. IORef a -&gt; a -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">writeIORef</span></a></span><span> </span><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+</span><a href="#local-6989586621679421071"><span class="hs-identifier hs-var">ref</span></a></span><span> </span><span class="annot"><span class="annottext">(StrictMaybe
+   (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+ -&gt; IO ())
+-&gt; StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+-&gt; IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
+-&gt; StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+forall a. a -&gt; StrictMaybe a
+</span><span class="hs-identifier hs-var">SJust</span></span><span> </span><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk
+</span><a href="#local-6989586621679421070"><span class="hs-identifier hs-var">nodeKern</span></a></span><span>
+</span><span id="line-49"></span><span>
+</span><span id="line-50"></span><span id="local-6989586621679421067"><span id="local-6989586621679421068"><span class="annot"><a href="Cardano.Tracing.Kernel.html#mapNodeKernelDataIO"><span class="hs-identifier hs-type">mapNodeKernelDataIO</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-51"></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679421068"><span class="hs-identifier hs-type">blk</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421067"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-52"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421068"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-53"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">StrictMaybe</span></span><span> </span><span class="annot"><a href="#local-6989586621679421067"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span></span></span><span>
+</span><span id="line-54"></span><span id="mapNodeKernelDataIO"><span class="annot"><span class="annottext">mapNodeKernelDataIO :: (NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a)
+-&gt; NodeKernelData blk -&gt; IO (StrictMaybe a)
+</span><a href="Cardano.Tracing.Kernel.html#mapNodeKernelDataIO"><span class="hs-identifier hs-var hs-var">mapNodeKernelDataIO</span></a></span></span><span> </span><span id="local-6989586621679421066"><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a
+</span><a href="#local-6989586621679421066"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Cardano.Tracing.Kernel.html#NodeKernelData"><span class="hs-identifier hs-type">NodeKernelData</span></a></span><span> </span><span id="local-6989586621679421065"><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+</span><a href="#local-6989586621679421065"><span class="hs-identifier hs-var">ref</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-55"></span><span>  </span><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+-&gt; IO
+     (StrictMaybe
+        (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+forall a. IORef a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">readIORef</span></a></span><span> </span><span class="annot"><span class="annottext">IORef
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+</span><a href="#local-6989586621679421065"><span class="hs-identifier hs-var">ref</span></a></span><span> </span><span class="annot"><span class="annottext">IO
+  (StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk))
+-&gt; (StrictMaybe
+      (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+    -&gt; IO (StrictMaybe a))
+-&gt; IO (StrictMaybe a)
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&gt;&gt;=</span></a></span><span> </span><span class="annot"><span class="annottext">(NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a)
+-&gt; StrictMaybe
+     (NodeKernel IO RemoteConnectionId LocalConnectionId blk)
+-&gt; IO (StrictMaybe a)
+forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
+(Traversable t, Applicative f) =&gt;
+(a -&gt; f b) -&gt; t a -&gt; f (t b)
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">traverse</span></a></span><span> </span><span class="annot"><span class="annottext">NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a
+</span><a href="#local-6989586621679421066"><span class="hs-identifier hs-var">f</span></a></span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span id="local-6989586621679421062"><span id="local-6989586621679421063"><span class="annot"><a href="Cardano.Tracing.Kernel.html#nkQueryLedger"><span class="hs-identifier hs-type">nkQueryLedger</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-58"></span><span>     </span><span class="annot"><span class="hs-identifier hs-type">IsLedger</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">LedgerState</span></span><span> </span><span class="annot"><a href="#local-6989586621679421063"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-59"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">ExtLedgerState</span></span><span> </span><span class="annot"><a href="#local-6989586621679421063"><span class="hs-identifier hs-type">blk</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679421062"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-60"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679421063"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-61"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421062"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-62"></span><span id="nkQueryLedger"><span class="annot"><span class="annottext">nkQueryLedger :: (ExtLedgerState blk -&gt; a)
+-&gt; NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a
+</span><a href="Cardano.Tracing.Kernel.html#nkQueryLedger"><span class="hs-identifier hs-var hs-var">nkQueryLedger</span></a></span></span><span> </span><span id="local-6989586621679421061"><span class="annot"><span class="annottext">ExtLedgerState blk -&gt; a
+</span><a href="#local-6989586621679421061"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span class="hs-special">{</span><span id="local-6989586621679421059"><span class="annot"><span class="annottext">ChainDB IO blk
+$sel:getChainDB:NodeKernel :: forall (m :: * -&gt; *) remotePeer localPeer blk.
+NodeKernel m remotePeer localPeer blk -&gt; ChainDB m blk
+getChainDB :: ChainDB IO blk
+</span><span class="hs-identifier hs-var hs-var">getChainDB</span></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-63"></span><span>  </span><span class="annot"><span class="annottext">ExtLedgerState blk -&gt; a
+</span><a href="#local-6989586621679421061"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">(ExtLedgerState blk -&gt; a) -&gt; IO (ExtLedgerState blk) -&gt; IO a
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">STM (ExtLedgerState blk) -&gt; IO (ExtLedgerState blk)
+forall a. STM a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">atomically</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ChainDB IO blk -&gt; STM IO (ExtLedgerState blk)
+forall (m :: * -&gt; *) blk.
+(Monad (STM m), IsLedger (LedgerState blk)) =&gt;
+ChainDB m blk -&gt; STM m (ExtLedgerState blk)
+</span><span class="hs-identifier hs-var">ChainDB.getCurrentLedger</span></span><span> </span><span class="annot"><span class="annottext">ChainDB IO blk
+</span><a href="#local-6989586621679421059"><span class="hs-identifier hs-var">getChainDB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-64"></span><span>
+</span><span id="line-65"></span><span id="local-6989586621679421054"><span id="local-6989586621679421055"><span class="annot"><a href="Cardano.Tracing.Kernel.html#nkQueryChain"><span class="hs-identifier hs-type">nkQueryChain</span></a></span><span> </span><span class="hs-glyph">::</span><span>
+</span><span id="line-66"></span><span>     </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">AF.AnchoredFragment</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Header</span></span><span> </span><span class="annot"><a href="#local-6989586621679421055"><span class="hs-identifier hs-type">blk</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679421054"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-67"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">RemoteConnectionId</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">LocalConnectionId</span></span><span> </span><span class="annot"><a href="#local-6989586621679421055"><span class="hs-identifier hs-type">blk</span></a></span><span>
+</span><span id="line-68"></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679421054"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-69"></span><span id="nkQueryChain"><span class="annot"><span class="annottext">nkQueryChain :: (AnchoredFragment (Header blk) -&gt; a)
+-&gt; NodeKernel IO RemoteConnectionId LocalConnectionId blk -&gt; IO a
+</span><a href="Cardano.Tracing.Kernel.html#nkQueryChain"><span class="hs-identifier hs-var hs-var">nkQueryChain</span></a></span></span><span> </span><span id="local-6989586621679421053"><span class="annot"><span class="annottext">AnchoredFragment (Header blk) -&gt; a
+</span><a href="#local-6989586621679421053"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">NodeKernel</span></span><span class="hs-special">{</span><span id="local-6989586621679421052"><span class="annot"><span class="annottext">ChainDB IO blk
+getChainDB :: ChainDB IO blk
+$sel:getChainDB:NodeKernel :: forall (m :: * -&gt; *) remotePeer localPeer blk.
+NodeKernel m remotePeer localPeer blk -&gt; ChainDB m blk
+</span><a href="#local-6989586621679421052"><span class="hs-identifier hs-var hs-var">getChainDB</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-70"></span><span>  </span><span class="annot"><span class="annottext">AnchoredFragment (Header blk) -&gt; a
+</span><a href="#local-6989586621679421053"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">(AnchoredFragment (Header blk) -&gt; a)
+-&gt; IO (AnchoredFragment (Header blk)) -&gt; IO a
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">STM (AnchoredFragment (Header blk))
+-&gt; IO (AnchoredFragment (Header blk))
+forall a. STM a -&gt; IO a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">atomically</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ChainDB IO blk -&gt; STM IO (AnchoredFragment (Header blk))
+forall (m :: * -&gt; *) blk.
+ChainDB m blk -&gt; STM m (AnchoredFragment (Header blk))
+</span><span class="hs-identifier hs-var hs-var">ChainDB.getCurrentChain</span></span><span> </span><span class="annot"><span class="annottext">ChainDB IO blk
+</span><a href="#local-6989586621679421052"><span class="hs-identifier hs-var">getChainDB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-71"></span></pre></body></html>

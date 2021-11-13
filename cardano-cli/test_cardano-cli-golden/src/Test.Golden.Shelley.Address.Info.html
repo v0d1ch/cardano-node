@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Golden.Shelley.Address.Info</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Golden.Shelley.Address.Info.html#golden_shelleyAddressInfo"><span class="hs-identifier">golden_shelleyAddressInfo</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">)</span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.OptParse.html"><span class="hs-identifier">Test.OptParse</span></a></span><span>
+</span><span id="line-10"></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier">Data.List</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">L</span></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-comment">{- HLINT ignore &quot;Use camelCase&quot; -}</span><span>
+</span><span id="line-15"></span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Test.Golden.Shelley.Address.Info.html#golden_shelleyAddressInfo"><span class="hs-identifier hs-type">golden_shelleyAddressInfo</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-17"></span><span id="golden_shelleyAddressInfo"><span class="annot"><span class="annottext">golden_shelleyAddressInfo :: Property
+</span><a href="Test.Golden.Shelley.Address.Info.html#golden_shelleyAddressInfo"><span class="hs-identifier hs-var hs-var">golden_shelleyAddressInfo</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-18"></span><span>  </span><span class="hs-comment">-- Disable as per commit: e69984d797fc3bdd5d71bdd99a0328110d71f6ad</span><span>
+</span><span id="line-19"></span><span>  </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO () -&gt; PropertyT IO ()
+forall (f :: * -&gt; *). Applicative f =&gt; Bool -&gt; f () -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">when</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; PropertyT IO ())
+-&gt; PropertyT IO () -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-20"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679209363"><span class="annot"><span class="annottext">byronBase58 :: String
+</span><a href="#local-6989586621679209363"><span class="hs-identifier hs-var hs-var">byronBase58</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;DdzFFzCqrhsg9F1joqXWJdGKwn6MaNavCqPsrZcjADRjA4ifEtrBmREJZyCojtuexKjMKNFr6CoU7Gx6PPR7pq14JxvPZuuk2xVkzn8p&quot;</span></span><span>
+</span><span id="line-21"></span><span>
+</span><span id="line-22"></span><span>    </span><span id="local-6989586621679209362"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209362"><span class="hs-identifier hs-var">infoText1</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-23"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;address&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;info&quot;</span></span><span>
+</span><span id="line-24"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--address&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209363"><span class="hs-identifier hs-var">byronBase58</span></a></span><span>
+</span><span id="line-25"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-26"></span><span>
+</span><span id="line-27"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Encoding: Base58&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209362"><span class="hs-identifier hs-var">infoText1</span></a></span><span>
+</span><span id="line-28"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Era: Byron&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209362"><span class="hs-identifier hs-var">infoText1</span></a></span><span>
+</span><span id="line-29"></span><span>
+</span><span id="line-30"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679209358"><span class="annot"><span class="annottext">byronHex :: String
+</span><a href="#local-6989586621679209358"><span class="hs-identifier hs-var hs-var">byronHex</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;82d818584283581c120e97e4ca7b831373c1060853d4896314e17d567a5723879b9a20eaa101581e581c135a115dd5dba68c28fb7e9409729ffc0503219ff7f9c08e84d13319001a28d0b871&quot;</span></span><span>
+</span><span id="line-31"></span><span>
+</span><span id="line-32"></span><span>    </span><span id="local-6989586621679209357"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209357"><span class="hs-identifier hs-var">infoText2</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-33"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;address&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;info&quot;</span></span><span>
+</span><span id="line-34"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--address&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209358"><span class="hs-identifier hs-var">byronHex</span></a></span><span>
+</span><span id="line-35"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Encoding: Hex&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209357"><span class="hs-identifier hs-var">infoText2</span></a></span><span>
+</span><span id="line-38"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Era: Byron&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209357"><span class="hs-identifier hs-var">infoText2</span></a></span><span>
+</span><span id="line-39"></span><span>
+</span><span id="line-40"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679209356"><span class="annot"><span class="annottext">shelleyHex :: String
+</span><a href="#local-6989586621679209356"><span class="hs-identifier hs-var hs-var">shelleyHex</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;82065820d8b4a892f2f6f1820d350c207d17d4cd7e7a1f7e0a83059e2d698a65ab8f96ed&quot;</span></span><span>
+</span><span id="line-41"></span><span>
+</span><span id="line-42"></span><span>    </span><span id="local-6989586621679209355"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209355"><span class="hs-identifier hs-var">infoText3</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; PropertyT IO String
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[String] -&gt; m String
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-43"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;address&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;info&quot;</span></span><span>
+</span><span id="line-44"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;--address&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209356"><span class="hs-identifier hs-var">shelleyHex</span></a></span><span>
+</span><span id="line-45"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-46"></span><span>
+</span><span id="line-47"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Encoding: Hex&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209355"><span class="hs-identifier hs-var">infoText3</span></a></span><span>
+</span><span id="line-48"></span><span>    </span><span class="annot"><span class="annottext">Bool -&gt; PropertyT IO ()
+forall (m :: * -&gt; *). (MonadTest m, HasCallStack) =&gt; Bool -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assert</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; PropertyT IO ()) -&gt; Bool -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Era: Shelley&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; Bool
+forall a. Eq a =&gt; [a] -&gt; [a] -&gt; Bool
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">`L.isInfixOf`</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679209355"><span class="hs-identifier hs-var">infoText3</span></a></span><span>
+</span><span id="line-49"></span></pre></body></html>

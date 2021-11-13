@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE OverloadedStrings #-}</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Test.Cli.ITN</span><span>
+</span><span id="line-4"></span><span>  </span><span class="hs-special">(</span><span> </span><span class="annot"><a href="Test.Cli.ITN.html#tests"><span class="hs-identifier">tests</span></a></span><span>
+</span><span id="line-5"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-6"></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier">Cardano.CLI.Shelley.Run.Key</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier">decodeBech32</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Property</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(===)</span></span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Test.OptParse.html"><span class="hs-identifier">Test.OptParse</span></a></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Codec.Binary.Bech32</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Bech32</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.ByteString.Base16</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Base16</span></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.Base</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Hedgehog.Extras.Test.File</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">H</span></span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-comment">{- HLINT ignore &quot;Reduce duplication&quot; -}</span><span>
+</span><span id="line-19"></span><span>
+</span><span id="line-20"></span><span class="hs-comment">-- | Bech32 verification key</span><span>
+</span><span id="line-21"></span><span class="annot"><a href="Test.Cli.ITN.html#itnVerKey"><span class="hs-identifier hs-type">itnVerKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-22"></span><span id="itnVerKey"><span class="annot"><span class="annottext">itnVerKey :: Text
+</span><a href="Test.Cli.ITN.html#itnVerKey"><span class="hs-identifier hs-var hs-var">itnVerKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;ed25519_pk1demeytzdadayd4qrqeg2raadp2eceg3mrdmefxyfxx73q60hg4xsjjyzyq&quot;</span></span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="hs-comment">-- | Bech32 signing key</span><span>
+</span><span id="line-25"></span><span class="annot"><a href="Test.Cli.ITN.html#itnSignKey"><span class="hs-identifier hs-type">itnSignKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-type">Text</span></a></span><span>
+</span><span id="line-26"></span><span id="itnSignKey"><span class="annot"><span class="annottext">itnSignKey :: Text
+</span><a href="Test.Cli.ITN.html#itnSignKey"><span class="hs-identifier hs-var hs-var">itnSignKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;ed25519_sk1yhnetcmla9pskrvp5z5ff2v8gkenhmluy736jd6nrxrlxcgn70zsy94f7k&quot;</span></span><span>
+</span><span id="line-27"></span><span>
+</span><span id="line-28"></span><span class="hs-comment">-- | 1. Convert a bech32 ITN key pair to a haskell stake verification key and signing key</span><span>
+</span><span id="line-29"></span><span class="hs-comment">--   2. Derive the haskell verification key from the haskell signing key.</span><span>
+</span><span id="line-30"></span><span class="annot"><a href="Test.Cli.ITN.html#prop_convertITNKeys"><span class="hs-identifier hs-type">prop_convertITNKeys</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-31"></span><span id="prop_convertITNKeys"><span class="annot"><span class="annottext">prop_convertITNKeys :: Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNKeys"><span class="hs-identifier hs-var hs-var">prop_convertITNKeys</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property)
+-&gt; ((FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (FilePath -&gt; PropertyT IO ())
+-&gt; Property
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; (FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; PropertyT IO ()) -&gt; Property)
+-&gt; (FilePath -&gt; PropertyT IO ()) -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679224406"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224406"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-32"></span><span>  </span><span class="hs-comment">-- ITN input file paths</span><span>
+</span><span id="line-33"></span><span>  </span><span id="local-6989586621679224405"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224405"><span class="hs-identifier hs-var">itnVerKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224406"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;itnVerKey.key&quot;</span></span><span>
+</span><span id="line-34"></span><span>  </span><span id="local-6989586621679224403"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224403"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224406"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;itnSignKey.key&quot;</span></span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span>  </span><span class="hs-comment">-- Converted keys output file paths</span><span>
+</span><span id="line-37"></span><span>  </span><span id="local-6989586621679224402"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224402"><span class="hs-identifier hs-var">outputHaskellVerKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224406"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;haskell-verification-key.key&quot;</span></span><span>
+</span><span id="line-38"></span><span>  </span><span id="local-6989586621679224401"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224401"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224406"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;haskell-signing-key.key&quot;</span></span><span>
+</span><span id="line-39"></span><span>
+</span><span id="line-40"></span><span>  </span><span class="hs-comment">-- Write ITN keys to disk</span><span>
+</span><span id="line-41"></span><span>  </span><span class="annot"><span class="annottext">IO () -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; PropertyT IO ()) -&gt; IO () -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Text -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">writeFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224405"><span class="hs-identifier hs-var">itnVerKeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Test.Cli.ITN.html#itnVerKey"><span class="hs-identifier hs-var">itnVerKey</span></a></span><span>
+</span><span id="line-42"></span><span>  </span><span class="annot"><span class="annottext">IO () -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; PropertyT IO ()) -&gt; IO () -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Text -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">writeFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224403"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Test.Cli.ITN.html#itnSignKey"><span class="hs-identifier hs-var">itnSignKey</span></a></span><span>
+</span><span id="line-43"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224405"><span class="hs-identifier hs-var">itnVerKeyFp</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224403"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-44"></span><span>
+</span><span id="line-45"></span><span>  </span><span class="hs-comment">-- Generate haskell stake verification key</span><span>
+</span><span id="line-46"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO FilePath -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO FilePath -&gt; PropertyT IO ())
+-&gt; PropertyT IO FilePath -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m FilePath
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-47"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;key&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;convert-itn-key&quot;</span></span><span>
+</span><span id="line-48"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--itn-verification-key-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224405"><span class="hs-identifier hs-var">itnVerKeyFp</span></a></span><span>
+</span><span id="line-49"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--out-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224402"><span class="hs-identifier hs-var">outputHaskellVerKeyFp</span></a></span><span>
+</span><span id="line-50"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-51"></span><span>  </span><span class="hs-comment">-- Generate haskell signing key</span><span>
+</span><span id="line-52"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO FilePath -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO FilePath -&gt; PropertyT IO ())
+-&gt; PropertyT IO FilePath -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m FilePath
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-53"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;key&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;convert-itn-key&quot;</span></span><span>
+</span><span id="line-54"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--itn-signing-key-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224403"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span>
+</span><span id="line-55"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--out-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224401"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span>
+</span><span id="line-56"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-57"></span><span>
+</span><span id="line-58"></span><span>  </span><span class="hs-comment">-- Check for existence of the converted ITN keys</span><span>
+</span><span id="line-59"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224402"><span class="hs-identifier hs-var">outputHaskellVerKeyFp</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224401"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-60"></span><span>
+</span><span id="line-61"></span><span class="hs-comment">-- | 1. Convert a bech32 ITN extended signing key to a haskell stake signing key</span><span>
+</span><span id="line-62"></span><span class="annot"><a href="Test.Cli.ITN.html#prop_convertITNExtendedSigningKey"><span class="hs-identifier hs-type">prop_convertITNExtendedSigningKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-63"></span><span id="prop_convertITNExtendedSigningKey"><span class="annot"><span class="annottext">prop_convertITNExtendedSigningKey :: Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNExtendedSigningKey"><span class="hs-identifier hs-var hs-var">prop_convertITNExtendedSigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property)
+-&gt; ((FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (FilePath -&gt; PropertyT IO ())
+-&gt; Property
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; (FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; PropertyT IO ()) -&gt; Property)
+-&gt; (FilePath -&gt; PropertyT IO ()) -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679224394"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224394"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-64"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679224393"><span class="annot"><span class="annottext">itnExtendedSignKey :: Text
+</span><a href="#local-6989586621679224393"><span class="hs-identifier hs-var hs-var">itnExtendedSignKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;\
+    \ed25519e_sk1qpcplz38tg4fusw0fkqljzspe9qmj06ldu9lgcve99v4fphuk9a535kwj\
+    \f38hkyn0shcycyaha4k9tmjy6xgvzaz7stw5t7rqjadyjcwfyx6k&quot;</span></span><span>
+</span><span id="line-67"></span><span>
+</span><span id="line-68"></span><span>  </span><span class="hs-comment">-- ITN input file paths</span><span>
+</span><span id="line-69"></span><span>  </span><span id="local-6989586621679224392"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224392"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224394"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;itnExtendedSignKey.key&quot;</span></span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span>  </span><span class="hs-comment">-- Converted keys output file paths</span><span>
+</span><span id="line-72"></span><span>  </span><span id="local-6989586621679224391"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224391"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224394"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;stake-signing.key&quot;</span></span><span>
+</span><span id="line-73"></span><span>
+</span><span id="line-74"></span><span>  </span><span class="hs-comment">-- Write ITN keys to disk</span><span>
+</span><span id="line-75"></span><span>  </span><span class="annot"><span class="annottext">IO () -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; PropertyT IO ()) -&gt; IO () -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Text -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">writeFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224392"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679224393"><span class="hs-identifier hs-var">itnExtendedSignKey</span></a></span><span>
+</span><span id="line-76"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224392"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-77"></span><span>
+</span><span id="line-78"></span><span>  </span><span class="hs-comment">-- Generate haskell signing key</span><span>
+</span><span id="line-79"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO FilePath -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO FilePath -&gt; PropertyT IO ())
+-&gt; PropertyT IO FilePath -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m FilePath
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-80"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;key&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;convert-itn-extended-key&quot;</span></span><span>
+</span><span id="line-81"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--itn-signing-key-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224392"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span>
+</span><span id="line-82"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--out-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224391"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span>
+</span><span id="line-83"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-84"></span><span>
+</span><span id="line-85"></span><span>  </span><span class="hs-comment">-- Check for existence of the converted ITN keys</span><span>
+</span><span id="line-86"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224391"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-87"></span><span>
+</span><span id="line-88"></span><span class="hs-comment">-- | 1. Convert a bech32 ITN BIP32 signing key to a haskell stake signing key</span><span>
+</span><span id="line-89"></span><span class="annot"><a href="Test.Cli.ITN.html#prop_convertITNBIP32SigningKey"><span class="hs-identifier hs-type">prop_convertITNBIP32SigningKey</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-90"></span><span id="prop_convertITNBIP32SigningKey"><span class="annot"><span class="annottext">prop_convertITNBIP32SigningKey :: Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNBIP32SigningKey"><span class="hs-identifier hs-var hs-var">prop_convertITNBIP32SigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property)
+-&gt; ((FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ())
+-&gt; (FilePath -&gt; PropertyT IO ())
+-&gt; Property
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; (FilePath -&gt; PropertyT IO ()) -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+FilePath -&gt; (FilePath -&gt; m ()) -&gt; m ()
+</span><span class="hs-identifier hs-var">H.moduleWorkspace</span></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;tmp&quot;</span></span><span> </span><span class="annot"><span class="annottext">((FilePath -&gt; PropertyT IO ()) -&gt; Property)
+-&gt; (FilePath -&gt; PropertyT IO ()) -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679224389"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224389"><span class="hs-identifier hs-var">tempDir</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-91"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679224388"><span class="annot"><span class="annottext">itnExtendedSignKey :: Text
+</span><a href="#local-6989586621679224388"><span class="hs-identifier hs-var hs-var">itnExtendedSignKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;\
+    \xprv1spkw5suj39723c40mr55gwh7j3vryjv2zdm4e47xs0deka\
+    \jcza9ud848ckdqf48md9njzc5pkujfxwu2j8wdvtxkx02n3s2qa\
+    \euhqnfx6zu9dyccpua6vf5x3kur9hsganq2kl0yw7y9hpunts0e9kc5xv3pz0yj&quot;</span></span><span>
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span>  </span><span class="hs-comment">-- ITN input file paths</span><span>
+</span><span id="line-97"></span><span>  </span><span id="local-6989586621679224387"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224387"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224389"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;itnBIP32SignKey.key&quot;</span></span><span>
+</span><span id="line-98"></span><span>
+</span><span id="line-99"></span><span>  </span><span class="hs-comment">-- Converted keys output file paths</span><span>
+</span><span id="line-100"></span><span>  </span><span id="local-6989586621679224386"><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224386"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; FilePath -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, HasCallStack) =&gt;
+FilePath -&gt; FilePath -&gt; m FilePath
+</span><a href="Test.OptParse.html#noteTempFile"><span class="hs-identifier hs-var">noteTempFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224389"><span class="hs-identifier hs-var">tempDir</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;stake-signing.key&quot;</span></span><span>
+</span><span id="line-101"></span><span>
+</span><span id="line-102"></span><span>  </span><span class="hs-comment">-- Write ITN keys to disk</span><span>
+</span><span id="line-103"></span><span>  </span><span class="annot"><span class="annottext">IO () -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">liftIO</span></a></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; PropertyT IO ()) -&gt; IO () -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath -&gt; Text -&gt; IO ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/text-1.2.4.1/src"><span class="hs-identifier hs-var">writeFile</span></a></span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224387"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679224388"><span class="hs-identifier hs-var">itnExtendedSignKey</span></a></span><span>
+</span><span id="line-104"></span><span>
+</span><span id="line-105"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224387"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-106"></span><span>
+</span><span id="line-107"></span><span>  </span><span class="hs-comment">-- Generate haskell signing key</span><span>
+</span><span id="line-108"></span><span>  </span><span class="annot"><span class="annottext">PropertyT IO FilePath -&gt; PropertyT IO ()
+forall (f :: * -&gt; *) a. Functor f =&gt; f a -&gt; f ()
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">void</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO FilePath -&gt; PropertyT IO ())
+-&gt; PropertyT IO FilePath -&gt; PropertyT IO ()
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO FilePath
+forall (m :: * -&gt; *).
+(MonadTest m, MonadCatch m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m FilePath
+</span><a href="Test.OptParse.html#execCardanoCLI"><span class="hs-identifier hs-var">execCardanoCLI</span></a></span><span>
+</span><span id="line-109"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;key&quot;</span></span><span class="hs-special">,</span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;convert-itn-bip32-key&quot;</span></span><span>
+</span><span id="line-110"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--itn-signing-key-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224387"><span class="hs-identifier hs-var">itnSignKeyFp</span></a></span><span>
+</span><span id="line-111"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><span class="hs-string">&quot;--out-file&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224386"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span>
+</span><span id="line-112"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-113"></span><span>
+</span><span id="line-114"></span><span>  </span><span class="hs-comment">-- Check for existence of the converted ITN keys</span><span>
+</span><span id="line-115"></span><span>  </span><span class="annot"><span class="annottext">[FilePath] -&gt; PropertyT IO ()
+forall (m :: * -&gt; *).
+(MonadTest m, MonadIO m, HasCallStack) =&gt;
+[FilePath] -&gt; m ()
+</span><span class="hs-identifier hs-var">H.assertFilesExist</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FilePath
+</span><a href="#local-6989586621679224386"><span class="hs-identifier hs-var">outputHaskellSignKeyFp</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-116"></span><span>
+</span><span id="line-117"></span><span class="hs-comment">-- | We check our 'decodeBech32' outputs against https://slowli.github.io/bech32-buffer/</span><span>
+</span><span id="line-118"></span><span class="hs-comment">-- using 'itnVerKey' &amp; 'itnSignKey' as inputs.</span><span>
+</span><span id="line-119"></span><span class="annot"><a href="Test.Cli.ITN.html#golden_bech32Decode"><span class="hs-identifier hs-type">golden_bech32Decode</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Property</span></span><span>
+</span><span id="line-120"></span><span id="golden_bech32Decode"><span class="annot"><span class="annottext">golden_bech32Decode :: Property
+</span><a href="Test.Cli.ITN.html#golden_bech32Decode"><span class="hs-identifier hs-var hs-var">golden_bech32Decode</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PropertyT IO () -&gt; Property
+</span><a href="Test.OptParse.html#propertyOnce"><span class="hs-identifier hs-var">propertyOnce</span></a></span><span> </span><span class="annot"><span class="annottext">(PropertyT IO () -&gt; Property) -&gt; PropertyT IO () -&gt; Property
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-121"></span><span>  </span><span class="hs-special">(</span><span id="local-6989586621679224384"><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679224384"><span class="hs-identifier hs-var">vHumReadPart</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679224383"><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679224383"><span class="hs-identifier hs-var">vDataPart</span></a></span></span><span> </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Either Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+-&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString)
+forall (m :: * -&gt; *) x a.
+(MonadTest m, Show x, HasCallStack) =&gt;
+Either x a -&gt; m a
+</span><span class="hs-identifier hs-var">H.evalEither</span></span><span> </span><span class="annot"><span class="annottext">(Either Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+ -&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString))
+-&gt; Either
+     Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+-&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+-&gt; Either
+     Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">decodeBech32</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Test.Cli.ITN.html#itnVerKey"><span class="hs-identifier hs-var">itnVerKey</span></a></span><span>
+</span><span id="line-122"></span><span>  </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Just</span></a></span><span> </span><span id="local-6989586621679224381"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224381"><span class="hs-identifier hs-var">vDataPartBase16</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Maybe ByteString -&gt; PropertyT IO (Maybe ByteString)
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataPart -&gt; Maybe ByteString
+</span><a href="#local-6989586621679224380"><span class="hs-identifier hs-var">dataPartToBase16</span></a></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679224383"><span class="hs-identifier hs-var">vDataPart</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-123"></span><span>
+</span><span id="line-124"></span><span>  </span><span class="hs-special">(</span><span id="local-6989586621679224379"><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679224379"><span class="hs-identifier hs-var">sHumReadPart</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679224378"><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679224378"><span class="hs-identifier hs-var">sDataPart</span></a></span></span><span> </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Either Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+-&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString)
+forall (m :: * -&gt; *) x a.
+(MonadTest m, Show x, HasCallStack) =&gt;
+Either x a -&gt; m a
+</span><span class="hs-identifier hs-var">H.evalEither</span></span><span> </span><span class="annot"><span class="annottext">(Either Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+ -&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString))
+-&gt; Either
+     Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+-&gt; PropertyT IO (HumanReadablePart, DataPart, ByteString)
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+-&gt; Either
+     Bech32DecodeError (HumanReadablePart, DataPart, ByteString)
+</span><a href="../file:///home/runner/work/cardano-node/cardano-node/dist-newstyle/build/x86_64-linux/ghc-8.10.4/cardano-cli-1.30.0/noopt/doc/html/cardano-cli/src"><span class="hs-identifier hs-var">decodeBech32</span></a></span><span> </span><span class="annot"><span class="annottext">Text
+</span><a href="Test.Cli.ITN.html#itnSignKey"><span class="hs-identifier hs-var">itnSignKey</span></a></span><span>
+</span><span id="line-125"></span><span>  </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Just</span></a></span><span> </span><span id="local-6989586621679224377"><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224377"><span class="hs-identifier hs-var">sDataPartBase16</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Maybe ByteString -&gt; PropertyT IO (Maybe ByteString)
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataPart -&gt; Maybe ByteString
+</span><a href="#local-6989586621679224380"><span class="hs-identifier hs-var">dataPartToBase16</span></a></span><span> </span><span class="annot"><span class="annottext">DataPart
+</span><a href="#local-6989586621679224378"><span class="hs-identifier hs-var">sDataPart</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-126"></span><span>
+</span><span id="line-127"></span><span>  </span><span class="hs-comment">-- Based on https://slowli.github.io/bech32-buffer/ which are in Base16</span><span>
+</span><span id="line-128"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679224376"><span class="annot"><span class="annottext">expectedHumanReadPartVerificationKey :: Text
+</span><a href="#local-6989586621679224376"><span class="hs-identifier hs-var hs-var">expectedHumanReadPartVerificationKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;ed25519_pk&quot;</span></span><span>
+</span><span id="line-129"></span><span>      </span><span id="local-6989586621679224375"><span class="annot"><span class="annottext">expectedDataPartVerificationKey :: ByteString
+</span><a href="#local-6989586621679224375"><span class="hs-identifier hs-var hs-var">expectedDataPartVerificationKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><span class="hs-string">&quot;6e77922c4deb7a46d4030650a1f7ad0ab38ca23b1b7794988931bd1069f7454d&quot;</span></span><span>
+</span><span id="line-130"></span><span>      </span><span id="local-6989586621679224374"><span class="annot"><span class="annottext">expectedHumanReadPartSigningKey :: Text
+</span><a href="#local-6989586621679224374"><span class="hs-identifier hs-var hs-var">expectedHumanReadPartSigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Text
+</span><span class="hs-string">&quot;ed25519_sk&quot;</span></span><span>
+</span><span id="line-131"></span><span>      </span><span id="local-6989586621679224373"><span class="annot"><span class="annottext">expectedDataPartSigningKey :: ByteString
+</span><a href="#local-6989586621679224373"><span class="hs-identifier hs-var hs-var">expectedDataPartSigningKey</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><span class="hs-string">&quot;25e795e37fe9430b0d81a0a894a98745b33beffc27a3a937531987f36113f3c5&quot;</span></span><span>
+</span><span id="line-132"></span><span>
+</span><span id="line-133"></span><span>  </span><span class="hs-comment">-- ITN Verification key decode check</span><span>
+</span><span id="line-134"></span><span>  </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679224376"><span class="hs-identifier hs-var">expectedHumanReadPartVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.humanReadablePartToText</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679224384"><span class="hs-identifier hs-var">vHumReadPart</span></a></span><span>
+</span><span id="line-135"></span><span>  </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224375"><span class="hs-identifier hs-var">expectedDataPartVerificationKey</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span>  </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224381"><span class="hs-identifier hs-var">vDataPartBase16</span></a></span><span>
+</span><span id="line-136"></span><span>
+</span><span id="line-137"></span><span>
+</span><span id="line-138"></span><span>  </span><span class="hs-comment">-- ITN Signing key decode check</span><span>
+</span><span id="line-139"></span><span>  </span><span class="annot"><span class="annottext">Text
+</span><a href="#local-6989586621679224374"><span class="hs-identifier hs-var">expectedHumanReadPartSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">Text -&gt; Text -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart -&gt; Text
+</span><span class="hs-identifier hs-var">Bech32.humanReadablePartToText</span></span><span> </span><span class="annot"><span class="annottext">HumanReadablePart
+</span><a href="#local-6989586621679224379"><span class="hs-identifier hs-var">sHumReadPart</span></a></span><span>
+</span><span id="line-140"></span><span>  </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224373"><span class="hs-identifier hs-var">expectedDataPartSigningKey</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString -&gt; PropertyT IO ()
+forall (m :: * -&gt; *) a.
+(MonadTest m, Eq a, Show a, HasCallStack) =&gt;
+a -&gt; a -&gt; m ()
+</span><span class="hs-operator hs-var">===</span></span><span> </span><span class="annot"><span class="annottext">ByteString
+</span><a href="#local-6989586621679224377"><span class="hs-identifier hs-var">sDataPartBase16</span></a></span><span>
+</span><span id="line-141"></span><span>
+</span><span id="line-142"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-143"></span><span>    </span><span class="annot"><a href="#local-6989586621679224380"><span class="hs-identifier hs-type">dataPartToBase16</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bech32.DataPart</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-type">Maybe</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/bytestring-0.10.12.0/src"><span class="hs-identifier hs-type">ByteString</span></a></span><span>
+</span><span id="line-144"></span><span>    </span><span id="local-6989586621679224380"><span class="annot"><span class="annottext">dataPartToBase16 :: DataPart -&gt; Maybe ByteString
+</span><a href="#local-6989586621679224380"><span class="hs-identifier hs-var hs-var">dataPartToBase16</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ByteString -&gt; ByteString) -&gt; Maybe ByteString -&gt; Maybe ByteString
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-identifier hs-var">fmap</span></a></span><span> </span><span class="annot"><span class="annottext">ByteString -&gt; ByteString
+</span><span class="hs-identifier hs-var">Base16.encode</span></span><span> </span><span class="annot"><span class="annottext">(Maybe ByteString -&gt; Maybe ByteString)
+-&gt; (DataPart -&gt; Maybe ByteString) -&gt; DataPart -&gt; Maybe ByteString
+forall k (cat :: k -&gt; k -&gt; *) (b :: k) (c :: k) (a :: k).
+Category cat =&gt;
+cat b c -&gt; cat a b -&gt; cat a c
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">.</span></a></span><span> </span><span class="annot"><span class="annottext">DataPart -&gt; Maybe ByteString
+</span><span class="hs-identifier hs-var">Bech32.dataPartToBytes</span></span><span>
+</span><span id="line-145"></span><span>
+</span><span id="line-146"></span><span class="annot"><a href="Test.Cli.ITN.html#tests"><span class="hs-identifier hs-type">tests</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">Bool</span></a></span><span>
+</span><span id="line-147"></span><span id="tests"><span class="annot"><span class="annottext">tests :: IO Bool
+</span><a href="Test.Cli.ITN.html#tests"><span class="hs-identifier hs-var hs-var">tests</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-148"></span><span>  </span><span class="annot"><span class="annottext">Group -&gt; IO Bool
+forall (m :: * -&gt; *). MonadIO m =&gt; Group -&gt; m Bool
+</span><span class="hs-identifier hs-var">H.checkParallel</span></span><span>
+</span><span id="line-149"></span><span>    </span><span class="annot"><span class="annottext">(Group -&gt; IO Bool) -&gt; Group -&gt; IO Bool
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/base-4.14.1.0/src"><span class="hs-operator hs-var">$</span></a></span><span> </span><span class="annot"><span class="annottext">GroupName -&gt; [(PropertyName, Property)] -&gt; Group
+</span><span class="hs-identifier hs-var">H.Group</span></span><span> </span><span class="annot"><span class="annottext">GroupName
+</span><span class="hs-string">&quot;ITN key conversion&quot;</span></span><span>
+</span><span id="line-150"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;prop_convertITNKeys&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNKeys"><span class="hs-identifier hs-var">prop_convertITNKeys</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-151"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;prop_convertITNBIP32SigningKey&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNBIP32SigningKey"><span class="hs-identifier hs-var">prop_convertITNBIP32SigningKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-152"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;prop_convertITNExtendedSigningKey&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Cli.ITN.html#prop_convertITNExtendedSigningKey"><span class="hs-identifier hs-var">prop_convertITNExtendedSigningKey</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-153"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PropertyName
+</span><span class="hs-string">&quot;golden_bech32Decode&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Property
+</span><a href="Test.Cli.ITN.html#golden_bech32Decode"><span class="hs-identifier hs-var">golden_bech32Decode</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-154"></span><span>        </span><span class="hs-special">]</span><span>
+</span><span id="line-155"></span></pre></body></html>

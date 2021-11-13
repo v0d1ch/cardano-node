@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Cardano.Prelude</span></span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Hedgehog.Main</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">defaultMain</span></span><span class="hs-special">)</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.FilePermissions.html"><span class="hs-identifier">Test.Cli.FilePermissions</span></a></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.ITN.html"><span class="hs-identifier">Test.Cli.ITN</span></a></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.MultiAssetParsing.html"><span class="hs-identifier">Test.Cli.MultiAssetParsing</span></a></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.Pioneers.Exercise1.html"><span class="hs-identifier">Test.Cli.Pioneers.Exercise1</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.Pioneers.Exercise2.html"><span class="hs-identifier">Test.Cli.Pioneers.Exercise2</span></a></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.Pioneers.Exercise3.html"><span class="hs-identifier">Test.Cli.Pioneers.Exercise3</span></a></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.Pioneers.Exercise4.html"><span class="hs-identifier">Test.Cli.Pioneers.Exercise4</span></a></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Cli.Shelley.Run.Query.html"><span class="hs-identifier">Test.Cli.Shelley.Run.Query</span></a></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="Test.Config.Mainnet.html"><span class="hs-identifier">Test.Config.Mainnet</span></a></span><span>
+</span><span id="line-14"></span><span>
+</span><span id="line-15"></span><span class="annot"><a href="Main.html#main"><span class="hs-identifier hs-type">main</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="../file:///home/runner/.ghcup/ghc/8.10.4/share/doc/ghc-8.10.4/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-type">IO</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span id="main"><span class="annot"><span class="annottext">main :: IO ()
+</span><a href="Main.html#main"><span class="hs-identifier hs-var hs-var">main</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-17"></span><span>  </span><span class="annot"><span class="annottext">[IO Bool] -&gt; IO ()
+</span><span class="hs-identifier hs-var">defaultMain</span></span><span>
+</span><span id="line-18"></span><span>    </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.FilePermissions.html#tests"><span class="hs-identifier hs-var">Test.Cli.FilePermissions.tests</span></a></span><span>
+</span><span id="line-19"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.ITN.html#tests"><span class="hs-identifier hs-var">Test.Cli.ITN.tests</span></a></span><span>
+</span><span id="line-20"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.MultiAssetParsing.html#tests"><span class="hs-identifier hs-var">Test.Cli.MultiAssetParsing.tests</span></a></span><span>
+</span><span id="line-21"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.Pioneers.Exercise1.html#tests"><span class="hs-identifier hs-var">Test.Cli.Pioneers.Exercise1.tests</span></a></span><span>
+</span><span id="line-22"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.Pioneers.Exercise2.html#tests"><span class="hs-identifier hs-var">Test.Cli.Pioneers.Exercise2.tests</span></a></span><span>
+</span><span id="line-23"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.Pioneers.Exercise3.html#tests"><span class="hs-identifier hs-var">Test.Cli.Pioneers.Exercise3.tests</span></a></span><span>
+</span><span id="line-24"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.Pioneers.Exercise4.html#tests"><span class="hs-identifier hs-var">Test.Cli.Pioneers.Exercise4.tests</span></a></span><span>
+</span><span id="line-25"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Cli.Shelley.Run.Query.html#tests"><span class="hs-identifier hs-var">Test.Cli.Shelley.Run.Query.tests</span></a></span><span>
+</span><span id="line-26"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IO Bool
+</span><a href="Test.Config.Mainnet.html#tests"><span class="hs-identifier hs-var">Test.Config.Mainnet.tests</span></a></span><span>
+</span><span id="line-27"></span><span>    </span><span class="hs-special">]</span><span>
+</span><span id="line-28"></span></pre></body></html>
